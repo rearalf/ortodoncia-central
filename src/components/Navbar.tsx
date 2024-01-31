@@ -39,13 +39,12 @@ const Navbar = () => {
 					<span className="sr-only">Open main menu</span>
 					<SlMenu className="p-2 text-paragraph group-hover:text-white" size="32" />
 				</button>
-				<div className="hidden w-full lg:block lg:w-auto relative" id="navbar-collapse">
-					{/* <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white"> */}
-					<ul className="absolute bg-background-first w-2/4">
+				<div className=" w-full lg:block lg:w-auto relative" id="navbar-collapse">
+					<ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-background-third rounded-lg bg-background-first lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-background-first">
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 "
+								className="block mb-3 py-2 px-3 text-white bg-base-500 rounded lg:rounded-none lg:bg-transparent lg:text-base-500 lg:p-0 lg:mb-0"
 								aria-current="page"
 							>
 								Incio
@@ -54,7 +53,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0 "
 							>
 								Quienes somos
 							</a>
@@ -62,7 +61,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0"
 							>
 								Servicios
 							</a>
@@ -70,7 +69,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0"
 							>
 								Nuestros Staff
 							</a>
@@ -78,7 +77,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0"
 							>
 								Blog
 							</a>
@@ -86,7 +85,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
+								className="block py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0"
 							>
 								Contacto
 							</a>
