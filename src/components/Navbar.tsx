@@ -18,8 +18,8 @@ const Navbar = () => {
 	}
 
 	return (
-		<nav className="bg-background-first border-b border-background-third">
-			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+		<nav className="bg-background-secundary border-b-2 border-background-thirdd">
+			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
 				<Link
 					href="/"
 					className="flex items-center space-x-3 rtl:space-x-reverse outline-2 p-1 outline-base-500"
@@ -31,7 +31,7 @@ const Navbar = () => {
 					id="button-menu"
 					data-collapse-toggle="button-menu"
 					type="button"
-					className="inline-flex items-center justify-center rounded-lg lg:hidden group  hover:bg-base-500 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500"
+					className="inline-flex items-center justify-center rounded-lg lg:hidden group hover:bg-base-500 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500"
 					aria-controls="button-menu"
 					aria-expanded="false"
 					onClick={handleMenu}
@@ -40,11 +40,11 @@ const Navbar = () => {
 					<SlMenu className="p-2 text-paragraph group-hover:text-white" size="32" />
 				</button>
 				<div className=" w-full lg:block lg:w-auto relative" id="navbar-collapse">
-					<ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-background-third rounded-lg bg-background-first lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-background-first">
+					<ul className="font-medium flex flex-col p-4 lg:p-1 mt-4 border-2 border-background-third rounded-lg bg-background-first lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-background-secundary">
 						<li>
 							<a
 								href="#"
-								className="block mb-3 py-2 px-3 text-white bg-base-500 rounded lg:rounded-none lg:bg-transparent lg:text-base-500 lg:p-0 lg:mb-0"
+								className="block mb-3 py-2 px-3 text-white bg-base-500 rounded lg:bg-transparent lg:text-base-500 lg:p-1 lg:mb-0 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500 "
 								aria-current="page"
 							>
 								Incio
@@ -53,7 +53,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0 "
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:text-base-500 lg:hover:bg-transparent lg:p-1 lg:mb-0 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500 "
 							>
 								Quienes somos
 							</a>
@@ -61,7 +61,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0"
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:text-base-500 lg:hover:bg-transparent lg:p-1 lg:mb-0 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500 "
 							>
 								Servicios
 							</a>
@@ -69,7 +69,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0"
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:text-base-500 lg:hover:bg-transparent lg:p-1 lg:mb-0 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500 "
 							>
 								Nuestros Staff
 							</a>
@@ -77,7 +77,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block mb-3 py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0 lg:mb-0"
+								className="block mb-3 py-2 px-3 text-paragraph rounded hover:text-base-500 lg:hover:bg-transparent lg:p-1 lg:mb-0 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500 "
 							>
 								Blog
 							</a>
@@ -85,7 +85,7 @@ const Navbar = () => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-paragraph rounded hover:bg-base-100 lg:hover:bg-transparent lg:p-0"
+								className="block py-2 px-3 text-paragraph rounded hover:text-base-500 lg:hover:bg-transparent lg:p-1 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500 "
 							>
 								Contacto
 							</a>

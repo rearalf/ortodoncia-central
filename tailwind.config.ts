@@ -1,6 +1,5 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+const config = {
 	content: [
 		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,15 +8,19 @@ const config: Config = {
 	theme: {
 		extend: {
 			colors: {
-				'background-first': '#FFFFFF',
-				'background-secundary': '#F3F1F1',
-				'background-third': '#ECEAEA',
-				// base colors
-				'base-100': '#FEFDCB',
-				'base-500': '#F3E900',
-				'base-600': '##D0C700',
-				// Text
+				/* Backgrounds color	 */
+				'background-first': '#fcfcfc',
+				'background-secundary': '#ebebeb',
+				'background-third': '#f7f7f7',
+				/* Text color */
 				paragraph: '#333333',
+				'header-3': '#292929',
+				'header-2': '#1F1F1F',
+				'header-1': '#141414',
+				/* Principal color */
+				'base-100': '#FDF09B',
+				'base-500': '#FEC200',
+				'base-600': '#DAA100',
 			},
 		},
 	},
