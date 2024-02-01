@@ -1,4 +1,5 @@
 import React from 'react'
+import { SlCheck } from 'react-icons/sl'
 
 interface CheckboxInterface {
 	label: string
@@ -9,44 +10,24 @@ interface CheckboxInterface {
 
 const Checkbox = (props: CheckboxInterface) => {
 	return (
-		<div className="inline-flex items-center">
+		<div>
+			<input
+				type="checkbox"
+				name={props.id}
+				id={props.id}
+				className="peer hidden [&:checked_+_label_svg]:block"
+				checked={props.checked}
+			/>
+
 			<label
-				className="relative flex items-center p-3 rounded-full cursor-pointer"
-				htmlFor={props.id}
-				data-ripple-dark="true"
+				htmlFor="DeliveryStandard"
+				className="flex cursor-pointer items-center justify-between rounded-lg border border-gray-100 bg-white p-4 my-4 text-sm font-medium shadow-sm hover:border-gray-400 peer-checked:border-base-500 peer-checked:ring-1 peer-checked:ring-base-500"
 			>
-				<input
-					id={props.id}
-					type="checkbox"
-					checked={props.checked}
-					onChange={props.onChange}
-					className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-paragraph transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-base-100 before:opacity-0 before:transition-opacity checked:border-base-500 checked:bg-base-500 checked:before:bg-base-500 hover:before:opacity-10"
-				/>
-				<span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-3.5 w-3.5"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-						stroke="currentColor"
-						strokeWidth="1"
-					>
-						<path
-							fillRule="evenodd"
-							d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-							clipRule="evenodd"
-						></path>
-					</svg>
-				</span>
+				<div className="flex items-center gap-2">
+					<SlCheck className="hidden h-5 w-5 text-base-600" />
+					<p className="text-paragraph">{props.label}</p>
+				</div>
 			</label>
-			{props.label && (
-				<label
-					className="mt-px text-paragraph cursor-pointer select-none"
-					htmlFor={props.id}
-				>
-					{props.label}
-				</label>
-			)}
 		</div>
 	)
 }

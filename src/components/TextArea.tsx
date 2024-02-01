@@ -2,7 +2,8 @@ import React from 'react'
 
 interface TextAreaProps {
 	id: string
-	label: string
+	label?: string
+	required?: boolean
 	placeholder?: string
 	value: string | number
 	onChange: React.ChangeEventHandler<HTMLTextAreaElement>
@@ -10,21 +11,24 @@ interface TextAreaProps {
 
 const TextArea = (props: TextAreaProps) => {
 	return (
-		<label
-			htmlFor={props.id}
-			className="relative block overflow-hidden rounded-md border border-paragraph px-3 pt-3 shadow-sm focus-within:border-base-600 focus-within:ring-1 focus-within:ring-base-600"
-		>
+		<div>
+			{props.label && (
+				<label
+					htmlFor="OrderNotes"
+					className="block text-sm font-medium text-paragraph uppercase"
+				>
+					{props.label}
+					{props.required && ' *'}
+				</label>
+			)}
+
 			<textarea
-				id={props.id}
-				value={props.value}
-				onChange={props.onChange}
+				id="OrderNotes"
+				className="mt-2 w-full rounded-lg border-paragraph align-top shadow-sm sm:text-sm focus:ring-base-500 focus:border-base-500"
+				rows={4}
 				placeholder={props.placeholder}
-				className="peer h-8 w-full border-none bg-transparent p-0 mt-7 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm min-h-32"
-			/>
-			<span className="absolute start-3 top-4 text-paragraph text-sm w-full bg-background uppercase">
-				{props.label}
-			</span>
-		</label>
+			></textarea>
+		</div>
 	)
 }
 

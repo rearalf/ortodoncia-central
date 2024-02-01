@@ -39,7 +39,7 @@ const Navbar = () => {
 					<span className="sr-only">Open main menu</span>
 					<SlMenu className="p-2 text-paragraph group-hover:text-white" size="32" />
 				</button>
-				<div className=" w-full lg:block lg:w-auto relative" id="navbar-collapse">
+				<div className=" w-full lg:block lg:w-auto relative hidden" id="navbar-collapse">
 					<ul className="font-medium flex flex-col p-4 lg:p-1 mt-4 border-2 border-background-third rounded-lg bg-background-first lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-background-secundary">
 						<li>
 							<a
