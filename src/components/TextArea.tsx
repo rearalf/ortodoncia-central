@@ -24,7 +24,9 @@ const TextArea = (props: TextAreaProps) => {
 
 			<textarea
 				id="OrderNotes"
-				className="mt-2 w-full rounded-lg border-paragraph align-top shadow-sm sm:text-sm focus:ring-base-500 focus:border-base-500"
+				className={`w-full rounded-lg border-gray-100 hover:border-gray-400 align-top shadow-sm sm:text-sm focus:ring-base-500 focus:border-base-500 ${
+					props.label && 'mt-2'
+				}`}
 				rows={4}
 				placeholder={props.placeholder}
 			></textarea>

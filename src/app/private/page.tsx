@@ -54,8 +54,8 @@ function Home() {
 						onChange={() => {}}
 					/>
 
-					<div className='flex flex-col'>
-						<ul className='mb-4'>
+					<div className="flex flex-col">
+						<ul className="mb-5">
 							<Checkbox
 								id="snc"
 								key="snc"
@@ -82,14 +82,54 @@ function Home() {
 								key="sme"
 								label="SME"
 								checked={false}
+								isLast
 								onChange={() => {}}
 							/>
 						</ul>
-						<InputBasic
+						<TextArea
 							value=""
-							type="text"
-							id="references"
-							key="references"
+							id="currentSystemicTreatment"
+							key="currentSystemicTreatment"
+							onChange={() => {}}
+						/>
+					</div>
+					
+					<div className="flex flex-col">
+						<ul className="mb-5">
+							<Checkbox
+								id="sr"
+								key="sr"
+								label="SR"
+								checked={true}
+								onChange={() => {}}
+							/>
+							<Checkbox
+								id="su"
+								key="su"
+								label="SU"
+								checked={false}
+								onChange={() => {}}
+							/>
+							<Checkbox
+								id="sgu"
+								key="sgu"
+								label="SGU"
+								checked={false}
+								onChange={() => {}}
+							/>
+							<Checkbox
+								id="sgi"
+								key="sgi"
+								label="SGI"
+								checked={false}
+								isLast
+								onChange={() => {}}
+							/>
+						</ul>
+						<TextArea
+							value=""
+							id="currentSystemicTreatment"
+							key="currentSystemicTreatment"
 							onChange={() => {}}
 						/>
 					</div>

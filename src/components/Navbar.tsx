@@ -18,7 +18,7 @@ const Navbar = () => {
 	}
 
 	return (
-		<nav className="bg-background-secundary border-b-2 border-background-thirdd">
+		<nav className="bg-background-first border-b-2 border-background-thirdd">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
 				<Link
 					href="/"
