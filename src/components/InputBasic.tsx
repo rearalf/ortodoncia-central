@@ -31,7 +31,7 @@ const InputBasic = (props: InputBasicProps) => {
 				min={1}
 				max={100}
 				placeholder={props.placeholder}
-				className={`w-full rounded-md border-gray-100 shadow-sm sm:text-sm focus:ring-base-500 focus:border-base-500 bg-white hover:border-gray-400 ${
+				className={`w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:ring-base-500 focus:border-base-500 bg-white hover:border-gray-500 ${
 					props.label && 'mt-2'
 				}`}
 			/>

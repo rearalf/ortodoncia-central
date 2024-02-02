@@ -40,11 +40,11 @@ const Navbar = () => {
 					<SlMenu className="p-2 text-paragraph group-hover:text-white" size="32" />
 				</button>
 				<div className=" w-full lg:block lg:w-auto relative hidden" id="navbar-collapse">
-					<ul className="font-medium flex flex-col p-4 lg:p-1 mt-4 border-2 border-background-third rounded-lg bg-background-first lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-background-secundary">
+					<ul className="font-medium flex flex-col p-4 lg:p-1 mt-4 border-2 border-background-secundary rounded-lg bg-background-first lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0">
 						<li>
 							<a
 								href="#"
-								className="block mb-3 py-2 px-3 text-white bg-base-500 rounded lg:bg-transparent lg:text-base-500 lg:p-1 lg:mb-0 focus:outline-none focus:ring-2 focus:ring-base-500 outline-2 outline-base-500 "
+								className="block mb-3 py-2 px-3 text-white bg-base-500 rounded lg:bg-transparent lg:text-base-500 lg:p-1 lg:mb-0 focus-within:outline-none focus:ring-2 focus-within:ring-base-500 outline-2 outline-base-500 "
 								aria-current="page"
 							>
 								Incio
