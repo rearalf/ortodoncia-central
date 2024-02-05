@@ -6,7 +6,7 @@ interface CheckboxInterface {
 	label: string
 	isLast?: boolean
 	checked: boolean
-	onChange: React.ChangeEventHandler<HTMLInputElement>
+	onChange: () => void
 }
 
 const Checkbox = (props: CheckboxInterface) => {
