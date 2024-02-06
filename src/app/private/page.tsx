@@ -104,14 +104,55 @@ function Home() {
 	]
 
 	const [tooth, setTooth] = useState<number>(0)
+
+	const [palatina, setPalatina] = useState<toothPositionStateType>('normal')
+	const [distal, setDistal] = useState<toothPositionStateType>('normal')
+	const [mesial, setMesial] = useState<toothPositionStateType>('normal')
+	const [vestibular, setVestibular] = useState<toothPositionStateType>('normal')
+	const [oclusal, setOclusal] = useState<toothPositionStateType>('normal')
+
 	const [teethState, setTeethState] = useState<toothPositionInterface[]>([])
 
 	const handleSelectTooth = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setTooth(Number(e.target.value))
 	}
 	const handleToothPosition = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		console.log(e.target.name)
-		console.log(e.target.value)
+		if (e.target.id === 'palatina') {
+			if (
+				e.target.value === 'decay' ||
+				e.target.value === 'normal' ||
+				e.target.value === 'filling'
+			)
+				setPalatina(e.target.value)
+		} else if (e.target.id === 'distal') {
+			if (
+				e.target.value === 'decay' ||
+				e.target.value === 'normal' ||
+				e.target.value === 'filling'
+			)
+				setDistal(e.target.value)
+		} else if (e.target.id === 'mesial') {
+			if (
+				e.target.value === 'decay' ||
+				e.target.value === 'normal' ||
+				e.target.value === 'filling'
+			)
+				setMesial(e.target.value)
+		} else if (e.target.id === 'vestibular') {
+			if (
+				e.target.value === 'decay' ||
+				e.target.value === 'normal' ||
+				e.target.value === 'filling'
+			)
+				setVestibular(e.target.value)
+		} else if (e.target.id === 'oclusal') {
+			if (
+				e.target.value === 'decay' ||
+				e.target.value === 'normal' ||
+				e.target.value === 'filling'
+			)
+				setOclusal(e.target.value)
+		}
 	}
 	return (
 		<>
@@ -260,7 +301,14 @@ function Home() {
 								options={[]}
 							/>
 						</div>
-						<ToothCheckbox handleToothPosition={handleToothPosition} />
+						<ToothCheckbox
+							palatina={palatina}
+							distal={distal}
+							mesial={mesial}
+							vestibular={vestibular}
+							oclusal={oclusal}
+							handleToothPosition={handleToothPosition}
+						/>
 					</div>
 				</div>
 			</main>

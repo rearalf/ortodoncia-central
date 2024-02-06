@@ -27,7 +27,7 @@ const Select = (props: SelectProps) => {
 				value={props.value}
 				onChange={props.onChange}
 				required={props.required || false}
-				className="mt-1.5 w-full rounded-lg border-gray-300 text-paragraph sm:text-sm focus:ring-base-500 focus:border-base-500 bg-white hover:border-gray-500"
+				className="mt-1.5 w-full rounded-lg border-gray-300 text-paragraph sm:text-sm focus:ring-base-500 focus:border-base-500 bg-white hover:border-gray-600"
 			>
 				<option value="">Please select</option>
 				{!props.optgroup
