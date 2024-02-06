@@ -1,11 +1,11 @@
 'use client'
-import Checkbox from '@/components/Checkbox'
-import InputBasic from '@/components/InputBasic'
+import React, { useState } from 'react'
 import Navbar from '@/components/Navbar'
 import Select from '@/components/Select'
 import TextArea from '@/components/TextArea'
+import Checkbox from '@/components/Checkbox'
+import InputBasic from '@/components/InputBasic'
 import ToothCheckbox from '@/components/teeth/ToothCheckbox'
-import React, { useState } from 'react'
 
 function Home() {
 	const teeth = [
@@ -102,7 +102,17 @@ function Home() {
 			],
 		},
 	]
-	const [isChecked, setIsChecked] = useState(false)
+
+	const [tooth, setTooth] = useState<number>(0)
+	const [teethState, setTeethState] = useState<toothPositionInterface[]>([])
+
+	const handleSelectTooth = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setTooth(Number(e.target.value))
+	}
+	const handleToothPosition = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		console.log(e.target.name)
+		console.log(e.target.value)
+	}
 	return (
 		<>
 			<Navbar />
@@ -129,17 +139,17 @@ function Home() {
 					/>
 					<InputBasic
 						value=""
+						type="text"
 						id="occupation"
 						key="occupation"
-						type="text"
 						label="Ocupacion"
 						onChange={() => {}}
 					/>
 					<InputBasic
 						value=""
+						type="tel"
 						id="phone"
 						key="phone"
-						type="tel"
 						label="Telefono"
 						onChange={() => {}}
 					/>
@@ -191,12 +201,7 @@ function Home() {
 								onChange={() => {}}
 							/>
 						</ul>
-						<TextArea
-							value=""
-							id="currentSystemicTreatment"
-							key="currentSystemicTreatment"
-							onChange={() => {}}
-						/>
+						<TextArea value="" id="options1" key="options1" onChange={() => {}} />
 					</div>
 
 					<div className="flex flex-col">
@@ -231,12 +236,7 @@ function Home() {
 								onChange={() => {}}
 							/>
 						</ul>
-						<TextArea
-							value=""
-							id="currentSystemicTreatment"
-							key="currentSystemicTreatment"
-							onChange={() => {}}
-						/>
+						<TextArea value="" id="options2" key="options2" onChange={() => {}} />
 					</div>
 
 					<InputBasic
@@ -251,16 +251,16 @@ function Home() {
 						<div className="flex justify-center w-3/4 m-auto">
 							<Select
 								optgroup
+								value={tooth}
 								id="toothNumber"
 								key="toothNumber"
-								value=""
 								label="Numero de diente"
-								onChange={() => {}}
+								onChange={handleSelectTooth}
 								optionsGroup={teeth}
 								options={[]}
 							/>
 						</div>
-						<ToothCheckbox />
+						<ToothCheckbox handleToothPosition={handleToothPosition} />
 					</div>
 				</div>
 			</main>

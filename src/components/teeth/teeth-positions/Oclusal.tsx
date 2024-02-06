@@ -16,7 +16,7 @@ const Oclusal = (props: OclusalInterface) => {
 				d="M126 64C126 98.8013 98.0104 127 63.5 127C28.9896 127 1 98.8013 1 64C1 29.1987 28.9896 1 63.5 1C98.0104 1 126 29.1987 126 64Z"
 				fill="white"
 				stroke="black"
-				stroke-width="2"
+				strokeWidth="2"
 			/>
 		</svg>
 	)

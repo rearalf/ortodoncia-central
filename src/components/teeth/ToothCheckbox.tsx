@@ -6,13 +6,17 @@ import Mesial from './teeth-positions/Mesial'
 import Oclusal from './teeth-positions/Oclusal'
 import Select from '../Select'
 
-const ToothCheckbox = () => {
+interface ToothCheckboxProps {
+	handleToothPosition: (e: React.ChangeEvent<HTMLSelectElement>) => void
+}
+
+const ToothCheckbox = (props: ToothCheckboxProps) => {
 	return (
 		<div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:grid-rows-3">
 			<div className="flex flex-col gap-4 justify-between order-1 md:col-start-2 md:py-3">
 				<Select
-					id=""
-					key=""
+					id="state"
+					key="state"
 					value=""
 					label="extracción o extraída"
 					onChange={() => {}}
@@ -22,11 +26,11 @@ const ToothCheckbox = () => {
 					]}
 				/>
 				<Select
-					id=""
-					key=""
+					id="palatina"
+					key="palatina"
 					value=""
 					label="Palatina"
-					onChange={() => {}}
+					onChange={props.handleToothPosition}
 					options={[
 						{ title: 'Con carie', value: 'decay' },
 						{ title: 'Con relleno', value: 'filling' },
@@ -44,8 +48,8 @@ const ToothCheckbox = () => {
 			</div>
 			<div className="order-2 md:col-start-1 md:row-start-2 md:flex md:justify-center md:items-center">
 				<Select
-					id=""
-					key=""
+					id="mesial"
+					key="mesial"
 					value=""
 					label="Mesial"
 					onChange={() => {}}
@@ -57,8 +61,8 @@ const ToothCheckbox = () => {
 			</div>
 			<div className="order-3 md:col-start-2 md:row-start-3 md:flex md:justify-center md:items-center">
 				<Select
-					id=""
-					key=""
+					id="vestibular"
+					key="vestibular"
 					value=""
 					label="Vestibular"
 					onChange={() => {}}
@@ -68,12 +72,23 @@ const ToothCheckbox = () => {
 					]}
 				/>
 			</div>
-			<div className="order-4 md:col-start-3 md:row-start-2 md:flex md:justify-center md:items-center">
+			<div className="order-4 flex flex-col gap-4 justify-between md:col-start-3 md:row-start-2 md:flex md:justify-center md:items-center">
 				<Select
-					id=""
-					key=""
+					id="distal"
+					key="distal"
 					value=""
 					label="Distal"
+					onChange={() => {}}
+					options={[
+						{ title: 'Con carie', value: 'decay' },
+						{ title: 'Con relleno', value: 'filling' },
+					]}
+				/>
+				<Select
+					id="oclusal"
+					key="oclusal"
+					value=""
+					label="Oclusal"
 					onChange={() => {}}
 					options={[
 						{ title: 'Con carie', value: 'decay' },

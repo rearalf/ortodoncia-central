@@ -13,11 +13,12 @@ const Checkbox = (props: CheckboxInterface) => {
 	return (
 		<div>
 			<input
-				type="checkbox"
-				name={props.id}
 				id={props.id}
-				className="peer hidden [&:checked_+_label_svg]:block"
+				name={props.id}
+				type="checkbox"
 				checked={props.checked}
+				onChange={props.onChange}
+				className="peer hidden [&:checked_+_label_svg]:block"
 			/>
 
 			<label
