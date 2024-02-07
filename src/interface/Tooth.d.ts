@@ -1,6 +1,6 @@
-type toothPositionStateType = 'normal' | 'decay' | 'filling'
+type toothPositionStateType = '' | 'decay' | 'filling'
 
-type toothStateType = 'extraction' | 'extracted'
+type toothStateType = '' | 'extraction' | 'extracted'
 
 interface toothPositionInterface {
 	tooth: number

@@ -105,11 +105,13 @@ function Home() {
 
 	const [tooth, setTooth] = useState<number>(0)
 
-	const [palatina, setPalatina] = useState<toothPositionStateType>('normal')
-	const [distal, setDistal] = useState<toothPositionStateType>('normal')
-	const [mesial, setMesial] = useState<toothPositionStateType>('normal')
-	const [vestibular, setVestibular] = useState<toothPositionStateType>('normal')
-	const [oclusal, setOclusal] = useState<toothPositionStateType>('normal')
+	const [palatina, setPalatina] = useState<toothPositionStateType>('')
+	const [distal, setDistal] = useState<toothPositionStateType>('')
+	const [mesial, setMesial] = useState<toothPositionStateType>('')
+	const [vestibular, setVestibular] = useState<toothPositionStateType>('')
+	const [oclusal, setOclusal] = useState<toothPositionStateType>('')
+
+	const [stateTooth, setStateTooth] = useState<toothStateType>('')
 
 	const [teethState, setTeethState] = useState<toothPositionInterface[]>([])
 
@@ -118,40 +120,27 @@ function Home() {
 	}
 	const handleToothPosition = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		if (e.target.id === 'palatina') {
-			if (
-				e.target.value === 'decay' ||
-				e.target.value === 'normal' ||
-				e.target.value === 'filling'
-			)
+			if (e.target.value === 'decay' || e.target.value === '' || e.target.value === 'filling')
 				setPalatina(e.target.value)
 		} else if (e.target.id === 'distal') {
-			if (
-				e.target.value === 'decay' ||
-				e.target.value === 'normal' ||
-				e.target.value === 'filling'
-			)
+			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
 				setDistal(e.target.value)
 		} else if (e.target.id === 'mesial') {
-			if (
-				e.target.value === 'decay' ||
-				e.target.value === 'normal' ||
-				e.target.value === 'filling'
-			)
+			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
 				setMesial(e.target.value)
 		} else if (e.target.id === 'vestibular') {
-			if (
-				e.target.value === 'decay' ||
-				e.target.value === 'normal' ||
-				e.target.value === 'filling'
-			)
+			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
 				setVestibular(e.target.value)
 		} else if (e.target.id === 'oclusal') {
-			if (
-				e.target.value === 'decay' ||
-				e.target.value === 'normal' ||
-				e.target.value === 'filling'
-			)
+			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
 				setOclusal(e.target.value)
+		} else if (e.target.id === 'state') {
+			if (
+				e.target.value === 'extraction' ||
+				e.target.value === 'extracted' ||
+				e.target.value === ''
+			)
+				setStateTooth(e.target.value)
 		}
 	}
 	return (
@@ -302,6 +291,7 @@ function Home() {
 							/>
 						</div>
 						<ToothCheckbox
+							stateTooth={stateTooth}
 							palatina={palatina}
 							distal={distal}
 							mesial={mesial}

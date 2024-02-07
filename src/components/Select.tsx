@@ -9,6 +9,7 @@ interface SelectProps {
 	optionsGroup?: { group: string; options: SelectProps['options'] }[]
 	options: { value: string; title: string }[]
 	onChange: React.ChangeEventHandler<HTMLSelectElement>
+	disabled?: boolean
 }
 
 const Select = (props: SelectProps) => {
@@ -18,7 +19,8 @@ const Select = (props: SelectProps) => {
 				htmlFor={props.id}
 				className="block w-full text-sm font-medium text-paragraph uppercase"
 			>
-				{props.label}
+				{`${props.label} ${props.required && '*'} `}
+				{props.disabled && <span className="text-[10px]">(Deshabilitado)</span>}
 			</label>
 
 			<select
@@ -27,7 +29,8 @@ const Select = (props: SelectProps) => {
 				value={props.value}
 				onChange={props.onChange}
 				required={props.required || false}
-				className="mt-1.5 w-full rounded-lg border-gray-300 text-paragraph sm:text-sm focus:ring-base-500 focus:border-base-500 bg-white hover:border-gray-600"
+				disabled={props.disabled || false}
+				className="mt-1.5 w-full rounded-lg border-gray-300 text-paragraph sm:text-sm focus:ring-base-500 focus:border-base-500 bg-white hover:border-gray-600 disabled:border-gray-400"
 			>
 				<option value="">Please select</option>
 				{!props.optgroup

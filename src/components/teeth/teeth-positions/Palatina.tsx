@@ -2,6 +2,7 @@ import React from 'react'
 
 interface PalatinaInterface {
 	class?: string
+	fill?: string
 }
 
 const Palatina = (props: PalatinaInterface) => {
@@ -17,7 +18,7 @@ const Palatina = (props: PalatinaInterface) => {
 			</mask>
 			<path
 				d="M197.995 41.0051C184.995 28.0049 169.561 17.6925 152.576 10.6569C135.59 3.62122 117.385 4.60258e-06 99 0C80.615 -4.60258e-06 62.4099 3.6212 45.4243 10.6569C28.4388 17.6925 13.0053 28.0048 0.00506592 41.005L99 140L197.995 41.0051Z"
-				fill="white"
+				fill={props.fill || 'white'}
 				stroke="black"
 				strokeWidth="2"
 				mask="url(#path-1-inside-1_861_106)"
