@@ -55,9 +55,7 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 					<div className="w-48 h-48 relative md:w-56 md:h-56 lg:w-60 lg:h-60">
 						<label htmlFor="palatina">
 							<Palatina
-								class={`z-10 w-32 absolute top-0 left-1/2 -translate-x-1/2 md:w-36 md:translate-y-[3%] lg:w-40 cursor-pointer ${
-									props.palatina === 'decay' ? 'animate-pulse' : ''
-								}`}
+								class="z-10 w-32 absolute top-0 left-1/2 -translate-x-1/2 md:w-36 md:translate-y-[3%] lg:w-40 cursor-pointer"
 								fill={
 									props.palatina === 'decay'
 										? '#CB0000'
@@ -92,10 +90,28 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 							/>
 						</label>
 						<label htmlFor="vestibular">
-							<Vestibular class="z-10 w-32 h-32 absolute top-1/2 left-1/2 translate-y-[-18%] translate-x-[-50%] md:w-36 md:h-36 lg:w-40 lg:h-40 lg:translate-y-[-15%] cursor-pointer" />
+							<Vestibular
+								class="z-10 w-32 h-32 absolute top-1/2 left-1/2 translate-y-[-18%] translate-x-[-50%] md:w-36 md:h-36 lg:w-40 lg:h-40 lg:translate-y-[-15%] cursor-pointer"
+								fill={
+									props.vestibular === 'decay'
+										? '#CB0000'
+										: props.vestibular === 'filling'
+										? '#007FB8'
+										: 'white'
+								}
+							/>
 						</label>
 						<label htmlFor="oclusal">
-							<Oclusal class="w-20 h-20 z-30 absolute left-1/2 top-1/2 translate-y-[-55%] translate-x-[-50%] md:w-28 md:h-28 lg:w-32 lg:h-32 lg:translate-y-[-50%] cursor-pointer" />
+							<Oclusal
+								class="w-20 h-20 z-30 absolute left-1/2 top-1/2 translate-y-[-55%] translate-x-[-50%] md:w-28 md:h-28 lg:w-32 lg:h-32 lg:translate-y-[-50%] cursor-pointer"
+								fill={
+									props.oclusal === 'decay'
+										? '#CB0000'
+										: props.oclusal === 'filling'
+										? '#007FB8'
+										: 'white'
+								}
+							/>
 						</label>
 					</div>
 				)}

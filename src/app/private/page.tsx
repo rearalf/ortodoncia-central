@@ -120,7 +120,7 @@ function Home() {
 	}
 	const handleToothPosition = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		if (e.target.id === 'palatina') {
-			if (e.target.value === 'decay' || e.target.value === '' || e.target.value === 'filling')
+			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
 				setPalatina(e.target.value)
 		} else if (e.target.id === 'distal') {
 			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
@@ -139,9 +139,28 @@ function Home() {
 				e.target.value === 'extraction' ||
 				e.target.value === 'extracted' ||
 				e.target.value === ''
-			)
+			) {
 				setStateTooth(e.target.value)
+				setPalatina('')
+				setDistal('')
+				setMesial('')
+				setVestibular('')
+				setOclusal('')
+			}
 		}
+	}
+	const handleClearStateTeeth = () => {
+		setPalatina('')
+		setDistal('')
+		setMesial('')
+		setVestibular('')
+		setOclusal('')
+		setStateTooth('')
+		setTooth(0)
+	}
+
+	const handleStateTeeth = () => {
+		console.log('first')
 	}
 	return (
 		<>
@@ -278,7 +297,7 @@ function Home() {
 						onChange={() => {}}
 					/>
 					<div className="grid gap-6 ">
-						<div className="flex justify-center w-3/4 m-auto">
+						<div className="flex flex-col gap-6">
 							<Select
 								optgroup
 								value={tooth}
@@ -289,6 +308,20 @@ function Home() {
 								optionsGroup={teeth}
 								options={[]}
 							/>
+							<div className="flex gap-4 flex-col">
+								<button
+									className="inline-block rounded border border-success-600 bg-success-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-success-600 focus:outline-none focus:ring focus:ring-success-400 focus:border-0 active:text-white active:bg-success-700 transition-colors duration-300 ease-in-out uppercase"
+									onClick={handleStateTeeth}
+								>
+									Guardar Estados
+								</button>
+								<button
+									className="inline-block rounded border border-danger-500 px-12 py-3 text-sm font-medium text-danger-500 hover:bg-danger-500 hover:text-white focus:outline-none focus:ring focus:ring-danger-500 focus:border-danger-500 active:bg-danger-400 transition-colors duration-300 ease-in-out uppercase"
+									onClick={handleClearStateTeeth}
+								>
+									Limpiar
+								</button>
+							</div>
 						</div>
 						<ToothCheckbox
 							stateTooth={stateTooth}

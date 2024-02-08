@@ -19,8 +19,8 @@ const Select = (props: SelectProps) => {
 				htmlFor={props.id}
 				className="block w-full text-sm font-medium text-paragraph uppercase"
 			>
-				{`${props.label} ${props.required && '*'} `}
-				{props.disabled && <span className="text-[10px]">(Deshabilitado)</span>}
+				{`${props.label} ${props.required ? '*' : ''} `}
+				{props.disabled ? <span className="text-[10px]">(Deshabilitado)</span> : ''}
 			</label>
 
 			<select
