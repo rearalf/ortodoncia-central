@@ -6,7 +6,7 @@ import TextArea from '@/components/TextArea'
 import Checkbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
 import ToothCheckbox from '@/components/teeth/ToothCheckbox'
-import { OrthoTerms } from '@/models/Patient'
+import { OrthoTerms, patientBasicData } from '@/models/Patient'
 
 function Home() {
 	const teeth = [
@@ -117,20 +117,7 @@ function Home() {
 	const [teethState, setTeethState] = useState<toothPositionInterface[]>([])
 
 	/* Patient's state */
-	const [patient, setPatient] = useState<Patient>({
-		name: '',
-		age: 0,
-		phone: '',
-		reason: '',
-		SNC: false,
-		SVC: false,
-		SE: false,
-		SME: false,
-		SR: false,
-		SU: false,
-		SGU: false,
-		SGI: false,
-	})
+	const [patient, setPatient] = useState<Patient>(patientBasicData)
 
 	const handleSelectTooth = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setTooth(Number(e.target.value))
@@ -205,27 +192,26 @@ function Home() {
 				e.target.id === OrthoTerms.SR ||
 				e.target.id === OrthoTerms.SU ||
 				e.target.id === OrthoTerms.SVC
-			) {
+			)
 				setPatient({
 					...patient,
 					[e.target.id]: e.target.checked,
 				})
-			} else {
+			else
 				setPatient({
 					...patient,
 					[e.target.id]: e.target.value,
 				})
-			}
-		} else if (e.target instanceof HTMLTextAreaElement) {
+		} else if (e.target instanceof HTMLTextAreaElement)
 			setPatient({
 				...patient,
 				[e.target.id]: e.target.value,
 			})
-		}
 	}
 
 	const handleClean = () => {
 		handleClearStateTeeth()
+		setPatient(patientBasicData)
 	}
 	const handleSave = () => {}
 	return (
@@ -233,7 +219,7 @@ function Home() {
 			<Navbar />
 			<main className="mx-auto max-w-screen-xl px-4 py-8 lg:py-12 space-y-8 lg:space-y-12">
 				<h1 className="text-4xl font-bold block text-center text-header-1">Formulario</h1>
-				<div className="flex flex-col gap-6">
+				<form className="flex flex-col gap-6">
 					<InputBasic
 						required
 						id="name"
@@ -275,7 +261,7 @@ function Home() {
 						key="reason"
 						value={patient.reason}
 						label="Motivo de consulta"
-						onChange={() => {}}
+						onChange={handleInput}
 					/>
 					<TextArea
 						id="currentSystemicTreatment"
@@ -390,12 +376,14 @@ function Home() {
 								<button
 									className="inline-block rounded border border-success-600 bg-success-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-success-600 focus:outline-none focus:ring focus:ring-success-400 focus:border-0 active:text-white active:bg-success-700 transition-colors duration-300 ease-in-out uppercase"
 									onClick={handleStateTeeth}
+									type="button"
 								>
 									Guardar Estado
 								</button>
 								<button
 									className="inline-block rounded border border-danger-500 px-12 py-3 text-sm font-medium text-danger-500 hover:bg-danger-500 hover:text-white focus:outline-none focus:ring focus:ring-danger-500 focus:border-danger-500 active:bg-danger-400 transition-colors duration-300 ease-in-out uppercase"
 									onClick={handleClearStateTeeth}
+									type="button"
 								>
 									Limpiar
 								</button>
@@ -417,17 +405,19 @@ function Home() {
 						<button
 							className="inline-block rounded border border-success-600 bg-success-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-success-600 focus:outline-none focus:ring focus:ring-success-400 focus:border-0 active:text-white active:bg-success-700 transition-colors duration-300 ease-in-out uppercase"
 							onClick={handleSave}
+							type="submit"
 						>
 							Guardar
 						</button>
 						<button
 							className="inline-block rounded border border-danger-500 px-12 py-3 text-sm font-medium text-danger-500 hover:bg-danger-500 hover:text-white focus:outline-none focus:ring focus:ring-danger-500 focus:border-danger-500 active:bg-danger-400 transition-colors duration-300 ease-in-out uppercase"
 							onClick={handleClean}
+							type="button"
 						>
 							Limpiar
 						</button>
 					</div>
-				</div>
+				</form>
 			</main>
 		</>
 	)
