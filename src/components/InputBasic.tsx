@@ -30,6 +30,8 @@ const InputBasic = (props: InputBasicProps) => {
 				required={props.required || false}
 				min={1}
 				max={100}
+				value={props.value}
+				onChange={props.onChange}
 				placeholder={props.placeholder}
 				className={`w-full rounded-md border-gray-300 shadow-sm sm:text-sm focus:ring-base-500 focus:border-base-500 bg-white hover:border-gray-500 ${
 					props.label && 'mt-2'

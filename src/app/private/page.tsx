@@ -6,6 +6,7 @@ import TextArea from '@/components/TextArea'
 import Checkbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
 import ToothCheckbox from '@/components/teeth/ToothCheckbox'
+import { OrthoTerms } from '@/models/Patient'
 
 function Home() {
 	const teeth = [
@@ -115,6 +116,22 @@ function Home() {
 
 	const [teethState, setTeethState] = useState<toothPositionInterface[]>([])
 
+	/* Patient's state */
+	const [patient, setPatient] = useState<Patient>({
+		name: '',
+		age: 0,
+		phone: '',
+		reason: '',
+		SNC: false,
+		SVC: false,
+		SE: false,
+		SME: false,
+		SR: false,
+		SU: false,
+		SGU: false,
+		SGI: false,
+	})
+
 	const handleSelectTooth = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setTooth(Number(e.target.value))
 	}
@@ -160,8 +177,57 @@ function Home() {
 	}
 
 	const handleStateTeeth = () => {
-		console.log('first')
+		const toothData: toothPositionInterface = {
+			tooth: tooth,
+			distal,
+			mesial,
+			oclusal,
+			palatina,
+			vestibular,
+			state: stateTooth,
+		}
+		const teethArray = teethState
+		teethArray.push(toothData)
+		setTeethState(teethArray)
 	}
+
+	const handleInput = (
+		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
+	) => {
+		if (e.target instanceof HTMLInputElement) {
+			if (
+				e.target.id === OrthoTerms.SNC ||
+				e.target.id === OrthoTerms.SE ||
+				e.target.id === OrthoTerms.SGI ||
+				e.target.id === OrthoTerms.SGU ||
+				e.target.id === OrthoTerms.SME ||
+				e.target.id === OrthoTerms.SNC ||
+				e.target.id === OrthoTerms.SR ||
+				e.target.id === OrthoTerms.SU ||
+				e.target.id === OrthoTerms.SVC
+			) {
+				setPatient({
+					...patient,
+					[e.target.id]: e.target.checked,
+				})
+			} else {
+				setPatient({
+					...patient,
+					[e.target.id]: e.target.value,
+				})
+			}
+		} else if (e.target instanceof HTMLTextAreaElement) {
+			setPatient({
+				...patient,
+				[e.target.id]: e.target.value,
+			})
+		}
+	}
+
+	const handleClean = () => {
+		handleClearStateTeeth()
+	}
+	const handleSave = () => {}
 	return (
 		<>
 			<Navbar />
@@ -169,135 +235,147 @@ function Home() {
 				<h1 className="text-4xl font-bold block text-center text-header-1">Formulario</h1>
 				<div className="flex flex-col gap-6">
 					<InputBasic
-						value=""
 						required
 						id="name"
 						key="name"
 						type="text"
+						value={patient.name}
+						onChange={handleInput}
 						label="Nombre completo"
-						onChange={() => {}}
 					/>
 					<InputBasic
-						value=""
 						required
 						id="age"
 						key="age"
 						type="number"
 						label="Edad"
-						onChange={() => {}}
+						value={patient.age}
+						onChange={handleInput}
 					/>
 					<InputBasic
-						value=""
 						type="text"
 						id="occupation"
 						key="occupation"
 						label="Ocupacion"
-						onChange={() => {}}
+						value={patient.occupation || ''}
+						onChange={handleInput}
 					/>
 					<InputBasic
-						value=""
+						required
 						type="tel"
 						id="phone"
 						key="phone"
 						label="Telefono"
-						onChange={() => {}}
+						value={patient.phone}
+						onChange={handleInput}
 					/>
 
 					<TextArea
-						value=""
 						id="reason"
 						key="reason"
+						value={patient.reason}
 						label="Motivo de consulta"
 						onChange={() => {}}
 					/>
 					<TextArea
-						value=""
 						id="currentSystemicTreatment"
 						key="currentSystemicTreatment"
 						label="tratamiento sistémico actual"
-						onChange={() => {}}
+						value={patient.currentSystemicTreatment || ''}
+						onChange={handleInput}
 					/>
 
 					<div className="flex flex-col">
 						<ul className="mb-5">
 							<Checkbox
-								id="snc"
-								key="snc"
+								id="SNC"
+								key="SNC"
 								label="SNC"
-								checked={true}
-								onChange={() => {}}
+								checked={patient.SNC}
+								onChange={handleInput}
 							/>
 							<Checkbox
-								id="svc"
-								key="svc"
+								id="SVC"
+								key="SVC"
 								label="SVC"
-								checked={false}
-								onChange={() => {}}
+								checked={patient.SVC}
+								onChange={handleInput}
 							/>
 							<Checkbox
-								id="se"
-								key="se"
+								id="SE"
+								key="SE"
 								label="SE"
-								checked={false}
-								onChange={() => {}}
+								checked={patient.SE}
+								onChange={handleInput}
 							/>
 							<Checkbox
-								id="sme"
-								key="sme"
+								id="SME"
+								key="SME"
 								label="SME"
-								checked={false}
+								checked={patient.SME}
 								isLast
-								onChange={() => {}}
+								onChange={handleInput}
 							/>
 						</ul>
-						<TextArea value="" id="options1" key="options1" onChange={() => {}} />
+						<TextArea
+							value={patient.comments1 || ''}
+							id="comments1"
+							key="comments1"
+							onChange={handleInput}
+						/>
 					</div>
 
 					<div className="flex flex-col">
 						<ul className="mb-5">
 							<Checkbox
-								id="sr"
-								key="sr"
+								id="SR"
+								key="SR"
 								label="SR"
-								checked={true}
-								onChange={() => {}}
+								checked={patient.SR}
+								onChange={handleInput}
 							/>
 							<Checkbox
-								id="su"
-								key="su"
+								id="SU"
+								key="SU"
 								label="SU"
-								checked={false}
-								onChange={() => {}}
+								checked={patient.SU}
+								onChange={handleInput}
 							/>
 							<Checkbox
-								id="sgu"
-								key="sgu"
+								id="SGU"
+								key="SGU"
 								label="SGU"
-								checked={false}
-								onChange={() => {}}
+								checked={patient.SGU}
+								onChange={handleInput}
 							/>
 							<Checkbox
-								id="sgi"
-								key="sgi"
+								id="SGI"
+								key="SGI"
 								label="SGI"
-								checked={false}
+								checked={patient.SGI}
 								isLast
-								onChange={() => {}}
+								onChange={handleInput}
 							/>
 						</ul>
-						<TextArea value="" id="options2" key="options2" onChange={() => {}} />
+						<TextArea
+							id="comments2"
+							key="comments2"
+							value={patient.comments2 || ''}
+							onChange={handleInput}
+						/>
 					</div>
 
 					<InputBasic
-						value=""
 						type="text"
 						id="references"
 						key="references"
+						value={patient.references || ''}
 						label="Referencias del laboratorio"
-						onChange={() => {}}
+						onChange={handleInput}
 					/>
+
 					<div className="grid gap-6 ">
-						<div className="flex flex-col gap-6">
+						<div className="flex flex-col gap-6 lg:grid lg:grid-cols-2">
 							<Select
 								optgroup
 								value={tooth}
@@ -308,12 +386,12 @@ function Home() {
 								optionsGroup={teeth}
 								options={[]}
 							/>
-							<div className="flex gap-4 flex-col">
+							<div className="flex gap-4 flex-col md:flex-row md:items-end md:justify-center">
 								<button
 									className="inline-block rounded border border-success-600 bg-success-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-success-600 focus:outline-none focus:ring focus:ring-success-400 focus:border-0 active:text-white active:bg-success-700 transition-colors duration-300 ease-in-out uppercase"
 									onClick={handleStateTeeth}
 								>
-									Guardar Estados
+									Guardar Estado
 								</button>
 								<button
 									className="inline-block rounded border border-danger-500 px-12 py-3 text-sm font-medium text-danger-500 hover:bg-danger-500 hover:text-white focus:outline-none focus:ring focus:ring-danger-500 focus:border-danger-500 active:bg-danger-400 transition-colors duration-300 ease-in-out uppercase"
@@ -330,8 +408,24 @@ function Home() {
 							mesial={mesial}
 							vestibular={vestibular}
 							oclusal={oclusal}
+							disable={tooth === 0}
 							handleToothPosition={handleToothPosition}
 						/>
+					</div>
+
+					<div className="flex gap-4 flex-col md:flex-row md:items-end md:justify-center">
+						<button
+							className="inline-block rounded border border-success-600 bg-success-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-success-600 focus:outline-none focus:ring focus:ring-success-400 focus:border-0 active:text-white active:bg-success-700 transition-colors duration-300 ease-in-out uppercase"
+							onClick={handleSave}
+						>
+							Guardar
+						</button>
+						<button
+							className="inline-block rounded border border-danger-500 px-12 py-3 text-sm font-medium text-danger-500 hover:bg-danger-500 hover:text-white focus:outline-none focus:ring focus:ring-danger-500 focus:border-danger-500 active:bg-danger-400 transition-colors duration-300 ease-in-out uppercase"
+							onClick={handleClean}
+						>
+							Limpiar
+						</button>
 					</div>
 				</div>
 			</main>

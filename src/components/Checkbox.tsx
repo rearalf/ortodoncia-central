@@ -6,7 +6,7 @@ interface CheckboxInterface {
 	label: string
 	isLast?: boolean
 	checked: boolean
-	onChange: () => void
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const Checkbox = (props: CheckboxInterface) => {
@@ -22,8 +22,8 @@ const Checkbox = (props: CheckboxInterface) => {
 			/>
 
 			<label
-				htmlFor="DeliveryStandard"
-				className={`flex cursor-pointer items-center justify-between rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-500 peer-checked:border-base-500 peer-checked:ring-1 peer-checked:ring-base-500 ${
+				htmlFor={props.id}
+				className={`flex cursor-pointer select-none items-center justify-between rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-500 peer-checked:border-base-500 peer-checked:ring-1 peer-checked:ring-base-500 ${
 					!props.isLast && 'my-4'
 				}`}
 			>

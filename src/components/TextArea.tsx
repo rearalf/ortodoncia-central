@@ -28,6 +28,8 @@ const TextArea = (props: TextAreaProps) => {
 					props.label && 'mt-2'
 				}`}
 				rows={4}
+				value={props.value}
+				onChange={props.onChange}
 				placeholder={props.placeholder}
 			></textarea>
 		</div>

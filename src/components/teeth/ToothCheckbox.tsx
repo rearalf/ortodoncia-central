@@ -16,6 +16,7 @@ interface ToothCheckboxProps {
 	vestibular: toothPositionStateType
 	oclusal: toothPositionStateType
 	stateTooth: toothStateType
+	disable: boolean
 }
 
 const ToothCheckbox = (props: ToothCheckboxProps) => {
@@ -28,6 +29,7 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 					value={props.stateTooth}
 					label="extracción o extraída"
 					onChange={props.handleToothPosition}
+					disabled={props.disable}
 					options={[
 						{ title: 'A extracción', value: 'extraction' },
 						{ title: 'Extraída', value: 'extracted' },
@@ -39,7 +41,11 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 					label="Palatina"
 					value={props.palatina}
 					onChange={props.handleToothPosition}
-					disabled={props.stateTooth === 'extracted' || props.stateTooth === 'extraction'}
+					disabled={
+						props.stateTooth === 'extracted' ||
+						props.stateTooth === 'extraction' ||
+						props.disable
+					}
 					options={[
 						{ title: 'Con carie', value: 'decay' },
 						{ title: 'Con relleno', value: 'filling' },
@@ -52,7 +58,7 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 				) : props.stateTooth === 'extracted' ? (
 					<ToothExtract class="w-48 h-48 lg:w-64 lg:h-64 xl:w-72 xl:h-72" />
 				) : (
-					<div className="w-48 h-48 relative md:w-56 md:h-56 lg:w-60 lg:h-60">
+					<div className={`w-48 h-48 relative md:w-56 md:h-56 lg:w-60 lg:h-60 ${props.disable && "opacity-50"}`}>
 						<label htmlFor="palatina">
 							<Palatina
 								class="z-10 w-32 absolute top-0 left-1/2 -translate-x-1/2 md:w-36 md:translate-y-[3%] lg:w-40 cursor-pointer"
@@ -123,7 +129,11 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 					label="Mesial"
 					value={props.mesial}
 					onChange={props.handleToothPosition}
-					disabled={props.stateTooth === 'extracted' || props.stateTooth === 'extraction'}
+					disabled={
+						props.stateTooth === 'extracted' ||
+						props.stateTooth === 'extraction' ||
+						props.disable
+					}
 					options={[
 						{ title: 'Con carie', value: 'decay' },
 						{ title: 'Con relleno', value: 'filling' },
@@ -137,7 +147,11 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 					label="Vestibular"
 					value={props.vestibular}
 					onChange={props.handleToothPosition}
-					disabled={props.stateTooth === 'extracted' || props.stateTooth === 'extraction'}
+					disabled={
+						props.stateTooth === 'extracted' ||
+						props.stateTooth === 'extraction' ||
+						props.disable
+					}
 					options={[
 						{ title: 'Con carie', value: 'decay' },
 						{ title: 'Con relleno', value: 'filling' },
@@ -151,7 +165,11 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 					label="Distal"
 					value={props.distal}
 					onChange={props.handleToothPosition}
-					disabled={props.stateTooth === 'extracted' || props.stateTooth === 'extraction'}
+					disabled={
+						props.stateTooth === 'extracted' ||
+						props.stateTooth === 'extraction' ||
+						props.disable
+					}
 					options={[
 						{ title: 'Con carie', value: 'decay' },
 						{ title: 'Con relleno', value: 'filling' },
@@ -163,7 +181,11 @@ const ToothCheckbox = (props: ToothCheckboxProps) => {
 					label="Oclusal"
 					value={props.oclusal}
 					onChange={props.handleToothPosition}
-					disabled={props.stateTooth === 'extracted' || props.stateTooth === 'extraction'}
+					disabled={
+						props.stateTooth === 'extracted' ||
+						props.stateTooth === 'extraction' ||
+						props.disable
+					}
 					options={[
 						{ title: 'Con carie', value: 'decay' },
 						{ title: 'Con relleno', value: 'filling' },
