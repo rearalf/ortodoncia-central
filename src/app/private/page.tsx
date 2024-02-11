@@ -1,12 +1,13 @@
 'use client'
 import React, { useState } from 'react'
-import Navbar from '@/components/Navbar'
 import Select from '@/components/Select'
 import TextArea from '@/components/TextArea'
 import Checkbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
 import ToothCheckbox from '@/components/teeth/ToothCheckbox'
 import { OrthoTerms, patientBasicData } from '@/models/Patient'
+import { Button } from '@mui/material'
+import Navbar from '@/components/Navbar'
 
 function Home() {
 	const teeth = [
