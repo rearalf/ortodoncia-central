@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 import Select from '@/components/Select'
 import TextArea from '@/components/TextArea'
-import Checkbox from '@/components/Checkbox'
+import InputCheckbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
-import ToothCheckbox from '@/components/teeth/ToothCheckbox'
+import ToothForm from '@/components/teeth/ToothCheckbox'
 import { OrthoTerms, patientBasicData } from '@/models/Patient'
 import { Button } from '@mui/material'
 import Navbar from '@/components/Navbar'
@@ -256,15 +256,19 @@ function Home() {
 						value={patient.phone}
 						onChange={handleInput}
 					/>
-
-					<TextArea
+					<InputBasic
+						multiline
+						type="text"
 						id="reason"
 						key="reason"
-						value={patient.reason}
 						label="Motivo de consulta"
+						value={patient.reason}
 						onChange={handleInput}
 					/>
-					<TextArea
+
+					<InputBasic
+						multiline
+						type="text"
 						id="currentSystemicTreatment"
 						key="currentSystemicTreatment"
 						label="tratamiento sistémico actual"
@@ -274,37 +278,38 @@ function Home() {
 
 					<div className="flex flex-col">
 						<ul className="mb-5">
-							<Checkbox
+							<InputCheckbox
 								id="SNC"
 								key="SNC"
 								label="SNC"
 								checked={patient.SNC}
 								onChange={handleInput}
 							/>
-							<Checkbox
+							<InputCheckbox
 								id="SVC"
 								key="SVC"
 								label="SVC"
 								checked={patient.SVC}
 								onChange={handleInput}
 							/>
-							<Checkbox
+							<InputCheckbox
 								id="SE"
 								key="SE"
 								label="SE"
 								checked={patient.SE}
 								onChange={handleInput}
 							/>
-							<Checkbox
+							<InputCheckbox
 								id="SME"
 								key="SME"
 								label="SME"
 								checked={patient.SME}
-								isLast
 								onChange={handleInput}
 							/>
 						</ul>
-						<TextArea
+						<InputBasic
+							multiline
+							type="text"
 							value={patient.comments1 || ''}
 							id="comments1"
 							key="comments1"
@@ -314,37 +319,38 @@ function Home() {
 
 					<div className="flex flex-col">
 						<ul className="mb-5">
-							<Checkbox
+							<InputCheckbox
 								id="SR"
 								key="SR"
 								label="SR"
 								checked={patient.SR}
 								onChange={handleInput}
 							/>
-							<Checkbox
+							<InputCheckbox
 								id="SU"
 								key="SU"
 								label="SU"
 								checked={patient.SU}
 								onChange={handleInput}
 							/>
-							<Checkbox
+							<InputCheckbox
 								id="SGU"
 								key="SGU"
 								label="SGU"
 								checked={patient.SGU}
 								onChange={handleInput}
 							/>
-							<Checkbox
+							<InputCheckbox
 								id="SGI"
 								key="SGI"
 								label="SGI"
 								checked={patient.SGI}
-								isLast
 								onChange={handleInput}
 							/>
 						</ul>
-						<TextArea
+						<InputBasic
+							multiline
+							type="text"
 							id="comments2"
 							key="comments2"
 							value={patient.comments2 || ''}
@@ -363,34 +369,27 @@ function Home() {
 
 					<div className="grid gap-6 ">
 						<div className="flex flex-col gap-6 lg:grid lg:grid-cols-2">
-							<Select
-								optgroup
-								value={tooth}
-								id="toothNumber"
-								key="toothNumber"
-								label="Numero de diente"
-								onChange={handleSelectTooth}
-								optionsGroup={teeth}
-								options={[]}
-							/>
 							<div className="flex gap-4 flex-col md:flex-row md:items-end md:justify-center">
-								<button
-									className="inline-block rounded border border-success-600 bg-success-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-success-600 focus:outline-none focus:ring focus:ring-success-400 focus:border-0 active:text-white active:bg-success-700 transition-colors duration-300 ease-in-out uppercase"
-									onClick={handleStateTeeth}
+								<Button
+									variant="contained"
+									color="success"
 									type="button"
+									onClick={handleStateTeeth}
 								>
 									Guardar Estado
-								</button>
-								<button
-									className="inline-block rounded border border-danger-500 px-12 py-3 text-sm font-medium text-danger-500 hover:bg-danger-500 hover:text-white focus:outline-none focus:ring focus:ring-danger-500 focus:border-danger-500 active:bg-danger-400 transition-colors duration-300 ease-in-out uppercase"
-									onClick={handleClearStateTeeth}
+								</Button>
+
+								<Button
+									variant="outlined"
+									color="error"
 									type="button"
+									onClick={handleClearStateTeeth}
 								>
-									Limpiar
-								</button>
+									Limpiar cambios
+								</Button>
 							</div>
 						</div>
-						<ToothCheckbox
+						<ToothForm
 							stateTooth={stateTooth}
 							palatina={palatina}
 							distal={distal}
@@ -403,20 +402,22 @@ function Home() {
 					</div>
 
 					<div className="flex gap-4 flex-col md:flex-row md:items-end md:justify-center">
-						<button
-							className="inline-block rounded border border-success-600 bg-success-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-success-600 focus:outline-none focus:ring focus:ring-success-400 focus:border-0 active:text-white active:bg-success-700 transition-colors duration-300 ease-in-out uppercase"
-							onClick={handleSave}
+						<Button
+							variant="contained"
+							color="success"
 							type="submit"
+							onClick={handleSave}
 						>
 							Guardar
-						</button>
-						<button
-							className="inline-block rounded border border-danger-500 px-12 py-3 text-sm font-medium text-danger-500 hover:bg-danger-500 hover:text-white focus:outline-none focus:ring focus:ring-danger-500 focus:border-danger-500 active:bg-danger-400 transition-colors duration-300 ease-in-out uppercase"
-							onClick={handleClean}
+						</Button>
+						<Button
+							variant="outlined"
+							color="error"
 							type="button"
+							onClick={handleClean}
 						>
 							Limpiar
-						</button>
+						</Button>
 					</div>
 				</form>
 			</main>

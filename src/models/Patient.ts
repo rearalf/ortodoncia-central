@@ -11,7 +11,7 @@ export enum OrthoTerms {
 
 export const patientBasicData: Patient = {
 	name: '',
-	age: 0,
+	age: 1,
 	phone: '',
 	reason: '',
 	SNC: false,
