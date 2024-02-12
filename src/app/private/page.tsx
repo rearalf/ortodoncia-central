@@ -1,13 +1,12 @@
 'use client'
 import React, { useState } from 'react'
-import Select from '@/components/Select'
-import TextArea from '@/components/TextArea'
 import InputCheckbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
 import ToothForm from '@/components/teeth/ToothCheckbox'
 import { OrthoTerms, patientBasicData } from '@/models/Patient'
-import { Button } from '@mui/material'
 import Navbar from '@/components/Navbar'
+import '@/styles/private.css'
+import InputDate from '@/components/InputDate'
 
 function Home() {
 	const teeth = [
@@ -218,65 +217,75 @@ function Home() {
 	return (
 		<>
 			<Navbar />
-			<main className="mx-auto max-w-screen-xl px-4 py-8 lg:py-12 space-y-8 lg:space-y-12">
-				<h1 className="text-4xl font-bold block text-center text-header-1">Formulario</h1>
-				<form className="flex flex-col gap-6">
-					<InputBasic
-						required
-						id="name"
-						key="name"
-						type="text"
-						value={patient.name}
-						onChange={handleInput}
-						label="Nombre completo"
-					/>
-					<InputBasic
-						required
-						id="age"
-						key="age"
-						type="number"
-						label="Edad"
-						value={patient.age}
-						onChange={handleInput}
-					/>
-					<InputBasic
-						type="text"
-						id="occupation"
-						key="occupation"
-						label="Ocupacion"
-						value={patient.occupation || ''}
-						onChange={handleInput}
-					/>
-					<InputBasic
-						required
-						type="tel"
-						id="phone"
-						key="phone"
-						label="Telefono"
-						value={patient.phone}
-						onChange={handleInput}
-					/>
-					<InputBasic
-						multiline
-						type="text"
-						id="reason"
-						key="reason"
-						label="Motivo de consulta"
-						value={patient.reason}
-						onChange={handleInput}
-					/>
+			<main className="main">
+				<h1>Formulario</h1>
+				<form>
+					<div className="firstPart">
+						<InputBasic
+							required
+							id="name"
+							key="name"
+							type="text"
+							value={patient.name}
+							onChange={handleInput}
+							label="Nombre completo"
+						/>
 
-					<InputBasic
-						multiline
-						type="text"
-						id="currentSystemicTreatment"
-						key="currentSystemicTreatment"
-						label="tratamiento sistémico actual"
-						value={patient.currentSystemicTreatment || ''}
-						onChange={handleInput}
-					/>
+						<InputDate />
 
-					<div className="flex flex-col">
+						<InputBasic
+							type="text"
+							id="occupation"
+							key="occupation"
+							label="Ocupación"
+							value={patient.occupation || ''}
+							onChange={handleInput}
+						/>
+
+						<InputBasic
+							required
+							type="tel"
+							id="phone"
+							key="phone"
+							label="Teléfono"
+							value={patient.phone}
+							onChange={handleInput}
+						/>
+					</div>
+
+					<div className='secondPart'>
+						<InputBasic
+							multiline
+							type="text"
+							id="reason"
+							key="reason"
+							label="Motivo de consulta"
+							value={patient.reason}
+							onChange={handleInput}
+						/>
+
+						<InputBasic
+							multiline
+							type="text"
+							id="allergicReactions"
+							key="allergicReactions"
+							label="Reacciones Alérgicas"
+							value={patient.reason}
+							onChange={handleInput}
+						/>
+
+						<InputBasic
+							multiline
+							type="text"
+							id="currentSystemicTreatment"
+							key="currentSystemicTreatment"
+							label="Tratamiento sistémico actual"
+							value={patient.currentSystemicTreatment || ''}
+							onChange={handleInput}
+						/>
+					</div>
+
+					<div className="">
 						<ul className="mb-5">
 							<InputCheckbox
 								id="SNC"
@@ -306,15 +315,15 @@ function Home() {
 								checked={patient.SME}
 								onChange={handleInput}
 							/>
+							<InputBasic
+								multiline
+								type="text"
+								id="comments1"
+								key="comments1"
+								value={patient.comments1 || ''}
+								onChange={handleInput}
+							/>
 						</ul>
-						<InputBasic
-							multiline
-							type="text"
-							value={patient.comments1 || ''}
-							id="comments1"
-							key="comments1"
-							onChange={handleInput}
-						/>
 					</div>
 
 					<div className="flex flex-col">
@@ -359,13 +368,15 @@ function Home() {
 					</div>
 
 					<InputBasic
+						multiline
 						type="text"
 						id="references"
 						key="references"
-						value={patient.references || ''}
 						label="Referencias del laboratorio"
+						value={patient.references || ''}
 						onChange={handleInput}
 					/>
+					{/*
 
 					<div className="grid gap-6 ">
 						<div className="flex flex-col gap-6 lg:grid lg:grid-cols-2">
@@ -418,7 +429,7 @@ function Home() {
 						>
 							Limpiar
 						</Button>
-					</div>
+					</div> */}
 				</form>
 			</main>
 		</>

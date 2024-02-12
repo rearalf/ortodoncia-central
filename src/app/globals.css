@@ -39,10 +39,26 @@ body {
 	padding: 0;
 }
 
+h1 {
+	margin: 0;
+	font-size: 36px;
+	font-weight: 700;
+	color: var(--header-3);
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
 .MuiButtonBase-root.MuiIconButton-root:hover {
 	background-color: rgba(0, 0, 0, 0.1);
 }
 .MuiButtonBase-root.MuiIconButton-root:active {
 	background-color: hsla(46, 100%, 50%, 0.4);
 	transition: background 0.1s ease-in-out;
+}
+
+.MuiFormControl-root.MuiTextField-root {
+	width: 100%;
 }
