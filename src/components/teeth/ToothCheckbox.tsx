@@ -56,22 +56,43 @@ const ToothForm = (props: ToothFormProps) => {
 			</div>
 			<div className={styles.toothFormTooth}>
 				<Button
-					variant={props.palatina === '' ? 'outlined' : 'contained'}
-					onClick={() => props.handleToothPosition('palatina')}
 					className={styles.palatina}
+					variant={props.palatina === '' ? 'outlined' : 'contained'}
+					color={props.palatina === 'decay' ? 'error' : 'info'}
+					onClick={() => props.handleToothPosition('palatina')}
 				>
 					Palatina
 				</Button>
-				<Button variant="outlined" className={styles.mesial}>
+				<Button
+					className={styles.mesial}
+					variant={props.mesial === '' ? 'outlined' : 'contained'}
+					color={props.mesial === 'decay' ? 'error' : 'info'}
+					onClick={() => props.handleToothPosition('mesial')}
+				>
 					Mesial
 				</Button>
-				<Button variant="outlined" className={styles.distal}>
+				<Button
+					className={styles.distal}
+					variant={props.distal === '' ? 'outlined' : 'contained'}
+					color={props.distal === 'decay' ? 'error' : 'info'}
+					onClick={() => props.handleToothPosition('distal')}
+				>
 					Distal
 				</Button>
-				<Button variant="outlined" className={styles.vestibular}>
+				<Button
+					className={styles.vestibular}
+					variant={props.vestibular === '' ? 'outlined' : 'contained'}
+					color={props.vestibular === 'decay' ? 'error' : 'info'}
+					onClick={() => props.handleToothPosition('vestibular')}
+				>
 					Vestibular
 				</Button>
-				<Button variant="outlined" className={styles.oclusal}>
+				<Button
+					className={styles.oclusal}
+					variant={props.oclusal === '' ? 'outlined' : 'contained'}
+					color={props.oclusal === 'decay' ? 'error' : 'info'}
+					onClick={() => props.handleToothPosition('oclusal')}
+				>
 					Oclusal
 				</Button>
 			</div>

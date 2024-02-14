@@ -114,7 +114,17 @@ function Home() {
 	const [patient, setPatient] = useState<Patient>(patientBasicData)
 
 	const handleToothPosition = (e: toothPosition) => {
-		console.log(e)
+		if (e === 'palatina') {
+			setPalatina(statePositionTooth)
+		} else if (e === 'distal') {
+			setDistal(statePositionTooth)
+		} else if (e === 'mesial') {
+			setMesial(statePositionTooth)
+		} else if (e === 'oclusal') {
+			setOclusal(statePositionTooth)
+		} else if (e === 'vestibular') {
+			setVestibular(statePositionTooth)
+		}
 	}
 
 	const handleFormControlStatePosition = (e: React.ChangeEvent<HTMLInputElement>) => {
