@@ -5,14 +5,36 @@ import InputBasic from '@/components/InputBasic'
 import ToothForm from '@/components/teeth/ToothCheckbox'
 import { OrthoTerms, patientBasicData } from '@/models/Patient'
 import Navbar from '@/components/Navbar'
-import '@/styles/private.css'
+import { SlArrowDown } from 'react-icons/sl'
 import InputDate from '@/components/InputDate'
+import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
+import '@/styles/private.css'
 
 function Home() {
+	const teethFirstRow = [
+		[
+			{ title: '17', value: '17' },
+			{ title: '16', value: '16' },
+			{ title: '15', value: '15' },
+			{ title: '14', value: '14' },
+			{ title: '13', value: '13' },
+			{ title: '12', value: '12' },
+			{ title: '11', value: '11' },
+		],
+		[
+			{ title: '21', value: '21' },
+			{ title: '22', value: '22' },
+			{ title: '23', value: '23' },
+			{ title: '24', value: '24' },
+			{ title: '25', value: '25' },
+			{ title: '26', value: '26' },
+			{ title: '27', value: '27' },
+			{ title: '28', value: '28' },
+		],
+	]
 	const teeth = [
-		{
-			group: '',
-			options: [
+		[
+			[
 				{ title: '18', value: '18' },
 				{ title: '17', value: '17' },
 				{ title: '16', value: '16' },
@@ -22,10 +44,8 @@ function Home() {
 				{ title: '12', value: '12' },
 				{ title: '11', value: '11' },
 			],
-		},
-		{
-			group: '',
-			options: [
+
+			[
 				{ title: '21', value: '21' },
 				{ title: '22', value: '22' },
 				{ title: '23', value: '23' },
@@ -35,50 +55,46 @@ function Home() {
 				{ title: '27', value: '27' },
 				{ title: '28', value: '28' },
 			],
-		},
-		{
-			group: '',
-			options: [
+		],
+
+		[
+			[
 				{ title: '55', value: '55' },
 				{ title: '54', value: '54' },
 				{ title: '53', value: '53' },
 				{ title: '52', value: '52' },
 				{ title: '51', value: '51' },
 			],
-		},
-		{
-			group: '',
-			options: [
+
+			[
 				{ title: '61', value: '61' },
 				{ title: '62', value: '62' },
 				{ title: '63', value: '63' },
 				{ title: '64', value: '64' },
 				{ title: '65', value: '65' },
 			],
-		},
-		{
-			group: '',
-			options: [
+		],
+
+		[
+			[
 				{ title: '85', value: '85' },
 				{ title: '84', value: '84' },
 				{ title: '83', value: '83' },
 				{ title: '82', value: '82' },
 				{ title: '81', value: '81' },
 			],
-		},
-		{
-			group: '',
-			options: [
+
+			[
 				{ title: '71', value: '71' },
 				{ title: '72', value: '72' },
 				{ title: '73', value: '73' },
 				{ title: '74', value: '74' },
 				{ title: '75', value: '75' },
 			],
-		},
-		{
-			group: '',
-			options: [
+		],
+
+		[
+			[
 				{ title: '48', value: '48' },
 				{ title: '47', value: '47' },
 				{ title: '46', value: '46' },
@@ -88,10 +104,7 @@ function Home() {
 				{ title: '42', value: '42' },
 				{ title: '41', value: '41' },
 			],
-		},
-		{
-			group: '',
-			options: [
+			[
 				{ title: '31', value: '31' },
 				{ title: '32', value: '32' },
 				{ title: '33', value: '33' },
@@ -101,7 +114,7 @@ function Home() {
 				{ title: '37', value: '37' },
 				{ title: '38', value: '38' },
 			],
-		},
+		],
 	]
 
 	const [tooth, setTooth] = useState<number>(0)
@@ -253,7 +266,7 @@ function Home() {
 						/>
 					</div>
 
-					<div className='secondPart'>
+					<div className="secondPart">
 						<InputBasic
 							multiline
 							type="text"
@@ -283,99 +296,147 @@ function Home() {
 							value={patient.currentSystemicTreatment || ''}
 							onChange={handleInput}
 						/>
-					</div>
-
-					<div className="">
-						<ul className="mb-5">
-							<InputCheckbox
-								id="SNC"
-								key="SNC"
-								label="SNC"
-								checked={patient.SNC}
-								onChange={handleInput}
-							/>
-							<InputCheckbox
-								id="SVC"
-								key="SVC"
-								label="SVC"
-								checked={patient.SVC}
-								onChange={handleInput}
-							/>
-							<InputCheckbox
-								id="SE"
-								key="SE"
-								label="SE"
-								checked={patient.SE}
-								onChange={handleInput}
-							/>
-							<InputCheckbox
-								id="SME"
-								key="SME"
-								label="SME"
-								checked={patient.SME}
-								onChange={handleInput}
-							/>
-							<InputBasic
-								multiline
-								type="text"
-								id="comments1"
-								key="comments1"
-								value={patient.comments1 || ''}
-								onChange={handleInput}
-							/>
-						</ul>
-					</div>
-
-					<div className="flex flex-col">
-						<ul className="mb-5">
-							<InputCheckbox
-								id="SR"
-								key="SR"
-								label="SR"
-								checked={patient.SR}
-								onChange={handleInput}
-							/>
-							<InputCheckbox
-								id="SU"
-								key="SU"
-								label="SU"
-								checked={patient.SU}
-								onChange={handleInput}
-							/>
-							<InputCheckbox
-								id="SGU"
-								key="SGU"
-								label="SGU"
-								checked={patient.SGU}
-								onChange={handleInput}
-							/>
-							<InputCheckbox
-								id="SGI"
-								key="SGI"
-								label="SGI"
-								checked={patient.SGI}
-								onChange={handleInput}
-							/>
-						</ul>
 						<InputBasic
 							multiline
 							type="text"
-							id="comments2"
-							key="comments2"
-							value={patient.comments2 || ''}
+							id="references"
+							key="references"
+							label="Referencias del laboratorio"
+							value={patient.references || ''}
 							onChange={handleInput}
 						/>
 					</div>
 
-					<InputBasic
-						multiline
-						type="text"
-						id="references"
-						key="references"
-						label="Referencias del laboratorio"
-						value={patient.references || ''}
-						onChange={handleInput}
+					<Accordion>
+						<AccordionSummary
+							expandIcon={<SlArrowDown />}
+							aria-controls="systemic-analysis"
+							id="systemicAnalysis"
+						>
+							Analisis Sistémico
+						</AccordionSummary>
+						<AccordionDetails className="systemicAnalysisAccordion">
+							<div className="systemicAnalysisAccordionContent">
+								<ul className="AccordionContent">
+									<InputCheckbox
+										id="SNC"
+										key="SNC"
+										label="SNC"
+										checked={patient.SNC}
+										onChange={handleInput}
+									/>
+									<InputCheckbox
+										id="SVC"
+										key="SVC"
+										label="SVC"
+										checked={patient.SVC}
+										onChange={handleInput}
+									/>
+									<InputCheckbox
+										id="SE"
+										key="SE"
+										label="SE"
+										checked={patient.SE}
+										onChange={handleInput}
+									/>
+									<InputCheckbox
+										id="SME"
+										key="SME"
+										label="SME"
+										checked={patient.SME}
+										onChange={handleInput}
+									/>
+								</ul>
+								<InputBasic
+									multiline
+									type="text"
+									id="comments1"
+									key="comments1"
+									value={patient.comments1 || ''}
+									onChange={handleInput}
+								/>
+							</div>
+							<div className="systemicAnalysisAccordionContent">
+								<ul className="AccordionContent">
+									<InputCheckbox
+										id="SR"
+										key="SR"
+										label="SR"
+										checked={patient.SR}
+										onChange={handleInput}
+									/>
+									<InputCheckbox
+										id="SU"
+										key="SU"
+										label="SU"
+										checked={patient.SU}
+										onChange={handleInput}
+									/>
+									<InputCheckbox
+										id="SGU"
+										key="SGU"
+										label="SGU"
+										checked={patient.SGU}
+										onChange={handleInput}
+									/>
+									<InputCheckbox
+										id="SGI"
+										key="SGI"
+										label="SGI"
+										checked={patient.SGI}
+										onChange={handleInput}
+									/>
+								</ul>
+								<InputBasic
+									multiline
+									type="text"
+									id="comments2"
+									key="comments2"
+									value={patient.comments2 || ''}
+									onChange={handleInput}
+								/>
+							</div>
+						</AccordionDetails>
+					</Accordion>
+
+					<div>
+						<div className="teethFirstRow">
+							{teeth.map(value => {
+								return (
+									<div className="teethFirstRow_row" key={`value${value}`}>
+										{value.map(number => {
+											return (
+												<div className="row" key={`row${number}`}>
+													{number.map((num, i) => {
+														return (
+															<Button
+																variant="outlined"
+																key={`button${i}`}
+															>
+																{num.title}
+															</Button>
+														)
+													})}
+												</div>
+											)
+										})}
+									</div>
+								)
+							})}
+						</div>
+					</div>
+
+					<ToothForm
+						stateTooth={stateTooth}
+						palatina={palatina}
+						distal={distal}
+						mesial={mesial}
+						vestibular={vestibular}
+						oclusal={oclusal}
+						disable={tooth === 0}
+						handleToothPosition={handleToothPosition}
 					/>
+
 					{/*
 
 					<div className="grid gap-6 ">
