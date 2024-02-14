@@ -401,12 +401,12 @@ function Home() {
 
 					<div>
 						<div className="teethFirstRow">
-							{teeth.map(value => {
+							{teeth.map((value, i) => {
 								return (
-									<div className="teethFirstRow_row" key={`value${value}`}>
-										{value.map(number => {
+									<div className="teethFirstRow_row" key={`value${i}`}>
+										{value.map((number, i) => {
 											return (
-												<div className="row" key={`row${number}`}>
+												<div className="row" key={`row${i}`}>
 													{number.map((num, i) => {
 														return (
 															<Button
