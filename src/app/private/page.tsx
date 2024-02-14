@@ -11,27 +11,6 @@ import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/mate
 import '@/styles/private.css'
 
 function Home() {
-	const teethFirstRow = [
-		[
-			{ title: '17', value: '17' },
-			{ title: '16', value: '16' },
-			{ title: '15', value: '15' },
-			{ title: '14', value: '14' },
-			{ title: '13', value: '13' },
-			{ title: '12', value: '12' },
-			{ title: '11', value: '11' },
-		],
-		[
-			{ title: '21', value: '21' },
-			{ title: '22', value: '22' },
-			{ title: '23', value: '23' },
-			{ title: '24', value: '24' },
-			{ title: '25', value: '25' },
-			{ title: '26', value: '26' },
-			{ title: '27', value: '27' },
-			{ title: '28', value: '28' },
-		],
-	]
 	const teeth = [
 		[
 			[
@@ -129,66 +108,18 @@ function Home() {
 
 	const [teethState, setTeethState] = useState<toothPositionInterface[]>([])
 
+	const [statePositionTooth, setStatePositionTooth] = useState<toothPositionStateType>('')
+
 	/* Patient's state */
 	const [patient, setPatient] = useState<Patient>(patientBasicData)
 
-	const handleSelectTooth = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setTooth(Number(e.target.value))
-	}
-	const handleToothPosition = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		if (e.target.id === 'palatina') {
-			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
-				setPalatina(e.target.value)
-		} else if (e.target.id === 'distal') {
-			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
-				setDistal(e.target.value)
-		} else if (e.target.id === 'mesial') {
-			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
-				setMesial(e.target.value)
-		} else if (e.target.id === 'vestibular') {
-			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
-				setVestibular(e.target.value)
-		} else if (e.target.id === 'oclusal') {
-			if (e.target.value === 'decay' || e.target.value === 'filling' || e.target.value === '')
-				setOclusal(e.target.value)
-		} else if (e.target.id === 'state') {
-			if (
-				e.target.value === 'extraction' ||
-				e.target.value === 'extracted' ||
-				e.target.value === ''
-			) {
-				setStateTooth(e.target.value)
-				setPalatina('')
-				setDistal('')
-				setMesial('')
-				setVestibular('')
-				setOclusal('')
-			}
-		}
-	}
-	const handleClearStateTeeth = () => {
-		setPalatina('')
-		setDistal('')
-		setMesial('')
-		setVestibular('')
-		setOclusal('')
-		setStateTooth('')
-		setTooth(0)
+	const handleToothPosition = (e: toothPosition) => {
+		console.log(e)
 	}
 
-	const handleStateTeeth = () => {
-		const toothData: toothPositionInterface = {
-			tooth: tooth,
-			distal,
-			mesial,
-			oclusal,
-			palatina,
-			vestibular,
-			state: stateTooth,
-		}
-		const teethArray = teethState
-		teethArray.push(toothData)
-		setTeethState(teethArray)
+	const handleFormControlStatePosition = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setStatePositionTooth(e.target.value as toothPositionStateType)
+		console.log(e.target.value as toothPositionStateType)
 	}
 
 	const handleInput = (
@@ -222,11 +153,6 @@ function Home() {
 			})
 	}
 
-	const handleClean = () => {
-		handleClearStateTeeth()
-		setPatient(patientBasicData)
-	}
-	const handleSave = () => {}
 	return (
 		<>
 			<Navbar />
@@ -434,6 +360,8 @@ function Home() {
 						vestibular={vestibular}
 						oclusal={oclusal}
 						disable={tooth === 0}
+						statePositionTooth={statePositionTooth}
+						handleFormControlStatePosition={handleFormControlStatePosition}
 						handleToothPosition={handleToothPosition}
 					/>
 

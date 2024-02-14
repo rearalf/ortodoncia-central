@@ -1,24 +1,11 @@
 import React from 'react'
-import Palatina from './teeth-positions/Palatina'
-import Distal from './teeth-positions/Distal'
-import Vestibular from './teeth-positions/Vestibular'
-import Mesial from './teeth-positions/Mesial'
-import Oclusal from './teeth-positions/Oclusal'
-import ExtractedTooth from './teeth-positions/ExtractedTooth'
-import ToothExtract from './teeth-positions/ToothExtract'
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 import styles from './styles.module.css'
-import {
-	Button,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormLabel,
-	Radio,
-	RadioGroup,
-} from '@mui/material'
 
 interface ToothFormProps {
-	handleToothPosition: (e: React.ChangeEvent<HTMLSelectElement>) => void
+	handleToothPosition: (e: toothPosition) => void
+	handleFormControlStatePosition: (e: React.ChangeEvent<HTMLInputElement>) => void
+	statePositionTooth: toothPositionStateType
 	palatina: toothPositionStateType
 	distal: toothPositionStateType
 	mesial: toothPositionStateType
@@ -40,6 +27,8 @@ const ToothForm = (props: ToothFormProps) => {
 						defaultValue=""
 						name="statePositionTooth"
 						className={styles.radioGroup}
+						value={props.statePositionTooth}
+						onChange={props.handleFormControlStatePosition}
 					>
 						<FormControlLabel value="decay" control={<Radio />} label="Carie" />
 						<FormControlLabel value="filling" control={<Radio />} label="Relleno" />
@@ -66,7 +55,11 @@ const ToothForm = (props: ToothFormProps) => {
 				</FormControl>
 			</div>
 			<div className={styles.toothFormTooth}>
-				<Button variant="outlined" className={styles.palatina}>
+				<Button
+					variant={props.palatina === '' ? 'outlined' : 'contained'}
+					onClick={() => props.handleToothPosition('palatina')}
+					className={styles.palatina}
+				>
 					Palatina
 				</Button>
 				<Button variant="outlined" className={styles.mesial}>
