@@ -1,10 +1,23 @@
 import React from 'react'
-import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
+import {
+	Button,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
+	IconButton,
+	Radio,
+	RadioGroup,
+} from '@mui/material'
 import styles from './styles.module.css'
+import { FiSave, FiXCircle } from 'react-icons/fi'
 
 interface ToothFormProps {
 	handleToothPosition: (e: toothPosition) => void
 	handleFormControlStatePosition: (e: React.ChangeEvent<HTMLInputElement>) => void
+	handleFormControlToothStateType: (e: React.ChangeEvent<HTMLInputElement>) => void
+	handleSaveStates: () => void
+	handleDeleteStates: () => void
+	tooth: number
 	statePositionTooth: toothPositionStateType
 	palatina: toothPositionStateType
 	distal: toothPositionStateType
@@ -19,11 +32,12 @@ const ToothForm = (props: ToothFormProps) => {
 	return (
 		<div className={styles.toothForm}>
 			<div className={styles.toothFormStates}>
+				<h2>El número de diente es: {props.tooth}</h2>
 				<FormControl className={styles.formControl}>
-					<FormLabel id="demo-radio-buttons-group-label">Estado del diente</FormLabel>
+					<FormLabel id="estado-del-diente">Estado del diente</FormLabel>
 					<RadioGroup
 						row
-						aria-labelledby="demo-radio-buttons-group-label"
+						aria-labelledby="estado-del-diente"
 						defaultValue=""
 						name="statePositionTooth"
 						className={styles.radioGroup}
@@ -36,12 +50,14 @@ const ToothForm = (props: ToothFormProps) => {
 					</RadioGroup>
 				</FormControl>
 				<FormControl className={styles.formControl}>
-					<FormLabel id="demo-radio-buttons-group-label">Estado de extracción</FormLabel>
+					<FormLabel id="estado-de-extracción">Estado de extracción</FormLabel>
 					<RadioGroup
 						row
-						aria-labelledby="demo-radio-buttons-group-label"
+						aria-labelledby="estado-de-extracción"
 						defaultValue=""
 						name="toothStateType"
+						value={props.stateTooth}
+						onChange={props.handleFormControlToothStateType}
 						className={styles.radioGroup}
 					>
 						<FormControlLabel
@@ -53,6 +69,14 @@ const ToothForm = (props: ToothFormProps) => {
 						<FormControlLabel value="" control={<Radio />} label="Blanco" />
 					</RadioGroup>
 				</FormControl>
+				<div className={styles.btnGroup}>
+					<IconButton aria-label="save" onClick={props.handleSaveStates}>
+						<FiSave size={24} />
+					</IconButton>
+					<IconButton aria-label="fix circle" onClick={props.handleDeleteStates}>
+						<FiXCircle size={24} />
+					</IconButton>
+				</div>
 			</div>
 			<div className={styles.toothFormTooth}>
 				<Button

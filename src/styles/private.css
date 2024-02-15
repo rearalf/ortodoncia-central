@@ -61,6 +61,12 @@ form {
 	gap: 12px;
 }
 
+.btn_group {
+	display: flex;
+	justify-content: center;
+	gap: 32px;
+}
+
 @media (width >= 768px) {
 	.firstPart,
 	.secondPart {
@@ -83,11 +89,11 @@ form {
 		grid-template-columns: repeat(4, 1fr);
 	}
 
-	.teethFirstRow{
+	.teethFirstRow {
 		gap: 32px;
 	}
 
-	.teethFirstRow_row{
+	.teethFirstRow_row {
 		gap: 18px 32px;
 	}
 }

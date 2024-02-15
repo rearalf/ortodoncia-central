@@ -11,10 +11,10 @@ const toothPositionState = {
 
 interface toothPositionInterface {
 	tooth: number
-	state?: toothStateType
-	palatina?: toothPositionStateType
-	mesial?: toothPositionStateType
-	distal?: toothPositionStateType
-	vestibular?: toothPositionStateType
-	oclusal?: toothPositionStateType
+	stateTooth: toothStateType
+	palatina: toothPositionStateType
+	mesial: toothPositionStateType
+	distal: toothPositionStateType
+	vestibular: toothPositionStateType
+	oclusal: toothPositionStateType
 }
