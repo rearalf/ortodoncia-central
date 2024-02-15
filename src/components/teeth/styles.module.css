@@ -1,0 +1,104 @@
+.toothForm {
+	margin-top: 28px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.toothFormStates {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.radioGroup,
+.formControl label {
+	display: flex;
+	justify-content: center;
+}
+
+.btnGroup {
+	display: flex;
+	gap: 18px;
+	justify-content: center;
+}
+
+.toothFormTooth {
+	width: 100%;
+	aspect-ratio: 1/1;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	gap: 18px;
+	grid-template-areas:
+		'palatina palatina palatina'
+		'mesial oclusal distal'
+		'vestibular vestibular vestibular';
+}
+
+.palatina {
+	grid-area: palatina;
+}
+
+.mesial {
+	grid-area: mesial;
+}
+
+.distal {
+	grid-area: distal;
+}
+
+.vestibular {
+	grid-area: vestibular;
+}
+
+.oclusal {
+	grid-area: oclusal;
+}
+
+@media (width>= 768px) {
+	.toothFormStates {
+		flex-direction: row;
+		justify-content: space-around;
+	}
+
+	.radioGroup,
+	.formControl label {
+		display: flex;
+		justify-content: center;
+	}
+
+	.btnGroup {
+		align-items: center;
+	}
+
+	.toothFormTooth {
+		margin: 0 auto;
+		max-width: 75%;
+	}
+}
+
+@media (width>= 1024px) {
+	.toothForm {
+		flex-direction: row;
+	}
+
+	.toothFormStates {
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.toothFormTooth {
+		margin: auto;
+		max-width: 50%;
+		max-height: 50%;
+	}
+
+	.radioGroup,
+	.formControl label {
+		justify-content: flex-start;
+	}
+
+	.btnGroup{
+		justify-content: flex-start;
+	}
+}

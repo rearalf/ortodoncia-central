@@ -1,4 +1,5 @@
 import React from 'react'
+import { TextareaAutosize } from '@mui/material'
 
 interface TextAreaProps {
 	id: string
@@ -11,28 +12,15 @@ interface TextAreaProps {
 
 const TextArea = (props: TextAreaProps) => {
 	return (
-		<div>
-			{props.label && (
-				<label
-					htmlFor={props.id}
-					className="block text-sm font-medium text-paragraph uppercase"
-				>
-					{props.label}
-					{props.required && ' *'}
-				</label>
-			)}
-
-			<textarea
-				id={props.id}
-				className={`w-full rounded-lg border-gray-300 hover:border-gray-500 align-top shadow-sm sm:text-sm focus:ring-base-500 focus:border-base-500 ${
-					props.label && 'mt-2'
-				}`}
-				rows={4}
-				value={props.value}
-				onChange={props.onChange}
-				placeholder={props.placeholder}
-			></textarea>
-		</div>
+		<TextareaAutosize
+			name={props.id}
+			id={props.id}
+			minRows={4}
+			value={props.value}
+			required={props.required}
+			onChange={props.onChange}
+			placeholder={props.placeholder}
+		/>
 	)
 }
 

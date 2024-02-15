@@ -1,43 +1,20 @@
+import { Checkbox, FormControlLabel } from '@mui/material'
 import React from 'react'
-import { SlCheck, SlClose } from 'react-icons/sl'
 
-interface CheckboxInterface {
+interface InputCheckboxInterface {
 	id: string
 	label: string
-	isLast?: boolean
 	checked: boolean
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Checkbox = (props: CheckboxInterface) => {
+const InputCheckbox = (props: InputCheckboxInterface) => {
 	return (
-		<div>
-			<input
-				id={props.id}
-				name={props.id}
-				type="checkbox"
-				checked={props.checked}
-				onChange={props.onChange}
-				className="peer hidden [&:checked_+_label_svg]:block"
-			/>
-
-			<label
-				htmlFor={props.id}
-				className={`flex cursor-pointer select-none items-center justify-between rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-500 peer-checked:border-base-500 peer-checked:ring-1 peer-checked:ring-base-500 ${
-					!props.isLast && 'my-4'
-				}`}
-			>
-				<div className="flex items-center gap-2">
-					{props.checked ? (
-						<SlCheck className="h-5 w-5 text-base-600" />
-					) : (
-						<SlClose className="h-5 w-5 text-paragraph" />
-					)}
-					<p className="text-paragraph">{props.label}</p>
-				</div>
-			</label>
-		</div>
+		<FormControlLabel
+			control={<Checkbox id={props.id} checked={props.checked} onChange={props.onChange} />}
+			label={props.label}
+		/>
 	)
 }
 
-export default Checkbox
+export default InputCheckbox

@@ -1,57 +1,64 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+	/* Backgrounds color	 */
+	--background-first: hsl(0, 0%, 99%);
+	--background-secundary: hsl(0, 0%, 92%);
+	--background-third: hsl(0, 0%, 95%);
+	/* Text color */
+	--paragrap: #333333;
+	--header-white: #fff;
+	--header-3: #292929;
+	--header-2: #1f1f1f;
+	--header-1: #141414;
+	/* Principal color */
+	--base-100: #fdf09b;
+	--base-500: #fec200;
+	--base-600: #daa100;
+	/* Success color */
+	--success-400: #c4f489;
+	--success-500: #a8ed63;
+	--success-600: #83cb48;
+	--success-700: #62aa31;
+	--success-800: #44891f;
+	--success-900: #2f7113;
+	/* Danger color */
+	--danger-100: #ffeadc;
+	--danger-200: #ffd0b9;
+	--danger-300: #ffb096;
+	--danger-400: #ff927c;
+	--danger-500: #ff6051;
+	--danger-600: #db3b3b;
+	--danger-700: #b72833;
+	--danger-800: #93192d;
+	--danger-900: #7a0f29;
+}
 
 body {
-	background-color: #fcfcfc;
-	color: #333333;
+	background-color: var(--background-first);
+	color: var(--paragrap);
+	margin: 0;
+	padding: 0;
 }
 
-.tooth-checkbox-label {
-	width: 0px;
-	height: 0px;
-	display: block;
-	border-right: 70px solid transparent;
-	border-left: 70px solid transparent;
-	border-top: 100px solid #5cb85c;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-	position: absolute;
-	top: 0;
-	left: 0;
+h1 {
+	margin: 0;
+	font-size: 36px;
+	font-weight: 700;
+	color: var(--header-3);
 }
 
-.pizza {
-	position: relative;
-	width: 300px; /* ajusta el tamaño de la pizza */
-	height: 300px; /* ajusta el tamaño de la pizza */
-	border-radius: 50%;
-	background-color: #f5deb3; /* color de la masa */
-	overflow: hidden;
+ul {
+	padding: 0;
+	margin: 0;
 }
 
-.slice {
-	position: absolute;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 0 150px 300px 150px; /* ajusta el tamaño y la forma de las porciones */
-	border-color: transparent transparent transparent transparent;
+.MuiButtonBase-root.MuiIconButton-root:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.MuiButtonBase-root.MuiIconButton-root:active {
+	background-color: hsla(46, 100%, 50%, 0.4);
+	transition: background 0.1s ease-in-out;
 }
 
-.slice:nth-child(1) {
-	transform: rotate(45deg);
-}
-
-.slice:nth-child(2) {
-	transform: rotate(135deg);
-}
-
-.slice:nth-child(3) {
-	transform: rotate(225deg);
-}
-
-.slice:nth-child(4) {
-	transform: rotate(315deg);
+.MuiFormControl-root.MuiTextField-root {
+	width: 100%;
 }
