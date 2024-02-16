@@ -327,7 +327,7 @@ function Home() {
 						</AccordionDetails>
 					</Accordion>
 
-					{/* <ToothForm  /> */}
+					<ToothForm />
 
 					<div className="btn_group">
 						<Button
