@@ -51,7 +51,7 @@
 	color: #fff;
 }
 
-.palatina {
+.toothButton .palatina {
 	position: absolute;
 	top: 0;
 	left: 15%;
@@ -63,7 +63,7 @@
 	border-bottom-right-radius: 60%;
 }
 
-.mesial {
+.toothButton .mesial {
 	position: absolute;
 	top: 20%;
 	left: 0;
@@ -75,7 +75,7 @@
 	border-bottom-right-radius: 60%;
 }
 
-.distal {
+.toothButton .distal {
 	position: absolute;
 	right: 0;
 	top: 20%;
@@ -87,7 +87,7 @@
 	border-top-left-radius: 60%;
 }
 
-.vestibular {
+.toothButton .vestibular {
 	position: absolute;
 	left: 15%;
 	bottom: 0;
@@ -99,7 +99,7 @@
 	border-top-right-radius: 60%;
 }
 
-.oclusal {
+.toothButton .oclusal {
 	position: absolute;
 	left: 50%;
 	top: 50%;
