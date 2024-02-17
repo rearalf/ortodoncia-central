@@ -110,6 +110,35 @@
 	min-width: 0;
 }
 
+.toothState {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	font-size: 95px;
+	user-select: none;
+	display: none;
+	line-height: 70px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	transition: font-size 0.5s ease-in-out;
+}
+
+.toothState:hover {
+	font-size: 105px;
+}
+
+.toothState.activeExtraction {
+	color: red;
+	display: block;
+}
+.toothState.activeExtracted {
+	color: blue;
+	display: block;
+}
+
 @media (width >= 768px) {
 	.optionsTeethForm {
 		flex-direction: row;

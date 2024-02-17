@@ -8,18 +8,46 @@ const ToothForm = () => {
 		useTeethState()
 
 	const hanldeModifyStateTooth = (position: toothPosition, tooth: number) => {
-		const updatedTeethList = [...teethList]
-		updatedTeethList.forEach(row => {
-			row.forEach(side => {
-				side.forEach(toothObj => {
-					if (toothObj.tooth === tooth) {
-						toothObj[position] = positionState
-					}
+		console.log(positionState)
+		if (positionState !== '') {
+			const updatedTeethList = [...teethList]
+			updatedTeethList.forEach(row => {
+				row.forEach(side => {
+					side.forEach(toothObj => {
+						if (toothObj.tooth === tooth) {
+							toothObj[position] = positionState
+						}
+					})
 				})
 			})
-		})
+			setTeethList(updatedTeethList)
+		} else if (toothState !== '') {
+			const updatedTeethList = [...teethList]
+			updatedTeethList.forEach(row => {
+				row.forEach(side => {
+					side.forEach(toothObj => {
+						if (toothObj.tooth === tooth) {
+							toothObj.toothState = toothState
+						}
+					})
+				})
+			})
+			setTeethList(updatedTeethList)
+		}
+	}
 
-		setTeethList(updatedTeethList)
+	const handlePositionState = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPositionState(e.target.value as toothPositionStateType)
+		if (e.target.value !== '') {
+			setToothState('')
+		}
+	}
+
+	const handleToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setToothState(e.target.value as toothStateType)
+		if (e.target.value !== '') {
+			setPositionState('')
+		}
 	}
 
 	return (
@@ -33,7 +61,7 @@ const ToothForm = () => {
 						defaultValue=""
 						name="positionState"
 						value={positionState}
-						onChange={e => setPositionState(e.target.value as toothPositionStateType)}
+						onChange={handlePositionState}
 					>
 						<FormControlLabel value="decay" control={<Radio />} label="Caries" />
 						<FormControlLabel value="filling" control={<Radio />} label="Relleno" />
@@ -48,7 +76,7 @@ const ToothForm = () => {
 						defaultValue=""
 						name="toothState"
 						value={toothState}
-						onChange={e => setToothState(e.target.value as toothStateType)}
+						onChange={handleToothState}
 					>
 						<FormControlLabel
 							value="extraction"
@@ -73,6 +101,18 @@ const ToothForm = () => {
 													className={styles.toothButton}
 													key={tooth.tooth}
 												>
+													<button
+														className={`${styles.toothState} ${
+															tooth.toothState === ''
+																? ''
+																: tooth.toothState === 'extraction'
+																? styles.activeExtraction
+																: styles.activeExtracted
+														}`}
+														type="button"
+													>
+														X
+													</button>
 													<span
 														className={`${styles.toothButtonNumber} ${
 															tooth.oclusal !== ''
