@@ -7,8 +7,7 @@ const ToothForm = () => {
 	const { teethList, toothState, setToothState, positionState, setPositionState, setTeethList } =
 		useTeethState()
 
-	const hanldeModifyStateTooth = (position: toothPosition, tooth: number) => {
-		console.log(positionState)
+	const hanldeModifyStateTooth = (position: toothPosition, tooth: number, state?: boolean) => {
 		if (positionState !== '') {
 			const updatedTeethList = [...teethList]
 			updatedTeethList.forEach(row => {
@@ -21,7 +20,7 @@ const ToothForm = () => {
 				})
 			})
 			setTeethList(updatedTeethList)
-		} else if (toothState !== '') {
+		} else if (state || toothState !== '') {
 			const updatedTeethList = [...teethList]
 			updatedTeethList.forEach(row => {
 				row.forEach(side => {
@@ -110,6 +109,13 @@ const ToothForm = () => {
 																: styles.activeExtracted
 														}`}
 														type="button"
+														onClick={() =>
+															hanldeModifyStateTooth(
+																'distal',
+																tooth.tooth,
+																true,
+															)
+														}
 													>
 														X
 													</button>
