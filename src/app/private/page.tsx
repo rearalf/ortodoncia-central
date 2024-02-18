@@ -13,75 +13,8 @@ import { FiSave, FiXCircle } from 'react-icons/fi'
 import '@/styles/private.css'
 
 function Home() {
-	const [tooth, setTooth] = useState<number>(0)
-
-	const [tabContext, setTabContext] = useState<string>('1')
-
-	const [palatina, setPalatina] = useState<toothPositionStateType>('')
-	const [distal, setDistal] = useState<toothPositionStateType>('')
-	const [mesial, setMesial] = useState<toothPositionStateType>('')
-	const [vestibular, setVestibular] = useState<toothPositionStateType>('')
-	const [oclusal, setOclusal] = useState<toothPositionStateType>('')
-
-	const [stateTooth, setStateTooth] = useState<toothStateType>('')
-
-	const [teethState, setTeethState] = useState<toothPositionInterface[]>([])
-
-	const [statePositionTooth, setStatePositionTooth] = useState<toothPositionStateType>('')
-
 	/* Patient's state */
 	const [patient, setPatient] = useState<Patient>(patientBasicData)
-
-	const handleToothPosition = (e: toothPosition) => {
-		if (e === 'palatina') {
-			setPalatina(statePositionTooth)
-		} else if (e === 'distal') {
-			setDistal(statePositionTooth)
-		} else if (e === 'mesial') {
-			setMesial(statePositionTooth)
-		} else if (e === 'oclusal') {
-			setOclusal(statePositionTooth)
-		} else if (e === 'vestibular') {
-			setVestibular(statePositionTooth)
-		}
-	}
-
-	const handleFormControlStatePosition = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setStatePositionTooth(e.target.value as toothPositionStateType)
-		if (e.target.value !== '') {
-			setStateTooth('')
-		}
-	}
-
-	const handleToothNumber = (number: number) => {
-		setTooth(number)
-		setTabContext('2')
-		const existingToothIndex = teethState.findIndex(item => item.tooth === number)
-		if (existingToothIndex !== -1) {
-			const toothValue = teethState[existingToothIndex]
-
-			setPalatina(toothValue.palatina)
-			setDistal(toothValue.distal)
-			setMesial(toothValue.mesial)
-			setOclusal(toothValue.oclusal)
-			setVestibular(toothValue.vestibular)
-
-			setStateTooth(toothValue.stateTooth)
-			console.log(toothValue)
-		}
-	}
-
-	const handleFormControlToothStateType = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setStateTooth(e.target.value as toothStateType)
-		if (e.target.value !== '') {
-			setPalatina('')
-			setDistal('')
-			setMesial('')
-			setOclusal('')
-			setVestibular('')
-			setStatePositionTooth('')
-		}
-	}
 
 	const handleInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
@@ -114,46 +47,8 @@ function Home() {
 			})
 	}
 
-	const handleSaveStates = () => {
-		const toothState: toothPositionInterface = {
-			tooth,
-			stateTooth,
-			palatina,
-			mesial,
-			oclusal,
-			distal,
-			vestibular,
-		}
-
-		const existingToothIndex = teethState.findIndex(item => item.tooth === toothState.tooth)
-
-		setTeethState(prevTeethState => {
-			if (existingToothIndex !== -1) {
-				const updatedTeethState = [...prevTeethState]
-				updatedTeethState[existingToothIndex] = toothState
-				return updatedTeethState
-			} else {
-				return [...prevTeethState, toothState]
-			}
-		})
-		handleDeleteStates()
-	}
-
-	const handleDeleteStates = () => {
-		setTabContext('1')
-		setPalatina('')
-		setDistal('')
-		setMesial('')
-		setOclusal('')
-		setVestibular('')
-		setTooth(0)
-		setStatePositionTooth('')
-		setStateTooth('')
-	}
-
 	const handleSaveData = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		console.log(teethState)
 	}
 
 	return (

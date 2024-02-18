@@ -1,32 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 import styles from './styles.module.css'
 import useTeethState from '@/states/toothFormState'
 
 const ToothForm = () => {
-	const { teethList, toothState, setToothState, positionState, setPositionState, setTeethList } =
-		useTeethState()
+	const {
+		changes,
+		teethList,
+		toothState,
+		positionState,
+		teethListOriginal,
+		setToothState,
+		setPositionState,
+		setTeethList,
+		setChanges,
+	} = useTeethState()
 
-	const hanldeModifyStateTooth = (position: toothPosition, tooth: number, state?: boolean) => {
-		if (positionState !== '') {
-			const updatedTeethList = [...teethList]
-			updatedTeethList.forEach(row => {
-				row.forEach(side => {
-					side.forEach(toothObj => {
-						if (toothObj.tooth === tooth) {
-							toothObj[position] = positionState
-						}
+	const hanldeModifyStateTooth = (tooth: number, position?: toothPosition) => {
+		const updatedTeethList = [...teethList]
+		if (toothState === '' && positionState !== '') {
+			if (position !== undefined) {
+				updatedTeethList.forEach(row => {
+					row.forEach(side => {
+						side.forEach(toothObj => {
+							if (toothObj.tooth === tooth) {
+								toothObj[position] =
+									positionState === 'disable' ? '' : positionState
+								toothObj.toothState = ''
+							}
+						})
 					})
 				})
-			})
-			setTeethList(updatedTeethList)
-		} else if (state || toothState !== '') {
-			const updatedTeethList = [...teethList]
+				setTeethList(updatedTeethList)
+			}
+		}
+
+		if (toothState !== '' && positionState === '') {
+			console.log(toothState === 'disable' ? '' : toothState)
 			updatedTeethList.forEach(row => {
 				row.forEach(side => {
 					side.forEach(toothObj => {
 						if (toothObj.tooth === tooth) {
-							toothObj.toothState = toothState
+							toothObj.toothState = toothState === 'disable' ? '' : toothState
+							console.log({ 'toothObj.toothState': toothObj.toothState })
 						}
 					})
 				})
@@ -49,6 +65,11 @@ const ToothForm = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (JSON.stringify(teethList) !== JSON.stringify(teethListOriginal)) setChanges(true)
+		else setChanges(false)
+	}, [teethList, teethListOriginal, setChanges])
+
 	return (
 		<div className={styles.teethForm}>
 			<div className={styles.optionsTeethForm}>
@@ -64,7 +85,13 @@ const ToothForm = () => {
 					>
 						<FormControlLabel value="decay" control={<Radio />} label="Caries" />
 						<FormControlLabel value="filling" control={<Radio />} label="Relleno" />
-						<FormControlLabel value="" control={<Radio />} label="Vacío" />
+						{changes && (
+							<FormControlLabel
+								value="disable"
+								control={<Radio />}
+								label="Deshabilitar"
+							/>
+						)}
 					</RadioGroup>
 				</FormControl>
 				<FormControl>
@@ -83,7 +110,13 @@ const ToothForm = () => {
 							label="A extracción"
 						/>
 						<FormControlLabel value="extracted" control={<Radio />} label="Extraida" />
-						<FormControlLabel value="" control={<Radio />} label="Vacío" />
+						{changes && (
+							<FormControlLabel
+								value="disable"
+								control={<Radio />}
+								label="Deshabilitar"
+							/>
+						)}
 					</RadioGroup>
 				</FormControl>
 			</div>
@@ -103,31 +136,34 @@ const ToothForm = () => {
 													<button
 														className={`${styles.toothState} ${
 															tooth.toothState === ''
-																? ''
+																? 'fasdfas'
 																: tooth.toothState === 'extraction'
 																? styles.activeExtraction
 																: styles.activeExtracted
 														}`}
 														type="button"
 														onClick={() =>
-															hanldeModifyStateTooth(
-																'distal',
-																tooth.tooth,
-																true,
-															)
+															hanldeModifyStateTooth(tooth.tooth)
 														}
 													>
 														X
 													</button>
-													<span
+													<button
 														className={`${styles.toothButtonNumber} ${
 															tooth.oclusal !== ''
 																? styles.toothButtonNumberOver
 																: ''
 														}`}
+														type="button"
+														onClick={() =>
+															hanldeModifyStateTooth(
+																tooth.tooth,
+																'oclusal',
+															)
+														}
 													>
 														{tooth.tooth}
-													</span>
+													</button>
 													<Button
 														variant={
 															tooth.palatina === ''
@@ -142,8 +178,8 @@ const ToothForm = () => {
 														}
 														onClick={() =>
 															hanldeModifyStateTooth(
-																'palatina',
 																tooth.tooth,
+																'palatina',
 															)
 														}
 													></Button>
@@ -161,8 +197,8 @@ const ToothForm = () => {
 														}
 														onClick={() =>
 															hanldeModifyStateTooth(
-																'mesial',
 																tooth.tooth,
+																'mesial',
 															)
 														}
 													></Button>
@@ -180,8 +216,8 @@ const ToothForm = () => {
 														}
 														onClick={() =>
 															hanldeModifyStateTooth(
-																'distal',
 																tooth.tooth,
+																'distal',
 															)
 														}
 													></Button>
@@ -199,8 +235,8 @@ const ToothForm = () => {
 														}
 														onClick={() =>
 															hanldeModifyStateTooth(
-																'vestibular',
 																tooth.tooth,
+																'vestibular',
 															)
 														}
 													></Button>
@@ -218,8 +254,8 @@ const ToothForm = () => {
 														}
 														onClick={() =>
 															hanldeModifyStateTooth(
-																'oclusal',
 																tooth.tooth,
+																'oclusal',
 															)
 														}
 													></Button>
