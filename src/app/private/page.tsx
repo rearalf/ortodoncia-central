@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Navbar from '@/components/Navbar'
-import { OrthoTerms, patientBasicData } from '@/models/Patient'
+import Patient, { OrthoTerms, patientBasicData } from '@/models/Patient'
 import InputCheckbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
 import ToothForm from '@/components/teeth/ToothCheckbox'
@@ -14,7 +14,7 @@ import '@/styles/private.css'
 
 function Home() {
 	/* Patient's state */
-	const [patient, setPatient] = useState<Patient>(patientBasicData)
+	const [patient, setPatient] = useState<PatientData>(patientBasicData)
 
 	const handleInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
@@ -47,8 +47,10 @@ function Home() {
 			})
 	}
 
-	const handleSaveData = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		const newPatient = new Patient(null, patient)
+		newPatient.save()
 	}
 
 	return (
@@ -65,7 +67,7 @@ function Home() {
 							key="name"
 							type="text"
 							value={patient.name}
-							onChange={handleInput}
+							onChange={e => setPatient({ ...patient, name: e.target.value })}
 							label="Nombre completo"
 						/>
 
@@ -107,7 +109,7 @@ function Home() {
 							id="allergicReactions"
 							key="allergicReactions"
 							label="Reacciones Alérgicas"
-							value={patient.reason}
+							value={patient.allergicReactions}
 							onChange={handleInput}
 						/>
 
@@ -117,7 +119,7 @@ function Home() {
 							id="currentSystemicTreatment"
 							key="currentSystemicTreatment"
 							label="Tratamiento sistémico actual"
-							value={patient.currentSystemicTreatment || ''}
+							value={patient.currentSystemicTreatment}
 							onChange={handleInput}
 						/>
 						<InputBasic
@@ -126,7 +128,7 @@ function Home() {
 							id="references"
 							key="references"
 							label="Referencias del laboratorio"
-							value={patient.references || ''}
+							value={patient.references}
 							onChange={handleInput}
 						/>
 					</div>
@@ -175,7 +177,7 @@ function Home() {
 									type="text"
 									id="comments1"
 									key="comments1"
-									value={patient.comments1 || ''}
+									value={patient.comments1}
 									onChange={handleInput}
 								/>
 							</div>
@@ -215,7 +217,7 @@ function Home() {
 									type="text"
 									id="comments2"
 									key="comments2"
-									value={patient.comments2 || ''}
+									value={patient.comments2}
 									onChange={handleInput}
 								/>
 							</div>

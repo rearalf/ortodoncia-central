@@ -1,20 +1,21 @@
-interface Patient {
+interface PatientData {
 	name: string
 	age: number
-	occupation?: string
+	occupation: string
 	phone: string
 	reason: string
-	currentSystemicTreatment?: string
+	allergicReactions: string
+	currentSystemicTreatment: string
+	references: string
 	SNC: boolean
 	SVC: boolean
 	SE: boolean
 	SME: boolean
-	comments1?: string
+	comments1: string
 	SR: boolean
 	SU: boolean
 	SGU: boolean
 	SGI: boolean
-	comments2?: string
-	references?: string
-	tooth?: toothPositionInterface[]
+	comments2: string
+	teeth: toothObject[][][]
 }
