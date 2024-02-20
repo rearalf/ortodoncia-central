@@ -48,9 +48,18 @@ function Home() {
 	}
 
 	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		const newPatient = new Patient(null, patient)
-		newPatient.save()
+		try {
+			e.preventDefault()
+			const data = {
+				name: 'wasdfasdfasdfaerrwer',
+				price: 2323,
+				quantity: 323,
+			}
+			const newPatient = new Patient(null, patient)
+			newPatient.save()
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (

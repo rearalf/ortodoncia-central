@@ -1,4 +1,5 @@
-import { firestore } from '@/database/firebase'
+import { db } from '@/database/firebase'
+import { DocumentData, DocumentReference, addDoc, collection } from 'firebase/firestore'
 
 export enum OrthoTerms {
 	SNC = 'SNC',
@@ -13,7 +14,7 @@ export enum OrthoTerms {
 
 export const patientBasicData: PatientData = {
 	name: '',
-	age: 1,
+	birthdate: new Date(),
 	phone: '',
 	occupation: '',
 	reason: '',
@@ -538,9 +539,16 @@ class Patient {
 		this.data = data
 	}
 
-	async save(): Promise<void> {
+	async save(): Promise<string | undefined> {
 		try {
-			
+			const newPatient = {
+				name: this.data.name,
+				birthdate: new Date(),
+				phone: this.data.phone,
+			}
+			const docRef = await addDoc(collection(db, 'patients'), newPatient)
+			console.log(docRef.id)
+			return docRef.id
 		} catch (error) {
 			console.error('Error saving patient:', error)
 		}

@@ -1,6 +1,6 @@
 interface PatientData {
 	name: string
-	age: number
+	birthdate: Date
 	occupation: string
 	phone: string
 	reason: string
