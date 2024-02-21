@@ -36,7 +36,6 @@ const ToothForm = () => {
 		}
 
 		if (toothState !== '' && positionState === '') {
-			console.log(toothState === 'disable' ? '' : toothState)
 			updatedTeethList.forEach(row => {
 				row.forEach(side => {
 					side.forEach(toothObj => {
