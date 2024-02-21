@@ -1,14 +1,39 @@
 import React from 'react'
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import {
+	DatePicker,
+	DateValidationError,
+	LocalizationProvider,
+	PickerChangeHandlerContext,
+} from '@mui/x-date-pickers'
+import { TextField } from '@mui/material'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
+import { sub } from 'date-fns'
 
-const InputDate = () => {
+interface InputDateProps {
+	value: Date
+	name: string
+	onChange: (value: Date | null, context: PickerChangeHandlerContext<DateValidationError>) => void
+}
+
+const InputDate = (props: InputDateProps) => {
 	return (
-		<LocalizationProvider dateAdapter={AdapterDayjs}>
+		<LocalizationProvider dateAdapter={AdapterDateFns}>
 			<DatePicker
 				label="Fecha de nacimiento"
-				openTo="year"
-				views={['year', 'month', 'day']}
+				name={props.name}
+				maxDate={sub(new Date(), {
+					years: 1,
+				})}
+				minDate={sub(new Date(), {
+					years: 95,
+				})}
+				value={props.value}
+				onChange={props.onChange}
+				slotProps={{
+					textField: {
+						helperText: 'MM/DD/YYYY',
+					},
+				}}
 			/>
 		</LocalizationProvider>
 	)

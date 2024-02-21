@@ -41,7 +41,6 @@ const ToothForm = () => {
 					side.forEach(toothObj => {
 						if (toothObj.tooth === tooth) {
 							toothObj.toothState = toothState === 'disable' ? '' : toothState
-							console.log({ 'toothObj.toothState': toothObj.toothState })
 						}
 					})
 				})

@@ -39,6 +39,14 @@ function Home() {
 			setPatientData(e.target.id, e.target.value)
 	}
 
+	const handleChangeDate = (value: Date | null) => {
+		try {
+			if (value) setPatientData('birthdate', value)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
 		try {
 			e.preventDefault()
@@ -67,7 +75,12 @@ function Home() {
 							label="Nombre completo"
 						/>
 
-						<InputDate />
+						<InputDate
+							name="birthdate"
+							key="birthdate"
+							value={patientData.birthdate}
+							onChange={handleChangeDate}
+						/>
 
 						<InputBasic
 							type="text"

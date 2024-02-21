@@ -1,3 +1,4 @@
+import { sub } from 'date-fns'
 import { create } from 'zustand'
 
 interface PatientStateInterface {
@@ -29,7 +30,9 @@ interface PatientStateInterface {
 const usePatientState = create<PatientStateInterface>()(set => ({
 	patientData: {
 		name: '',
-		birthdate: new Date(),
+		birthdate: sub(new Date(), {
+			years: 1,
+		}),
 		phone: '',
 		occupation: '',
 		reason: '',
