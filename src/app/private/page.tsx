@@ -12,9 +12,11 @@ import usePatientState from '@/states/patientState'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import { FiSave, FiXCircle } from 'react-icons/fi'
 import '@/styles/private.css'
+import useTeethState from '@/states/toothFormState'
 
 function Home() {
 	const { patientData, setPatientData } = usePatientState()
+	const { teethList } = useTeethState()
 
 	const handleInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
@@ -40,8 +42,8 @@ function Home() {
 	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
 		try {
 			e.preventDefault()
-			/* const newPatient = new Patient(null, patientData)
-			newPatient.save() */
+			const newPatient = new Patient(null, patientData, teethList)
+			newPatient.save()
 		} catch (error) {
 			console.log(error)
 		}

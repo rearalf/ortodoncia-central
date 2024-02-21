@@ -17,5 +17,4 @@ interface PatientData {
 	SGU: boolean
 	SGI: boolean
 	comments2: string
-	teeth: toothObject[][][]
 }
