@@ -15,16 +15,21 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 28px;
+	gap: 20px;
 }
 
 .teethFirstRow_row {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 18px;
+	gap: 10px;
 }
 
+.teethFirstRow_row:last-child,
+.teethFirstRow_row:first-child {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
 .row {
 	display: flex;
 	flex-wrap: wrap;
@@ -32,18 +37,25 @@
 	gap: 12px;
 }
 
+.teethFirstRow_row:last-child .row,
+.teethFirstRow_row:first-child .row {
+	gap: 3px;
+}
+
 .toothButton {
+	--sizeBox: 35px;
 	position: relative;
-	width: 75px;
-	height: 75px;
+	width: var(--sizeBox);
+	height: var(--sizeBox);
 }
 
 .toothButtonNumber {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	transform: translate(-50%, -50%);
 	z-index: 0;
+	font-size: 9px;
+	transform: translate(-50%, -50%);
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
@@ -60,7 +72,7 @@
 	top: 0;
 	left: 15%;
 	width: 70%;
-	height: 20px;
+	height: 10px;
 	padding: 0;
 	min-width: 0;
 	border-bottom-left-radius: 60%;
@@ -73,7 +85,7 @@
 	left: 0;
 	height: 60%;
 	padding: 0;
-	min-width: 20px;
+	min-width: 10px;
 	border-top-right-radius: 60%;
 	max-width: 0;
 	border-bottom-right-radius: 60%;
@@ -85,7 +97,7 @@
 	top: 20%;
 	height: 60%;
 	padding: 0;
-	min-width: 20px;
+	min-width: 10px;
 	max-width: 0;
 	border-bottom-left-radius: 60%;
 	border-top-left-radius: 60%;
@@ -96,7 +108,7 @@
 	left: 15%;
 	bottom: 0;
 	width: 70%;
-	height: 20px;
+	height: 10px;
 	padding: 0;
 	min-width: 0;
 	border-top-left-radius: 60%;
@@ -104,12 +116,13 @@
 }
 
 .toothButton .oclusal {
+	--sizeBox: 15px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 30px;
-	height: 30px;
+	width: var(--sizeBox);
+	height: var(--sizeBox);
 	padding: 0;
 	min-width: 0;
 }
@@ -120,18 +133,14 @@
 	top: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 1;
-	font-size: 95px;
+	font-size: 45px;
 	user-select: none;
 	display: none;
-	line-height: 70px;
+	line-height: 32px;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 	transition: font-size 0.5s ease-in-out;
-}
-
-.toothState:hover {
-	font-size: 105px;
 }
 
 .toothState.activeExtraction {
@@ -147,5 +156,127 @@
 	.optionsTeethForm {
 		flex-direction: row;
 		gap: 32px;
+	}
+}
+
+@media (width >= 1000px) {
+	.teethFirstRow {
+		display: grid;
+		gap: 15px;
+	}
+}
+@media (width >= 1024px) {
+	.teethFirstRow {
+		display: grid;
+		gap: 15px;
+	}
+
+	.teethFirstRow_row {
+		gap: 20px;
+	}
+
+	.row,
+	.teethFirstRow_row:last-child .row,
+	.teethFirstRow_row:first-child .row {
+		gap: 12px;
+	}
+
+	.toothButton {
+		--sizeBox: 50px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothButtonNumber {
+		font-size: 12px;
+	}
+
+	.toothButton .vestibular,
+	.toothButton .palatina {
+		height: 15px;
+	}
+
+	.toothButton .distal,
+	.toothButton .mesial {
+		min-width: 15px;
+	}
+
+	.toothButton .oclusal {
+		--sizeBox: 20px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothState {
+		font-size: 65px;
+		line-height: 45px;
+	}
+
+	.toothState:hover {
+		font-size: 75px;
+	}
+}
+
+@media (width >= 1200px) {
+	.toothButton {
+		--sizeBox: 55px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothButtonNumber {
+		font-size: 15px;
+	}
+
+	.toothButton .oclusal {
+		--sizeBox: 25px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothState {
+		font-size: 72px;
+		line-height: 52px;
+	}
+
+	.toothState:hover {
+		font-size: 78px;
+	}
+}
+
+@media (width >= 1440px) {
+	.toothButton {
+		--sizeBox: 65px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothButtonNumber {
+		font-size: 18px;
+	}
+
+	.toothButton .oclusal {
+		--sizeBox: 28px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothButton .vestibular,
+	.toothButton .palatina {
+		height: 18px;
+	}
+
+	.toothButton .distal,
+	.toothButton .mesial {
+		min-width: 18px;
+	}
+
+	.toothState {
+		font-size: 80px;
+		line-height: 60px;
+	}
+
+	.toothState:hover {
+		font-size: 82px;
 	}
 }
