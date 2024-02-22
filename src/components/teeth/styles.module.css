@@ -157,6 +157,51 @@
 		flex-direction: row;
 		gap: 32px;
 	}
+
+	.teethFirstRow_row {
+		gap: 10px;
+	}
+
+	.row,
+	.teethFirstRow_row:last-child .row,
+	.teethFirstRow_row:first-child .row {
+		gap: 4px;
+	}
+
+	.toothButton {
+		--sizeBox: 45px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothButtonNumber {
+		font-size: 11px;
+	}
+
+	.toothButton .vestibular,
+	.toothButton .palatina {
+		height: 12px;
+	}
+
+	.toothButton .distal,
+	.toothButton .mesial {
+		min-width: 12px;
+	}
+
+	.toothButton .oclusal {
+		--sizeBox: 20px;
+		width: var(--sizeBox);
+		height: var(--sizeBox);
+	}
+
+	.toothState {
+		font-size: 65px;
+		line-height: 45px;
+	}
+
+	.toothState:hover {
+		font-size: 75px;
+	}
 }
 
 @media (width >= 1000px) {
