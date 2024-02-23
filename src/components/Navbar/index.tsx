@@ -60,12 +60,12 @@ const Navbar = () => {
 
 				<div className={`${styles.navbarCollapse} ${styles.hidden}`} id="navbar-collapse">
 					<ul className={styles.navMenu}>
-						<NavLink title="Inicio" active />
+						{/* <NavLink title="Inicio" active />
 						<NavLink title="Quienes somos" />
 						<NavLink title="Servicios" />
 						<NavLink title="Nuestros Staff" />
 						<NavLink title="Blog" />
-						<NavLink title="Contacto" />
+						<NavLink title="Contacto" /> */}
 					</ul>
 				</div>
 			</nav>

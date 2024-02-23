@@ -1,5 +1,5 @@
 import { db } from '@/database/firebase'
-import { addDoc, collection } from 'firebase/firestore'
+import { QuerySnapshot, addDoc, collection, getDocs } from 'firebase/firestore'
 
 export enum OrthoTerms {
 	SNC = 'SNC',
@@ -59,6 +59,21 @@ class Patient {
 			return patient.id
 		} catch (error) {
 			console.error('Error saving patient:', error)
+		}
+	}
+
+	async getAllPatients(): Promise<any[]> {
+		try {
+			const querySnapshot: QuerySnapshot = await getDocs(collection(db, 'patients'))
+			const patientsData: any[] = []
+			querySnapshot.forEach(doc => {
+				const patientData = doc.data()
+				patientsData.push(patientData)
+			})
+			return patientsData
+		} catch (error) {
+			console.error('Error getting all patient:', error)
+			return []
 		}
 	}
 }
