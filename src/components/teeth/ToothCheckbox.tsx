@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect } from 'react'
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 import styles from './styles.module.css'
