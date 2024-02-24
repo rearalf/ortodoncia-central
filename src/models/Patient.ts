@@ -1,5 +1,13 @@
 import { db } from '@/database/firebase'
-import { QuerySnapshot, addDoc, collection, getDocs } from 'firebase/firestore'
+import {
+	query,
+	addDoc,
+	orderBy,
+	getDocs,
+	collection,
+	QuerySnapshot,
+	OrderByDirection,
+} from 'firebase/firestore'
 
 export enum OrthoTerms {
 	SNC = 'SNC',
@@ -13,6 +21,7 @@ export enum OrthoTerms {
 }
 
 export const patientBasicData: PatientData = {
+	id_patient: '',
 	name: '',
 	birthdate: new Date(),
 	phone: '',
@@ -34,25 +43,15 @@ export const patientBasicData: PatientData = {
 }
 
 class Patient {
-	private id: string | null
-	private patientData: PatientData
-	private teeth: toothObject[][][]
-
-	constructor(id: string | null, patientData: PatientData, teeth: toothObject[][][]) {
-		this.id = id
-		this.patientData = patientData
-		this.teeth = teeth
-	}
-
-	async save(): Promise<string | undefined> {
+	async save(patientData: PatientData, teeth: toothObject[][][]): Promise<string | undefined> {
 		try {
-			const patient = await addDoc(collection(db, 'patients'), this.patientData)
+			const patient = await addDoc(collection(db, 'patients'), patientData)
 			if (patient.id) {
 				const dbPatient = patient.firestore
 				const patientsTeeth = await addDoc(
 					collection(dbPatient, `patients/${patient.id}/teeth`),
 					{
-						teeth: JSON.stringify(this.teeth),
+						teeth: JSON.stringify(teeth),
 					},
 				)
 			}
@@ -62,14 +61,22 @@ class Patient {
 		}
 	}
 
-	async getAllPatients(): Promise<any[]> {
+	async getAllPatients(
+		fieldPath: string,
+		directionStr: OrderByDirection,
+	): Promise<PatientData[]> {
 		try {
-			const querySnapshot: QuerySnapshot = await getDocs(collection(db, 'patients'))
+			const patientRef = collection(db, 'patients')
+			const firstDocument = query(patientRef, orderBy(fieldPath, directionStr))
+			const querySnapshot: QuerySnapshot = await getDocs(firstDocument)
+
 			const patientsData: any[] = []
+
 			querySnapshot.forEach(doc => {
 				const patientData = doc.data()
-				patientsData.push(patientData)
+				patientsData.push({ ...patientData, id_patient: doc.id })
 			})
+
 			return patientsData
 		} catch (error) {
 			console.error('Error getting all patient:', error)

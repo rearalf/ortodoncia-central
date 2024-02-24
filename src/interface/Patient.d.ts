@@ -1,4 +1,5 @@
 interface PatientData {
+	id_patient?: string
 	name: string
 	birthdate: Date
 	occupation: string

@@ -47,8 +47,8 @@ const PatientForm = () => {
 	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
 		try {
 			e.preventDefault()
-			const newPatient = new Patient(null, patientData, teethList)
-			newPatient.save()
+			const newPatient = new Patient()
+			newPatient.save(patientData, teethList)
 		} catch (error) {
 			console.log(error)
 		}
