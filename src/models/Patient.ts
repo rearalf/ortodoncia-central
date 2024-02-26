@@ -48,12 +48,9 @@ class Patient {
 			const patient = await addDoc(collection(db, 'patients'), patientData)
 			if (patient.id) {
 				const dbPatient = patient.firestore
-				await addDoc(
-					collection(dbPatient, `patients/${patient.id}/teeth`),
-					{
-						teeth: JSON.stringify(teeth),
-					},
-				)
+				await addDoc(collection(dbPatient, `patients/${patient.id}/teeth`), {
+					teeth: JSON.stringify(teeth),
+				})
 			}
 			return patient.id
 		} catch (error) {
@@ -70,6 +67,7 @@ class Patient {
 			const firstDocument = query(patientRef, orderBy(fieldPath, directionStr))
 			const querySnapshot: QuerySnapshot = await getDocs(firstDocument)
 
+			// eslint-disable-next-line
 			const patientsData: any[] = []
 
 			querySnapshot.forEach(doc => {

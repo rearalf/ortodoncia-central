@@ -5,7 +5,9 @@ interface RadioGroupComponent {
 	row?: boolean
 	id: string
 	label: string
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	value: any
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	defaultValue?: any
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	options: {

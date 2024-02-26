@@ -1,4 +1,3 @@
-import { patientBasicData } from '@/models/Patient'
 import { create } from 'zustand'
 
 interface PatientsStateInterface {
