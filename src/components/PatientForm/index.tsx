@@ -10,6 +10,7 @@ import useTeethState from '@/states/toothFormState'
 import usePatientState from '@/states/patientState'
 import Patient, { OrthoTerms } from '@/models/Patient'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
+import './styles.css'
 
 const PatientForm = () => {
 	const { patientData, setPatientData } = usePatientState()
@@ -55,7 +56,7 @@ const PatientForm = () => {
 	}
 
 	return (
-		<form onSubmit={handleSaveData}>
+		<form onSubmit={handleSaveData} className="form_patient">
 			<div className="firstPart">
 				<InputBasic
 					required

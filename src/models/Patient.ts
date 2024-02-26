@@ -48,7 +48,7 @@ class Patient {
 			const patient = await addDoc(collection(db, 'patients'), patientData)
 			if (patient.id) {
 				const dbPatient = patient.firestore
-				const patientsTeeth = await addDoc(
+				await addDoc(
 					collection(dbPatient, `patients/${patient.id}/teeth`),
 					{
 						teeth: JSON.stringify(teeth),

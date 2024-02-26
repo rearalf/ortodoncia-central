@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from '@mui/material'
 import useTeethState from '@/states/toothFormState'
 import styles from './styles.module.css'
@@ -47,7 +46,7 @@ const TeethTable = () => {
 						{value.map((number, i) => {
 							return (
 								<div className={styles.row} key={`row${i}`}>
-									{number.map((tooth, i) => {
+									{number.map(tooth => {
 										return (
 											<div className={styles.toothButton} key={tooth.tooth}>
 												<button
