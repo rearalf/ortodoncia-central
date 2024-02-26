@@ -19,7 +19,7 @@ const TablePatient = () => {
 
 	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - allPatients.length) : 0
 
-	const handleChangePage = (e: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+	const handleChangePage = (_e: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
 		setPage(newPage)
 	}
 
