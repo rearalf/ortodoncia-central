@@ -37,7 +37,8 @@
 .createPatient_main .btn_group {
 	display: flex;
 	justify-content: center;
-	gap: 32px;
+	flex-direction: column;
+	gap: 16px;
 }
 
 .createPatient_main .MuiFormControl-root.MuiTextField-root {
@@ -54,6 +55,11 @@
 	.createPatient_main .systemicAnalysisAccordion {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.createPatient_main .btn_group {
+		flex-direction: row;
+		gap: 32px;
 	}
 }
 

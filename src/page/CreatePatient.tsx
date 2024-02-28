@@ -17,7 +17,7 @@ const CreatePatient = () => {
 			<Navbar />
 			<main className="createPatient_main">
 				<h1>Nuevo paciente</h1>
-				<form onSubmit={handleSaveData} className="form_patient">
+				<form className="form_patient">
 					<div className="firstPart">
 						<InputBasic
 							required
@@ -194,9 +194,23 @@ const CreatePatient = () => {
 							variant="contained"
 							color="success"
 							type="submit"
+							onClick={e => {
+								handleSaveData(e, 'teethForm')
+							}}
 							startIcon={<FiSave />}
 						>
-							Guardar
+							Ir al formulario de dientes
+						</Button>
+						<Button
+							variant="contained"
+							color="success"
+							type="submit"
+							onClick={e => {
+								handleSaveData(e, 'profile')
+							}}
+							startIcon={<FiSave />}
+						>
+							Solo guardar
 						</Button>
 						<Button
 							variant="outlined"

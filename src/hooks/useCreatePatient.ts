@@ -2,8 +2,10 @@ import React from 'react'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import Patient, { OrthoTerms } from '@/models/Patient'
+import { useNavigate } from 'react-router-dom'
 
 function useCreatePatient() {
+	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { teethList } = useTeethState()
 
@@ -36,15 +38,31 @@ function useCreatePatient() {
 		}
 	}
 
-	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSaveData = async (
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+		direction: 'profile' | 'teethForm',
+	) => {
 		try {
 			e.preventDefault()
 			const newPatient = new Patient()
-			newPatient.save(patientData, teethList)
+			const patient = await newPatient.save(patientData, teethList)
+			if (patient !== undefined) {
+				direction === 'profile'
+					? navigate(`/patient-profile/${patient}`)
+					: navigate(`/patient-profile/${patient}`)
+			}
 		} catch (error) {
 			console.log(error)
 		}
 	}
+
+	/* 	const handleSaveButton = async (e: React.FormEvent<HTMLFormElement>) => {
+		try {
+			handleSaveData(e)
+		} catch (error) {
+			console.log(error)
+		}
+	} */
 
 	return {
 		patientData,

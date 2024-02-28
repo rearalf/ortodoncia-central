@@ -1,6 +1,6 @@
-'use client'
 import React from 'react'
 import {
+	IconButton,
 	Paper,
 	Table,
 	TableBody,
@@ -11,8 +11,10 @@ import {
 	TablePagination,
 	TableRow,
 } from '@mui/material'
+import { FiUser } from 'react-icons/fi'
 import usePatientsState from '@/states/patientsState'
 import TablePaginationActions from '../TablePaginationActions'
+import { Link } from 'react-router-dom'
 
 const TablePatient = () => {
 	const { page, setPage, rowsPerPage, allPatients, setRowsPerPage } = usePatientsState()
@@ -46,24 +48,27 @@ const TablePatient = () => {
 					{(rowsPerPage > 0
 						? allPatients.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 						: allPatients
-					).map(patient => {
-						// console.log(patient)
-						return (
-							<TableRow key={patient.id_patient}>
-								<TableCell scope="patient">{patient.name}</TableCell>
-								<TableCell style={{ width: 160 }} align="center">
-									{new Date(patient.birthdate).toString()}
-								</TableCell>
-								<TableCell style={{ width: 160 }} align="center">
-									{patient.phone}
-								</TableCell>
-								<TableCell style={{ width: 160 }} align="center">
-									{patient.occupation}
-								</TableCell>
-								<TableCell style={{ width: 160 }} align="center"></TableCell>
-							</TableRow>
-						)
-					})}
+					).map(patient => (
+						<TableRow key={patient.id_patient}>
+							<TableCell scope="patient">{patient.name}</TableCell>
+							<TableCell style={{ width: 160 }} align="center">
+								{new Date(patient.birthdate).toString()}
+							</TableCell>
+							<TableCell style={{ width: 160 }} align="center">
+								{patient.phone}
+							</TableCell>
+							<TableCell style={{ width: 160 }} align="center">
+								{patient.occupation}
+							</TableCell>
+							<TableCell style={{ width: 160 }} align="center">
+								<Link to={`/patient-profile/${patient.id_patient}`}>
+									<IconButton>
+										<FiUser />
+									</IconButton>
+								</Link>
+							</TableCell>
+						</TableRow>
+					))}
 					{emptyRows > 0 && (
 						<TableRow style={{ height: 53 * emptyRows }}>
 							<TableCell colSpan={6} />
