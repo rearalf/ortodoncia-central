@@ -1,8 +1,12 @@
-import Routes from '@/router/Routes'
+import { Outlet } from 'react-router-dom'
 import '@/styles/App.css'
 
 function App() {
-	return <Routes />
+	return (
+		<div className="hello">
+			<Outlet />
+		</div>
+	)
 }
 
 export default App

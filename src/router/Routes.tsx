@@ -1,20 +1,28 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import App from '@/App'
 import Home from '@/page/Home'
 import CreatePatient from '@/page/CreatePatient'
+import { createBrowserRouter } from 'react-router-dom'
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+	[
+		{
+			path: '/',
+			element: <App />,
+			children: [
+				{
+					path: '/',
+					element: <Home />,
+				},
+				{
+					path: '/create-patient',
+					element: <CreatePatient />,
+				},
+			],
+		},
+	],
 	{
-		path: '/',
-		element: <Home />,
+		basename: '/',
 	},
-	{
-		path: '/create-patient',
-		element: <CreatePatient />,
-	},
-])
+)
 
-const Routes = () => {
-	return <RouterProvider router={router} />
-}
-
-export default Routes
+export default router
