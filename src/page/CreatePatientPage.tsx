@@ -4,6 +4,7 @@ import InputDate from '@/components/InputDate'
 import InputBasic from '@/components/InputBasic'
 import InputCheckbox from '@/components/Checkbox'
 import { FiSave, FiXCircle } from 'react-icons/fi'
+import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import '@/styles/CreatePatient.css'
@@ -14,6 +15,7 @@ const CreatePatientPage = () => {
 
 	return (
 		<>
+			<HeadComponent title="Crear paciente" />
 			<Navbar />
 			<main className="createPatient_main">
 				<h1>Nuevo paciente</h1>
