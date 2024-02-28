@@ -9,7 +9,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/mate
 import '@/styles/CreatePatient.css'
 // import TeethForm from '@/components/TeethForm'
 
-const CreatePatient = () => {
+const CreatePatientPage = () => {
 	const { patientData, handleSaveData, handleInput, handleChangeDate } = useCreatePatient()
 
 	return (
@@ -193,10 +193,7 @@ const CreatePatient = () => {
 						<Button
 							variant="contained"
 							color="success"
-							type="submit"
-							onClick={e => {
-								handleSaveData(e, 'teethForm')
-							}}
+							onClick={() => handleSaveData('teethForm')}
 							startIcon={<FiSave />}
 						>
 							Ir al formulario de dientes
@@ -205,9 +202,7 @@ const CreatePatient = () => {
 							variant="contained"
 							color="success"
 							type="submit"
-							onClick={e => {
-								handleSaveData(e, 'profile')
-							}}
+							onClick={() => handleSaveData('profile')}
 							startIcon={<FiSave />}
 						>
 							Solo guardar
@@ -227,4 +222,4 @@ const CreatePatient = () => {
 	)
 }
 
-export default CreatePatient
+export default CreatePatientPage

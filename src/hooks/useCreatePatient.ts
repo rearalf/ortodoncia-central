@@ -38,12 +38,8 @@ function useCreatePatient() {
 		}
 	}
 
-	const handleSaveData = async (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-		direction: 'profile' | 'teethForm',
-	) => {
+	const handleSaveData = async (direction: 'profile' | 'teethForm') => {
 		try {
-			e.preventDefault()
 			const newPatient = new Patient()
 			const patient = await newPatient.save(patientData, teethList)
 			if (patient !== undefined) {
@@ -55,14 +51,6 @@ function useCreatePatient() {
 			console.log(error)
 		}
 	}
-
-	/* 	const handleSaveButton = async (e: React.FormEvent<HTMLFormElement>) => {
-		try {
-			handleSaveData(e)
-		} catch (error) {
-			console.log(error)
-		}
-	} */
 
 	return {
 		patientData,

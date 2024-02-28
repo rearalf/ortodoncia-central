@@ -1,8 +1,8 @@
 import App from '@/App'
-import Home from '@/page/Home'
-import CreatePatient from '@/page/CreatePatient'
+import HomePage from '@/page/HomePage'
+import CreatePatientPage from '@/page/CreatePatientPage'
+import PatientProfilePage from '@/page/PatientProfilePage'
 import { createBrowserRouter } from 'react-router-dom'
-import PatientProfile from '@/page/PatientProfile'
 
 const router = createBrowserRouter(
 	[
@@ -12,15 +12,15 @@ const router = createBrowserRouter(
 			children: [
 				{
 					path: '/',
-					element: <Home />,
+					element: <HomePage />,
 				},
 				{
 					path: '/create-patient',
-					element: <CreatePatient />,
+					element: <CreatePatientPage />,
 				},
 				{
 					path: '/patient-profile/:id',
-					element: <PatientProfile />,
+					element: <PatientProfilePage />,
 				},
 			],
 		},

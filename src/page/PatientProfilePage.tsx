@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar'
 import '@/styles/PatientProfile.css'
 
-const PatientProfile = () => {
+const PatientProfilePage = () => {
 	return (
 		<>
 			<Navbar />
@@ -12,4 +12,4 @@ const PatientProfile = () => {
 	)
 }
 
-export default PatientProfile
+export default PatientProfilePage

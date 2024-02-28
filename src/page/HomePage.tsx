@@ -6,7 +6,7 @@ import { FiUserPlus } from 'react-icons/fi'
 import TablePatient from '@/components/Patient/TablePatient'
 import '@/styles/Home.css'
 
-const Home = () => {
+const HomePage = () => {
 	useHome()
 	return (
 		<>
@@ -26,4 +26,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default HomePage
