@@ -1,0 +1,23 @@
+.teethform_main {
+	margin: 0 auto;
+	max-width: 1280px;
+	padding: 32px 16px;
+}
+
+.teethform_main h1 {
+	text-align: center;
+}
+
+.teethform_main .btn_group {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+}
+
+@media (width >= 768px) {
+	.teethform_main .btn_group {
+		flex-direction: row;
+	}
+}

@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar'
 import HeadComponent from '@/components/HeadComponent'
-import '@/styles/PatientProfile.css'
+import '@/styles/PatientProfilePage.css'
 
 const PatientProfilePage = () => {
 	return (

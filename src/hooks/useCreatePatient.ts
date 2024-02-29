@@ -43,9 +43,13 @@ function useCreatePatient() {
 			const newPatient = new Patient()
 			const patient = await newPatient.save(patientData, teethList)
 			if (patient !== undefined) {
+				setPatientData({
+					...patientData,
+					id: patient,
+				})
 				direction === 'profile'
 					? navigate(`/patient-profile/${patient}`)
-					: navigate(`/patient-profile/${patient}`)
+					: navigate(`/teeth-form`)
 			}
 		} catch (error) {
 			console.log(error)

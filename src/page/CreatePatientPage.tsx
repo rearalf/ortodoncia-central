@@ -7,8 +7,7 @@ import { FiSave, FiXCircle } from 'react-icons/fi'
 import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
-import '@/styles/CreatePatient.css'
-// import TeethForm from '@/components/TeethForm'
+import '@/styles/CreatePatientPage.css'
 
 const CreatePatientPage = () => {
 	const { patientData, handleSaveData, handleInput, handleChangeDate } = useCreatePatient()
@@ -188,8 +187,6 @@ const CreatePatientPage = () => {
 							</div>
 						</AccordionDetails>
 					</Accordion>
-
-					{/* <TeethForm /> */}
 
 					<div className="btn_group">
 						<Button

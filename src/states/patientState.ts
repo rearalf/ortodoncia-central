@@ -3,6 +3,7 @@ import { create } from 'zustand'
 
 interface PatientStateInterface {
 	patientData: {
+		id: string | undefined
 		name: string
 		birthdate: Date
 		occupation: string
@@ -29,6 +30,7 @@ interface PatientStateInterface {
 
 const usePatientState = create<PatientStateInterface>()(set => ({
 	patientData: {
+		id: undefined,
 		name: '',
 		birthdate: sub(new Date(), {
 			years: 1,
