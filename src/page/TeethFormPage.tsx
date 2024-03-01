@@ -7,13 +7,20 @@ import useTeethFormPage from '@/hooks/useTeethFormPage'
 import '@/styles/TeethFormPage.css'
 
 const TeethFormPage = () => {
-	const { handleSaveTeeth, handleCancelButton } = useTeethFormPage()
+	const { patientData, handleSaveTeeth, handleCancelButton } = useTeethFormPage()
 	return (
 		<>
 			<HeadComponent title="Dientes de " />
 			<Navbar />
 			<main className="teethform_main">
-				<h1>Mapa de dientes de </h1>
+				<h1>
+					Mapa de dientes de{' '}
+					{` ${patientData.name.split(' ')[0]} ${
+						patientData.name.split(' ')[2]
+							? patientData.name.split(' ')[2]
+							: patientData.name.split(' ')[1]
+					}`}
+				</h1>
 				<TeethForm />
 				<div className="btn_group">
 					<Button

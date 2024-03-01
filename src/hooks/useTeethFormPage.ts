@@ -1,4 +1,5 @@
 import usePatientState from '@/states/patientState'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function useTeethFormPage() {
@@ -13,7 +14,12 @@ function useTeethFormPage() {
 		else navigate('/')
 	}
 
+	useEffect(() => {
+		console.log(patientData)
+	}, [])
+
 	return {
+		patientData,
 		handleSaveTeeth,
 		handleCancelButton,
 	}

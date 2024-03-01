@@ -12,14 +12,23 @@ const PatientProfilePage = () => {
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
 			<main className="patientprofile_main">
-				<h1>Paciente {patientData.name.split(' ')[0]}</h1>
-				<Button
-					variant="contained"
-					startIcon={<FiUserPlus />}
-					onClick={handleGoToTeethForm}
-				>
-					Nueva cita
-				</Button>
+				<header className="main_header">
+					<h1>
+						Paciente
+						{` ${patientData.name.split(' ')[0]} ${
+							patientData.name.split(' ')[2]
+								? patientData.name.split(' ')[2]
+								: patientData.name.split(' ')[1]
+						}`}
+					</h1>
+					<Button
+						variant="contained"
+						startIcon={<FiUserPlus />}
+						onClick={handleGoToTeethForm}
+					>
+						Nueva cita
+					</Button>
+				</header>
 			</main>
 		</>
 	)

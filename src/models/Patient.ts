@@ -91,7 +91,7 @@ class Patient {
 	}
 
 	// eslint-disable-next-line
-	async getPatient(id: string): Promise<PatientData | {}> {
+	async getPatient(id: string): Promise<PatientData | undefined> {
 		try {
 			const patientRef = collection(db, 'patients')
 			const patientQuery = query(patientRef, where(documentId(), '==', id))
@@ -115,7 +115,7 @@ class Patient {
 			return patientData
 		} catch (error) {
 			console.log('Error getting patient data: ' + error)
-			return {}
+			return undefined
 		}
 	}
 }
