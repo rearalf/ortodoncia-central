@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 interface PatientsStateInterface {
 	allPatients: {
-		id_patient?: string
+		id?: string
 		name: string
 		birthdate: Date
 		occupation: string

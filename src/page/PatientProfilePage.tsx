@@ -6,13 +6,13 @@ import usePatientProfilePage from '@/hooks/usePatientProfilePage'
 import '@/styles/PatientProfilePage.css'
 
 const PatientProfilePage = () => {
-	const { handleGoToTeethForm } = usePatientProfilePage()
+	const { patientData, handleGoToTeethForm } = usePatientProfilePage()
 	return (
 		<>
-			<HeadComponent title="Perfil de " />
+			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
 			<main className="patientprofile_main">
-				<h1>Nuevo paciente</h1>
+				<h1>Paciente {patientData.name.split(' ')[0]}</h1>
 				<Button
 					variant="contained"
 					startIcon={<FiUserPlus />}

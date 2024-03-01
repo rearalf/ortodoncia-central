@@ -7,6 +7,8 @@ import {
 	collection,
 	QuerySnapshot,
 	OrderByDirection,
+	where,
+	documentId,
 } from 'firebase/firestore'
 
 export enum OrthoTerms {
@@ -21,7 +23,7 @@ export enum OrthoTerms {
 }
 
 export const patientBasicData: PatientData = {
-	id_patient: '',
+	id: '',
 	name: '',
 	birthdate: new Date(),
 	phone: '',
@@ -71,14 +73,49 @@ class Patient {
 			const patientsData: any[] = []
 
 			querySnapshot.forEach(doc => {
-				const patientData = doc.data()
-				patientsData.push({ ...patientData, id_patient: doc.id })
+				const data = doc.data()
+				patientsData.push({
+					...data,
+					id: doc.id,
+					birthdate: new Date(
+						data.birthdate.seconds * 1000 + data.birthdate.nanoseconds / 1000000,
+					),
+				})
 			})
 
 			return patientsData
 		} catch (error) {
 			console.error('Error getting all patient:', error)
 			return []
+		}
+	}
+
+	// eslint-disable-next-line
+	async getPatient(id: string): Promise<PatientData | {}> {
+		try {
+			const patientRef = collection(db, 'patients')
+			const patientQuery = query(patientRef, where(documentId(), '==', id))
+			const querySnapshot: QuerySnapshot = await getDocs(patientQuery)
+
+			// eslint-disable-next-line
+			let patientData: any = {}
+
+			querySnapshot.docs
+			querySnapshot.forEach(doc => {
+				const data = doc.data()
+				patientData = {
+					...doc.data(),
+					id: doc.id,
+					birthdate: new Date(
+						data.birthdate.seconds * 1000 + data.birthdate.nanoseconds / 1000000,
+					),
+				}
+			})
+
+			return patientData
+		} catch (error) {
+			console.log('Error getting patient data: ' + error)
+			return {}
 		}
 	}
 }

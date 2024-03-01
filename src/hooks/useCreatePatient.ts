@@ -31,12 +31,12 @@ function useCreatePatient() {
 			else
 				setPatientData({
 					...patientData,
-					[e.target.id]: e.target.value,
+					[e.target.id]: e.target.value.trim(),
 				})
 		} else if (e.target instanceof HTMLTextAreaElement)
 			setPatientData({
 				...patientData,
-				[e.target.id]: e.target.value,
+				[e.target.id]: e.target.value.trim(),
 			})
 	}
 

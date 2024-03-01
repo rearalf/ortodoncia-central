@@ -49,7 +49,7 @@ const TablePatient = () => {
 						? allPatients.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 						: allPatients
 					).map(patient => (
-						<TableRow key={patient.id_patient}>
+						<TableRow key={patient.id}>
 							<TableCell scope="patient">{patient.name}</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								{new Date(patient.birthdate).toString()}
@@ -61,7 +61,7 @@ const TablePatient = () => {
 								{patient.occupation}
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
-								<Link to={`/patient-profile/${patient.id_patient}`}>
+								<Link to={`/patient-profile/${patient.id}`}>
 									<IconButton>
 										<FiUser />
 									</IconButton>
