@@ -10,7 +10,8 @@ import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/mate
 import '@/styles/CreatePatientPage.css'
 
 const CreatePatientPage = () => {
-	const { patientData, handleSaveData, handleInput, handleChangeDate } = useCreatePatient()
+	const { patientData, handleSaveData, handleInput, handleChangeDate, handleCancelButton } =
+		useCreatePatient()
 
 	return (
 		<>
@@ -210,6 +211,7 @@ const CreatePatientPage = () => {
 							variant="outlined"
 							color="error"
 							type="button"
+							onClick={handleCancelButton}
 							startIcon={<FiXCircle />}
 						>
 							Cancelar

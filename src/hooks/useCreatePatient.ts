@@ -24,15 +24,29 @@ function useCreatePatient() {
 				e.target.id === OrthoTerms.SU ||
 				e.target.id === OrthoTerms.SVC
 			)
-				setPatientData(e.target.id, e.target.checked)
-			else setPatientData(e.target.id, e.target.value)
+				setPatientData({
+					...patientData,
+					[e.target.id]: e.target.value,
+				})
+			else
+				setPatientData({
+					...patientData,
+					[e.target.id]: e.target.value,
+				})
 		} else if (e.target instanceof HTMLTextAreaElement)
-			setPatientData(e.target.id, e.target.value)
+			setPatientData({
+				...patientData,
+				[e.target.id]: e.target.value,
+			})
 	}
 
 	const handleChangeDate = (value: Date | null) => {
 		try {
-			if (value) setPatientData('birthdate', value)
+			if (value)
+				setPatientData({
+					...patientData,
+					birthdate: value,
+				})
 		} catch (error) {
 			console.log(error)
 		}
@@ -56,11 +70,16 @@ function useCreatePatient() {
 		}
 	}
 
+	const handleCancelButton = () => {
+		navigate(-1)
+	}
+
 	return {
 		patientData,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
+		handleCancelButton,
 	}
 }
 

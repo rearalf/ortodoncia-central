@@ -3,7 +3,7 @@ import { create } from 'zustand'
 
 interface PatientStateInterface {
 	patientData: {
-		id: string | undefined
+		id?: string
 		name: string
 		birthdate: Date
 		occupation: string
@@ -23,14 +23,13 @@ interface PatientStateInterface {
 		SGI: boolean
 		comments2: string
 	}
-	setPatientData: (property: string, value: string | Date | number | boolean) => void
+	setPatientData: (value: PatientStateInterface['patientData']) => void
 	teeth: toothObject[][][]
 	setTeeth: (value: PatientStateInterface['teeth']) => void
 }
 
 const usePatientState = create<PatientStateInterface>()(set => ({
 	patientData: {
-		id: undefined,
 		name: '',
 		birthdate: sub(new Date(), {
 			years: 1,
@@ -550,13 +549,10 @@ const usePatientState = create<PatientStateInterface>()(set => ({
 		],
 	],
 	setTeeth: value => set(state => ({ ...state, teeth: value })),
-	setPatientData: (property, value) =>
+	setPatientData: value =>
 		set(state => ({
 			...state,
-			patientData: {
-				...state.patientData,
-				[property]: value,
-			},
+			patientData: value,
 		})),
 }))
 

@@ -7,7 +7,7 @@ import useTeethFormPage from '@/hooks/useTeethFormPage'
 import '@/styles/TeethFormPage.css'
 
 const TeethFormPage = () => {
-	const { handleSaveTeeth } = useTeethFormPage()
+	const { handleSaveTeeth, handleCancelButton } = useTeethFormPage()
 	return (
 		<>
 			<HeadComponent title="Dientes de " />
@@ -28,6 +28,7 @@ const TeethFormPage = () => {
 						variant="outlined"
 						color="error"
 						type="button"
+						onClick={handleCancelButton}
 						startIcon={<FiXCircle />}
 					>
 						Cancelar
