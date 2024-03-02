@@ -1,19 +1,24 @@
 import { Button } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import TeethForm from '@/components/TeethForm'
+import InputDate from '@/components/InputDate'
+import InputBasic from '@/components/InputBasic'
 import { FiSave, FiXCircle } from 'react-icons/fi'
+import InputSelect from '@/components/InputSelect'
 import HeadComponent from '@/components/HeadComponent'
 import useTeethFormPage from '@/hooks/useTeethFormPage'
+import InputNumericFormat from '@/components/NumericFormatCustom '
 import '@/styles/TeethFormPage.css'
 
 const TeethFormPage = () => {
-	const { patientData, handleSaveTeeth, handleCancelButton } = useTeethFormPage()
+	const { minDate, maxDate, appointment, patientData, handleSaveTeeth, handleCancelButton } =
+		useTeethFormPage()
 	return (
 		<>
 			<HeadComponent title="Dientes de " />
 			<Navbar />
 			<main className="teethform_main">
-				<h1>
+				<h1 className="main_title">
 					Mapa de dientes de{' '}
 					{` ${patientData.name.split(' ')[0]} ${
 						patientData.name.split(' ')[2]
@@ -21,7 +26,55 @@ const TeethFormPage = () => {
 							: patientData.name.split(' ')[1]
 					}`}
 				</h1>
+
 				<TeethForm />
+
+				<section className="main_lastform">
+					<h2 className="lastform_title">Cita de hoy</h2>
+					<div className="lastform_form">
+						<InputDate
+							name="date"
+							key="date"
+							value={appointment.date}
+							onChange={value => {
+								console.log(value)
+							}}
+							helperText="MM/DD/YYYY"
+							maxDate={maxDate}
+							minDate={minDate}
+						/>
+						<InputNumericFormat
+							id="cost"
+							key="cost"
+							label="Costo"
+							value={appointment.const}
+							onChange={() => {}}
+						/>
+						<InputSelect
+							key="doctor"
+							id="doctor"
+							label="Doctor"
+							value={appointment.doctor}
+							onChange={() => {}}
+							items={[
+								{
+									item: 'Lorena',
+									value: 'Lorena',
+								},
+							]}
+						/>
+						<InputBasic
+							multiline
+							type="text"
+							id="treatment"
+							key="treatment"
+							label="Tratamiento"
+							value={appointment.treatment}
+							onChange={() => {}}
+						/>
+					</div>
+				</section>
+
 				<div className="btn_group">
 					<Button
 						variant="contained"

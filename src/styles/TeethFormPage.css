@@ -4,8 +4,26 @@
 	padding: 32px 16px;
 }
 
-.teethform_main h1 {
+.teethform_main .main_title {
 	text-align: center;
+}
+
+.teethform_main .main_lastform {
+	display: flex;
+	flex-direction: column;
+}
+
+.teethform_main .main_lastform .lastform_title {
+	margin-bottom: 24px;
+}
+
+.teethform_main .main_lastform .lastform_form {
+	display: flex;
+	flex-direction: column;
+}
+
+.teethform_main .main_lastform .lastform_form > * {
+	margin-bottom: 18px;
 }
 
 .teethform_main .btn_group {
@@ -19,5 +37,19 @@
 @media (width >= 768px) {
 	.teethform_main .btn_group {
 		flex-direction: row;
+	}
+
+	.teethform_main .main_lastform .lastform_form {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+		margin-bottom: 24px;
+	}
+
+	.teethform_main .main_lastform .lastform_form > * {
+		margin-bottom: 0;
+	}
+
+	.teethform_main .main_lastform .lastform_form .MuiFormControl-root {
 	}
 }

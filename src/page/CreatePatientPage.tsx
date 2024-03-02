@@ -10,8 +10,15 @@ import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/mate
 import '@/styles/CreatePatientPage.css'
 
 const CreatePatientPage = () => {
-	const { patientData, handleSaveData, handleInput, handleChangeDate, handleCancelButton } =
-		useCreatePatient()
+	const {
+		minDate,
+		maxDate,
+		patientData,
+		handleSaveData,
+		handleInput,
+		handleChangeDate,
+		handleCancelButton,
+	} = useCreatePatient()
 
 	return (
 		<>
@@ -36,6 +43,9 @@ const CreatePatientPage = () => {
 							key="birthdate"
 							value={patientData.birthdate}
 							onChange={handleChangeDate}
+							helperText="MM/DD/YYYY"
+							maxDate={maxDate}
+							minDate={minDate}
 						/>
 
 						<InputBasic

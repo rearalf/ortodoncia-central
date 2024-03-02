@@ -11,6 +11,7 @@ import usePatientState from '@/states/patientState'
 import Patient, { OrthoTerms } from '@/models/Patient'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import './styles.css'
+import { sub } from 'date-fns'
 
 const PatientForm = () => {
 	const { patientData, setPatientData } = usePatientState()
@@ -87,6 +88,12 @@ const PatientForm = () => {
 					key="birthdate"
 					value={patientData.birthdate}
 					onChange={handleChangeDate}
+					minDate={sub(new Date(), {
+						years: 95,
+					})}
+					maxDate={sub(new Date(), {
+						years: 1,
+					})}
 				/>
 
 				<InputBasic

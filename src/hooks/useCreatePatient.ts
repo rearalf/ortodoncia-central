@@ -1,13 +1,20 @@
 import React from 'react'
+import { sub } from 'date-fns'
+import { useNavigate } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import Patient, { OrthoTerms } from '@/models/Patient'
-import { useNavigate } from 'react-router-dom'
 
 function useCreatePatient() {
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { teethList } = useTeethState()
+	const maxDate = sub(new Date(), {
+		years: 1,
+	})
+	const minDate = sub(new Date(), {
+		years: 95,
+	})
 
 	const handleInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
@@ -75,6 +82,8 @@ function useCreatePatient() {
 	}
 
 	return {
+		minDate,
+		maxDate,
 		patientData,
 		handleInput,
 		handleSaveData,

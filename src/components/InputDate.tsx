@@ -5,11 +5,13 @@ import {
 	PickerChangeHandlerContext,
 } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
-import { sub } from 'date-fns'
 
 interface InputDateProps {
 	value: Date
 	name: string
+	minDate?: Date
+	maxDate?: Date
+	helperText?: string
 	onChange: (value: Date | null, context: PickerChangeHandlerContext<DateValidationError>) => void
 }
 
@@ -19,17 +21,13 @@ const InputDate = (props: InputDateProps) => {
 			<DatePicker
 				label="Fecha de nacimiento"
 				name={props.name}
-				maxDate={sub(new Date(), {
-					years: 1,
-				})}
-				minDate={sub(new Date(), {
-					years: 95,
-				})}
+				maxDate={props.maxDate}
+				minDate={props.minDate}
 				value={props.value}
 				onChange={props.onChange}
 				slotProps={{
 					textField: {
-						helperText: 'MM/DD/YYYY',
+						helperText: props.helperText,
 					},
 				}}
 			/>
