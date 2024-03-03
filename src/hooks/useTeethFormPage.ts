@@ -1,5 +1,5 @@
 import { sub } from 'date-fns'
-import { useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
@@ -7,7 +7,7 @@ import useTeethState from '@/states/toothFormState'
 function useTeethFormPage() {
 	const navigate = useNavigate()
 	const { patientData } = usePatientState()
-	const { appointment } = useTeethState()
+	const { appointment, setAppointment } = useTeethState()
 	const maxDate = sub(new Date(), {
 		years: 1,
 	})
@@ -24,8 +24,33 @@ function useTeethFormPage() {
 		else navigate('/')
 	}
 
+	const handleChangeInputDate = (value: Date | null) => {
+		try {
+			if (value)
+				setAppointment({
+					...appointment,
+					date: value,
+				})
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const handleChangeInput = (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+	) => {
+		try {
+			setAppointment({
+				...appointment,
+				[e.target.id]: e.target.value,
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	useEffect(() => {
-		console.log(patientData)
+		// console.log(patientData)
 	}, [patientData])
 
 	return {
@@ -34,7 +59,9 @@ function useTeethFormPage() {
 		appointment,
 		patientData,
 		handleSaveTeeth,
+		handleChangeInput,
 		handleCancelButton,
+		handleChangeInputDate,
 	}
 }
 

@@ -11,8 +11,16 @@ import InputNumericFormat from '@/components/NumericFormatCustom '
 import '@/styles/TeethFormPage.css'
 
 const TeethFormPage = () => {
-	const { minDate, maxDate, appointment, patientData, handleSaveTeeth, handleCancelButton } =
-		useTeethFormPage()
+	const {
+		minDate,
+		maxDate,
+		appointment,
+		patientData,
+		handleSaveTeeth,
+		handleChangeInput,
+		handleCancelButton,
+		handleChangeInputDate,
+	} = useTeethFormPage()
 	return (
 		<>
 			<HeadComponent title="Dientes de " />
@@ -36,19 +44,27 @@ const TeethFormPage = () => {
 							name="date"
 							key="date"
 							value={appointment.date}
-							onChange={value => {
-								console.log(value)
-							}}
+							onChange={handleChangeInputDate}
 							helperText="MM/DD/YYYY"
 							maxDate={maxDate}
 							minDate={minDate}
+						/>
+						<InputBasic
+							type="text"
+							id="treatment"
+							key="treatment"
+							label="Tratamiento"
+							value={appointment.treatment}
+							onChange={handleChangeInput}
 						/>
 						<InputNumericFormat
 							id="cost"
 							key="cost"
 							label="Costo"
 							value={appointment.const}
-							onChange={() => {}}
+							onChange={() => {
+								console.log('first')
+							}}
 						/>
 						<InputSelect
 							key="doctor"
@@ -63,15 +79,15 @@ const TeethFormPage = () => {
 								},
 							]}
 						/>
-						<InputBasic
+						{/* <InputBasic
 							multiline
 							type="text"
 							id="treatment"
 							key="treatment"
 							label="Tratamiento"
 							value={appointment.treatment}
-							onChange={() => {}}
-						/>
+							onChange={handleChangeInput}
+						/> */}
 					</div>
 				</section>
 

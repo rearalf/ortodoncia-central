@@ -9,6 +9,7 @@ interface TeethStateInterface {
 		const: string
 		doctor: string
 	}
+	setAppointment: (value: TeethStateInterface['appointment']) => void
 	setTeethList: (value: TeethStateInterface['teethList']) => void
 	toothState: toothStateType
 	setToothState: (value: toothStateType) => void
@@ -522,6 +523,11 @@ const useTeethState = create<TeethStateInterface>()(set => ({
 		const: '',
 		doctor: '',
 	},
+	setAppointment: value =>
+		set(state => ({
+			...state,
+			appointment: value,
+		})),
 	setTeethList: value => set(state => ({ ...state, teethList: value })),
 	toothState: '',
 	setToothState: value => set(state => ({ ...state, toothState: value })),
