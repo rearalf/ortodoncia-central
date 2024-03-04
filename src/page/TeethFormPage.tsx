@@ -17,9 +17,11 @@ const TeethFormPage = () => {
 		appointment,
 		patientData,
 		handleSaveTeeth,
+		handleChangeCost,
 		handleChangeInput,
 		handleCancelButton,
 		handleChangeInputDate,
+		handleChangeSelectInput,
 	} = useTeethFormPage()
 	return (
 		<>
@@ -48,22 +50,15 @@ const TeethFormPage = () => {
 							helperText="MM/DD/YYYY"
 							maxDate={maxDate}
 							minDate={minDate}
-						/>
-						<InputBasic
-							type="text"
-							id="treatment"
-							key="treatment"
-							label="Tratamiento"
-							value={appointment.treatment}
-							onChange={handleChangeInput}
+							disabled
 						/>
 						<InputNumericFormat
 							id="cost"
 							key="cost"
 							label="Costo"
-							value={appointment.const}
-							onChange={() => {
-								console.log('first')
+							value={appointment.cost}
+							onChange={value => {
+								handleChangeCost(value)
 							}}
 						/>
 						<InputSelect
@@ -71,15 +66,19 @@ const TeethFormPage = () => {
 							id="doctor"
 							label="Doctor"
 							value={appointment.doctor}
-							onChange={() => {}}
+							onChange={handleChangeSelectInput}
 							items={[
 								{
 									item: 'Lorena',
 									value: 'Lorena',
 								},
+								{
+									item: 'Marenco',
+									value: 'Marenco',
+								},
 							]}
 						/>
-						{/* <InputBasic
+						<InputBasic
 							multiline
 							type="text"
 							id="treatment"
@@ -87,7 +86,7 @@ const TeethFormPage = () => {
 							label="Tratamiento"
 							value={appointment.treatment}
 							onChange={handleChangeInput}
-						/> */}
+						/>
 					</div>
 				</section>
 

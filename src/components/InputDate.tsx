@@ -12,6 +12,7 @@ interface InputDateProps {
 	minDate?: Date
 	maxDate?: Date
 	helperText?: string
+	disabled?: boolean
 	onChange: (value: Date | null, context: PickerChangeHandlerContext<DateValidationError>) => void
 }
 
@@ -30,6 +31,7 @@ const InputDate = (props: InputDateProps) => {
 						helperText: props.helperText,
 					},
 				}}
+				disabled={props.disabled}
 			/>
 		</LocalizationProvider>
 	)

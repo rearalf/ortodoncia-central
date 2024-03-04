@@ -1,4 +1,3 @@
-import { sub } from 'date-fns'
 import { create } from 'zustand'
 
 interface TeethStateInterface {
@@ -6,7 +5,7 @@ interface TeethStateInterface {
 	appointment: {
 		date: Date
 		treatment: string
-		const: string
+		cost: string
 		doctor: string
 	}
 	setAppointment: (value: TeethStateInterface['appointment']) => void
@@ -516,11 +515,9 @@ const useTeethState = create<TeethStateInterface>()(set => ({
 		],
 	],
 	appointment: {
-		date: sub(new Date(), {
-			years: 1,
-		}),
+		date: new Date(),
 		treatment: '',
-		const: '',
+		cost: '',
 		doctor: '',
 	},
 	setAppointment: value =>

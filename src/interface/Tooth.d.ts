@@ -29,3 +29,10 @@ interface toothObject {
 	vestibular: toothPositionStateType
 	oclusal: toothPositionStateType
 }
+
+interface appointmentInterface {
+	date: Date
+	treatment: string
+	cost: string
+	doctor: string
+}

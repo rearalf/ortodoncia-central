@@ -118,6 +118,22 @@ class Patient {
 			return undefined
 		}
 	}
+
+	async saveNewAppointment(
+		id: string,
+		appointment: appointmentInterface,
+		teeth: toothObject[][][],
+		// eslint-disable-next-line
+	): Promise<any | undefined> {
+		try {
+			const patientRef = collection(db, `patients/${id}/appointment`)
+			const addData = addDoc(patientRef, { appointment, teeth: JSON.stringify(teeth) })
+			return addData
+		} catch (error) {
+			console.log('Error saving teeth form: ' + error)
+			return undefined
+		}
+	}
 }
 
 export default Patient

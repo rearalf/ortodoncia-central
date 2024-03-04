@@ -1,22 +1,33 @@
-import { sub } from 'date-fns'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
+import { SelectChangeEvent } from '@mui/material'
+import Patient from '@/models/Patient'
 
 function useTeethFormPage() {
 	const navigate = useNavigate()
 	const { patientData } = usePatientState()
-	const { appointment, setAppointment } = useTeethState()
-	const maxDate = sub(new Date(), {
-		years: 1,
-	})
-	const minDate = sub(new Date(), {
-		years: 95,
-	})
+	const { appointment, setAppointment, teethList } = useTeethState()
+	const maxDate = new Date()
+	const minDate = new Date()
 
-	const handleSaveTeeth = () => {
-		console.log(patientData)
+	const handleSaveTeeth = async () => {
+		try {
+			if (patientData.id) {
+				const saveNewAppointment = new Patient()
+				const newAppointment = await saveNewAppointment.saveNewAppointment(
+					patientData.id,
+					appointment,
+					teethList,
+				)
+				if (newAppointment !== undefined) {
+					console.log(newAppointment)
+				}
+			}
+		} catch (error) {
+			console.log('Error button teeth form: ' + error)
+		}
 	}
 
 	const handleCancelButton = () => {
@@ -36,6 +47,17 @@ function useTeethFormPage() {
 		}
 	}
 
+	const handleChangeSelectInput = (e: SelectChangeEvent<string>) => {
+		try {
+			setAppointment({
+				...appointment,
+				doctor: e.target.value,
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	const handleChangeInput = (
 		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
 	) => {
@@ -49,9 +71,16 @@ function useTeethFormPage() {
 		}
 	}
 
-	useEffect(() => {
-		// console.log(patientData)
-	}, [patientData])
+	const handleChangeCost = (e: { target: { name: string; value: string } }) => {
+		try {
+			setAppointment({
+				...appointment,
+				[e.target.name]: e.target.value,
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return {
 		maxDate,
@@ -59,9 +88,11 @@ function useTeethFormPage() {
 		appointment,
 		patientData,
 		handleSaveTeeth,
+		handleChangeCost,
 		handleChangeInput,
 		handleCancelButton,
 		handleChangeInputDate,
+		handleChangeSelectInput,
 	}
 }
 

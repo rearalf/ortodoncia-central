@@ -1,5 +1,5 @@
+import React from 'react'
 import { TextField } from '@mui/material'
-import React, { ChangeEventHandler } from 'react'
 import { NumericFormat, NumericFormatProps } from 'react-number-format'
 
 interface CustomProps {
@@ -11,7 +11,7 @@ interface InputNumericFormatProps {
 	id: string
 	label: string
 	value: string
-	onChange: ChangeEventHandler<HTMLInputElement>
+	onChange: (event: { target: { name: string; value: string } }) => void
 }
 
 const NumericFormatCustom = React.forwardRef<NumericFormatProps, CustomProps>(
@@ -43,7 +43,10 @@ const InputNumericFormat = (props: InputNumericFormatProps) => {
 		<TextField
 			label={props.label}
 			value={props.value}
-			onChange={props.onChange}
+			onChange={value => {
+				// console.log(value)
+				props.onChange(value)
+			}}
 			name={props.id}
 			id={props.id}
 			InputProps={{
