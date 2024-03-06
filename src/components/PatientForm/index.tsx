@@ -1,5 +1,5 @@
-'use client'
 import React from 'react'
+import { sub } from 'date-fns'
 import InputDate from '../InputDate'
 import TeethForm from '../TeethForm'
 import InputBasic from '../InputBasic'
@@ -11,7 +11,6 @@ import usePatientState from '@/states/patientState'
 import Patient, { OrthoTerms } from '@/models/Patient'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import './styles.css'
-import { sub } from 'date-fns'
 
 const PatientForm = () => {
 	const { patientData, setPatientData } = usePatientState()

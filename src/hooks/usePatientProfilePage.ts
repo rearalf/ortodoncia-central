@@ -1,12 +1,16 @@
+import getAge from '@/utils/getAge'
 import Patient from '@/models/Patient'
-import usePatientState from '@/states/patientState'
 import { useCallback, useEffect } from 'react'
+import usePatientState from '@/states/patientState'
+import useTeethState from '@/states/toothFormState'
 import { useNavigate, useParams } from 'react-router-dom'
+import formatDate from '@/utils/formatDate'
 
 function usePatientProfilePage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
 	const { setPatientData, patientData } = usePatientState()
+	const { setTeethList } = useTeethState()
 
 	const handleGoToTeethForm = () => navigate('/teeth-form')
 
@@ -18,7 +22,13 @@ function usePatientProfilePage() {
 				if (data !== undefined) {
 					setPatientData({
 						...data,
+						age: getAge(data.birthdate),
+						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					if (data.teeth !== undefined) {
+						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
+						setTeethList(teeth)
+					}
 				}
 			}
 		} catch (error) {

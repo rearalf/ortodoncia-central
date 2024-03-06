@@ -9,8 +9,44 @@
 	flex-direction: column;
 }
 
+.patientprofile_main .main_header .header_btnGroup {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	justify-content: center;
+}
+
+.main_information {
+	display: grid;
+	gap: 24px;
+}
+
+.main_information .information_basicInformation,
+.main_information .information_additionalInfo {
+	background-color: var(--background-third);
+	padding: 24px;
+	border-radius: 4px;
+}
+
+.main_information .info_data {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+.main_information .info_data a {
+	text-decoration: none;
+	color: var(--paragrap);
+}
+.main_information .info_data a:hover {
+	color: var(--success-600);
+}
+
 @media (width >= 768px) {
 	.patientprofile_main .main_header {
 		flex-direction: row;
+	}
+
+	.main_information {
+		grid-template-columns: repeat(2, 1fr);
 	}
 }

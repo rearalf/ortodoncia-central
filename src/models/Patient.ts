@@ -9,6 +9,9 @@ import {
 	OrderByDirection,
 	where,
 	documentId,
+	updateDoc,
+	doc,
+	serverTimestamp,
 } from 'firebase/firestore'
 
 export enum OrthoTerms {
@@ -126,8 +129,21 @@ class Patient {
 		// eslint-disable-next-line
 	): Promise<any | undefined> {
 		try {
-			const patientRef = collection(db, `patients/${id}/appointment`)
-			const addData = addDoc(patientRef, { appointment, teeth: JSON.stringify(teeth) })
+			const patientRef = doc(db, 'patients', id)
+			const patientTeethRef = collection(db, `patients/${id}/appointment`)
+			const addData = await addDoc(patientTeethRef, {
+				appointment,
+				teeth: JSON.stringify(teeth),
+			})
+
+			if (addData.id) {
+				const updatePatient = await updateDoc(patientRef, {
+					teeth: JSON.stringify(teeth),
+					updatedAt: serverTimestamp(),
+				})
+				console.log(updatePatient)
+			}
+
 			return addData
 		} catch (error) {
 			console.log('Error saving teeth form: ' + error)

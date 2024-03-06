@@ -4,7 +4,11 @@ import RadioGroupComponent from '../RadioGroup'
 import useTeethState from '@/states/toothFormState'
 import styles from './styles.module.css'
 
-const TeethForm = () => {
+interface TeethFormProps {
+	showControllers?: boolean
+}
+
+const TeethForm = (props: TeethFormProps) => {
 	const { toothState, positionState, setToothState, setPositionState } = useTeethState()
 
 	const handlePositionState = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,32 +27,36 @@ const TeethForm = () => {
 
 	return (
 		<div className={styles.teethForm}>
-			<div className={styles.optionsTeethForm}>
-				<RadioGroupComponent
-					row
-					id="positionState"
-					label="Estado del diente"
-					value={positionState}
-					onChange={handlePositionState}
-					options={[
-						{ label: 'Caries', value: 'decay' },
-						{ label: 'Relleno', value: 'filling' },
-						{ label: 'Deshacer', value: 'disable' },
-					]}
-				/>
-				<RadioGroupComponent
-					row
-					id="toothState"
-					label="Estado de extracción"
-					value={toothState}
-					onChange={handleToothState}
-					options={[
-						{ label: 'A extracción', value: 'extraction' },
-						{ label: 'Extraida', value: 'extracted' },
-						{ label: 'Deshacer', value: 'disable' },
-					]}
-				/>
-			</div>
+			{!props.showControllers ? (
+				<div className={styles.optionsTeethForm}>
+					<RadioGroupComponent
+						row
+						id="positionState"
+						label="Estado del diente"
+						value={positionState}
+						onChange={handlePositionState}
+						options={[
+							{ label: 'Caries', value: 'decay' },
+							{ label: 'Relleno', value: 'filling' },
+							{ label: 'Deshacer', value: 'disable' },
+						]}
+					/>
+					<RadioGroupComponent
+						row
+						id="toothState"
+						label="Estado de extracción"
+						value={toothState}
+						onChange={handleToothState}
+						options={[
+							{ label: 'A extracción', value: 'extraction' },
+							{ label: 'Extraida', value: 'extracted' },
+							{ label: 'Deshacer', value: 'disable' },
+						]}
+					/>
+				</div>
+			) : (
+				<h2>Estado actual de la dentadura</h2>
+			)}
 			<TeethTable />
 		</div>
 	)
