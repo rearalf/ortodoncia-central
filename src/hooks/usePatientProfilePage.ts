@@ -22,7 +22,7 @@ function usePatientProfilePage() {
 				if (data !== undefined) {
 					setPatientData({
 						...data,
-						age: getAge(data.birthdate),
+						age: getAge(data.birthdate.toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
 					if (data.teeth !== undefined) {
@@ -34,7 +34,7 @@ function usePatientProfilePage() {
 		} catch (error) {
 			console.log('Error getting patient data usePatient: ' + error)
 		}
-	}, [id, setPatientData])
+	}, [id, setPatientData, setTeethList])
 
 	useEffect(() => {
 		getPatientData()

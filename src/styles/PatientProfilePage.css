@@ -31,14 +31,23 @@
 .main_information .info_data {
 	display: flex;
 	align-items: center;
-	gap: 2px;
+	gap: 4px;
+	font-weight: 600;
 }
+.main_information .info_data .info {
+	font-weight: 800;
+}
+
 .main_information .info_data a {
 	text-decoration: none;
 	color: var(--paragrap);
 }
 .main_information .info_data a:hover {
 	color: var(--success-600);
+}
+
+.information_teethTable .teethTable_title {
+	margin-bottom: 24px;
 }
 
 @media (width >= 768px) {

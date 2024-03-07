@@ -1,8 +1,8 @@
-import { Button, Tooltip } from '@mui/material'
 import Navbar from '@/components/Navbar'
-import { FiSmartphone, FiUserPlus } from 'react-icons/fi'
-import TeethForm from '@/components/TeethForm'
+import { Button, Tooltip } from '@mui/material'
+import TeethTable from '@/components/TeethTable'
 import HeadComponent from '@/components/HeadComponent'
+import { FiSmartphone, FiUserPlus } from 'react-icons/fi'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
 import '@/styles/PatientProfilePage.css'
 
@@ -22,7 +22,7 @@ const PatientProfilePage = () => {
 								: patientData.name.split(' ')[1]
 						}`}
 					</h1>
-					<div className='header_btnGroup'>
+					<div className="header_btnGroup">
 						<Button
 							variant="contained"
 							startIcon={<FiUserPlus />}
@@ -48,15 +48,20 @@ const PatientProfilePage = () => {
 								Nombre completo: <span className="info">{patientData.name}</span>
 							</p>
 							<p className="info_data">
-								Edad:{' '}
-								<Tooltip title={patientData.formatBirthdate?.toLocaleUpperCase()}>
-									<span className="info">{patientData.age}</span>
-								</Tooltip>
+								Edad: <span className="info">{patientData.age}</span>
+							</p>
+							<p className="info_data">
+								Cumpleaños:{' '}
+								<span className="info">
+									{patientData.formatBirthdate?.toLocaleUpperCase()}
+								</span>
 							</p>
 							<p className="info_data">
 								<FiSmartphone size={24} />
 								<Tooltip title="Llamar">
-									<a href={`tel:+${patientData.phone}`}>{patientData.phone}</a>
+									<a href={`tel:+${patientData.phone}`} className="info">
+										{patientData.phone}
+									</a>
 								</Tooltip>
 							</p>
 							<p className="info_data">
@@ -67,19 +72,25 @@ const PatientProfilePage = () => {
 					<article className="information_additionalInfo">
 						<h2 className="additionalInfo_title">Información adicional</h2>
 						<div className="additionalInfo_info">
-							<p className="info_data">Alérgias: {patientData.allergicReactions}</p>
 							<p className="info_data">
-								Tratamiento sistematico actual:{' '}
-								{patientData.currentSystemicTreatment}
+								Alérgias:{' '}
+								<span className="info">{patientData.allergicReactions}</span>
 							</p>
 							<p className="info_data">
-								Referencias de laboratorio: {patientData.currentSystemicTreatment}
+								Tratamiento sistematico actual:{' '}
+								<span className="info">{patientData.currentSystemicTreatment}</span>
+							</p>
+							<p className="info_data">
+								Referencias de laboratorio:{' '}
+								<span className="info">{patientData.currentSystemicTreatment}</span>
 							</p>
 						</div>
 					</article>
 				</div>
-
-				<TeethForm showControllers />
+				<article className="information_teethTable">
+					<h2 className="teethTable_title">Estado actual de la dentadura</h2>
+					<TeethTable />
+				</article>
 			</main>
 		</>
 	)

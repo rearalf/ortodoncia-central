@@ -1,0 +1,19 @@
+.teethForm {
+	display: flex;
+	flex-direction: column;
+	gap: 38px;
+	margin: 38px 0;
+}
+
+.optionsTeethForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+@media (width >= 768px) {
+	.optionsTeethForm {
+		flex-direction: row;
+		gap: 32px;
+	}
+}

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material'
 import useTeethState from '@/states/toothFormState'
-import styles from './styles.module.css'
+import './styles.css'
 
 const TeethTable = () => {
 	const { teethList, toothState, positionState, setTeethList } = useTeethState()
@@ -39,23 +39,23 @@ const TeethTable = () => {
 	}
 
 	return (
-		<div className={styles.teethFirstRow}>
+		<div className="teethFirstRow">
 			{teethList.map((value, i) => {
 				return (
-					<div className={styles.teethFirstRow_row} key={`value${i}`}>
+					<div className="teethFirstRow_row" key={`value${i}`}>
 						{value.map((number, i) => {
 							return (
-								<div className={styles.row} key={`row${i}`}>
+								<div className="row" key={`row${i}`}>
 									{number.map(tooth => {
 										return (
-											<div className={styles.toothButton} key={tooth.tooth}>
+											<div className="toothButton" key={tooth.tooth}>
 												<button
-													className={`${styles.toothState} ${
+													className={`${'toothState'} ${
 														tooth.toothState === ''
 															? ''
 															: tooth.toothState === 'extraction'
-															? styles.activeExtraction
-															: styles.activeExtracted
+															? 'activeExtraction'
+															: 'activeExtracted'
 													}`}
 													type="button"
 													onClick={() =>
@@ -65,9 +65,9 @@ const TeethTable = () => {
 													X
 												</button>
 												<button
-													className={`${styles.toothButtonNumber} ${
+													className={`${'toothButtonNumber'} ${
 														tooth.oclusal !== ''
-															? styles.toothButtonNumberOver
+															? 'toothButtonNumberOver'
 															: ''
 													}`}
 													type="button"
@@ -86,7 +86,7 @@ const TeethTable = () => {
 															? 'outlined'
 															: 'contained'
 													}
-													className={styles.palatina}
+													className="palatina"
 													color={
 														tooth.palatina === 'decay'
 															? 'error'
@@ -105,7 +105,7 @@ const TeethTable = () => {
 															? 'outlined'
 															: 'contained'
 													}
-													className={styles.mesial}
+													className="mesial"
 													color={
 														tooth.mesial === 'decay' ? 'error' : 'info'
 													}
@@ -122,7 +122,7 @@ const TeethTable = () => {
 															? 'outlined'
 															: 'contained'
 													}
-													className={styles.distal}
+													className="distal"
 													color={
 														tooth.distal === 'decay' ? 'error' : 'info'
 													}
@@ -139,7 +139,7 @@ const TeethTable = () => {
 															? 'outlined'
 															: 'contained'
 													}
-													className={styles.vestibular}
+													className="vestibular"
 													color={
 														tooth.vestibular === 'decay'
 															? 'error'
@@ -158,7 +158,7 @@ const TeethTable = () => {
 															? 'outlined'
 															: 'contained'
 													}
-													className={styles.oclusal}
+													className="oclusal"
 													color={
 														tooth.oclusal === 'decay' ? 'error' : 'info'
 													}
