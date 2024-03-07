@@ -45,6 +45,7 @@ const TeethFormPage = () => {
 						<InputDate
 							name="date"
 							key="date"
+							label="Fecha de la cita"
 							value={appointment.date}
 							onChange={handleChangeInputDate}
 							helperText="MM/DD/YYYY"

@@ -1,5 +1,15 @@
 import Navbar from '@/components/Navbar'
-import { Button, Tooltip } from '@mui/material'
+import {
+	Button,
+	Paper,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+	Tooltip,
+} from '@mui/material'
 import TeethTable from '@/components/TeethTable'
 import HeadComponent from '@/components/HeadComponent'
 import { FiSmartphone, FiUserPlus } from 'react-icons/fi'
@@ -57,7 +67,7 @@ const PatientProfilePage = () => {
 								</span>
 							</p>
 							<p className="info_data">
-								<FiSmartphone size={24} />
+								<FiSmartphone size={24} /> Teléfono:
 								<Tooltip title="Llamar">
 									<a href={`tel:+${patientData.phone}`} className="info">
 										{patientData.phone}
@@ -69,6 +79,7 @@ const PatientProfilePage = () => {
 							</p>
 						</div>
 					</article>
+
 					<article className="information_additionalInfo">
 						<h2 className="additionalInfo_title">Información adicional</h2>
 						<div className="additionalInfo_info">
@@ -87,10 +98,73 @@ const PatientProfilePage = () => {
 						</div>
 					</article>
 				</div>
-				<article className="information_teethTable">
+
+				<section className="main_teethTable">
 					<h2 className="teethTable_title">Estado actual de la dentadura</h2>
 					<TeethTable />
-				</article>
+				</section>
+
+				<section className="main_appointments">
+					<h2 className='appointments_title'>Citas anteriores</h2>
+					<TableContainer component={Paper}>
+						<Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+							<TableHead>
+								<TableRow>
+									<TableCell>Nombre</TableCell>
+									<TableCell align="center">Edad</TableCell>
+									<TableCell align="center">Teléfono</TableCell>
+									<TableCell align="center">Ocupación</TableCell>
+									<TableCell align="center">Acciones</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								<TableRow>
+									<TableCell scope="patient">sadrgdsfghdfgj</TableCell>
+									<TableCell style={{ width: 160 }} align="center">
+										dfghdfgh
+									</TableCell>
+									<TableCell style={{ width: 160 }} align="center">
+										fdgsdfg
+									</TableCell>
+									<TableCell style={{ width: 160 }} align="center">
+										asdf
+									</TableCell>
+									<TableCell style={{ width: 160 }} align="center">
+										asdfasdfas
+									</TableCell>
+								</TableRow>
+							</TableBody>
+							{/* <TableFooter>
+								<TableRow>
+									<TablePagination
+										rowsPerPageOptions={[
+											5,
+											10,
+											25,
+											{ label: 'All', value: -1 },
+										]}
+										colSpan={5}
+										count={allPatients.length}
+										rowsPerPage={rowsPerPage}
+										page={page}
+										labelRowsPerPage="Filas pro página"
+										slotProps={{
+											select: {
+												inputProps: {
+													'aria-label': 'Filas por página',
+												},
+												native: false,
+											},
+										}}
+										onPageChange={handleChangePage}
+										onRowsPerPageChange={handleChangeRowsPerPage}
+										ActionsComponent={TablePaginationActions}
+									/>
+								</TableRow>
+							</TableFooter> */}
+						</Table>
+					</TableContainer>
+				</section>
 			</main>
 		</>
 	)

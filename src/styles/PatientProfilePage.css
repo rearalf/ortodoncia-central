@@ -46,7 +46,13 @@
 	color: var(--success-600);
 }
 
-.information_teethTable .teethTable_title {
+.main_appointments,
+.main_teethTable {
+	margin-bottom: 24px;
+}
+
+.main_appointments .appointments_title,
+.main_teethTable .teethTable_title {
 	margin-bottom: 24px;
 }
 

@@ -13,6 +13,7 @@ interface InputDateProps {
 	maxDate?: Date
 	helperText?: string
 	disabled?: boolean
+	label: string
 	onChange: (value: Date | null, context: PickerChangeHandlerContext<DateValidationError>) => void
 }
 
@@ -20,7 +21,7 @@ const InputDate = (props: InputDateProps) => {
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns}>
 			<DatePicker
-				label="Fecha de nacimiento"
+				label={props.label}
 				name={props.name}
 				maxDate={props.maxDate}
 				minDate={props.minDate}

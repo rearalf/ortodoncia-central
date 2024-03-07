@@ -41,6 +41,7 @@ const CreatePatientPage = () => {
 						<InputDate
 							name="birthdate"
 							key="birthdate"
+							label="Fecha de nacimiento"
 							value={patientData.birthdate}
 							onChange={handleChangeDate}
 							helperText="MM/DD/YYYY"
