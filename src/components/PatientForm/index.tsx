@@ -83,6 +83,7 @@ const PatientForm = () => {
 				/>
 
 				<InputDate
+					label="Fecha de nacimiento"
 					name="birthdate"
 					key="birthdate"
 					value={patientData.birthdate}
