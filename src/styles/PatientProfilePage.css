@@ -19,6 +19,7 @@
 .main_information {
 	display: grid;
 	gap: 24px;
+	margin-bottom: 24px;
 }
 
 .main_information .information_basicInformation,

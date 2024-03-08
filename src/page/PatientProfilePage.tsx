@@ -1,18 +1,9 @@
 import Navbar from '@/components/Navbar'
-import {
-	Button,
-	Paper,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TableRow,
-	Tooltip,
-} from '@mui/material'
+import { Button, Tooltip } from '@mui/material'
 import TeethTable from '@/components/TeethTable'
 import HeadComponent from '@/components/HeadComponent'
 import { FiSmartphone, FiUserPlus } from 'react-icons/fi'
+import AppointmentsTable from '@/components/AppointmentsTable'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
 import '@/styles/PatientProfilePage.css'
 
@@ -105,65 +96,8 @@ const PatientProfilePage = () => {
 				</section>
 
 				<section className="main_appointments">
-					<h2 className='appointments_title'>Citas anteriores</h2>
-					<TableContainer component={Paper}>
-						<Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-							<TableHead>
-								<TableRow>
-									<TableCell>Nombre</TableCell>
-									<TableCell align="center">Edad</TableCell>
-									<TableCell align="center">Teléfono</TableCell>
-									<TableCell align="center">Ocupación</TableCell>
-									<TableCell align="center">Acciones</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>
-								<TableRow>
-									<TableCell scope="patient">sadrgdsfghdfgj</TableCell>
-									<TableCell style={{ width: 160 }} align="center">
-										dfghdfgh
-									</TableCell>
-									<TableCell style={{ width: 160 }} align="center">
-										fdgsdfg
-									</TableCell>
-									<TableCell style={{ width: 160 }} align="center">
-										asdf
-									</TableCell>
-									<TableCell style={{ width: 160 }} align="center">
-										asdfasdfas
-									</TableCell>
-								</TableRow>
-							</TableBody>
-							{/* <TableFooter>
-								<TableRow>
-									<TablePagination
-										rowsPerPageOptions={[
-											5,
-											10,
-											25,
-											{ label: 'All', value: -1 },
-										]}
-										colSpan={5}
-										count={allPatients.length}
-										rowsPerPage={rowsPerPage}
-										page={page}
-										labelRowsPerPage="Filas pro página"
-										slotProps={{
-											select: {
-												inputProps: {
-													'aria-label': 'Filas por página',
-												},
-												native: false,
-											},
-										}}
-										onPageChange={handleChangePage}
-										onRowsPerPageChange={handleChangeRowsPerPage}
-										ActionsComponent={TablePaginationActions}
-									/>
-								</TableRow>
-							</TableFooter> */}
-						</Table>
-					</TableContainer>
+					<h2 className="appointments_title">Citas anteriores</h2>
+					<AppointmentsTable />
 				</section>
 			</main>
 		</>

@@ -23,6 +23,7 @@ function useTeethFormPage() {
 				)
 				if (newAppointment !== undefined) {
 					console.log(newAppointment)
+					navigate(-1)
 				}
 			}
 		} catch (error) {
