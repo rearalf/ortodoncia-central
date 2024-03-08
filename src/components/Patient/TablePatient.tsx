@@ -10,6 +10,7 @@ import {
 	TableHead,
 	TablePagination,
 	TableRow,
+	Tooltip,
 } from '@mui/material'
 import { FiUser } from 'react-icons/fi'
 import usePatientsState from '@/states/patientsState'
@@ -34,7 +35,7 @@ const TablePatient = () => {
 
 	return (
 		<TableContainer component={Paper}>
-			<Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+			<Table sx={{ minWidth: 500 }} aria-label="Tabla de pacientes">
 				<TableHead>
 					<TableRow>
 						<TableCell>Nombre</TableCell>
@@ -49,10 +50,23 @@ const TablePatient = () => {
 						? allPatients.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 						: allPatients
 					).map(patient => (
-						<TableRow key={patient.id}>
-							<TableCell scope="patient">{patient.name}</TableCell>
+						<TableRow
+							key={patient.id}
+							sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+							hover
+						>
+							<TableCell scope="patient">
+								<Link
+									to={`/patient-profile/${patient.id}`}
+									className="patient-name-link"
+								>
+									{patient.name}
+								</Link>
+							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
-								{new Date(patient.birthdate).toString()}
+								<Tooltip title={patient.formatBirthdate}>
+									<span>{patient.age}</span>
+								</Tooltip>
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								{patient.phone}

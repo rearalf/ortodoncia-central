@@ -4,7 +4,9 @@ interface PatientsStateInterface {
 	allPatients: {
 		id?: string
 		name: string
+		age?: number
 		birthdate: Date
+		formatBirthdate?: string
 		occupation: string
 		phone: string
 		reason: string

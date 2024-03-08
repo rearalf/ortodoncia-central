@@ -1,8 +1,8 @@
 :root {
 	/* Backgrounds color	 */
-	--background-first: hsl(0, 0%, 99%);
+	--background-first: hsl(0, 0%, 100%);
 	--background-secundary: hsl(0, 0%, 92%);
-	--background-third: hsl(0, 0%, 95%);
+	--background-third: hsl(0, 0%, 90%);
 	/* Text color */
 	--paragrap: #333333;
 	--header-white: #fff;
@@ -70,4 +70,47 @@ ul {
 
 .MuiFormControl-root.input-select {
 	min-width: 150px;
+}
+
+/*
+	Tables
+*/
+.MuiPaper-root.MuiTableContainer-root {
+	background-color: hsl(0, 0%, 91%);
+	color: var(--paragrap);
+	border-radius: 4px;
+	box-shadow: none;
+	animation-duration: 1.5s;
+	animation-name: slidein;
+}
+
+.MuiPaper-root.MuiTableContainer-root .MuiTableRow-root.MuiTableRow-head {
+	background-color: hsl(0, 0%, 90%);
+}
+
+.MuiPaper-root.MuiTableContainer-root .MuiTableRow-root.MuiTableRow-head .MuiTableCell-head {
+	color: var(--header-1);
+	font-size: 16px;
+	font-weight: 700;
+	border-bottom: none;
+}
+
+.MuiTableRow-root.MuiTableRow-hover:nth-child(2n-1) {
+	background-color: hsl(0, 0%, 89%);
+}
+
+.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body {
+	border-bottom: none;
+	font-size: 14px;
+}
+
+.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a {
+	color: #2b3842;
+	font-size: 14px;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a:hover {
+	color: #0b1524;
 }
