@@ -8,7 +8,8 @@ import Patient from '@/models/Patient'
 function useTeethFormPage() {
 	const navigate = useNavigate()
 	const { patientData } = usePatientState()
-	const { appointment, setAppointment, teethList } = useTeethState()
+	const { appointment, setAppointment, teethList, setToothState, setPositionState } =
+		useTeethState()
 	const maxDate = new Date()
 	const minDate = new Date()
 
@@ -22,8 +23,11 @@ function useTeethFormPage() {
 					teethList,
 				)
 				if (newAppointment !== undefined) {
-					console.log(newAppointment)
+					handleCleanStates()
 					navigate(-1)
+				} else {
+					handleCleanStates()
+					throw 'Error to saving data'
 				}
 			}
 		} catch (error) {
@@ -34,6 +38,12 @@ function useTeethFormPage() {
 	const handleCancelButton = () => {
 		if (patientData.id) navigate(`/patient-profile/${patientData.id}`)
 		else navigate('/')
+		handleCleanStates()
+	}
+
+	const handleCleanStates = () => {
+		setToothState('')
+		setPositionState('')
 	}
 
 	const handleChangeInputDate = (value: Date | null) => {

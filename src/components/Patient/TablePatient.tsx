@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+	Button,
 	IconButton,
 	Paper,
 	Table,
@@ -39,6 +40,7 @@ const TablePatient = () => {
 				<TableHead>
 					<TableRow>
 						<TableCell>Nombre</TableCell>
+						<TableCell align="center">Fecha de nacimiento</TableCell>
 						<TableCell align="center">Edad</TableCell>
 						<TableCell align="center">Teléfono</TableCell>
 						<TableCell align="center">Ocupación</TableCell>
@@ -56,17 +58,20 @@ const TablePatient = () => {
 							hover
 						>
 							<TableCell scope="patient">
-								<Link
-									to={`/patient-profile/${patient.id}`}
-									className="patient-name-link"
-								>
-									{patient.name}
-								</Link>
-							</TableCell>
-							<TableCell style={{ width: 160 }} align="center">
-								<Tooltip title={patient.formatBirthdate}>
-									<span>{patient.age}</span>
+								<Tooltip title="Ir al perfil">
+									<Link
+										to={`/patient-profile/${patient.id}`}
+										className="patient-name-link"
+									>
+										<Button variant="text">{patient.name}</Button>
+									</Link>
 								</Tooltip>
+							</TableCell>
+							<TableCell style={{ width: 250 }} align="center">
+								<span>{patient.formatBirthdate?.toLocaleUpperCase()}</span>
+							</TableCell>
+							<TableCell style={{ width: 50 }} align="center">
+								<span>{patient.age}</span>
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								{patient.phone}
@@ -75,11 +80,13 @@ const TablePatient = () => {
 								{patient.occupation}
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
-								<Link to={`/patient-profile/${patient.id}`}>
-									<IconButton>
-										<FiUser />
-									</IconButton>
-								</Link>
+								<Tooltip title="Ir al perfil">
+									<Link to={`/patient-profile/${patient.id}`}>
+										<IconButton>
+											<FiUser />
+										</IconButton>
+									</Link>
+								</Tooltip>
 							</TableCell>
 						</TableRow>
 					))}
@@ -93,7 +100,7 @@ const TablePatient = () => {
 					<TableRow>
 						<TablePagination
 							rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-							colSpan={5}
+							colSpan={6}
 							count={allPatients.length}
 							rowsPerPage={rowsPerPage}
 							page={page}

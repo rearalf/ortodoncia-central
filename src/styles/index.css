@@ -3,12 +3,29 @@
 	--background-first: hsl(0, 0%, 100%);
 	--background-secundary: hsl(0, 0%, 92%);
 	--background-third: hsl(0, 0%, 90%);
+
+	--background-color-1: #fcfcfc;
+	--background-color-2: #ebebeb;
+	--background-color-3: #f7f7f7;
+
 	/* Text color */
 	--paragrap: #333333;
 	--header-white: #fff;
 	--header-3: #292929;
 	--header-2: #1f1f1f;
 	--header-1: #141414;
+
+	/* Color text */
+	--color-text-100: #ebf4f6;
+	--color-text-200: #d8e9ed;
+	--color-text-300: #aec3c9;
+	--color-text-400: #7b8d94;
+	--color-text-500: #3c474d;
+	--color-text-600: #2b3842;
+	--color-text-700: #1e2b37;
+	--color-text-800: #131e2c;
+	--color-text-900: #0b1524;
+
 	/* Principal color */
 	--base-100: #fdf09b;
 	--base-500: #fec200;
@@ -38,7 +55,7 @@
 }
 
 body {
-	background-color: var(--background-first);
+	background-color: var(--background-color-2);
 	color: var(--paragrap);
 	margin: 0;
 	padding: 0;
@@ -76,7 +93,7 @@ ul {
 	Tables
 */
 .MuiPaper-root.MuiTableContainer-root {
-	background-color: hsl(0, 0%, 91%);
+	background-color: var(--background-color-1);
 	color: var(--paragrap);
 	border-radius: 4px;
 	box-shadow: none;
@@ -85,7 +102,7 @@ ul {
 }
 
 .MuiPaper-root.MuiTableContainer-root .MuiTableRow-root.MuiTableRow-head {
-	background-color: hsl(0, 0%, 90%);
+	background-color: var(--background-color-1);
 }
 
 .MuiPaper-root.MuiTableContainer-root .MuiTableRow-root.MuiTableRow-head .MuiTableCell-head {
@@ -96,21 +113,26 @@ ul {
 }
 
 .MuiTableRow-root.MuiTableRow-hover:nth-child(2n-1) {
-	background-color: hsl(0, 0%, 89%);
+	background-color: var(--background-color-3);
 }
 
 .MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body {
 	border-bottom: none;
 	font-size: 14px;
 }
+.MuiTableRow-root:hover {
+	background-color: var(--background-color-2);
+}
 
+.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a button,
 .MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a {
-	color: #2b3842;
+	color: var(--color-text-500);
 	font-size: 14px;
 	text-decoration: none;
 	font-weight: 600;
 }
 
+.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a button:hover,
 .MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a:hover {
-	color: #0b1524;
+	color: var(--color-text-900);
 }

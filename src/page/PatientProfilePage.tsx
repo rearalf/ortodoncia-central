@@ -86,6 +86,10 @@ const PatientProfilePage = () => {
 								Referencias de laboratorio:{' '}
 								<span className="info">{patientData.currentSystemicTreatment}</span>
 							</p>
+							<p className="info_data">
+								Motivo de consulta:{' '}
+								<span className="info">{patientData.reason}</span>
+							</p>
 						</div>
 					</article>
 				</div>

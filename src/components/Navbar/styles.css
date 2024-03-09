@@ -1,6 +1,8 @@
 .header {
-	background-color: var(--background-first);
-	border-bottom: 2px solid var(--background-secundary);
+	background-color: var(--background-color-1);
+	width: 100%;
+	box-shadow: hsl(52deg 1% 25% / 20%) 0px 5px 10px;
+	transition: padding-left 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .navbar {
