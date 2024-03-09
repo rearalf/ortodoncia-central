@@ -12,7 +12,7 @@ import useAppointmentState from '@/states/appointmentsState'
 function usePatientProfilePage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const { setTeethList } = useTeethState()
+	const { setTeethList, setToothState, setPositionState } = useTeethState()
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
 
@@ -73,6 +73,11 @@ function usePatientProfilePage() {
 	useEffect(() => {
 		getAppointments()
 	}, [id, getAppointments])
+
+	useEffect(() => {
+		setToothState('')
+		setPositionState('')
+	}, [setToothState, setPositionState])
 
 	return {
 		patientData,

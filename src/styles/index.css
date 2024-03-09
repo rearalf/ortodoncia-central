@@ -112,27 +112,22 @@ ul {
 	border-bottom: none;
 }
 
-.MuiTableRow-root.MuiTableRow-hover:nth-child(2n-1) {
-	background-color: var(--background-color-3);
-}
-
-.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body {
-	border-bottom: none;
+.MuiTableRow-root .MuiTableCell-root.MuiTableCell-body {
 	font-size: 14px;
 }
 .MuiTableRow-root:hover {
 	background-color: var(--background-color-2);
 }
 
-.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a button,
-.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a {
+.MuiTableRow-root .MuiTableCell-root.MuiTableCell-body a button,
+.MuiTableRow-root .MuiTableCell-root.MuiTableCell-body a {
 	color: var(--color-text-500);
 	font-size: 14px;
 	text-decoration: none;
 	font-weight: 600;
 }
 
-.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a button:hover,
-.MuiTableRow-root.MuiTableRow-hover .MuiTableCell-root.MuiTableCell-body a:hover {
+.MuiTableRow-root .MuiTableCell-root.MuiTableCell-body a button:hover,
+.MuiTableRow-root .MuiTableCell-root.MuiTableCell-body a:hover {
 	color: var(--color-text-900);
 }

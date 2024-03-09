@@ -28,7 +28,7 @@ const AppointmentsTable = () => {
 						<TableRow key={data.id}>
 							<TableCell>{data.formatDate}</TableCell>
 							<TableCell>{data.treatment}</TableCell>
-							<TableCell align="center">{data.cost}</TableCell>
+							<TableCell align="center">$ {data.cost}</TableCell>
 							<TableCell align="center">{data.doctor}</TableCell>
 							<TableCell align="center"></TableCell>
 						</TableRow>
