@@ -50,7 +50,10 @@ export const patientBasicData: PatientData = {
 class Patient {
 	async save(patientData: PatientData, teeth: toothObject[][][]): Promise<string | undefined> {
 		try {
-			const patient = await addDoc(collection(db, 'patients'), patientData)
+			const patient = await addDoc(collection(db, 'patients'), {
+				...patientData,
+				created_at: serverTimestamp(),
+			})
 			if (patient.id) {
 				const dbPatient = patient.firestore
 				await addDoc(collection(dbPatient, `patients/${patient.id}/teeth`), {
@@ -151,12 +154,19 @@ class Patient {
 		}
 	}
 
-	async updatePatient(id: string) {
+	async updatePatient(id: string, patientData: PatientData): Promise<boolean> {
 		try {
 			const patientRef = doc(db, 'patients', id)
-			console.log(patientRef)
+			const updateData = await updateDoc(patientRef, {
+				...patientData,
+				updated_at: serverTimestamp(),
+			})
+				.then(() => true)
+				.catch(() => false)
+			return updateData
 		} catch (error) {
 			console.log('Error updating data patient: ' + error)
+			return false
 		}
 	}
 }

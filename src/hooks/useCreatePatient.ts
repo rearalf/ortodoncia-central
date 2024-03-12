@@ -35,7 +35,7 @@ function useCreatePatient() {
 			)
 				setPatientData({
 					...patientData,
-					[e.target.id]: e.target.value,
+					[e.target.id]: e.target.checked,
 				})
 			else
 				setPatientData({

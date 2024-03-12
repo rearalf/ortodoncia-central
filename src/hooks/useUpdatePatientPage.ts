@@ -1,16 +1,14 @@
 import { sub } from 'date-fns'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 import useAlertState from '@/states/useAlertState'
-import useTeethState from '@/states/toothFormState'
 import usePatientState from '@/states/patientState'
 import Patient, { OrthoTerms } from '@/models/Patient'
-import { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function useUpdatePatientPage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
-	const { teethList } = useTeethState()
 	const { setHandleState } = useAlertState()
 	const maxDate = sub(new Date(), {
 		years: 1,
@@ -36,17 +34,17 @@ function useUpdatePatientPage() {
 			)
 				setPatientData({
 					...patientData,
-					[e.target.id]: e.target.value,
+					[e.target.id]: e.target.checked,
 				})
 			else
 				setPatientData({
 					...patientData,
-					[e.target.id]: e.target.value.trim(),
+					[e.target.id]: e.target.value,
 				})
 		} else if (e.target instanceof HTMLTextAreaElement)
 			setPatientData({
 				...patientData,
-				[e.target.id]: e.target.value.trim(),
+				[e.target.id]: e.target.value,
 			})
 	}
 
@@ -62,27 +60,38 @@ function useUpdatePatientPage() {
 		}
 	}
 
-	const handleSaveData = async () => {
+	const handleSaveData = async (e: any) => {
 		try {
+			e.preventDefault()
 			const newPatient = new Patient()
-			const patient = await newPatient.save(patientData, teethList)
-			if (patient !== undefined) {
-				setPatientData({
-					...patientData,
-					id: patient,
-				})
+			if (id !== undefined) {
+				const patient = await newPatient.updatePatient(id, patientData)
 
-				navigate(`/patient-profile/${patient}`)
+				if (patient) {
+					setPatientData({
+						...patientData,
+					})
 
-				setHandleState({
-					severity: 'success',
-					variant: 'filled',
-					show: true,
-					text: 'Datos guardados con éxito.',
-				})
+					navigate(`/patient-profile/${id}`)
+
+					setHandleState({
+						severity: 'success',
+						variant: 'filled',
+						show: true,
+						text: 'Datos modificados con éxito.',
+					})
+				} else {
+					throw 'Error updating data.'
+				}
 			}
 		} catch (error) {
 			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al modificar los datos.',
+			})
 		}
 	}
 
@@ -92,7 +101,7 @@ function useUpdatePatientPage() {
 			severity: 'warning',
 			variant: 'filled',
 			show: true,
-			text: 'Creación de paciente cancelada.',
+			text: 'Actualización del paciente cancelada.',
 		})
 	}
 
@@ -101,7 +110,9 @@ function useUpdatePatientPage() {
 			const getPatient = async () => {
 				const ModelPatient = new Patient()
 				const getPatientData = await ModelPatient.getPatient(id)
-				console.log(getPatientData)
+				if (getPatientData) {
+					setPatientData(getPatientData)
+				}
 			}
 			getPatient()
 		}

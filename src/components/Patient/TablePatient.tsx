@@ -82,7 +82,7 @@ const TablePatient = () => {
 								<Tooltip title="Ir al perfil">
 									<Link to={`/patient-profile/${patient.id}`}>
 										<IconButton>
-											<FiUser />
+											<FiUser size={20} />
 										</IconButton>
 									</Link>
 								</Tooltip>

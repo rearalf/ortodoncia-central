@@ -48,6 +48,7 @@ function usePatientProfilePage() {
 				show: true,
 				text: 'Error al obtener los datos del paciente.',
 			})
+			navigate('/')
 		}
 	}, [id, setPatientData, setTeethList, setHandleState])
 
