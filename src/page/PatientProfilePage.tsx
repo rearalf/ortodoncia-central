@@ -8,7 +8,7 @@ import usePatientProfilePage from '@/hooks/usePatientProfilePage'
 import '@/styles/PatientProfilePage.css'
 
 const PatientProfilePage = () => {
-	const { patientData, handleGoToTeethForm } = usePatientProfilePage()
+	const { patientData, handleGoToTeethForm, handleGoToUpdatePatient } = usePatientProfilePage()
 	return (
 		<>
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
@@ -27,7 +27,7 @@ const PatientProfilePage = () => {
 						<Button
 							variant="contained"
 							startIcon={<FiUserPlus />}
-							onClick={handleGoToTeethForm}
+							onClick={handleGoToUpdatePatient}
 						>
 							Modificar datos
 						</Button>

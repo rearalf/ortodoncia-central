@@ -19,6 +19,7 @@ function usePatientProfilePage() {
 	const { setHandleState } = useAlertState()
 
 	const handleGoToTeethForm = () => navigate('/teeth-form')
+	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
 
 	const getPatientData = useCallback(async () => {
 		try {
@@ -96,6 +97,7 @@ function usePatientProfilePage() {
 	return {
 		patientData,
 		handleGoToTeethForm,
+		handleGoToUpdatePatient,
 	}
 }
 

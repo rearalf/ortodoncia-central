@@ -150,6 +150,15 @@ class Patient {
 			return undefined
 		}
 	}
+
+	async updatePatient(id: string) {
+		try {
+			const patientRef = doc(db, 'patients', id)
+			console.log(patientRef)
+		} catch (error) {
+			console.log('Error updating data patient: ' + error)
+		}
+	}
 }
 
 export default Patient
