@@ -32,7 +32,7 @@ const TeethForm = () => {
 					onChange={handlePositionState}
 					options={[
 						{ label: 'Caries', value: 'decay' },
-						{ label: 'Relleno', value: 'filling' },
+						{ label: 'Obturación', value: 'filling' },
 						{ label: 'Deshacer', value: 'disable' },
 					]}
 				/>

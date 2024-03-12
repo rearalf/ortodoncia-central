@@ -95,7 +95,7 @@ const PatientProfilePage = () => {
 				</div>
 
 				<section className="main_teethTable">
-					<h2 className="teethTable_title">Estado actual de la dentadura</h2>
+					<h2 className="teethTable_title">Odontograma</h2>
 					<TeethTable />
 				</section>
 

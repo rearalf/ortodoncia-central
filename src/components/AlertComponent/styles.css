@@ -1,0 +1,9 @@
+.alert-component {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+    transition: left .5s ease-in-out;
+}
+
+.alert-component.active {
+}
