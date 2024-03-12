@@ -4,12 +4,14 @@ import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import { SelectChangeEvent } from '@mui/material'
 import Patient from '@/models/Patient'
+import useAlertState from '@/states/useAlertState'
 
 function useTeethFormPage() {
 	const navigate = useNavigate()
 	const { patientData } = usePatientState()
 	const { appointment, setAppointment, teethList, setToothState, setPositionState } =
 		useTeethState()
+	const { setHandleState } = useAlertState()
 	const maxDate = new Date()
 	const minDate = new Date()
 
@@ -25,6 +27,12 @@ function useTeethFormPage() {
 				if (newAppointment !== undefined) {
 					handleCleanStates()
 					navigate(-1)
+					setHandleState({
+						severity: 'success',
+						variant: 'filled',
+						show: true,
+						text: 'Datos guardados.',
+					})
 				} else {
 					handleCleanStates()
 					throw 'Error to saving data'
@@ -32,6 +40,12 @@ function useTeethFormPage() {
 			}
 		} catch (error) {
 			console.log('Error button teeth form: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al guardar los datos.',
+			})
 		}
 	}
 
@@ -39,6 +53,12 @@ function useTeethFormPage() {
 		if (patientData.id) navigate(`/patient-profile/${patientData.id}`)
 		else navigate('/')
 		handleCleanStates()
+		setHandleState({
+			severity: 'warning',
+			variant: 'filled',
+			show: true,
+			text: 'Datos no guardados.',
+		})
 	}
 
 	const handleCleanStates = () => {

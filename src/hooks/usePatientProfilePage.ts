@@ -8,6 +8,7 @@ import formatDate from '@/utils/formatDate'
 import { constantTeethList } from '@/utils/constants'
 import Appointment from '@/models/Appointment'
 import useAppointmentState from '@/states/appointmentsState'
+import useAlertState from '@/states/useAlertState'
 
 function usePatientProfilePage() {
 	const { id } = useParams()
@@ -15,6 +16,7 @@ function usePatientProfilePage() {
 	const { setTeethList, setToothState, setPositionState } = useTeethState()
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
+	const { setHandleState } = useAlertState()
 
 	const handleGoToTeethForm = () => navigate('/teeth-form')
 
@@ -39,8 +41,14 @@ function usePatientProfilePage() {
 			}
 		} catch (error) {
 			console.log('Error getting patient data usePatient: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del paciente.',
+			})
 		}
-	}, [id, setPatientData, setTeethList])
+	}, [id, setPatientData, setTeethList, setHandleState])
 
 	const getAppointments = useCallback(async () => {
 		try {
@@ -58,8 +66,14 @@ function usePatientProfilePage() {
 			}
 		} catch (error) {
 			console.log('Error getting all apointment: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos de las citas.',
+			})
 		}
-	}, [id, setAppoinments])
+	}, [id, setAppoinments, setHandleState])
 
 	useEffect(() => {
 		setTeethList(constantTeethList)
