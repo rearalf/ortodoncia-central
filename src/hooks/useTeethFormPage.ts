@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
@@ -112,6 +112,18 @@ function useTeethFormPage() {
 			console.log(error)
 		}
 	}
+
+	useEffect(() => {
+		if (patientData.id === undefined) {
+			navigate(-1)
+			setHandleState({
+				severity: 'warning',
+				variant: 'filled',
+				show: true,
+				text: 'Datos del paciente no obtenidos.',
+			})
+		}
+	}, [patientData.id, navigate, setHandleState])
 
 	return {
 		maxDate,
