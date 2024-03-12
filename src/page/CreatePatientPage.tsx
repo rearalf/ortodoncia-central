@@ -204,19 +204,19 @@ const CreatePatientPage = () => {
 						<Button
 							variant="contained"
 							color="success"
-							onClick={() => handleSaveData('teethForm')}
-							startIcon={<FiSave />}
-						>
-							Ir al formulario de dientes
-						</Button>
-						<Button
-							variant="contained"
-							color="success"
 							type="submit"
 							onClick={() => handleSaveData('profile')}
 							startIcon={<FiSave />}
 						>
-							Solo guardar
+							Guardar
+						</Button>
+						<Button
+							variant="contained"
+							color="success"
+							onClick={() => handleSaveData('teethForm')}
+							startIcon={<FiSave />}
+						>
+							Guardar e ir al Odontograma
 						</Button>
 						<Button
 							variant="outlined"

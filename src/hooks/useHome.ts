@@ -1,11 +1,13 @@
 import Patient from '@/models/Patient'
 import usePatientsState from '@/states/patientsState'
+import useAlertState from '@/states/useAlertState'
 import formatDate from '@/utils/formatDate'
 import getAge from '@/utils/getAge'
 import { useEffect } from 'react'
 
 function useHome() {
 	const { setAllPatients } = usePatientsState()
+	const { setHandleState } = useAlertState()
 
 	useEffect(() => {
 		const getAllPatient = async () => {
@@ -25,10 +27,16 @@ function useHome() {
 				setAllPatients(patients)
 			} catch (error) {
 				console.log(error)
+				setHandleState({
+					severity: 'error',
+					variant: 'filled',
+					show: true,
+					text: 'Error al obtener datos de los pacientes.',
+				})
 			}
 		}
 		getAllPatient()
-	}, [setAllPatients])
+	}, [setAllPatients, setHandleState])
 }
 
 export default useHome

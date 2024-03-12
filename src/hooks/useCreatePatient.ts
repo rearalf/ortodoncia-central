@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import Patient, { OrthoTerms } from '@/models/Patient'
+import useAlertState from '@/states/useAlertState'
 
 function useCreatePatient() {
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { teethList } = useTeethState()
+	const { setHandleState } = useAlertState()
 	const maxDate = sub(new Date(), {
 		years: 1,
 	})
@@ -71,6 +73,12 @@ function useCreatePatient() {
 				direction === 'profile'
 					? navigate(`/patient-profile/${patient}`)
 					: navigate(`/teeth-form`)
+				setHandleState({
+					severity: 'success',
+					variant: 'filled',
+					show: true,
+					text: 'Datos guardados con éxito.',
+				})
 			}
 		} catch (error) {
 			console.log(error)
@@ -79,6 +87,12 @@ function useCreatePatient() {
 
 	const handleCancelButton = () => {
 		navigate(-1)
+		setHandleState({
+			severity: 'warning',
+			variant: 'filled',
+			show: true,
+			text: 'Creación de paciente cancelada.',
+		})
 	}
 
 	return {
