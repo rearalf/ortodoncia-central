@@ -43,14 +43,11 @@ class Appointment {
 	async getAppointment(id_patient: string, id: string): Promise<any> {
 		try {
 			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id}`)
-			let appointment: any = {}
 
 			return new Promise((resolve, reject) => {
 				const unsubscribe = onSnapshot(
 					appointmentRef,
 					querySnapshot => {
-						// Actualizamos el objeto appointment con los datos obtenidos
-						appointment = { ...querySnapshot.data() }
 						unsubscribe() // Detenemos la escucha del snapshot
 						resolve(querySnapshot.data())
 					},
