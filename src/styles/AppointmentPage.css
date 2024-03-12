@@ -1,0 +1,52 @@
+.appointment-page_main {
+	margin: 1rem auto;
+	max-width: 1280px;
+	padding: 32px 16px;
+}
+
+.appointment-page_main .main_title {
+	margin-bottom: 24px;
+}
+
+.appointment-page_main .main_content {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.appointment-page_main .main_patient,
+.appointment-page_main .main_detail-appointment {
+	background-color: var(--background-color-3);
+	padding: 24px;
+	border-radius: 4px;
+	width: 100%;
+}
+
+.appointment-page_main .detail-patient_data .info_data,
+.appointment-page_main .main_detail-appointment .info_data {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-weight: 600;
+}
+.appointment-page_main .detail-patient_data .info_data .info,
+.appointment-page_main .main_detail-appointment .info_data .info {
+	font-weight: 800;
+}
+
+.appointment-page_main .main_odontograma {
+	margin-top: 24px;
+}
+
+.appointment-page_main .main_odontograma .odontograma_title {
+	margin-bottom: 24px;
+}
+
+@media (width >= 768px) {
+	.appointment-page_main .main_content {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 24px;
+	}
+}

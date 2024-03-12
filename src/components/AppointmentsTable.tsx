@@ -14,6 +14,7 @@ import {
 import useAppointmentState from '@/states/appointmentsState'
 import TablePaginationActions from './TablePaginationActions'
 import { FiCalendar } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 const AppointmentsTable = () => {
 	const { appointments, setPage, setRowsPerPage, page, rowsPerPage } = useAppointmentState()
@@ -55,9 +56,11 @@ const AppointmentsTable = () => {
 							<TableCell align="center">{data.doctor}</TableCell>
 							<TableCell align="center">
 								<Tooltip title="Ver cita">
-									<IconButton>
-										<FiCalendar />
-									</IconButton>
+									<Link to={`/appointment/${data.id}`}>
+										<IconButton>
+											<FiCalendar size={20} />
+										</IconButton>
+									</Link>
 								</Tooltip>
 							</TableCell>
 						</TableRow>

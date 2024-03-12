@@ -1,5 +1,5 @@
 import { db } from '@/database/firebase'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, doc, getDocs, onSnapshot } from 'firebase/firestore'
 
 class Appointment {
 	async getAppointmentsByPatient(
@@ -37,6 +37,32 @@ class Appointment {
 		} catch (error) {
 			console.log('Error getting appointments: ' + error)
 			return []
+		}
+	}
+
+	async getAppointment(id_patient: string, id: string): Promise<any> {
+		try {
+			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id}`)
+			let appointment: any = {}
+
+			return new Promise((resolve, reject) => {
+				const unsubscribe = onSnapshot(
+					appointmentRef,
+					querySnapshot => {
+						// Actualizamos el objeto appointment con los datos obtenidos
+						appointment = { ...querySnapshot.data() }
+						unsubscribe() // Detenemos la escucha del snapshot
+						resolve(querySnapshot.data())
+					},
+					error => {
+						console.log('Error getting the appointment: ' + error)
+						reject()
+					},
+				)
+			})
+		} catch (error) {
+			console.log('Error getting the appointmnet: ' + error)
+			return {}
 		}
 	}
 }

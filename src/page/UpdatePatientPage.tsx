@@ -13,6 +13,7 @@ function UpdatePatientPage() {
 		minDate,
 		maxDate,
 		patientData,
+		patientName,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
@@ -23,7 +24,7 @@ function UpdatePatientPage() {
 			<HeadComponent title={`Actualizar paciente | `} />
 			<Navbar />
 			<main className="createPatient_main">
-				<h1>Actualizar paciente - </h1>
+				<h1>Actualizar paciente - {patientName}</h1>
 				<form className="form_patient">
 					<div className="firstPart">
 						<InputBasic

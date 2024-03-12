@@ -1,5 +1,5 @@
 import { sub } from 'date-fns'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
 import Patient, { OrthoTerms } from '@/models/Patient'
@@ -10,6 +10,7 @@ function useUpdatePatientPage() {
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
+	const [patientName, setPatientName] = useState<string>('')
 	const maxDate = sub(new Date(), {
 		years: 1,
 	})
@@ -112,6 +113,13 @@ function useUpdatePatientPage() {
 				const getPatientData = await ModelPatient.getPatient(id)
 				if (getPatientData) {
 					setPatientData(getPatientData)
+					setPatientName(
+						`${patientData.name.split(' ')[0]} ${
+							patientData.name.split(' ')[2]
+								? patientData.name.split(' ')[2]
+								: patientData.name.split(' ')[1]
+						}`,
+					)
 				}
 			}
 			getPatient()
@@ -122,6 +130,7 @@ function useUpdatePatientPage() {
 		minDate,
 		maxDate,
 		patientData,
+		patientName,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
