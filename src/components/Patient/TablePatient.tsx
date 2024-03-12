@@ -89,9 +89,11 @@ const TablePatient = () => {
 							</TableCell>
 						</TableRow>
 					))}
-					{emptyRows > 0 && (
+					{allPatients.length === 0 && (
 						<TableRow style={{ height: 53 * emptyRows }}>
-							<TableCell colSpan={6} />
+							<TableCell colSpan={6} align="center">
+								<h3>No hay pacientes para mostrar</h3>
+							</TableCell>
 						</TableRow>
 					)}
 				</TableBody>
