@@ -8,15 +8,17 @@ import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import '@/styles/CreatePatientPage.css'
+import PhoneNumberInput from '@/components/PhoneNumberInput'
 
 const CreatePatientPage = () => {
 	const {
 		minDate,
 		maxDate,
 		patientData,
-		handleSaveData,
 		handleInput,
+		handleSaveData,
 		handleChangeDate,
+		handleChangePhone,
 		handleCancelButton,
 	} = useCreatePatient()
 
@@ -58,16 +60,16 @@ const CreatePatientPage = () => {
 							onChange={handleInput}
 						/>
 
-						<InputBasic
+						<PhoneNumberInput
 							required
-							type="tel"
-							id="phone"
 							key="phone"
+							name="phone"
 							label="Teléfono"
 							value={patientData.phone}
-							onChange={handleInput}
+							onChange={handleChangePhone}
 						/>
 					</div>
+
 					<div className="secondPart">
 						<InputBasic
 							multiline
@@ -108,6 +110,7 @@ const CreatePatientPage = () => {
 							onChange={handleInput}
 						/>
 					</div>
+
 					<Accordion>
 						<AccordionSummary
 							expandIcon={<SlArrowDown />}
@@ -213,6 +216,7 @@ const CreatePatientPage = () => {
 						<Button
 							variant="contained"
 							color="success"
+							type="submit"
 							onClick={() => handleSaveData('teethForm')}
 							startIcon={<FiSave />}
 						>

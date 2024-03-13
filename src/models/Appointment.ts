@@ -9,7 +9,6 @@ class Appointment {
 			const appointmentRef = collection(db, 'patients', id, 'appointment')
 			const querySnapshot = await getDocs(appointmentRef)
 
-			// eslint-disable-next-line
 			const appointments: {
 				id: string
 				appointment: appointment
@@ -40,6 +39,7 @@ class Appointment {
 		}
 	}
 
+	// eslint-disable-next-line
 	async getAppointment(id_patient: string, id: string): Promise<any> {
 		try {
 			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id}`)

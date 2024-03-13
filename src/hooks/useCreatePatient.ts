@@ -18,6 +18,17 @@ function useCreatePatient() {
 		years: 95,
 	})
 
+	const handleChangePhone = (
+		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
+		if (typeof e === 'string') {
+			setPatientData({
+				...patientData,
+				phone: e,
+			})
+		}
+	}
+
 	const handleInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
@@ -63,6 +74,25 @@ function useCreatePatient() {
 
 	const handleSaveData = async (direction: 'profile' | 'teethForm') => {
 		try {
+			if (patientData.name === '') {
+				setHandleState({
+					severity: 'warning',
+					variant: 'filled',
+					show: true,
+					text: 'Debe agregar el nombre completo.',
+				})
+				throw 'Fiel name is empty.'
+			}
+			if (patientData.phone === '') {
+				setHandleState({
+					severity: 'warning',
+					variant: 'filled',
+					show: true,
+					text: 'Debe agregar el número de teléfono.',
+				})
+				throw 'Fiel phone is empty.'
+			}
+
 			const newPatient = new Patient()
 			const patient = await newPatient.save(patientData, teethList)
 			if (patient !== undefined) {
@@ -79,6 +109,14 @@ function useCreatePatient() {
 					show: true,
 					text: 'Datos guardados con éxito.',
 				})
+			} else {
+				setHandleState({
+					severity: 'error',
+					variant: 'filled',
+					show: true,
+					text: 'Error al guardar los datos.',
+				})
+				throw 'Error creating patient.'
 			}
 		} catch (error) {
 			console.log(error)
@@ -102,6 +140,7 @@ function useCreatePatient() {
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
+		handleChangePhone,
 		handleCancelButton,
 	}
 }
