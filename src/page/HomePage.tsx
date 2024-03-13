@@ -6,9 +6,11 @@ import { FiSearch, FiUserPlus, FiX } from 'react-icons/fi'
 import TablePatient from '@/components/Patient/TablePatient'
 import { Button, InputAdornment, TextField, Tooltip } from '@mui/material'
 import '@/styles/HomePage.css'
+import SkeletonComponent from '@/components/SkeletonComponent'
 
 const HomePage = () => {
-	const { search, handleChangeInput, handleSearchPatient, handleClearSearchPatient } = useHome()
+	const { search, loading, handleChangeInput, handleSearchPatient, handleClearSearchPatient } =
+		useHome()
 	return (
 		<>
 			<HeadComponent title="Inicio" />
@@ -51,7 +53,16 @@ const HomePage = () => {
 						<FiSearch size={24} />
 					</Button>
 				</form>
-				<TablePatient />
+
+				{loading ? (
+					<SkeletonComponent
+						variant="rectangular"
+						height={300}
+						animation="wave"
+					/>
+				) : (
+					<TablePatient />
+				)}
 			</main>
 		</>
 	)

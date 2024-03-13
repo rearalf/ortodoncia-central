@@ -6,7 +6,7 @@ import useAlertState from '@/states/useAlertState'
 import usePatientsState from '@/states/patientsState'
 
 function useHome() {
-	const { setAllPatients } = usePatientsState()
+	const { setAllPatients, setLoading, loading } = usePatientsState()
 	const { setHandleState } = useAlertState()
 
 	const [search, setSearch] = useState<string>('')
@@ -17,6 +17,7 @@ function useHome() {
 		try {
 			e.preventDefault()
 			if (search.length >= 5) {
+				setLoading(true)
 				const patientInstance = new Patient()
 				const patientsData = await patientInstance.searchPatient(search)
 
@@ -31,6 +32,7 @@ function useHome() {
 
 				if (patients.length > 0) {
 					setAllPatients(patients)
+					setLoading(false)
 
 					setHandleState({
 						severity: 'success',
@@ -40,6 +42,7 @@ function useHome() {
 					})
 				} else {
 					setSearch('')
+					setLoading(false)
 					setHandleState({
 						severity: 'info',
 						variant: 'filled',
@@ -70,6 +73,7 @@ function useHome() {
 		try {
 			try {
 				if (search !== '') {
+					setLoading(true)
 					const patientInstance = new Patient()
 					const patientsData = await patientInstance.getAllPatients('name', 'asc')
 
@@ -83,6 +87,7 @@ function useHome() {
 					})
 
 					setSearch('')
+					setLoading(false)
 					setAllPatients(patients)
 					setHandleState({
 						severity: 'success',
@@ -108,6 +113,7 @@ function useHome() {
 	useEffect(() => {
 		const getAllPatient = async () => {
 			try {
+				setLoading(true)
 				const patientInstance = new Patient()
 				const patientsData = await patientInstance.getAllPatients('name', 'asc')
 
@@ -120,6 +126,7 @@ function useHome() {
 					})
 				})
 
+				setLoading(false)
 				setAllPatients(patients)
 			} catch (error) {
 				console.log(error)
@@ -132,10 +139,11 @@ function useHome() {
 			}
 		}
 		getAllPatient()
-	}, [setAllPatients, setHandleState])
+	}, [setAllPatients, setHandleState, setLoading])
 
 	return {
 		search,
+		loading,
 		handleChangeInput,
 		handleSearchPatient,
 		handleClearSearchPatient,

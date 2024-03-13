@@ -25,17 +25,25 @@ interface PatientsStateInterface {
 		comments2: string
 	}[]
 	page: number
+	loading: boolean
 	rowsPerPage: number
 	setPage: (value: number) => void
+	setLoading: (value: boolean) => void
 	setRowsPerPage: (value: number) => void
 	setAllPatients: (value: PatientsStateInterface['allPatients']) => void
 }
 
 const usePatientsState = create<PatientsStateInterface>()(set => ({
-	allPatients: [],
-	rowsPerPage: 5,
 	page: 0,
-	setPage: (value: number) =>
+	loading: true,
+	rowsPerPage: 5,
+	allPatients: [],
+	setLoading: value =>
+		set(state => ({
+			...state,
+			loading: value,
+		})),
+	setPage: value =>
 		set(state => ({
 			...state,
 			page: value,
