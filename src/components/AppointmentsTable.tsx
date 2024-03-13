@@ -73,29 +73,31 @@ const AppointmentsTable = () => {
 						</TableRow>
 					)}
 				</TableBody>
-				<TableFooter>
-					<TableRow>
-						<TablePagination
-							rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-							colSpan={5}
-							count={appointments.length}
-							rowsPerPage={rowsPerPage}
-							page={page}
-							labelRowsPerPage="Filas pro página"
-							slotProps={{
-								select: {
-									inputProps: {
-										'aria-label': 'Filas por página',
+				{appointments.length !== 0 && (
+					<TableFooter>
+						<TableRow>
+							<TablePagination
+								rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+								colSpan={5}
+								count={appointments.length}
+								rowsPerPage={rowsPerPage}
+								page={page}
+								labelRowsPerPage="Filas pro página"
+								slotProps={{
+									select: {
+										inputProps: {
+											'aria-label': 'Filas por página',
+										},
+										native: false,
 									},
-									native: false,
-								},
-							}}
-							onPageChange={handleChangePage}
-							onRowsPerPageChange={handleChangeRowsPerPage}
-							ActionsComponent={TablePaginationActions}
-						/>
-					</TableRow>
-				</TableFooter>
+								}}
+								onPageChange={handleChangePage}
+								onRowsPerPageChange={handleChangeRowsPerPage}
+								ActionsComponent={TablePaginationActions}
+							/>
+						</TableRow>
+					</TableFooter>
+				)}
 			</Table>
 		</TableContainer>
 	)
