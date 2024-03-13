@@ -73,7 +73,11 @@ const TablePatient = () => {
 								<span>{patient.age}</span>
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
-								{patient.phone}
+								<Tooltip title="Llamar">
+									<a href={`tel:+${patient.phone}`} className="info">
+										{patient.phone}
+									</a>
+								</Tooltip>
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								{patient.occupation}
