@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import getAge from '@/utils/getAge'
 import Patient from '@/models/Patient'
 import formatDate from '@/utils/formatDate'
@@ -13,8 +13,9 @@ function useHome() {
 
 	const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
-	const handleSearchPatient = async () => {
+	const handleSearchPatient = async (e: FormEvent<HTMLFormElement>) => {
 		try {
+			e.preventDefault()
 			if (search.length >= 5) {
 				const patientInstance = new Patient()
 				const patientsData = await patientInstance.searchPatient(search)

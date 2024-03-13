@@ -22,7 +22,7 @@ const HomePage = () => {
 						</Button>
 					</Link>
 				</div>
-				<div className="main_searchSection">
+				<form onSubmit={handleSearchPatient} className="main_searchSection">
 					<TextField
 						label="Buscar"
 						id="searchName"
@@ -47,10 +47,10 @@ const HomePage = () => {
 							),
 						}}
 					/>
-					<Button variant="contained" onClick={handleSearchPatient}>
+					<Button variant="contained" type="submit">
 						<FiSearch size={24} />
 					</Button>
-				</div>
+				</form>
 				<TablePatient />
 			</main>
 		</>
