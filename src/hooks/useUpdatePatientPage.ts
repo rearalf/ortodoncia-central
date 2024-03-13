@@ -18,6 +18,17 @@ function useUpdatePatientPage() {
 		years: 95,
 	})
 
+	const handleChangePhone = (
+		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
+		if (typeof e === 'string') {
+			setPatientData({
+				...patientData,
+				phone: e,
+			})
+		}
+	}
+
 	const handleInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
@@ -61,9 +72,8 @@ function useUpdatePatientPage() {
 		}
 	}
 
-	const handleSaveData = async (e: any) => {
+	const handleSaveData = async () => {
 		try {
-			e.preventDefault()
 			const newPatient = new Patient()
 			if (id !== undefined) {
 				const patient = await newPatient.updatePatient(id, patientData)
@@ -134,6 +144,7 @@ function useUpdatePatientPage() {
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
+		handleChangePhone,
 		handleCancelButton,
 	}
 }

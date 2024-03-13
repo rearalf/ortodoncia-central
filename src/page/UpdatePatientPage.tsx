@@ -5,8 +5,9 @@ import InputBasic from '@/components/InputBasic'
 import InputCheckbox from '@/components/Checkbox'
 import { FiSave, FiXCircle } from 'react-icons/fi'
 import HeadComponent from '@/components/HeadComponent'
-import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
+import PhoneNumberInput from '@/components/PhoneNumberInput'
 import useUpdatePatientPage from '@/hooks/useUpdatePatientPage'
+import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 
 function UpdatePatientPage() {
 	const {
@@ -17,6 +18,7 @@ function UpdatePatientPage() {
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
+		handleChangePhone,
 		handleCancelButton,
 	} = useUpdatePatientPage()
 	return (
@@ -57,16 +59,16 @@ function UpdatePatientPage() {
 							onChange={handleInput}
 						/>
 
-						<InputBasic
+						<PhoneNumberInput
 							required
-							type="tel"
-							id="phone"
 							key="phone"
+							name="phone"
 							label="Teléfono"
 							value={patientData.phone}
-							onChange={handleInput}
+							onChange={handleChangePhone}
 						/>
 					</div>
+
 					<div className="secondPart">
 						<InputBasic
 							multiline
@@ -107,6 +109,7 @@ function UpdatePatientPage() {
 							onChange={handleInput}
 						/>
 					</div>
+
 					<Accordion>
 						<AccordionSummary
 							expandIcon={<SlArrowDown />}
@@ -203,7 +206,6 @@ function UpdatePatientPage() {
 						<Button
 							variant="contained"
 							color="success"
-							type="submit"
 							onClick={handleSaveData}
 							startIcon={<FiSave />}
 						>
