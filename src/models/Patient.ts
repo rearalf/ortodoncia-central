@@ -1,17 +1,17 @@
 import { db } from '@/database/firebase'
 import {
+	doc,
+	where,
 	query,
 	addDoc,
 	orderBy,
 	getDocs,
-	collection,
-	QuerySnapshot,
-	OrderByDirection,
-	where,
-	documentId,
 	updateDoc,
-	doc,
+	collection,
+	documentId,
+	QuerySnapshot,
 	serverTimestamp,
+	OrderByDirection,
 } from 'firebase/firestore'
 
 export enum OrthoTerms {
@@ -167,6 +167,37 @@ class Patient {
 		} catch (error) {
 			console.log('Error updating data patient: ' + error)
 			return false
+		}
+	}
+
+	async searchPatient(name: string): Promise<PatientData[]> {
+		try {
+			const patientRef = collection(db, 'patients')
+			const patientQuery = query(
+				patientRef,
+				where('name', '>=', name),
+				where('name', '<=', name + '\uf8ff'),
+			)
+			const querySnapshot: QuerySnapshot = await getDocs(patientQuery)
+
+			// eslint-disable-next-line
+			const patientsData: any[] = []
+
+			querySnapshot.forEach(doc => {
+				const data = doc.data()
+				patientsData.push({
+					...data,
+					id: doc.id,
+					birthdate: new Date(
+						data.birthdate.seconds * 1000 + data.birthdate.nanoseconds / 1000000,
+					),
+				})
+			})
+
+			return patientsData
+		} catch (error) {
+			console.log('Error searching patients: ' + error)
+			return []
 		}
 	}
 }

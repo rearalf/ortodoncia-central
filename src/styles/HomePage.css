@@ -12,10 +12,26 @@
 	margin-bottom: 30px;
 }
 
+.main_searchSection {
+	margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 18px;
+}
+
+.main_searchSection .searchSection_searchInput {
+	width: 100%;
+}
+
 @media (width >= 768px) {
 	.main_header {
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+	}
+
+	.main_searchSection {
+		flex-direction: row;
 	}
 }
