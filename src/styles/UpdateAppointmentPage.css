@@ -9,6 +9,12 @@
 	flex-direction: column;
 	gap: 24px;
 }
+.update-appointment-page_main .main_form .form_odontograma {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-bottom: 24px;
+}
 
 .main_form .form_content {
 	display: flex;

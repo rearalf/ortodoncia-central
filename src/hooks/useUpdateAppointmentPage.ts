@@ -2,19 +2,19 @@ import getAge from '@/utils/getAge'
 import Patient from '@/models/Patient'
 import formatDate from '@/utils/formatDate'
 import Appointment from '@/models/Appointment'
-import { ChangeEvent, useEffect } from 'react'
 import { SelectChangeEvent } from '@mui/material'
+import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import { useNavigate, useParams } from 'react-router-dom'
-import useAlertState from '@/states/useAlertState'
+import { ChangeEvent, useCallback, useEffect } from 'react'
 
 function useUpdateAppointmentPage() {
 	const navigate = useNavigate()
 	const { setHandleState } = useAlertState()
 	const { id_patient, id_appointment } = useParams()
-	const { appointment, setAppointment } = useTeethState()
 	const { patientData, setPatientData } = usePatientState()
+	const { appointment, setAppointment, setTeethList } = useTeethState()
 
 	const handleChangeInputDate = (value: Date | null) => {
 		try {
@@ -75,7 +75,7 @@ function useUpdateAppointmentPage() {
 		})
 	}
 
-	const getAppointmentData = async () => {
+	const getAppointmentData = useCallback(async () => {
 		try {
 			const appointmentClass = new Appointment()
 			if (!patientData.id && !appointment.id && id_appointment && id_patient) {
@@ -98,17 +98,19 @@ function useUpdateAppointmentPage() {
 						}),
 						id: id_appointment,
 					})
+					const teeth = JSON.parse(JSON.parse(JSON.stringify(appointmentById.teeth)))
+					setTeethList(teeth)
 				}
 			}
 		} catch (error) {
 			console.log(error)
 		}
-	}
+	}, [id_appointment, setAppointment, setTeethList, id_patient, appointment.id, patientData.id])
 
-	const getPatientData = async () => {
+	const getPatientData = useCallback(async () => {
 		try {
 			const patientClass = new Patient()
-			if (!patientData.id && !patientData.name && id_patient) {
+			if (!patientData.id && id_patient) {
 				const data = await patientClass.getPatient(id_patient)
 				if (data !== undefined) {
 					setPatientData({
@@ -121,12 +123,12 @@ function useUpdateAppointmentPage() {
 		} catch (error) {
 			console.log(error)
 		}
-	}
+	}, [id_patient, setPatientData, patientData.id])
 
 	useEffect(() => {
 		getAppointmentData()
 		getPatientData()
-	}, [id_patient, id_appointment])
+	}, [id_patient, id_appointment, getPatientData, getAppointmentData])
 
 	return {
 		appointment,

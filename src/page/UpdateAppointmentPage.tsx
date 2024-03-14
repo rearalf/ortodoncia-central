@@ -1,13 +1,14 @@
+import { Button } from '@mui/material'
 import Navbar from '@/components/Navbar'
+import InputDate from '@/components/InputDate'
+import InputBasic from '@/components/InputBasic'
+import { FiSave, FiXCircle } from 'react-icons/fi'
+import InputSelect from '@/components/InputSelect'
 import HeadComponent from '@/components/HeadComponent'
+import InputNumericFormat from '@/components/NumericFormatCustom '
 import useUpdateAppointmentPage from '@/hooks/useUpdateAppointmentPage'
 import '@/styles/UpdateAppointmentPage.css'
-import InputDate from '@/components/InputDate'
-import InputNumericFormat from '@/components/NumericFormatCustom '
-import InputSelect from '@/components/InputSelect'
-import InputBasic from '@/components/InputBasic'
-import { Button } from '@mui/material'
-import { FiSave, FiXCircle } from 'react-icons/fi'
+import TeethTable from '@/components/TeethTable'
 
 function UpdateAppointmentPage() {
 	const {
@@ -75,6 +76,12 @@ function UpdateAppointmentPage() {
 							onChange={handleChangeInput}
 						/>
 					</div>
+
+					<section className='form_odontograma'>
+						<h2>Odontograma al finalizar la cita</h2>
+						<TeethTable />
+					</section>
+
 					<div className="btn_group">
 						<Button
 							variant="contained"
@@ -82,7 +89,7 @@ function UpdateAppointmentPage() {
 							onClick={handleSave}
 							startIcon={<FiSave />}
 						>
-							Solo guardar
+							Guardar
 						</Button>
 						<Button
 							color="error"
