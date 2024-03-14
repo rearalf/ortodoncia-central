@@ -1,5 +1,5 @@
 interface appointment {
-	id: string
+	id?: string
 	date: Date
 	formatDate?: string
 	treatment: string

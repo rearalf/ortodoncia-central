@@ -4,10 +4,6 @@
 	padding: 32px 16px;
 }
 
-.appointment-page_main .main_title {
-	margin-bottom: 24px;
-}
-
 .appointment-page_main .main_content {
 	display: flex;
 	flex-direction: column;

@@ -9,8 +9,7 @@ import { useParams } from 'react-router-dom'
 function useAppointment() {
 	const { id } = useParams()
 	const { patientData } = usePatientState()
-	const { setTeethList } = useTeethState()
-	const [appointment, setAppointmnet] = useState<appointment>()
+	const { appointment, setTeethList, setAppointment } = useTeethState()
 	const [patientName, setPatientName] = useState<string>('')
 
 	useEffect(() => {
@@ -24,7 +23,7 @@ function useAppointment() {
 				if (id && patientData.id) {
 					const appointmentById = await appointment.getAppointment(patientData.id, id)
 					if (appointmentById) {
-						setAppointmnet({
+						setAppointment({
 							...appointmentById.appointment,
 							date: new Date(
 								appointmentById.appointment.date.seconds * 1000 +
@@ -36,6 +35,7 @@ function useAppointment() {
 										appointmentById.appointment.date.nanoseconds / 1000000,
 								),
 							}),
+							id,
 						})
 						const teeth = JSON.parse(JSON.parse(JSON.stringify(appointmentById.teeth)))
 						setTeethList(teeth)
@@ -53,7 +53,7 @@ function useAppointment() {
 			}
 		}
 		getAppointment()
-	}, [])
+	}, [id])
 
 	return {
 		patientName,

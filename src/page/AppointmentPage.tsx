@@ -3,15 +3,24 @@ import TeethTable from '@/components/TeethTable'
 import useAppointment from '@/hooks/useAppointment'
 import HeadComponent from '@/components/HeadComponent'
 import '@/styles/AppointmentPage.css'
+import { Link } from 'react-router-dom'
+import { Button } from '@mui/material'
 
 function AppointmentPage() {
 	const { patientName, appointment, patientData } = useAppointment()
 	return (
 		<>
-			<HeadComponent title={`Cita de `} />
+			<HeadComponent title={`Cita de ${patientName}`} />
 			<Navbar />
 			<main className="appointment-page_main">
-				<h1 className="main_title">Cita de {patientName}</h1>
+				<header className="main_header">
+					<h1 className="header_title">Cita de {patientName}</h1>
+					<Link
+						to={`/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment`}
+					>
+						<Button variant="contained">Modificar cita</Button>
+					</Link>
+				</header>
 				<div className="main_content">
 					<article className="main_detail-appointment">
 						<h2 className="detail-appointment_title">Datos de la cita</h2>
@@ -54,7 +63,7 @@ function AppointmentPage() {
 				</div>
 
 				<section className="main_odontograma">
-					<h2 className="odontograma_title">Odontograma antes de la cita</h2>
+					<h2 className="odontograma_title">Odontograma después de la cita</h2>
 					<TeethTable />
 				</section>
 			</main>

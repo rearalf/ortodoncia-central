@@ -3,13 +3,8 @@ import { create } from 'zustand'
 
 interface TeethStateInterface {
 	teethList: toothObject[][][]
-	appointment: {
-		date: Date
-		treatment: string
-		cost: string
-		doctor: string
-	}
-	setAppointment: (value: TeethStateInterface['appointment']) => void
+	appointment: appointment
+	setAppointment: (value: appointment) => void
 	setTeethList: (value: TeethStateInterface['teethList']) => void
 	toothState: toothStateType
 	setToothState: (value: toothStateType) => void

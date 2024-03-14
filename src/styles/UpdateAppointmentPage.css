@@ -1,0 +1,36 @@
+.update-appointment-page_main {
+	margin: 1rem auto;
+	max-width: 1280px;
+	padding: 32px 16px;
+}
+
+.main_form {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.main_form .form_content {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.main_form .btn_group {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+@media (width >= 768px) {
+	.main_form .form_content {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.main_form .btn_group {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+}

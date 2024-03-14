@@ -6,6 +6,7 @@ import UpdatePatientPage from '@/page/UpdatePatientPage'
 import PatientProfilePage from '@/page/PatientProfilePage'
 import { createBrowserRouter } from 'react-router-dom'
 import AppointmentPage from '@/page/AppointmentPage'
+import UpdateAppointmentPage from '@/page/UpdateAppointmentPage'
 
 const router = createBrowserRouter(
 	[
@@ -36,6 +37,10 @@ const router = createBrowserRouter(
 				{
 					path: '/appointment/:id',
 					element: <AppointmentPage />,
+				},
+				{
+					path: '/patient-profile/:id_patient/appointment/:id_appointment/update-appointment',
+					element: <UpdateAppointmentPage />,
 				},
 			],
 		},
