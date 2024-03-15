@@ -1,8 +1,8 @@
-import { sub } from 'date-fns'
+import Patient from '@/models/Patient'
 import { useEffect, useState } from 'react'
+import { OrthoTerms, maxDate, minDate } from '@/utils/constants'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
-import Patient, { OrthoTerms } from '@/models/Patient'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function useUpdatePatientPage() {
@@ -11,12 +11,6 @@ function useUpdatePatientPage() {
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
 	const [patientName, setPatientName] = useState<string>('')
-	const maxDate = sub(new Date(), {
-		years: 1,
-	})
-	const minDate = sub(new Date(), {
-		years: 95,
-	})
 
 	const handleChangePhone = (
 		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

@@ -50,7 +50,7 @@ function usePatientProfilePage() {
 			})
 			navigate('/')
 		}
-	}, [id, setPatientData, setTeethList, setHandleState])
+	}, [id, setPatientData, setTeethList, setHandleState, navigate])
 
 	const getAppointments = useCallback(async () => {
 		try {

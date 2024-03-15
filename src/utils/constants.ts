@@ -1,3 +1,5 @@
+import { sub } from 'date-fns'
+
 export const constantTeethList: toothObject[][][] = [
 	[
 		[
@@ -502,3 +504,44 @@ export const constantAppointment = {
 	cost: '',
 	doctor: '',
 }
+
+export enum OrthoTerms {
+	SNC = 'SNC',
+	SVC = 'SVC',
+	SE = 'SE',
+	SME = 'SME',
+	SR = 'SR',
+	SU = 'SU',
+	SGU = 'SGU',
+	SGI = 'SGI',
+}
+
+export const patientBasicData: PatientDataInterface = {
+	name: '',
+	birthdate: sub(new Date(), {
+		years: 1,
+	}),
+	phone: '',
+	occupation: '',
+	reason: '',
+	allergicReactions: '',
+	currentSystemicTreatment: '',
+	references: '',
+	SNC: false,
+	SVC: false,
+	SE: false,
+	SME: false,
+	comments1: '',
+	SR: false,
+	SU: false,
+	SGU: false,
+	SGI: false,
+	comments2: '',
+}
+
+export const maxDate = sub(new Date(), {
+	years: 1,
+})
+export const minDate = sub(new Date(), {
+	years: 95,
+})

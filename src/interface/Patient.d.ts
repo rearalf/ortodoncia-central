@@ -1,4 +1,4 @@
-interface PatientData {
+interface PatientDataInterface {
 	id?: string
 	name: string
 	age?: number

@@ -21,7 +21,7 @@ function useHome() {
 				const patientInstance = new Patient()
 				const patientsData = await patientInstance.searchPatient(search)
 
-				const patients: PatientData[] = []
+				const patients: PatientDataInterface[] = []
 				patientsData.map(data => {
 					patients.push({
 						...data,
@@ -77,7 +77,7 @@ function useHome() {
 					const patientInstance = new Patient()
 					const patientsData = await patientInstance.getAllPatients('name', 'asc')
 
-					const patients: PatientData[] = []
+					const patients: PatientDataInterface[] = []
 					patientsData.map(data => {
 						patients.push({
 							...data,
@@ -117,7 +117,7 @@ function useHome() {
 				const patientInstance = new Patient()
 				const patientsData = await patientInstance.getAllPatients('name', 'asc')
 
-				const patients: PatientData[] = []
+				const patients: PatientDataInterface[] = []
 				patientsData.map(data => {
 					patients.push({
 						...data,

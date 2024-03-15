@@ -1,22 +1,16 @@
+import Patient from '@/models/Patient'
 import React, { useEffect } from 'react'
-import { sub } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
+import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
-import Patient, { OrthoTerms } from '@/models/Patient'
-import useAlertState from '@/states/useAlertState'
+import { OrthoTerms, patientBasicData, maxDate, minDate } from '@/utils/constants'
 
 function useCreatePatient() {
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { teethList } = useTeethState()
 	const { setHandleState } = useAlertState()
-	const maxDate = sub(new Date(), {
-		years: 1,
-	})
-	const minDate = sub(new Date(), {
-		years: 95,
-	})
 
 	const handleChangePhone = (
 		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -135,28 +129,7 @@ function useCreatePatient() {
 	}
 
 	useEffect(() => {
-		setPatientData({
-			name: '',
-			birthdate: sub(new Date(), {
-				years: 1,
-			}),
-			phone: '',
-			occupation: '',
-			reason: '',
-			allergicReactions: '',
-			currentSystemicTreatment: '',
-			references: '',
-			SNC: false,
-			SVC: false,
-			SE: false,
-			SME: false,
-			comments1: '',
-			SR: false,
-			SU: false,
-			SGU: false,
-			SGI: false,
-			comments2: '',
-		})
+		setPatientData(patientBasicData)
 	}, [setPatientData])
 
 	return {
