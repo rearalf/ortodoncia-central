@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { sub } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
@@ -133,6 +133,31 @@ function useCreatePatient() {
 			text: 'Creación de paciente cancelada.',
 		})
 	}
+
+	useEffect(() => {
+		setPatientData({
+			name: '',
+			birthdate: sub(new Date(), {
+				years: 1,
+			}),
+			phone: '',
+			occupation: '',
+			reason: '',
+			allergicReactions: '',
+			currentSystemicTreatment: '',
+			references: '',
+			SNC: false,
+			SVC: false,
+			SE: false,
+			SME: false,
+			comments1: '',
+			SR: false,
+			SU: false,
+			SGU: false,
+			SGI: false,
+			comments2: '',
+		})
+	}, [setPatientData])
 
 	return {
 		minDate,
