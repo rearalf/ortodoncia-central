@@ -1,5 +1,5 @@
 import Patient from '@/models/Patient'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { OrthoTerms, maxDate, minDate } from '@/utils/constants'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
@@ -110,10 +110,10 @@ function useUpdatePatientPage() {
 		})
 	}
 
-	useEffect(() => {
-		if (id !== undefined) {
-			const getPatient = async () => {
-				const ModelPatient = new Patient()
+	const getPatient = useCallback(async () => {
+		try {
+			const ModelPatient = new Patient()
+			if (id) {
 				const getPatientData = await ModelPatient.getPatient(id)
 				if (getPatientData) {
 					setPatientData(getPatientData)
@@ -125,10 +125,24 @@ function useUpdatePatientPage() {
 						}`,
 					)
 				}
+			} else {
+				setHandleState({
+					severity: 'error',
+					variant: 'filled',
+					show: true,
+					text: 'Error al obtener los datos.',
+				})
 			}
+		} catch (error) {
+			console.log(error)
+		}
+	}, [id, patientData.name, setPatientData, setHandleState])
+
+	useEffect(() => {
+		if (id !== undefined) {
 			getPatient()
 		}
-	}, [id])
+	}, [id, getPatient])
 
 	return {
 		minDate,
