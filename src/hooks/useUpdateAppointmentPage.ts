@@ -63,7 +63,37 @@ function useUpdateAppointmentPage() {
 		}
 	}
 
-	const handleSave = () => {}
+	const handleSave = async () => {
+		try {
+			const appointmentClass = new Appointment()
+			if (patientData.id && appointment.id) {
+				const updateAppoinment = await appointmentClass.updateAppoinment(
+					patientData.id,
+					appointment.id,
+					appointment,
+				)
+				console.log(updateAppoinment)
+				if (updateAppoinment) {
+					setHandleState({
+						severity: 'success',
+						variant: 'filled',
+						show: true,
+						text: 'La actualización de la cita fue exitosa.',
+					})
+				} else {
+					throw 'Error updating in update appointment.'
+				}
+			}
+		} catch (error) {
+			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Ocurrio un error al actualizar.',
+			})
+		}
+	}
 
 	const handleCancel = () => {
 		navigate(-1)

@@ -51,12 +51,12 @@ function useCreatePatient() {
 			else
 				setPatientData({
 					...patientData,
-					[e.target.id]: e.target.value.trim(),
+					[e.target.id]: e.target.value,
 				})
 		} else if (e.target instanceof HTMLTextAreaElement)
 			setPatientData({
 				...patientData,
-				[e.target.id]: e.target.value.trim(),
+				[e.target.id]: e.target.value,
 			})
 	}
 
@@ -72,8 +72,9 @@ function useCreatePatient() {
 		}
 	}
 
-	const handleSaveData = async (direction: 'profile' | 'teethForm') => {
+	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
 		try {
+			e.preventDefault()
 			if (patientData.name === '') {
 				setHandleState({
 					severity: 'warning',
@@ -100,9 +101,9 @@ function useCreatePatient() {
 					...patientData,
 					id: patient,
 				})
-				direction === 'profile'
-					? navigate(`/patient-profile/${patient}`)
-					: navigate(`/teeth-form`)
+
+				navigate(`/patient-profile/${patient}`)
+
 				setHandleState({
 					severity: 'success',
 					variant: 'filled',

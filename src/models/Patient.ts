@@ -135,14 +135,14 @@ class Patient {
 			const patientRef = doc(db, 'patients', id)
 			const patientTeethRef = collection(db, `patients/${id}/appointment`)
 			const addData = await addDoc(patientTeethRef, {
-				appointment,
+				appointment: { ...appointment, created_at: serverTimestamp() },
 				teeth: JSON.stringify(teeth),
 			})
 
 			if (addData.id) {
 				const updatePatient = await updateDoc(patientRef, {
 					teeth: JSON.stringify(teeth),
-					updatedAt: serverTimestamp(),
+					updated_at: serverTimestamp(),
 				})
 				console.log(updatePatient)
 			}

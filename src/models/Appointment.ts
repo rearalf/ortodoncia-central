@@ -1,5 +1,12 @@
 import { db } from '@/database/firebase'
-import { collection, doc, getDocs, onSnapshot } from 'firebase/firestore'
+import {
+	collection,
+	doc,
+	getDocs,
+	onSnapshot,
+	serverTimestamp,
+	updateDoc,
+} from 'firebase/firestore'
 
 class Appointment {
 	async getAppointmentsByPatient(
@@ -40,9 +47,9 @@ class Appointment {
 	}
 
 	// eslint-disable-next-line
-	async getAppointment(id_patient: string, id: string): Promise<any> {
+	async getAppointment(id_patient: string, id_appointment: string): Promise<any> {
 		try {
-			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id}`)
+			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id_appointment}`)
 
 			return new Promise((resolve, reject) => {
 				const unsubscribe = onSnapshot(
@@ -60,6 +67,32 @@ class Appointment {
 		} catch (error) {
 			console.log('Error getting the appointmnet: ' + error)
 			return {}
+		}
+	}
+
+	async updateAppoinment(
+		id_patient: string,
+		id_appointment: string,
+		appointmentData: appointment,
+	) {
+		try {
+			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id_appointment}`)
+
+			const updateData = await updateDoc(appointmentRef, {
+				appointment: {
+					date: appointmentData.date,
+					treatment: appointmentData.treatment,
+					cost: appointmentData.cost,
+					doctor: appointmentData.doctor,
+					updated_at: serverTimestamp(),
+				},
+			})
+				.then(() => true)
+				.catch(() => false)
+			return updateData
+		} catch (error) {
+			console.log('Error updating the appointmnet: ' + error)
+			return false
 		}
 	}
 }

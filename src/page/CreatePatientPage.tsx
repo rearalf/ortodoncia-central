@@ -28,7 +28,7 @@ const CreatePatientPage = () => {
 			<Navbar />
 			<main className="createPatient_main">
 				<h1>Nuevo paciente</h1>
-				<form className="form_patient">
+				<form className="form_patient" onSubmit={handleSaveData}>
 					<div className="firstPart">
 						<InputBasic
 							required
@@ -208,19 +208,9 @@ const CreatePatientPage = () => {
 							variant="contained"
 							color="success"
 							type="submit"
-							onClick={() => handleSaveData('profile')}
 							startIcon={<FiSave />}
 						>
 							Guardar
-						</Button>
-						<Button
-							variant="contained"
-							color="success"
-							type="submit"
-							onClick={() => handleSaveData('teethForm')}
-							startIcon={<FiSave />}
-						>
-							Guardar e ir al Odontograma
 						</Button>
 						<Button
 							variant="outlined"
