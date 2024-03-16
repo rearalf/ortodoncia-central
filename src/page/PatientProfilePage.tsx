@@ -2,9 +2,9 @@ import Navbar from '@/components/Navbar'
 import { Button, Tooltip } from '@mui/material'
 import TeethTable from '@/components/TeethTable'
 import HeadComponent from '@/components/HeadComponent'
-import { FiSmartphone, FiUserPlus } from 'react-icons/fi'
 import AppointmentsTable from '@/components/AppointmentsTable'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
+import { FiCalendar, FiSmartphone, FiUserPlus } from 'react-icons/fi'
 import '@/styles/PatientProfilePage.css'
 
 const PatientProfilePage = () => {
@@ -33,7 +33,7 @@ const PatientProfilePage = () => {
 						</Button>
 						<Button
 							variant="contained"
-							startIcon={<FiUserPlus />}
+							startIcon={<FiCalendar />}
 							onClick={handleGoToTeethForm}
 						>
 							Nueva cita

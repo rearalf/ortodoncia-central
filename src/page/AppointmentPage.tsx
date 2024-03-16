@@ -7,14 +7,27 @@ import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
 
 function AppointmentPage() {
-	const { patientName, appointment, patientData } = useAppointment()
+	const { appointment, patientData } = useAppointment()
 	return (
 		<>
-			<HeadComponent title={`Cita de ${patientName}`} />
+			<HeadComponent
+				title={`Cita de ${patientData.name.split(' ')[0]} ${
+					patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+				}`}
+			/>
 			<Navbar />
 			<main className="appointment-page_main">
 				<header className="main_header">
-					<h1 className="header_title">Cita de {patientName}</h1>
+					<h1 className="header_title">
+						Cita de{' '}
+						{`${patientData.name.split(' ')[0]} ${
+							patientData.name.split(' ')[2]
+								? patientData.name.split(' ')[2]
+								: patientData.name.split(' ')[1]
+						}`}
+					</h1>
 					<Link
 						to={`/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment`}
 					>

@@ -9,33 +9,25 @@ import {
 } from 'firebase/firestore'
 
 class Appointment {
-	async getAppointmentsByPatient(
-		id: string,
-	): Promise<{ id: string; appointment: appointment; teeth: toothObject[][][] }[]> {
+	async getAppointmentsByPatient(id: string): Promise<appointment[]> {
 		try {
 			const appointmentRef = collection(db, 'patients', id, 'appointment')
 			const querySnapshot = await getDocs(appointmentRef)
 
-			const appointments: {
-				id: string
-				appointment: appointment
-				teeth: toothObject[][][]
-			}[] = []
+			const appointments: appointment[] = []
 
 			querySnapshot.forEach(doc => {
 				const data = doc.data()
 
 				appointments.push({
+					...data,
 					id: doc.id,
-					appointment: {
-						id: doc.id,
-						...data.appointment,
-						date: new Date(
-							data.appointment.date.seconds * 1000 +
-								data.appointment.date.nanoseconds / 1000000,
-						),
-					},
-					teeth: data.teeth,
+					date: new Date(data.date.seconds * 1000 + data.date.nanoseconds / 1000000),
+					treatment: data.treatment,
+					cost: data.cost,
+					doctor: data.doctor,
+					created_at: data.created_at,
+					updated_at: data.created_at,
 				})
 			})
 
@@ -79,13 +71,13 @@ class Appointment {
 			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id_appointment}`)
 
 			const updateData = await updateDoc(appointmentRef, {
-				appointment: {
-					date: appointmentData.date,
-					treatment: appointmentData.treatment,
-					cost: appointmentData.cost,
-					doctor: appointmentData.doctor,
-					updated_at: serverTimestamp(),
-				},
+				date: appointmentData.date,
+				treatment: appointmentData.treatment,
+				cost: appointmentData.cost,
+				doctor: appointmentData.doctor,
+				teeth: appointmentData.teeth,
+				created_at: appointmentData.created_at,
+				updated_at: serverTimestamp(),
 			})
 				.then(() => true)
 				.catch(() => false)

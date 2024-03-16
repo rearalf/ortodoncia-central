@@ -72,7 +72,7 @@ function useUpdateAppointmentPage() {
 					appointment.id,
 					appointment,
 				)
-				console.log(updateAppoinment)
+
 				if (updateAppoinment) {
 					setHandleState({
 						severity: 'success',
@@ -80,6 +80,7 @@ function useUpdateAppointmentPage() {
 						show: true,
 						text: 'La actualización de la cita fue exitosa.',
 					})
+					navigate(`/patient-profile/${patientData.id}/appointment/${appointment.id}`)
 				} else {
 					throw 'Error updating in update appointment.'
 				}

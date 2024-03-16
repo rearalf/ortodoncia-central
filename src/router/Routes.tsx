@@ -35,7 +35,7 @@ const router = createBrowserRouter(
 					element: <UpdatePatientPage />,
 				},
 				{
-					path: '/appointment/:id',
+					path: '/patient-profile/:id_patient/appointment/:id_appointment',
 					element: <AppointmentPage />,
 				},
 				{

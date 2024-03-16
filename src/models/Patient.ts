@@ -22,14 +22,11 @@ class Patient {
 		try {
 			const patient = await addDoc(collection(db, 'patients'), {
 				...patientData,
+				teeth: JSON.stringify(teeth),
 				created_at: serverTimestamp(),
+				updated_at: serverTimestamp(),
 			})
-			if (patient.id) {
-				const dbPatient = patient.firestore
-				await addDoc(collection(dbPatient, `patients/${patient.id}/teeth`), {
-					teeth: JSON.stringify(teeth),
-				})
-			}
+
 			return patient.id
 		} catch (error) {
 			console.error('Error saving patient:', error)
@@ -102,19 +99,25 @@ class Patient {
 		// eslint-disable-next-line
 	): Promise<any | undefined> {
 		try {
-			const patientRef = doc(db, 'patients', id)
 			const patientTeethRef = collection(db, `patients/${id}/appointment`)
 			const addData = await addDoc(patientTeethRef, {
-				appointment: { ...appointment, created_at: serverTimestamp() },
+				date: appointment.date,
+				treatment: appointment.treatment,
+				cost: appointment.cost,
+				doctor: appointment.doctor,
 				teeth: JSON.stringify(teeth),
+				created_at: serverTimestamp(),
+				updated_at: serverTimestamp(),
 			})
 
 			if (addData.id) {
-				const updatePatient = await updateDoc(patientRef, {
+				const patientRef = doc(db, 'patients', id)
+				await updateDoc(patientRef, {
 					teeth: JSON.stringify(teeth),
 					updated_at: serverTimestamp(),
 				})
-				console.log(updatePatient)
+					.then(() => true)
+					.catch(() => false)
 			}
 
 			return addData

@@ -56,7 +56,9 @@ const AppointmentsTable = () => {
 							<TableCell align="center">{data.doctor}</TableCell>
 							<TableCell align="center">
 								<Tooltip title="Ver cita">
-									<Link to={`/appointment/${data.id}`}>
+									<Link
+										to={`/patient-profile/${data.id_patient}/appointment/${data.id}`}
+									>
 										<IconButton>
 											<FiCalendar size={20} />
 										</IconButton>

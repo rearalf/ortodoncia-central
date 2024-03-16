@@ -31,7 +31,7 @@ function useTeethFormPage() {
 						severity: 'success',
 						variant: 'filled',
 						show: true,
-						text: 'Datos guardados.',
+						text: 'Datos de la cita guardados.',
 					})
 				} else {
 					handleCleanStates()

@@ -503,6 +503,8 @@ export const constantAppointment = {
 	treatment: '',
 	cost: '',
 	doctor: '',
+	created_at: new Date(),
+	updated_at: new Date(),
 }
 
 export enum OrthoTerms {

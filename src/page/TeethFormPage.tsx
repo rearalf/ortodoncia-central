@@ -98,7 +98,7 @@ const TeethFormPage = () => {
 						onClick={handleSaveTeeth}
 						startIcon={<FiSave />}
 					>
-						Solo guardar
+						Guardar
 					</Button>
 					<Button
 						variant="outlined"

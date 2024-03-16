@@ -60,8 +60,9 @@ function usePatientProfilePage() {
 				const appointmentsList: appointment[] = []
 				allAppointment.map(data =>
 					appointmentsList.push({
-						...data.appointment,
-						formatDate: formatDate({ date: data.appointment.date }),
+						...data,
+						id_patient: id,
+						formatDate: formatDate({ date: data.date }),
 					}),
 				)
 				setAppoinments(appointmentsList)

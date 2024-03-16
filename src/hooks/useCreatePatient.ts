@@ -4,12 +4,18 @@ import { useNavigate } from 'react-router-dom'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
-import { OrthoTerms, patientBasicData, maxDate, minDate } from '@/utils/constants'
+import {
+	maxDate,
+	minDate,
+	OrthoTerms,
+	patientBasicData,
+	constantTeethList,
+} from '@/utils/constants'
 
 function useCreatePatient() {
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
-	const { teethList } = useTeethState()
+	const { teethList, setTeethList } = useTeethState()
 	const { setHandleState } = useAlertState()
 
 	const handleChangePhone = (
@@ -130,7 +136,8 @@ function useCreatePatient() {
 
 	useEffect(() => {
 		setPatientData(patientBasicData)
-	}, [setPatientData])
+		setTeethList(constantTeethList)
+	}, [])
 
 	return {
 		minDate,
