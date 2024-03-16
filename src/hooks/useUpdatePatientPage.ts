@@ -112,31 +112,33 @@ function useUpdatePatientPage() {
 
 	const getPatient = useCallback(async () => {
 		try {
-			const ModelPatient = new Patient()
-			if (id) {
-				const getPatientData = await ModelPatient.getPatient(id)
-				if (getPatientData) {
-					setPatientData(getPatientData)
-					setPatientName(
-						`${patientData.name.split(' ')[0]} ${
-							patientData.name.split(' ')[2]
-								? patientData.name.split(' ')[2]
-								: patientData.name.split(' ')[1]
-						}`,
-					)
+			if (!patientData.id) {
+				const ModelPatient = new Patient()
+				if (id) {
+					const getPatientData = await ModelPatient.getPatient(id)
+					if (getPatientData) {
+						setPatientData(getPatientData)
+						setPatientName(
+							`${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+						)
+					}
+				} else {
+					setHandleState({
+						severity: 'error',
+						variant: 'filled',
+						show: true,
+						text: 'Error al obtener los datos.',
+					})
 				}
-			} else {
-				setHandleState({
-					severity: 'error',
-					variant: 'filled',
-					show: true,
-					text: 'Error al obtener los datos.',
-				})
 			}
 		} catch (error) {
 			console.log(error)
 		}
-	}, [id, patientData.name, setPatientData, setHandleState])
+	}, [id, patientData.name, setPatientData, setHandleState, patientData.id])
 
 	useEffect(() => {
 		if (id !== undefined) {
