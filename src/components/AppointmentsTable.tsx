@@ -52,7 +52,9 @@ const AppointmentsTable = () => {
 						<TableRow key={data.id}>
 							<TableCell>{data.formatDate}</TableCell>
 							<TableCell style={{ maxWidth: 250 }}>
-								{data.treatment}
+								{data.treatment.split('\n').map((line, index) => (
+									<p key={index}>{line}</p>
+								))}
 							</TableCell>
 							<TableCell align="center">$ {data.cost}</TableCell>
 							<TableCell align="center">{data.doctor}</TableCell>

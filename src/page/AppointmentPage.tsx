@@ -48,14 +48,14 @@ function AppointmentPage() {
 							<p className="info_data">
 								Doctor: <span className="info">{appointment?.doctor}</span>
 							</p>
-							<p className="info_data info_data_big">
+							<div className="info_data info_data_big">
 								Tratamiento:{' '}
-								<p className="info info_big">
+								<div className="info info_big">
 									{appointment.treatment.split('\n').map((line, index) => (
 										<p key={index}>{line}</p>
 									))}
-								</p>
-							</p>
+								</div>
+							</div>
 						</div>
 					</article>
 
@@ -74,14 +74,14 @@ function AppointmentPage() {
 									{patientData.formatBirthdate?.toLocaleUpperCase()}
 								</span>
 							</p>
-							<p className="info_data info_data_big">
+							<div className="info_data info_data_big">
 								Razón:{' '}
-								<p className="info info_big">
+								<div className="info info_big">
 									{patientData.reason.split('\n').map((line, index) => (
 										<p key={index}>{line}</p>
 									))}
-								</p>
-							</p>
+								</div>
+							</div>
 						</div>
 					</article>
 				</div>

@@ -29,7 +29,7 @@ function usePatientProfilePage() {
 				if (data !== undefined) {
 					setPatientData({
 						...data,
-						age: getAge(data.birthdate.toISOString()),
+						age: getAge(new Date(data.birthdate).toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
 					if (data.teeth !== undefined) {
@@ -58,13 +58,16 @@ function usePatientProfilePage() {
 				const appointment = new Appointment()
 				const allAppointment = await appointment.getAppointmentsByPatient(id)
 				const appointmentsList: appointment[] = []
-				allAppointment.map(data =>
+				allAppointment.map(data => {
+					const textoFormateado = formatLongText(data.treatment, 40, 2)
+
 					appointmentsList.push({
 						...data,
 						id_patient: id,
 						formatDate: formatDate({ date: data.date }),
-					}),
-				)
+						treatment: textoFormateado,
+					})
+				})
 				setAppoinments(appointmentsList)
 			}
 		} catch (error) {
@@ -77,6 +80,31 @@ function usePatientProfilePage() {
 			})
 		}
 	}, [id, setAppoinments, setHandleState])
+
+	function formatLongText(text: string, charactersPerLine: number, maxLines: number): string {
+		const words: string[] = text.split(' ')
+		let lines: string[] = []
+		let currentLine: string = ''
+
+		words.forEach(word => {
+			if ((currentLine + word).length > charactersPerLine) {
+				lines.push(currentLine.trim())
+				currentLine = ''
+			}
+			currentLine += word + ' '
+		})
+
+		if (currentLine !== '') {
+			lines.push(currentLine.trim())
+		}
+
+		lines = lines.slice(0, maxLines)
+		if (lines.length === maxLines) {
+			lines[maxLines - 1] += '...'
+		}
+
+		return lines.join('\n')
+	}
 
 	useEffect(() => {
 		setTeethList(constantTeethList)
