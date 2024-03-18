@@ -7,7 +7,7 @@ import Patient from '@/models/Patient'
 import useAlertState from '@/states/useAlertState'
 import getAge from '@/utils/getAge'
 import formatDate from '@/utils/formatDate'
-import { constantTeethList } from '@/utils/constants'
+import { constantAppointment, constantTeethList } from '@/utils/constants'
 
 function useTeethFormPage() {
 	const navigate = useNavigate()
@@ -159,6 +159,10 @@ function useTeethFormPage() {
 			getPatientData()
 		}
 	}, [patientData.id, navigate, setHandleState, id_patient, getPatientData])
+
+	useEffect(() => {
+		if (appointment.id) setAppointment(constantAppointment)
+	}, [])
 
 	return {
 		appointment,
