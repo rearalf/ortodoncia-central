@@ -74,21 +74,44 @@ const PatientProfilePage = () => {
 					<article className="information_additionalInfo">
 						<h2 className="additionalInfo_title">Información adicional</h2>
 						<div className="additionalInfo_info">
-							<p className="info_data">
+							<p className="info_data info_data_big">
 								Alérgias:{' '}
-								<span className="info">{patientData.allergicReactions}</span>
+								<p className="info info_big">
+									{patientData.allergicReactions
+										.split('\n')
+										.map((line, index) => (
+											<span key={index}>{line}</span>
+										))}
+								</p>
 							</p>
-							<p className="info_data">
+							<p className="info_data info_data_big">
 								Tratamiento sistematico actual:{' '}
-								<span className="info">{patientData.currentSystemicTreatment}</span>
+								<p className="info">
+									{patientData.currentSystemicTreatment
+										.split('\n')
+										.map((line, index) => (
+											<p key={index}>{line}</p>
+										))}
+								</p>
 							</p>
-							<p className="info_data">
+							<p className="info_data info_data_big">
 								Referencias de laboratorio:{' '}
-								<span className="info">{patientData.currentSystemicTreatment}</span>
+								<p className="info">
+									{patientData.currentSystemicTreatment
+										.split('\n')
+										.map((line, index) => (
+											<p key={index}>{line}</p>
+										))}
+								</p>
 							</p>
-							<p className="info_data">
+							
+							<p className="info_data info_data_big">
 								Motivo de consulta:{' '}
-								<span className="info">{patientData.reason}</span>
+								<p className="info info_big">
+									{patientData.reason.split('\n').map((line, index) => (
+										<p key={index}>{line}</p>
+									))}
+								</p>
 							</p>
 						</div>
 					</article>

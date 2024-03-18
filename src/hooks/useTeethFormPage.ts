@@ -1,22 +1,31 @@
-import { ChangeEvent, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { ChangeEvent, FormEvent, useCallback, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import { SelectChangeEvent } from '@mui/material'
 import Patient from '@/models/Patient'
 import useAlertState from '@/states/useAlertState'
+import getAge from '@/utils/getAge'
+import formatDate from '@/utils/formatDate'
+import { constantTeethList } from '@/utils/constants'
 
 function useTeethFormPage() {
 	const navigate = useNavigate()
-	const { patientData } = usePatientState()
-	const { appointment, setAppointment, teethList, setToothState, setPositionState } =
-		useTeethState()
+	const { id_patient } = useParams()
 	const { setHandleState } = useAlertState()
-	const maxDate = new Date()
-	const minDate = new Date()
+	const { patientData, setPatientData } = usePatientState()
+	const {
+		appointment,
+		setAppointment,
+		teethList,
+		setTeethList,
+		setToothState,
+		setPositionState,
+	} = useTeethState()
 
-	const handleSaveTeeth = async () => {
+	const handleSaveTeeth = async (e: FormEvent<HTMLFormElement>) => {
 		try {
+			e.preventDefault()
 			if (patientData.id) {
 				const saveNewAppointment = new Patient()
 				const newAppointment = await saveNewAppointment.saveNewAppointment(
@@ -38,6 +47,7 @@ function useTeethFormPage() {
 					throw 'Error to saving data'
 				}
 			}
+			console.log('first')
 		} catch (error) {
 			console.log('Error button teeth form: ' + error)
 			setHandleState({
@@ -95,7 +105,7 @@ function useTeethFormPage() {
 		try {
 			setAppointment({
 				...appointment,
-				[e.target.id]: e.target.value,
+				treatment: e.target.value,
 			})
 		} catch (error) {
 			console.log(error)
@@ -106,16 +116,35 @@ function useTeethFormPage() {
 		try {
 			setAppointment({
 				...appointment,
-				[e.target.name]: e.target.value,
+				cost: e.target.value,
 			})
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
-	useEffect(() => {
-		if (patientData.id === undefined) {
-			navigate(-1)
+	const getPatientData = useCallback(async () => {
+		try {
+			if (id_patient) {
+				const patient = new Patient()
+				const data = await patient.getPatient(id_patient)
+				if (data !== undefined) {
+					setPatientData({
+						...data,
+						age: getAge(data.birthdate.toISOString()),
+						formatBirthdate: formatDate({ date: data.birthdate }),
+					})
+					if (data.teeth !== undefined) {
+						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
+						setTeethList(teeth)
+					} else {
+						setTeethList(constantTeethList)
+					}
+				}
+			}
+		} catch (error) {
+			console.log(error)
+			navigate(`patient-profile/${id_patient}`)
 			setHandleState({
 				severity: 'warning',
 				variant: 'filled',
@@ -123,11 +152,15 @@ function useTeethFormPage() {
 				text: 'Datos del paciente no obtenidos.',
 			})
 		}
-	}, [patientData.id, navigate, setHandleState])
+	}, [id_patient, navigate, setHandleState, setTeethList, setPatientData])
+
+	useEffect(() => {
+		if (patientData.id === undefined) {
+			getPatientData()
+		}
+	}, [patientData.id, navigate, setHandleState, id_patient, getPatientData])
 
 	return {
-		maxDate,
-		minDate,
 		appointment,
 		patientData,
 		handleSaveTeeth,

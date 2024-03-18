@@ -27,7 +27,7 @@ const router = createBrowserRouter(
 					element: <PatientProfilePage />,
 				},
 				{
-					path: '/teeth-form',
+					path: '/teeth-form/:id_patient',
 					element: <TeethFormPage />,
 				},
 				{

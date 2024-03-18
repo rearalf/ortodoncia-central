@@ -18,7 +18,7 @@ function usePatientProfilePage() {
 	const { setAppoinments } = useAppointmentState()
 	const { setHandleState } = useAlertState()
 
-	const handleGoToTeethForm = () => navigate('/teeth-form')
+	const handleGoToTeethForm = () => navigate('/teeth-form/' + id)
 	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
 
 	const getPatientData = useCallback(async () => {

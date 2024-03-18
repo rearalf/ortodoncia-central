@@ -4,13 +4,16 @@ interface InputSelectProps {
 	id: string
 	label: string
 	value: string
+	required?: boolean
 	items: { value: string | number; item: string }[]
 	onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void
 }
 
 const InputSelect = (props: InputSelectProps) => (
 	<FormControl className="input-select">
-		<InputLabel id={props.id}>{props.label}</InputLabel>
+		<InputLabel id={props.id} required={props.required}>
+			{props.label}
+		</InputLabel>
 		<Select
 			id={props.id}
 			name={props.id}
@@ -18,6 +21,7 @@ const InputSelect = (props: InputSelectProps) => (
 			label={props.label}
 			value={props.value}
 			onChange={props.onChange}
+			required={props.required}
 		>
 			{props.items.map(item => {
 				return (

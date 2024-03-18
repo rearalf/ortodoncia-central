@@ -28,6 +28,17 @@
 .appointment-page_main .detail-patient_data .info_data .info,
 .appointment-page_main .main_detail-appointment .info_data .info {
 	font-weight: 800;
+	margin: 0;
+}
+
+.appointment-page_main .main_patient .info_data.info_data_big,
+.appointment-page_main .main_detail-appointment .info_data.info_data_big {
+	align-items: start;
+}
+
+.appointment-page_main .main_patient .info_data .info.info_big p,
+.appointment-page_main .main_detail-appointment .info_data .info.info_big p {
+	margin: 0;
 }
 
 .appointment-page_main .main_odontograma {

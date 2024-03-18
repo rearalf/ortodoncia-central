@@ -12,8 +12,6 @@ import '@/styles/TeethFormPage.css'
 
 const TeethFormPage = () => {
 	const {
-		minDate,
-		maxDate,
 		appointment,
 		patientData,
 		handleSaveTeeth,
@@ -25,11 +23,11 @@ const TeethFormPage = () => {
 	} = useTeethFormPage()
 	return (
 		<>
-			<HeadComponent title="Dientes de " />
+			<HeadComponent title="Odontograma de " />
 			<Navbar />
 			<main className="teethform_main">
 				<h1 className="main_title">
-					Mapa de dientes de{' '}
+					Odontograma de{' '}
 					{` ${patientData.name.split(' ')[0]} ${
 						patientData.name.split(' ')[2]
 							? patientData.name.split(' ')[2]
@@ -39,7 +37,7 @@ const TeethFormPage = () => {
 
 				<TeethForm />
 
-				<section className="main_lastform">
+				<form onSubmit={handleSaveTeeth} className="main_lastform">
 					<h2 className="lastform_title">Cita de hoy</h2>
 					<div className="lastform_form">
 						<InputDate
@@ -49,11 +47,10 @@ const TeethFormPage = () => {
 							value={appointment.date}
 							onChange={handleChangeInputDate}
 							helperText="MM/DD/YYYY"
-							maxDate={maxDate}
-							minDate={minDate}
 							disabled
 						/>
 						<InputNumericFormat
+							required
 							id="cost"
 							key="cost"
 							label="Costo"
@@ -63,6 +60,7 @@ const TeethFormPage = () => {
 							}}
 						/>
 						<InputSelect
+							required
 							key="doctor"
 							id="doctor"
 							label="Doctor"
@@ -80,6 +78,7 @@ const TeethFormPage = () => {
 							]}
 						/>
 						<InputBasic
+							required
 							multiline
 							type="text"
 							id="treatment"
@@ -89,27 +88,26 @@ const TeethFormPage = () => {
 							onChange={handleChangeInput}
 						/>
 					</div>
-				</section>
-
-				<div className="btn_group">
-					<Button
-						variant="contained"
-						color="success"
-						onClick={handleSaveTeeth}
-						startIcon={<FiSave />}
-					>
-						Guardar
-					</Button>
-					<Button
-						variant="outlined"
-						color="error"
-						type="button"
-						onClick={handleCancelButton}
-						startIcon={<FiXCircle />}
-					>
-						Cancelar
-					</Button>
-				</div>
+					<div className="btn_group">
+						<Button
+							variant="contained"
+							color="success"
+							type="submit"
+							startIcon={<FiSave />}
+						>
+							Guardar
+						</Button>
+						<Button
+							variant="outlined"
+							color="error"
+							type="button"
+							onClick={handleCancelButton}
+							startIcon={<FiXCircle />}
+						>
+							Cancelar
+						</Button>
+					</div>
+				</form>
 			</main>
 		</>
 	)

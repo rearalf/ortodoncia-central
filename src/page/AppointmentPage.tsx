@@ -8,6 +8,7 @@ import { Button } from '@mui/material'
 
 function AppointmentPage() {
 	const { appointment, patientData } = useAppointment()
+
 	return (
 		<>
 			<HeadComponent
@@ -47,8 +48,13 @@ function AppointmentPage() {
 							<p className="info_data">
 								Doctor: <span className="info">{appointment?.doctor}</span>
 							</p>
-							<p className="info_data">
-								Tratamiento: <span className="info">{appointment?.treatment}</span>
+							<p className="info_data info_data_big">
+								Tratamiento:{' '}
+								<p className="info info_big">
+									{appointment.treatment.split('\n').map((line, index) => (
+										<p key={index}>{line}</p>
+									))}
+								</p>
 							</p>
 						</div>
 					</article>
@@ -68,8 +74,13 @@ function AppointmentPage() {
 									{patientData.formatBirthdate?.toLocaleUpperCase()}
 								</span>
 							</p>
-							<p className="info_data">
-								Razón: <span className="info">{patientData.reason}</span>
+							<p className="info_data info_data_big">
+								Razón:{' '}
+								<p className="info info_big">
+									{patientData.reason.split('\n').map((line, index) => (
+										<p key={index}>{line}</p>
+									))}
+								</p>
 							</p>
 						</div>
 					</article>

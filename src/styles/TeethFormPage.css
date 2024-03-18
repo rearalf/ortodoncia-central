@@ -29,13 +29,13 @@
 .teethform_main .btn_group {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	gap: 16px;
 }
 
 @media (width >= 768px) {
 	.teethform_main .btn_group {
+		justify-content: center;
+		align-items: center;
 		flex-direction: row;
 	}
 

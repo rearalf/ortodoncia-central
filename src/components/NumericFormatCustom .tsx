@@ -11,6 +11,7 @@ interface InputNumericFormatProps {
 	id: string
 	label: string
 	value: string
+	required?: boolean
 	onChange: (event: { target: { name: string; value: string } }) => void
 }
 
@@ -49,6 +50,7 @@ const InputNumericFormat = (props: InputNumericFormatProps) => {
 			}}
 			name={props.id}
 			id={props.id}
+			required={props.required}
 			InputProps={{
 				// eslint-disable-next-line
 				inputComponent: NumericFormatCustom as any,

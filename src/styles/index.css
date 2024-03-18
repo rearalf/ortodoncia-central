@@ -85,6 +85,19 @@ ul {
 	margin: 0;
 }
 
+.info_data_big.info_data {
+	align-items: start;
+}
+
+.info_data_big .info {
+	font-weight: 800;
+	margin: 0;
+}
+
+.info_data .info.info_big span {
+	margin: 0;
+}
+
 .MuiFormControl-root.input-select {
 	min-width: 150px;
 }
@@ -117,6 +130,10 @@ ul {
 }
 .MuiTableRow-root:hover {
 	background-color: var(--background-color-2);
+}
+
+.MuiTableRow-root .MuiTableCell-root.MuiTableCell-body p {
+	margin: 4px 0;
 }
 
 .MuiTableRow-root .MuiTableCell-root.MuiTableCell-body a button,
