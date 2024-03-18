@@ -1,5 +1,5 @@
 import Patient from '@/models/Patient'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { OrthoTerms, maxDate, minDate } from '@/utils/constants'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
@@ -10,7 +10,6 @@ function useUpdatePatientPage() {
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
-	const [patientName, setPatientName] = useState<string>('')
 
 	const handleChangePhone = (
 		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -118,13 +117,6 @@ function useUpdatePatientPage() {
 					const getPatientData = await ModelPatient.getPatient(id)
 					if (getPatientData) {
 						setPatientData(getPatientData)
-						setPatientName(
-							`${patientData.name.split(' ')[0]} ${
-								patientData.name.split(' ')[2]
-									? patientData.name.split(' ')[2]
-									: patientData.name.split(' ')[1]
-							}`,
-						)
 					}
 				} else {
 					setHandleState({
@@ -150,7 +142,6 @@ function useUpdatePatientPage() {
 		minDate,
 		maxDate,
 		patientData,
-		patientName,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,

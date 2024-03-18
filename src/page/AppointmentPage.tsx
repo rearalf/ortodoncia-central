@@ -5,6 +5,7 @@ import HeadComponent from '@/components/HeadComponent'
 import '@/styles/AppointmentPage.css'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
+import BreadCrumbs from '@/components/BreadCrumbs'
 
 function AppointmentPage() {
 	const { appointment, patientData } = useAppointment()
@@ -20,6 +21,30 @@ function AppointmentPage() {
 			/>
 			<Navbar />
 			<main className="appointment-page_main">
+				<BreadCrumbs
+					links={[
+						{
+							link_name: 'Inicio',
+							link_to: '/',
+						},
+						{
+							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: `/patient-profile/${patientData.id}`,
+						},
+						{
+							link_name: `Cita de ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: `/patient-profile/${patientData.id}/appointment/${appointment.id}/update-appointment`,
+						},
+					]}
+				/>
 				<header className="main_header">
 					<h1 className="header_title">
 						Cita de{' '}

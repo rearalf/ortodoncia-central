@@ -9,6 +9,7 @@ import InputNumericFormat from '@/components/NumericFormatCustom '
 import useUpdateAppointmentPage from '@/hooks/useUpdateAppointmentPage'
 import '@/styles/UpdateAppointmentPage.css'
 import TeethTable from '@/components/TeethTable'
+import BreadCrumbs from '@/components/BreadCrumbs'
 
 function UpdateAppointmentPage() {
 	const {
@@ -26,6 +27,34 @@ function UpdateAppointmentPage() {
 			<HeadComponent title={`Cita de`} />
 			<Navbar />
 			<main className="update-appointment-page_main">
+				<BreadCrumbs
+					links={[
+						{
+							link_name: 'Inicio',
+							link_to: '/',
+						},
+						{
+							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: `/patient-profile/${patientData.id}`,
+						},
+						{
+							link_name: `Cita de ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: `/patient-profile/${patientData.id}/appointment/${appointment.id}`,
+						},
+						{
+							link_name: 'Modificar cita',
+							link_to: `/patient-profile/${patientData.id}/appointment/${appointment.id}/update-appointment`,
+						},
+					]}
+				/>
 				<header className="main_header">
 					<h1>Modificar cita {patientData.name}</h1>
 				</header>
@@ -77,7 +106,7 @@ function UpdateAppointmentPage() {
 						/>
 					</div>
 
-					<section className='form_odontograma'>
+					<section className="form_odontograma">
 						<h2>Odontograma al finalizar la cita</h2>
 						<TeethTable />
 					</section>

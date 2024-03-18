@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import { Button, Tooltip } from '@mui/material'
 import TeethTable from '@/components/TeethTable'
+import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import AppointmentsTable from '@/components/AppointmentsTable'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
@@ -14,6 +15,22 @@ const PatientProfilePage = () => {
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
 			<main className="patientprofile_main">
+				<BreadCrumbs
+					links={[
+						{
+							link_name: 'Inicio',
+							link_to: '/',
+						},
+						{
+							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: `/patient-profile/${patientData.id}`,
+						},
+					]}
+				/>
 				<header className="main_header">
 					<h1>
 						Paciente

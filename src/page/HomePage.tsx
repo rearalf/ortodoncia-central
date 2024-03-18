@@ -1,12 +1,13 @@
 import useHome from '@/hooks/useHome'
 import { Link } from 'react-router-dom'
 import Navbar from '@/components/Navbar'
+import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import { FiSearch, FiUserPlus, FiX } from 'react-icons/fi'
 import TablePatient from '@/components/Patient/TablePatient'
+import SkeletonComponent from '@/components/SkeletonComponent'
 import { Button, InputAdornment, TextField, Tooltip } from '@mui/material'
 import '@/styles/HomePage.css'
-import SkeletonComponent from '@/components/SkeletonComponent'
 
 const HomePage = () => {
 	const { search, loading, handleChangeInput, handleSearchPatient, handleClearSearchPatient } =
@@ -16,6 +17,7 @@ const HomePage = () => {
 			<HeadComponent title="Inicio" />
 			<Navbar />
 			<main className="home_main">
+				<BreadCrumbs />
 				<div className="main_header">
 					<h1>Pacientes</h1>
 					<Link to="/create-patient">
@@ -55,11 +57,7 @@ const HomePage = () => {
 				</form>
 
 				{loading ? (
-					<SkeletonComponent
-						variant="rectangular"
-						height={300}
-						animation="wave"
-					/>
+					<SkeletonComponent variant="rectangular" height={300} animation="wave" />
 				) : (
 					<TablePatient />
 				)}

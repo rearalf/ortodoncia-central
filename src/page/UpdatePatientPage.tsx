@@ -4,6 +4,7 @@ import InputDate from '@/components/InputDate'
 import InputBasic from '@/components/InputBasic'
 import InputCheckbox from '@/components/Checkbox'
 import { FiSave, FiXCircle } from 'react-icons/fi'
+import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
 import useUpdatePatientPage from '@/hooks/useUpdatePatientPage'
@@ -14,7 +15,6 @@ function UpdatePatientPage() {
 		minDate,
 		maxDate,
 		patientData,
-		patientName,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
@@ -26,7 +26,38 @@ function UpdatePatientPage() {
 			<HeadComponent title={`Actualizar paciente | `} />
 			<Navbar />
 			<main className="createPatient_main">
-				<h1>Actualizar paciente - {patientName}</h1>
+				<BreadCrumbs
+					links={[
+						{
+							link_name: 'Inicio',
+							link_to: '/',
+						},
+						{
+							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: `/patient-profile/${patientData.id}`,
+						},
+						{
+							link_name: `Actualizar datos de ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: '/',
+						},
+					]}
+				/>
+				<h1>
+					Actualizar paciente -{' '}
+					{`${patientData.name.split(' ')[0]} ${
+						patientData.name.split(' ')[2]
+							? patientData.name.split(' ')[2]
+							: patientData.name.split(' ')[1]
+					}`}
+				</h1>
 				<form className="form_patient">
 					<div className="firstPart">
 						<InputBasic

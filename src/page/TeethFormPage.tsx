@@ -9,6 +9,7 @@ import HeadComponent from '@/components/HeadComponent'
 import useTeethFormPage from '@/hooks/useTeethFormPage'
 import InputNumericFormat from '@/components/NumericFormatCustom '
 import '@/styles/TeethFormPage.css'
+import BreadCrumbs from '@/components/BreadCrumbs'
 
 const TeethFormPage = () => {
 	const {
@@ -26,6 +27,26 @@ const TeethFormPage = () => {
 			<HeadComponent title="Odontograma de " />
 			<Navbar />
 			<main className="teethform_main">
+				<BreadCrumbs
+					links={[
+						{
+							link_name: 'Inicio',
+							link_to: '/',
+						},
+						{
+							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
+								patientData.name.split(' ')[2]
+									? patientData.name.split(' ')[2]
+									: patientData.name.split(' ')[1]
+							}`,
+							link_to: `/patient-profile/${patientData.id}`,
+						},
+						{
+							link_name: 'Nueva cita',
+							link_to: '/',
+						},
+					]}
+				/>
 				<h1 className="main_title">
 					Odontograma de{' '}
 					{` ${patientData.name.split(' ')[0]} ${

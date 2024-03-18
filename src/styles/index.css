@@ -63,6 +63,15 @@ body {
 	font-size: 14px;
 }
 
+a {
+	color: var(--color-text-400);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--color-text-800);
+}
+
 h1,
 h2 {
 	margin: 0;
@@ -147,4 +156,10 @@ ul {
 .MuiTableRow-root .MuiTableCell-root.MuiTableCell-body a button:hover,
 .MuiTableRow-root .MuiTableCell-root.MuiTableCell-body a:hover {
 	color: var(--color-text-900);
+}
+
+.MuiBreadcrumbs-ol a,
+.MuiBreadcrumbs-ol p {
+	margin: 0;
+	font-size: 14px;
 }

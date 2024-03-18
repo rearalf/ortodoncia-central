@@ -4,11 +4,12 @@ import InputDate from '@/components/InputDate'
 import InputBasic from '@/components/InputBasic'
 import InputCheckbox from '@/components/Checkbox'
 import { FiSave, FiXCircle } from 'react-icons/fi'
+import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
+import PhoneNumberInput from '@/components/PhoneNumberInput'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import '@/styles/CreatePatientPage.css'
-import PhoneNumberInput from '@/components/PhoneNumberInput'
 
 const CreatePatientPage = () => {
 	const {
@@ -27,6 +28,18 @@ const CreatePatientPage = () => {
 			<HeadComponent title="Crear paciente" />
 			<Navbar />
 			<main className="createPatient_main">
+				<BreadCrumbs
+					links={[
+						{
+							link_name: 'Inicio',
+							link_to: '/',
+						},
+						{
+							link_name: 'Crear paciente',
+							link_to: '/create-patient',
+						},
+					]}
+				/>
 				<h1>Nuevo paciente</h1>
 				<form className="form_patient" onSubmit={handleSaveData}>
 					<div className="firstPart">
