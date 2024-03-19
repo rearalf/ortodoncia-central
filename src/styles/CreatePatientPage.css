@@ -4,20 +4,74 @@
 	padding: 32px 16px;
 }
 
-.createPatient_main h1 {
-	display: block;
-	text-align: center;
-	margin-bottom: 2rem;
+.createPatient_main .createPatient_main-title {
+	margin-bottom: 1rem;
 }
 
-.createPatient_main form {
+.createPatient_main .form_patient {
 	display: flex;
 	flex-direction: column;
 	gap: 18px;
 	width: 100%;
 }
 
-.createPatient_main .firstPart,
+.createPatient_main .form_patient .form_patient-first_section {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.createPatient_main .form_patient .first_section-optional_section,
+.createPatient_main .form_patient .form_patient-first_section .first_section-avatar_component,
+.createPatient_main .form_patient .form_patient-first_section .first_section-required_inputs {
+	background-color: var(--background-color-3);
+	padding: 24px;
+	border-radius: 4px;
+}
+
+.createPatient_main .form_patient .first_section-optional_section,
+.createPatient_main .form_patient .form_patient-first_section .first_section-required_inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.createPatient_main .form_patient .form_patient-first_section .first_section-avatar_component {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.createPatient_main
+	.form_patient
+	.form_patient-first_section
+	.first_section-avatar_component
+	.MuiAvatar-root.MuiAvatar-circular {
+	width: 250px;
+	height: 250px;
+	font-size: 130px;
+}
+
+.createPatient_main
+	.form_patient
+	.form_patient-first_section
+	.first_section-avatar_component
+	.btn-group {
+	display: flex;
+	gap: 12px;
+}
+
+@media (width >= 1024px) {
+	.createPatient_main .form_patient .first_section-optional_section,
+	.createPatient_main .form_patient .form_patient-first_section {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* .createPatient_main .firstPart,
 .createPatient_main .secondPart {
 	display: flex;
 	flex-direction: column;
@@ -41,11 +95,38 @@
 	width: 100%;
 }
 
+.createPatient_main .avatarComponent {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.createPatient_main .avatarComponent .btn-group {
+	display: flex;
+	gap: 12px;
+}
+
+.createPatient_main .avatarComponent .MuiAvatar-root.MuiAvatar-circular {
+	width: 250px;
+	height: 250px;
+	font-size: 130px;
+}
+
 @media (width >= 768px) {
 	.createPatient_main .firstPart,
 	.createPatient_main .secondPart {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.createPatient_main .avatarComponent {
+	}
+
+	.createPatient_main .avatarComponent .MuiAvatar-root.MuiAvatar-circular {
+		width: 200px;
+		height: 200px;
 	}
 
 	.createPatient_main .systemicAnalysisAccordion {
@@ -76,3 +157,4 @@
 		gap: 18px 32px;
 	}
 }
+ */

@@ -10,6 +10,7 @@ import useCreatePatient from '@/hooks/useCreatePatient'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import '@/styles/CreatePatientPage.css'
+import AvatarComponent from '@/components/AvatarComponent'
 
 const CreatePatientPage = () => {
 	const {
@@ -40,50 +41,60 @@ const CreatePatientPage = () => {
 						},
 					]}
 				/>
-				<h1>Nuevo paciente</h1>
+				<h1 className="createPatient_main-title">Nuevo paciente</h1>
 				<form className="form_patient" onSubmit={handleSaveData}>
-					<div className="firstPart">
-						<InputBasic
-							required
-							id="name"
-							key="name"
-							type="text"
-							value={patientData.name}
-							onChange={handleInput}
-							label="Nombre completo"
-						/>
-
-						<InputDate
-							name="birthdate"
-							key="birthdate"
-							label="Fecha de nacimiento"
-							value={patientData.birthdate}
-							onChange={handleChangeDate}
-							helperText="MM/DD/YYYY"
-							maxDate={maxDate}
-							minDate={minDate}
-						/>
-
-						<InputBasic
-							type="text"
-							id="occupation"
-							key="occupation"
-							label="Ocupación"
-							value={patientData.occupation || ''}
-							onChange={handleInput}
-						/>
-
-						<PhoneNumberInput
-							required
-							key="phone"
-							name="phone"
-							label="Teléfono"
-							value={patientData.phone}
-							onChange={handleChangePhone}
-						/>
+					<div className="form_patient-first_section">
+						<div className="first_section-avatar_component">
+							<Button aria-label="Agregar foto">
+								<AvatarComponent name={patientData.name} />
+							</Button>
+							<div className="btn-group">
+								<Button variant="contained">Agregar foto</Button>
+								<Button variant="outlined" color="error">
+									Quitar
+								</Button>
+							</div>
+						</div>
+						<div className="first_section-required_inputs">
+							<InputBasic
+								required
+								id="name"
+								key="name"
+								type="text"
+								value={patientData.name}
+								onChange={handleInput}
+								label="Nombre completo"
+							/>
+							<InputDate
+								name="birthdate"
+								key="birthdate"
+								label="Fecha de nacimiento"
+								value={patientData.birthdate}
+								onChange={handleChangeDate}
+								helperText="MM/DD/YYYY"
+								maxDate={maxDate}
+								minDate={minDate}
+							/>
+							<PhoneNumberInput
+								required
+								key="phone"
+								name="phone"
+								label="Teléfono"
+								value={patientData.phone}
+								onChange={handleChangePhone}
+							/>
+							<InputBasic
+								type="text"
+								id="occupation"
+								key="occupation"
+								label="Ocupación"
+								value={patientData.occupation || ''}
+								onChange={handleInput}
+							/>
+						</div>
 					</div>
 
-					<div className="secondPart">
+					<div className="first_section-optional_section">
 						<InputBasic
 							multiline
 							type="text"
