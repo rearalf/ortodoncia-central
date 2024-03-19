@@ -92,41 +92,6 @@ class Patient {
 		}
 	}
 
-	async saveNewAppointment(
-		id: string,
-		appointment: appointmentInterface,
-		teeth: toothObject[][][],
-		// eslint-disable-next-line
-	): Promise<any | undefined> {
-		try {
-			const patientTeethRef = collection(db, `patients/${id}/appointment`)
-			const addData = await addDoc(patientTeethRef, {
-				date: appointment.date,
-				treatment: appointment.treatment,
-				cost: appointment.cost,
-				doctor: appointment.doctor,
-				teeth: JSON.stringify(teeth),
-				created_at: serverTimestamp(),
-				updated_at: serverTimestamp(),
-			})
-
-			if (addData.id) {
-				const patientRef = doc(db, 'patients', id)
-				await updateDoc(patientRef, {
-					teeth: JSON.stringify(teeth),
-					updated_at: serverTimestamp(),
-				})
-					.then(() => true)
-					.catch(() => false)
-			}
-
-			return addData
-		} catch (error) {
-			console.log('Error saving teeth form: ' + error)
-			return undefined
-		}
-	}
-
 	async updatePatient(id: string, patientData: PatientDataInterface): Promise<boolean> {
 		try {
 			const patientRef = doc(db, 'patients', id)

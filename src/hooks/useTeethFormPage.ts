@@ -1,12 +1,13 @@
-import { ChangeEvent, FormEvent, useCallback, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import getAge from '@/utils/getAge'
+import Patient from '@/models/Patient'
+import formatDate from '@/utils/formatDate'
+import Appointment from '@/models/Appointment'
+import { SelectChangeEvent } from '@mui/material'
+import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
-import { SelectChangeEvent } from '@mui/material'
-import Patient from '@/models/Patient'
-import useAlertState from '@/states/useAlertState'
-import getAge from '@/utils/getAge'
-import formatDate from '@/utils/formatDate'
+import { useNavigate, useParams } from 'react-router-dom'
+import { ChangeEvent, FormEvent, useCallback, useEffect } from 'react'
 import { constantAppointment, constantTeethList } from '@/utils/constants'
 
 function useTeethFormPage() {
@@ -27,7 +28,7 @@ function useTeethFormPage() {
 		try {
 			e.preventDefault()
 			if (patientData.id) {
-				const saveNewAppointment = new Patient()
+				const saveNewAppointment = new Appointment()
 				const newAppointment = await saveNewAppointment.saveNewAppointment(
 					patientData.id,
 					appointment,
