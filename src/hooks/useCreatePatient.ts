@@ -134,6 +134,14 @@ function useCreatePatient() {
 		})
 	}
 
+	const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+		try {
+			if (event.target.files !== null) {
+				console.log(event.target.files[0])
+			}
+		} catch (error) {}
+	}
+
 	useEffect(() => {
 		setPatientData(patientBasicData)
 		setTeethList(constantTeethList)
@@ -146,6 +154,7 @@ function useCreatePatient() {
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
+		handleChangeFile,
 		handleChangePhone,
 		handleCancelButton,
 	}

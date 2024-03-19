@@ -3,14 +3,14 @@ import { SlArrowDown } from 'react-icons/sl'
 import InputDate from '@/components/InputDate'
 import InputBasic from '@/components/InputBasic'
 import InputCheckbox from '@/components/Checkbox'
-import { FiSave, FiXCircle } from 'react-icons/fi'
+import { FiSave, FiUpload, FiXCircle } from 'react-icons/fi'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
+import AvatarComponent from '@/components/AvatarComponent'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
 import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import '@/styles/CreatePatientPage.css'
-import AvatarComponent from '@/components/AvatarComponent'
 
 const CreatePatientPage = () => {
 	const {
@@ -19,6 +19,7 @@ const CreatePatientPage = () => {
 		patientData,
 		handleInput,
 		handleSaveData,
+		handleChangeFile,
 		handleChangeDate,
 		handleChangePhone,
 		handleCancelButton,
@@ -46,10 +47,36 @@ const CreatePatientPage = () => {
 					<div className="form_patient-first_section">
 						<div className="first_section-avatar_component">
 							<Button aria-label="Agregar foto">
-								<AvatarComponent name={patientData.name} />
+								<label htmlFor="avatar">
+									<AvatarComponent name={patientData.name} />
+								</label>
 							</Button>
+							<input
+								id="avatar"
+								name="avatar"
+								type="file"
+								accept="image/*"
+								className="btn-get-picture_input"
+								onChange={handleChangeFile}
+								style={{ display: 'none' }}
+								multiple={false}
+							/>
 							<div className="btn-group">
-								<Button variant="contained">Agregar foto</Button>
+								<Button variant="contained" className="btn_btn-get-picture">
+									<label htmlFor="avatar" className="upload-label">
+										<FiUpload /> Subir imagen
+									</label>
+									<input
+										id="avatar"
+										name="avatar"
+										type="file"
+										accept="image/*"
+										className="btn-get-picture_input"
+										onChange={handleChangeFile}
+										style={{ display: 'none' }}
+										multiple={false}
+									/>
+								</Button>
 								<Button variant="outlined" color="error">
 									Quitar
 								</Button>
@@ -143,9 +170,9 @@ const CreatePatientPage = () => {
 						>
 							Analisis Sistémico
 						</AccordionSummary>
-						<AccordionDetails className="systemicAnalysisAccordion">
-							<div className="systemicAnalysisAccordionContent">
-								<ul className="AccordionContent">
+						<AccordionDetails className="accordion-systemic_analysis">
+							<div className="systemic_analysis-content">
+								<ul className="contetn-checks">
 									<InputCheckbox
 										id="SNC"
 										key="SNC"
@@ -184,8 +211,8 @@ const CreatePatientPage = () => {
 									onChange={handleInput}
 								/>
 							</div>
-							<div className="systemicAnalysisAccordionContent">
-								<ul className="AccordionContent">
+							<div className="systemic_analysis-content">
+								<ul className="contetn-checks">
 									<InputCheckbox
 										id="SR"
 										key="SR"

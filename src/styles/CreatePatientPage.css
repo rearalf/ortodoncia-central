@@ -11,7 +11,7 @@
 .createPatient_main .form_patient {
 	display: flex;
 	flex-direction: column;
-	gap: 18px;
+	gap: 24px;
 	width: 100%;
 }
 
@@ -21,12 +21,24 @@
 	gap: 24px;
 }
 
+.createPatient_main .MuiPaper-root {
+	border-radius: 4px;
+	background-color: var(--background-color-3);
+}
+
+.createPatient_main .MuiPaper-root .MuiAccordionSummary-content {
+	font-size: 14px;
+	font-weight: 600;
+}
+
 .createPatient_main .form_patient .first_section-optional_section,
 .createPatient_main .form_patient .form_patient-first_section .first_section-avatar_component,
 .createPatient_main .form_patient .form_patient-first_section .first_section-required_inputs {
 	background-color: var(--background-color-3);
 	padding: 24px;
 	border-radius: 4px;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 .createPatient_main .form_patient .first_section-optional_section,
@@ -61,100 +73,44 @@
 	.btn-group {
 	display: flex;
 	gap: 12px;
+	position: relative; /* Agregado para el posicionamiento del input */
 }
 
-@media (width >= 1024px) {
-	.createPatient_main .form_patient .first_section-optional_section,
-	.createPatient_main .form_patient .form_patient-first_section {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-/* .createPatient_main .firstPart,
-.createPatient_main .secondPart {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-}
-
-.createPatient_main .systemicAnalysisAccordion {
+.createPatient_main .accordion-systemic_analysis {
 	display: flex;
 	flex-direction: column;
 	gap: 18px;
-}
-
-.createPatient_main .btn_group {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	gap: 16px;
 }
 
 .createPatient_main .MuiFormControl-root.MuiTextField-root {
 	width: 100%;
 }
 
-.createPatient_main .avatarComponent {
+.createPatient_main .form_patient .btn_group {
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 	gap: 12px;
 }
 
-.createPatient_main .avatarComponent .btn-group {
-	display: flex;
-	gap: 12px;
+.createPatient_main .form_patient .btn_btn-get-picture .btn-get-picture_input {
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
 }
 
-.createPatient_main .avatarComponent .MuiAvatar-root.MuiAvatar-circular {
-	width: 250px;
-	height: 250px;
-	font-size: 130px;
-}
-
-@media (width >= 768px) {
-	.createPatient_main .firstPart,
-	.createPatient_main .secondPart {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	.createPatient_main .avatarComponent {
-	}
-
-	.createPatient_main .avatarComponent .MuiAvatar-root.MuiAvatar-circular {
-		width: 200px;
-		height: 200px;
-	}
-
-	.createPatient_main .systemicAnalysisAccordion {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	.createPatient_main .btn_group {
+@media (min-width: 768px) {
+	.createPatient_main .form_patient .btn_group {
 		flex-direction: row;
-		gap: 32px;
+		justify-content: center;
 	}
 }
 
-@media (width >= 1024px) {
-	.createPatient_main .firstPart {
+@media (min-width: 1024px) {
+	.createPatient_main .form_patient .first_section-optional_section,
+	.createPatient_main .form_patient .form_patient-first_section {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-	}
-	.createPatient_main .secondPart {
-		grid-template-columns: repeat(4, 1fr);
-	}
-
-	.createPatient_main .teethFirstRow {
-		gap: 32px;
-	}
-
-	.createPatient_main .teethFirstRow_row {
-		gap: 18px 32px;
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
- */
