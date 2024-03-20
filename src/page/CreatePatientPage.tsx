@@ -9,13 +9,13 @@ import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
 import AvatarComponent from '@/components/AvatarComponent'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
+import BackdropLoading from '@/components/BackdropLoading'
 import {
 	Button,
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
 	CircularProgress,
-	Backdrop,
 } from '@mui/material'
 import '@/styles/CreatePatientPage.css'
 
@@ -38,12 +38,7 @@ const CreatePatientPage = () => {
 
 	return (
 		<>
-			<Backdrop
-				sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
-				open={loadingPatient}
-			>
-				<CircularProgress />
-			</Backdrop>
+			<BackdropLoading loading={loadingPatient} />
 			<HeadComponent title="Crear paciente" />
 			<Navbar />
 			<main className="createPatient_main">

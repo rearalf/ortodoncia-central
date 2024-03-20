@@ -39,6 +39,19 @@
 	background-color: var(--background-color-3);
 	padding: 24px;
 	border-radius: 4px;
+	position: relative;
+}
+
+.main_information .information_basicInformation .avatar_photo {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.main_information .information_basicInformation .avatar_photo .MuiAvatar-root {
+	width: 100px;
+	height: 100px;
+	font-size: 50px;
 }
 
 .main_information .info_data {

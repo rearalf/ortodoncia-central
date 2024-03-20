@@ -7,11 +7,15 @@ import AppointmentsTable from '@/components/AppointmentsTable'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
 import { FiCalendar, FiSmartphone, FiUserPlus } from 'react-icons/fi'
 import '@/styles/PatientProfilePage.css'
+import AvatarComponent from '@/components/AvatarComponent'
+import BackdropLoading from '@/components/BackdropLoading'
 
 const PatientProfilePage = () => {
-	const { patientData, handleGoToTeethForm, handleGoToUpdatePatient } = usePatientProfilePage()
+	const { patientData, loading, handleGoToTeethForm, handleGoToUpdatePatient } =
+		usePatientProfilePage()
 	return (
 		<>
+			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
 			<main className="patientprofile_main">
@@ -60,10 +64,20 @@ const PatientProfilePage = () => {
 
 				<div className="main_information">
 					<article className="information_basicInformation">
+						<div className="avatar_photo">
+							<AvatarComponent
+								srcImage={patientData.avatarURL}
+								name={`${patientData.name.split(' ')[0]} ${
+									patientData.name.split(' ')[2]
+										? patientData.name.split(' ')[2]
+										: patientData.name.split(' ')[1]
+								}`}
+							/>
+						</div>
 						<h2 className="basicInformation_title">Datos personales</h2>
 						<div className="basicInformation__info">
 							<p className="info_data">
-								Nombre completo: <span className="info">{patientData.name}</span>
+								Nombre: <span className="info">{patientData.name}</span>
 							</p>
 							<p className="info_data">
 								Edad: <span className="info">{patientData.age}</span>

@@ -1,6 +1,6 @@
 import getAge from '@/utils/getAge'
 import Patient from '@/models/Patient'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -17,6 +17,7 @@ function usePatientProfilePage() {
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
 	const { setHandleState } = useAlertState()
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const handleGoToTeethForm = () => navigate('/teeth-form/' + id)
 	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
@@ -24,9 +25,11 @@ function usePatientProfilePage() {
 	const getPatientData = useCallback(async () => {
 		try {
 			if (id) {
+				setLoading(true)
 				const patient = new Patient()
 				const data = await patient.getPatient(id)
 				if (data !== undefined) {
+					setLoading(false)
 					setPatientData({
 						...data,
 						age: getAge(new Date(data.birthdate).toISOString()),
@@ -41,6 +44,7 @@ function usePatientProfilePage() {
 				}
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log('Error getting patient data usePatient: ' + error)
 			setHandleState({
 				severity: 'error',
@@ -125,6 +129,7 @@ function usePatientProfilePage() {
 	}, [setToothState, setPositionState])
 
 	return {
+		loading,
 		patientData,
 		handleGoToTeethForm,
 		handleGoToUpdatePatient,
