@@ -1,5 +1,5 @@
 import Patient from '@/models/Patient'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { OrthoTerms, maxDate, minDate } from '@/utils/constants'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
@@ -10,6 +10,11 @@ function useUpdatePatientPage() {
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
+	const [progress, setUploadTask] = useState(0)
+	const [avatarURL, setAvatarURL] = useState('')
+	const [avatar, setAvatar] = useState<File | undefined>(undefined)
+	const [loading, setLoading] = useState<boolean>(false)
+	const [loadingPatient, setLoadingPatient] = useState<boolean>(false)
 
 	const handleChangePhone = (
 		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -65,11 +70,70 @@ function useUpdatePatientPage() {
 		}
 	}
 
-	const handleSaveData = async () => {
+	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
 		try {
-			const newPatient = new Patient()
+			e.preventDefault()
+			if (patientData.name === '') {
+				setHandleState({
+					severity: 'warning',
+					variant: 'filled',
+					show: true,
+					text: 'Debe agregar el nombre completo.',
+				})
+				throw 'Fiel name is empty.'
+			}
+			if (patientData.phone === '') {
+				setHandleState({
+					severity: 'warning',
+					variant: 'filled',
+					show: true,
+					text: 'Debe agregar el número de teléfono.',
+				})
+				throw 'Fiel phone is empty.'
+			}
+			setLoadingPatient(true)
+
+			const modelPatient = new Patient()
+			let uploadURL: string = ''
+			let avatarNewName: number
+
+			if (!patientData.avatarName) {
+				avatarNewName = new Date().getTime()
+			} else {
+				avatarNewName = patientData.avatarName
+			}
+
+			if (avatar) {
+				setLoading(true)
+				const uploadTask = await modelPatient.upLoadAvatar(
+					avatar,
+					avatarNewName,
+					setUploadTask,
+				)
+				if (uploadTask.resolve) {
+					uploadURL = uploadTask.downloadURL
+					setPatientData({
+						...patientData,
+						avatarURL: uploadTask.downloadURL,
+						avatarName: avatarNewName,
+					})
+				} else {
+					setLoading(false)
+					setHandleState({
+						severity: 'error',
+						variant: 'filled',
+						show: true,
+						text: 'Error al subir la imagen.',
+					})
+				}
+			}
+
 			if (id !== undefined) {
-				const patient = await newPatient.updatePatient(id, patientData)
+				const patient = await modelPatient.updatePatient(id, {
+					...patientData,
+					avatarURL: uploadURL,
+					avatarName: avatarNewName,
+				})
 
 				if (patient) {
 					setPatientData({
@@ -116,6 +180,7 @@ function useUpdatePatientPage() {
 				if (id) {
 					const getPatientData = await ModelPatient.getPatient(id)
 					if (getPatientData) {
+						if (getPatientData.avatarURL) setAvatarURL(getPatientData.avatarURL)
 						setPatientData(getPatientData)
 					}
 				} else {
@@ -132,19 +197,54 @@ function useUpdatePatientPage() {
 		}
 	}, [id, patientData.name, setPatientData, setHandleState, patientData.id])
 
+	const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+		try {
+			if (event.target.files !== null) {
+				const file = event.target.files[0]
+				if (file.type && file.type.startsWith('image/')) {
+					const imgUrl = URL.createObjectURL(file)
+					setAvatarURL(imgUrl)
+					setAvatar(file)
+				} else {
+					setHandleState({
+						severity: 'error',
+						variant: 'filled',
+						show: true,
+						text: 'El archivo seleccionado no es una imagen.',
+					})
+				}
+			}
+		} catch (error) {
+			console.log('Handle change file error: ' + error)
+		}
+	}
+
+	const handleCancelFile = () => {
+		setAvatar(undefined)
+		setAvatarURL('')
+	}
+
 	useEffect(() => {
 		if (id !== undefined) {
+			if (patientData.avatarURL) setAvatarURL(patientData.avatarURL)
 			getPatient()
+		} else {
+			if (patientData.avatarURL) setAvatarURL(patientData.avatarURL)
 		}
 	}, [id, getPatient])
 
 	return {
 		minDate,
 		maxDate,
+		loading,
+		avatarURL,
 		patientData,
+		loadingPatient,
 		handleInput,
 		handleSaveData,
+		handleCancelFile,
 		handleChangeDate,
+		handleChangeFile,
 		handleChangePhone,
 		handleCancelButton,
 	}

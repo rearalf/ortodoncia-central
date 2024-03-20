@@ -3,26 +3,40 @@ import { SlArrowDown } from 'react-icons/sl'
 import InputDate from '@/components/InputDate'
 import InputBasic from '@/components/InputBasic'
 import InputCheckbox from '@/components/Checkbox'
-import { FiSave, FiXCircle } from 'react-icons/fi'
+import { FiSave, FiUpload, FiXCircle } from 'react-icons/fi'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
 import useUpdatePatientPage from '@/hooks/useUpdatePatientPage'
-import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Button,
+	CircularProgress,
+} from '@mui/material'
+import AvatarComponent from '@/components/AvatarComponent'
+import BackdropLoading from '@/components/BackdropLoading'
 
 function UpdatePatientPage() {
 	const {
 		minDate,
 		maxDate,
+		loading,
+		avatarURL,
 		patientData,
+		loadingPatient,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
+		handleCancelFile,
+		handleChangeFile,
 		handleChangePhone,
 		handleCancelButton,
 	} = useUpdatePatientPage()
 	return (
 		<>
+			<BackdropLoading loading={loadingPatient} />
 			<HeadComponent title={`Actualizar paciente | `} />
 			<Navbar />
 			<main className="createPatient_main">
@@ -50,7 +64,7 @@ function UpdatePatientPage() {
 						},
 					]}
 				/>
-				<h1>
+				<h1 className="createPatient_main-title">
 					Actualizar paciente -{' '}
 					{`${patientData.name.split(' ')[0]} ${
 						patientData.name.split(' ')[2]
@@ -58,49 +72,92 @@ function UpdatePatientPage() {
 							: patientData.name.split(' ')[1]
 					}`}
 				</h1>
-				<form className="form_patient">
-					<div className="firstPart">
-						<InputBasic
-							required
-							id="name"
-							key="name"
-							type="text"
-							value={patientData.name}
-							onChange={handleInput}
-							label="Nombre completo"
-						/>
+				<form className="form_patient" onSubmit={handleSaveData}>
+					<div className="form_patient-first_section">
+						<div className="first_section-avatar_component">
+							{loading && (
+								<div className="avatar_component-loading">
+									<CircularProgress />
+								</div>
+							)}
+							<Button aria-label="Agregar foto">
+								<label htmlFor="avatar">
+									<AvatarComponent srcImage={avatarURL} name={patientData.name} />
+								</label>
+							</Button>
+							<input
+								id="avatar"
+								name="avatar"
+								type="file"
+								accept="image/*"
+								className="btn-get-picture_input"
+								onChange={handleChangeFile}
+								style={{ display: 'none' }}
+								multiple={false}
+							/>
+							<div className="btn-group">
+								<Button variant="contained" className="btn_btn-get-picture">
+									<label htmlFor="avatar" className="upload-label">
+										<FiUpload /> Subir imagen
+									</label>
+									<input
+										id="avatar"
+										name="avatar"
+										type="file"
+										accept="image/*"
+										className="btn-get-picture_input"
+										onChange={handleChangeFile}
+										style={{ display: 'none' }}
+										multiple={false}
+									/>
+								</Button>
+								<Button variant="outlined" color="error" onClick={handleCancelFile}>
+									Quitar
+								</Button>
+							</div>
+						</div>
+						<div className="first_section-required_inputs">
+							<InputBasic
+								required
+								id="name"
+								key="name"
+								type="text"
+								value={patientData.name}
+								onChange={handleInput}
+								label="Nombre completo"
+							/>
 
-						<InputDate
-							name="birthdate"
-							key="birthdate"
-							label="Fecha de nacimiento"
-							value={patientData.birthdate}
-							onChange={handleChangeDate}
-							helperText="MM/DD/YYYY"
-							maxDate={maxDate}
-							minDate={minDate}
-						/>
+							<InputDate
+								name="birthdate"
+								key="birthdate"
+								label="Fecha de nacimiento"
+								value={patientData.birthdate}
+								onChange={handleChangeDate}
+								helperText="MM/DD/YYYY"
+								maxDate={maxDate}
+								minDate={minDate}
+							/>
 
-						<InputBasic
-							type="text"
-							id="occupation"
-							key="occupation"
-							label="Ocupación"
-							value={patientData.occupation || ''}
-							onChange={handleInput}
-						/>
+							<InputBasic
+								type="text"
+								id="occupation"
+								key="occupation"
+								label="Ocupación"
+								value={patientData.occupation || ''}
+								onChange={handleInput}
+							/>
 
-						<PhoneNumberInput
-							required
-							key="phone"
-							name="phone"
-							label="Teléfono"
-							value={patientData.phone}
-							onChange={handleChangePhone}
-						/>
+							<PhoneNumberInput
+								required
+								key="phone"
+								name="phone"
+								label="Teléfono"
+								value={patientData.phone}
+								onChange={handleChangePhone}
+							/>
+						</div>
 					</div>
-
-					<div className="secondPart">
+					<div className="first_section-optional_section">
 						<InputBasic
 							multiline
 							type="text"
@@ -149,9 +206,9 @@ function UpdatePatientPage() {
 						>
 							Analisis Sistémico
 						</AccordionSummary>
-						<AccordionDetails className="systemicAnalysisAccordion">
-							<div className="systemicAnalysisAccordionContent">
-								<ul className="AccordionContent">
+						<AccordionDetails className="accordion-systemic_analysis">
+							<div className="systemic_analysis-content">
+								<ul className="contetn-checks">
 									<InputCheckbox
 										id="SNC"
 										key="SNC"
@@ -190,8 +247,8 @@ function UpdatePatientPage() {
 									onChange={handleInput}
 								/>
 							</div>
-							<div className="systemicAnalysisAccordionContent">
-								<ul className="AccordionContent">
+							<div className="systemic_analysis-content">
+								<ul className="contetn-checks">
 									<InputCheckbox
 										id="SR"
 										key="SR"
@@ -237,7 +294,7 @@ function UpdatePatientPage() {
 						<Button
 							variant="contained"
 							color="success"
-							onClick={handleSaveData}
+							type="submit"
 							startIcon={<FiSave />}
 						>
 							Guardar

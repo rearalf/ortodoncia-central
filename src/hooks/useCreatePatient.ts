@@ -99,6 +99,7 @@ function useCreatePatient() {
 				throw 'Fiel phone is empty.'
 			}
 			setLoadingPatient(true)
+
 			const newPatient = new Patient()
 			let uploadURL: string = ''
 			const avatarName: number = new Date().getTime()
