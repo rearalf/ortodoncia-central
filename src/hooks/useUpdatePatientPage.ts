@@ -233,6 +233,10 @@ function useUpdatePatientPage() {
 		}
 	}, [id, getPatient])
 
+	useEffect(() => {
+		if (progress === 100) setLoading(false)
+	}, [progress])
+
 	return {
 		minDate,
 		maxDate,
