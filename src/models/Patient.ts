@@ -144,7 +144,7 @@ class Patient {
 		file: File,
 		nameImage: number,
 		setUploadTask: (value: number) => void,
-	): Promise<string> {
+	): Promise<{ resolve: boolean; downloadURL: string }> {
 		try {
 			const avatarRef = ref(storage, 'avatars/' + nameImage)
 			const uploadTask = uploadBytesResumable(avatarRef, file)
@@ -160,7 +160,7 @@ class Patient {
 					},
 					() => {
 						getDownloadURL(uploadTask.snapshot.ref).then(downloadURL =>
-							resolve(downloadURL),
+							resolve({ resolve: true, downloadURL }),
 						)
 					},
 				)

@@ -60,6 +60,15 @@
 	.form_patient
 	.form_patient-first_section
 	.first_section-avatar_component
+	.avatar_component-loading {
+	position: absolute;
+	z-index: 2;
+}
+
+.createPatient_main
+	.form_patient
+	.form_patient-first_section
+	.first_section-avatar_component
 	.MuiAvatar-root.MuiAvatar-circular {
 	width: 250px;
 	height: 250px;
@@ -108,6 +117,7 @@
 }
 
 @media (min-width: 1024px) {
+	.createPatient_main .accordion-systemic_analysis,
 	.createPatient_main .form_patient .first_section-optional_section,
 	.createPatient_main .form_patient .form_patient-first_section {
 		display: grid;

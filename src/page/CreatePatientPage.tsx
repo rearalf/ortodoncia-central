@@ -9,15 +9,24 @@ import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
 import AvatarComponent from '@/components/AvatarComponent'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
-import { Button, Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import {
+	Button,
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	CircularProgress,
+	Backdrop,
+} from '@mui/material'
 import '@/styles/CreatePatientPage.css'
 
 const CreatePatientPage = () => {
 	const {
 		minDate,
 		maxDate,
+		loading,
 		avatarURL,
 		patientData,
+		loadingPatient,
 		handleInput,
 		handleSaveData,
 		handleCancelFile,
@@ -29,6 +38,12 @@ const CreatePatientPage = () => {
 
 	return (
 		<>
+			<Backdrop
+				sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
+				open={loadingPatient}
+			>
+				<CircularProgress />
+			</Backdrop>
 			<HeadComponent title="Crear paciente" />
 			<Navbar />
 			<main className="createPatient_main">
@@ -48,6 +63,11 @@ const CreatePatientPage = () => {
 				<form className="form_patient" onSubmit={handleSaveData}>
 					<div className="form_patient-first_section">
 						<div className="first_section-avatar_component">
+							{loading && (
+								<div className="avatar_component-loading">
+									<CircularProgress />
+								</div>
+							)}
 							<Button aria-label="Agregar foto">
 								<label htmlFor="avatar">
 									<AvatarComponent srcImage={avatarURL} name={patientData.name} />

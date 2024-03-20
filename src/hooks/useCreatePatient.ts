@@ -20,6 +20,8 @@ function useCreatePatient() {
 	const [progress, setUploadTask] = useState(0)
 	const [avatarURL, setAvatarURL] = useState('')
 	const [avatar, setAvatar] = useState<File | undefined>(undefined)
+	const [loading, setLoading] = useState<boolean>(false)
+	const [loadingPatient, setLoadingPatient] = useState<boolean>(false)
 
 	const handleChangePhone = (
 		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -96,18 +98,29 @@ function useCreatePatient() {
 				})
 				throw 'Fiel phone is empty.'
 			}
-
+			setLoadingPatient(true)
 			const newPatient = new Patient()
 			let uploadURL: string = ''
 			const avatarName: number = new Date().getTime()
 			if (avatar) {
+				setLoading(true)
 				const uploadTask = await newPatient.upLoadAvatar(avatar, avatarName, setUploadTask)
-				uploadURL = uploadTask
-				setPatientData({
-					...patientData,
-					avatarURL: uploadTask,
-					avatarName: avatarName,
-				})
+				if (uploadTask.resolve) {
+					uploadURL = uploadTask.downloadURL
+					setPatientData({
+						...patientData,
+						avatarURL: uploadTask.downloadURL,
+						avatarName: avatarName,
+					})
+				} else {
+					setLoading(false)
+					setHandleState({
+						severity: 'error',
+						variant: 'filled',
+						show: true,
+						text: 'Error al subir la imagen.',
+					})
+				}
 			}
 
 			const patient = await newPatient.save(
@@ -116,6 +129,7 @@ function useCreatePatient() {
 			)
 
 			if (patient !== undefined) {
+				setLoadingPatient(false)
 				setPatientData({
 					...patientData,
 					id: patient,
@@ -130,6 +144,7 @@ function useCreatePatient() {
 					text: 'Datos guardados con éxito.',
 				})
 			} else {
+				setLoadingPatient(false)
 				setHandleState({
 					severity: 'error',
 					variant: 'filled',
@@ -175,12 +190,10 @@ function useCreatePatient() {
 		}
 	}
 
-	const handleCancelFile = () =>
-		setPatientData({
-			...patientData,
-			avatar: undefined,
-			avatarURL: undefined,
-		})
+	const handleCancelFile = () => {
+		setAvatar(undefined)
+		setAvatarURL('')
+	}
 
 	useEffect(() => {
 		setPatientData(patientBasicData)
@@ -188,15 +201,16 @@ function useCreatePatient() {
 	}, [setPatientData, setTeethList])
 
 	useEffect(() => {
-		console.log({ progress })
+		if (progress === 100) setLoading(false)
 	}, [progress])
 
 	return {
 		minDate,
 		maxDate,
-		progress,
+		loading,
 		avatarURL,
 		patientData,
+		loadingPatient,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
