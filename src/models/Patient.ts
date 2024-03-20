@@ -1,4 +1,5 @@
-import { db } from '@/database/firebase'
+import { db, storage } from '@/database/firebase'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import {
 	doc,
 	where,
@@ -136,6 +137,37 @@ class Patient {
 		} catch (error) {
 			console.log('Error searching patients: ' + error)
 			return []
+		}
+	}
+
+	async upLoadAvatar(
+		file: File,
+		nameImage: number,
+		setUploadTask: (value: number) => void,
+	): Promise<string> {
+		try {
+			const avatarRef = ref(storage, 'avatars/' + nameImage)
+			const uploadTask = uploadBytesResumable(avatarRef, file)
+			return new Promise((resolve, reject) => {
+				uploadTask.on(
+					'state_changed',
+					snapshot => {
+						const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+						setUploadTask(progress)
+					},
+					error => {
+						reject(error)
+					},
+					() => {
+						getDownloadURL(uploadTask.snapshot.ref).then(downloadURL =>
+							resolve(downloadURL),
+						)
+					},
+				)
+			})
+		} catch (error) {
+			console.error('Error uploading avatar:', error)
+			throw error
 		}
 	}
 }

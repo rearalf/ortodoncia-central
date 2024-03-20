@@ -1,6 +1,8 @@
 interface PatientDataInterface {
 	id?: string
-	avatar?: string
+	avatar?: File
+	avatarName?: number
+	avatarURL?: string
 	name: string
 	age?: number
 	birthdate: Date

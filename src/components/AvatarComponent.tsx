@@ -39,13 +39,16 @@ const AvatarComponent = (props: AvatarComponentProps = AvatarComponentDefault) =
 		disableInteractive={props.disableInteractive}
 		arrow
 	>
-		<Avatar
-			children={stringAvatar(props.name)?.children}
-			sx={stringAvatar(props.name)?.sx}
-			src={props.srcImage}
-			className={props.className}
-			alt={props.name}
-		/>
+		{!props.srcImage ? (
+			<Avatar
+				children={stringAvatar(props.name)?.children}
+				sx={stringAvatar(props.name)?.sx}
+				className={props.className}
+				alt={props.name}
+			/>
+		) : (
+			<Avatar src={props.srcImage} className={props.className} alt={props.name} />
+		)}
 	</Tooltip>
 )
 

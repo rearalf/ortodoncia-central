@@ -1,5 +1,5 @@
 import Patient from '@/models/Patient'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
@@ -17,6 +17,9 @@ function useCreatePatient() {
 	const { patientData, setPatientData } = usePatientState()
 	const { teethList, setTeethList } = useTeethState()
 	const { setHandleState } = useAlertState()
+	const [progress, setUploadTask] = useState(0)
+	const [avatarURL, setAvatarURL] = useState('')
+	const [avatar, setAvatar] = useState<File | undefined>(undefined)
 
 	const handleChangePhone = (
 		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -95,7 +98,23 @@ function useCreatePatient() {
 			}
 
 			const newPatient = new Patient()
-			const patient = await newPatient.save(patientData, teethList)
+			let uploadURL: string = ''
+			const avatarName: number = new Date().getTime()
+			if (avatar) {
+				const uploadTask = await newPatient.upLoadAvatar(avatar, avatarName, setUploadTask)
+				uploadURL = uploadTask
+				setPatientData({
+					...patientData,
+					avatarURL: uploadTask,
+					avatarName: avatarName,
+				})
+			}
+
+			const patient = await newPatient.save(
+				{ ...patientData, avatarURL: uploadURL, avatarName: avatarName },
+				teethList,
+			)
+
 			if (patient !== undefined) {
 				setPatientData({
 					...patientData,
@@ -137,24 +156,52 @@ function useCreatePatient() {
 	const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
 			if (event.target.files !== null) {
-				console.log(event.target.files[0])
+				const file = event.target.files[0]
+				if (file.type && file.type.startsWith('image/')) {
+					const imgUrl = URL.createObjectURL(file)
+					setAvatarURL(imgUrl)
+					setAvatar(file)
+				} else {
+					setHandleState({
+						severity: 'error',
+						variant: 'filled',
+						show: true,
+						text: 'El archivo seleccionado no es una imagen.',
+					})
+				}
 			}
-		} catch (error) {}
+		} catch (error) {
+			console.log('Handle change file error: ' + error)
+		}
 	}
+
+	const handleCancelFile = () =>
+		setPatientData({
+			...patientData,
+			avatar: undefined,
+			avatarURL: undefined,
+		})
 
 	useEffect(() => {
 		setPatientData(patientBasicData)
 		setTeethList(constantTeethList)
-	}, [])
+	}, [setPatientData, setTeethList])
+
+	useEffect(() => {
+		console.log({ progress })
+	}, [progress])
 
 	return {
 		minDate,
 		maxDate,
+		progress,
+		avatarURL,
 		patientData,
 		handleInput,
 		handleSaveData,
 		handleChangeDate,
 		handleChangeFile,
+		handleCancelFile,
 		handleChangePhone,
 		handleCancelButton,
 	}

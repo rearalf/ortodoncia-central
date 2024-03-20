@@ -9,16 +9,18 @@ import HeadComponent from '@/components/HeadComponent'
 import useCreatePatient from '@/hooks/useCreatePatient'
 import AvatarComponent from '@/components/AvatarComponent'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
-import { Accordion, AccordionDetails, AccordionSummary, Button } from '@mui/material'
+import { Button, Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import '@/styles/CreatePatientPage.css'
 
 const CreatePatientPage = () => {
 	const {
 		minDate,
 		maxDate,
+		avatarURL,
 		patientData,
 		handleInput,
 		handleSaveData,
+		handleCancelFile,
 		handleChangeFile,
 		handleChangeDate,
 		handleChangePhone,
@@ -48,7 +50,7 @@ const CreatePatientPage = () => {
 						<div className="first_section-avatar_component">
 							<Button aria-label="Agregar foto">
 								<label htmlFor="avatar">
-									<AvatarComponent name={patientData.name} />
+									<AvatarComponent srcImage={avatarURL} name={patientData.name} />
 								</label>
 							</Button>
 							<input
@@ -77,7 +79,7 @@ const CreatePatientPage = () => {
 										multiple={false}
 									/>
 								</Button>
-								<Button variant="outlined" color="error">
+								<Button variant="outlined" color="error" onClick={handleCancelFile}>
 									Quitar
 								</Button>
 							</div>
