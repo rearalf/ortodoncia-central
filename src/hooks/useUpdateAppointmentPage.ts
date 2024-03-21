@@ -7,14 +7,24 @@ import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ChangeEvent, useCallback, useEffect } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 
 function useUpdateAppointmentPage() {
 	const navigate = useNavigate()
 	const { setHandleState } = useAlertState()
-	const { id_patient, id_appointment } = useParams()
+	const { id_patient, id_appointment, last_appointment } = useParams()
 	const { patientData, setPatientData } = usePatientState()
 	const { appointment, setAppointment, setTeethList } = useTeethState()
+	const [staticTeethList, setStaticTeethList] = useState<string>('')
+	const [newChanges, setNewChange] = useState<{
+		date: Date
+		formatDate: string
+		reason: string
+	}>({
+		date: new Date(),
+		formatDate: formatDate({ date: new Date() }),
+		reason: '',
+	})
 
 	const handleChangeInputDate = (value: Date | null) => {
 		try {
@@ -46,6 +56,33 @@ function useUpdateAppointmentPage() {
 			setAppointment({
 				...appointment,
 				[e.target.id]: e.target.value,
+			})
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const handleReasonChangeInputDate = (value: Date | null) => {
+		try {
+			if (value) {
+				setNewChange({
+					...newChanges,
+					date: value,
+					formatDate: formatDate({ date: new Date(value) }),
+				})
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const handleReasonChangeInput = (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+	) => {
+		try {
+			setNewChange({
+				...newChanges,
+				reason: e.target.value,
 			})
 		} catch (error) {
 			console.log(error)
@@ -108,29 +145,30 @@ function useUpdateAppointmentPage() {
 
 	const getAppointmentData = useCallback(async () => {
 		try {
-			const appointmentClass = new Appointment()
 			if (!patientData.id && !appointment.id && id_appointment && id_patient) {
+				const appointmentClass = new Appointment()
 				const appointmentById = await appointmentClass.getAppointment(
 					id_patient,
 					id_appointment,
 				)
 				if (appointmentById) {
 					setAppointment({
-						...appointmentById.appointment,
+						...appointmentById,
 						date: new Date(
-							appointmentById.appointment.date.seconds * 1000 +
-								appointmentById.appointment.date.nanoseconds / 1000000,
+							appointmentById.date.seconds * 1000 +
+								appointmentById.date.nanoseconds / 1000000,
 						),
 						formatDate: formatDate({
 							date: new Date(
-								appointmentById.appointment.date.seconds * 1000 +
-									appointmentById.appointment.date.nanoseconds / 1000000,
+								appointmentById.date.seconds * 1000 +
+									appointmentById.date.nanoseconds / 1000000,
 							),
 						}),
 						id: id_appointment,
 					})
 					const teeth = JSON.parse(JSON.parse(JSON.stringify(appointmentById.teeth)))
 					setTeethList(teeth)
+					setStaticTeethList(appointmentById.teeth)
 				}
 			}
 		} catch (error) {
@@ -162,14 +200,18 @@ function useUpdateAppointmentPage() {
 	}, [id_patient, id_appointment, getPatientData, getAppointmentData])
 
 	return {
+		newChanges,
 		appointment,
 		patientData,
+		last_appointment,
 		handleSave,
 		handleCancel,
 		handleChangeCost,
 		handleChangeInput,
 		handleChangeInputDate,
 		handleChangeSelectInput,
+		handleReasonChangeInput,
+		handleReasonChangeInputDate,
 	}
 }
 

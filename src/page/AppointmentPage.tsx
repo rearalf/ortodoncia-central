@@ -8,7 +8,7 @@ import { Button } from '@mui/material'
 import BreadCrumbs from '@/components/BreadCrumbs'
 
 function AppointmentPage() {
-	const { appointment, patientData } = useAppointment()
+	const { appointment, patientData, last_appointment } = useAppointment()
 
 	return (
 		<>
@@ -55,7 +55,11 @@ function AppointmentPage() {
 						}`}
 					</h1>
 					<Link
-						to={`/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment`}
+						to={
+							last_appointment
+								? `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment/true`
+								: `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment`
+						}
 					>
 						<Button variant="contained">Modificar cita</Button>
 					</Link>

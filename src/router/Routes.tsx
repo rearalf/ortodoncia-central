@@ -35,11 +35,11 @@ const router = createBrowserRouter(
 					element: <UpdatePatientPage />,
 				},
 				{
-					path: '/patient-profile/:id_patient/appointment/:id_appointment',
+					path: '/patient-profile/:id_patient/appointment/:id_appointment/:last_appointment',
 					element: <AppointmentPage />,
 				},
 				{
-					path: '/patient-profile/:id_patient/appointment/:id_appointment/update-appointment',
+					path: '/patient-profile/:id_patient/appointment/:id_appointment/update-appointment/:last_appointment',
 					element: <UpdateAppointmentPage />,
 				},
 			],

@@ -10,7 +10,7 @@ import useTeethState from '@/states/toothFormState'
 import { constantTeethList } from '@/utils/constants'
 
 function useAppointment() {
-	const { id_patient, id_appointment } = useParams()
+	const { id_patient, id_appointment, last_appointment } = useParams()
 	const { patientData, setPatientData } = usePatientState()
 	const { appointment, setTeethList, setAppointment } = useTeethState()
 	const { setHandleState } = useAlertState()
@@ -92,6 +92,7 @@ function useAppointment() {
 	return {
 		patientData,
 		appointment,
+		last_appointment,
 	}
 }
 

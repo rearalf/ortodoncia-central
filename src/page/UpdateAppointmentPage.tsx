@@ -10,17 +10,22 @@ import useUpdateAppointmentPage from '@/hooks/useUpdateAppointmentPage'
 import '@/styles/UpdateAppointmentPage.css'
 import TeethTable from '@/components/TeethTable'
 import BreadCrumbs from '@/components/BreadCrumbs'
+import TeethForm from '@/components/TeethForm'
 
 function UpdateAppointmentPage() {
 	const {
+		newChanges,
 		appointment,
 		patientData,
+		last_appointment,
 		handleSave,
 		handleCancel,
 		handleChangeCost,
 		handleChangeInput,
 		handleChangeInputDate,
 		handleChangeSelectInput,
+		handleReasonChangeInput,
+		handleReasonChangeInputDate,
 	} = useUpdateAppointmentPage()
 	return (
 		<>
@@ -47,7 +52,9 @@ function UpdateAppointmentPage() {
 									? patientData.name.split(' ')[2]
 									: patientData.name.split(' ')[1]
 							}`,
-							link_to: `/patient-profile/${patientData.id}/appointment/${appointment.id}`,
+							link_to: last_appointment
+								? `/patient-profile/${patientData.id}/appointment/${appointment.id}/true`
+								: `/patient-profile/${patientData.id}/appointment/${appointment.id}`,
 						},
 						{
 							link_name: 'Modificar cita',
@@ -66,7 +73,7 @@ function UpdateAppointmentPage() {
 							label="Fecha de la cita"
 							value={appointment.date}
 							onChange={handleChangeInputDate}
-							helperText={appointment.formatDate}
+							helperText={appointment.formatDate?.toUpperCase()}
 							disabled
 						/>
 						<InputNumericFormat
@@ -106,9 +113,35 @@ function UpdateAppointmentPage() {
 						/>
 					</div>
 
+					{last_appointment && (
+						<section className="form_reason-change">
+							<h2>Razón del cambio</h2>
+							<div className="reason-change_inputs">
+								<InputDate
+									name="dateChange"
+									key="dateChange"
+									label="Fecha del cambio"
+									value={newChanges.date}
+									onChange={handleReasonChangeInputDate}
+									helperText={newChanges.formatDate.toUpperCase()}
+									disabled
+								/>
+								<InputBasic
+									multiline
+									type="text"
+									id="reasonChange"
+									key="reasonChange"
+									label="Razón del cambio"
+									value={newChanges.reason}
+									onChange={handleReasonChangeInput}
+								/>
+							</div>
+						</section>
+					)}
+
 					<section className="form_odontograma">
 						<h2>Odontograma al finalizar la cita</h2>
-						<TeethTable />
+						{last_appointment ? <TeethForm /> : <TeethTable />}
 					</section>
 
 					<div className="btn_group">

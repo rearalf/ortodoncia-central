@@ -16,6 +16,18 @@
 	margin-bottom: 24px;
 }
 
+.main_form .form_reason-change,
+.main_form .form_odontograma,
+.main_form .form_content {
+	background-color: var(--background-color-3);
+	padding: 24px;
+	border-radius: 4px;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.main_form .form_reason-change .reason-change_inputs,
+.main_form .form_reason-change,
 .main_form .form_content {
 	display: flex;
 	flex-direction: column;
@@ -29,6 +41,7 @@
 }
 
 @media (width >= 768px) {
+	.main_form .form_reason-change .reason-change_inputs,
 	.main_form .form_content {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);

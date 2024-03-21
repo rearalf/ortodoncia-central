@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import useAppointmentState from '@/states/appointmentsState'
 import TablePaginationActions from './TablePaginationActions'
-import { FiCalendar } from 'react-icons/fi'
+import { FiBookmark, FiCalendar } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 const AppointmentsTable = () => {
@@ -48,7 +48,7 @@ const AppointmentsTable = () => {
 					{(rowsPerPage > 0
 						? appointments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 						: appointments
-					).map(data => (
+					).map((data, i) => (
 						<TableRow key={data.id}>
 							<TableCell>{data.formatDate}</TableCell>
 							<TableCell style={{ maxWidth: 250 }}>
@@ -59,12 +59,33 @@ const AppointmentsTable = () => {
 							<TableCell align="center">$ {data.cost}</TableCell>
 							<TableCell align="center">{data.doctor}</TableCell>
 							<TableCell align="center">
+								{i === 0 && (
+									<Tooltip title="Modificar cita">
+										<Link
+											to={`/patient-profile/${data.id_patient}/appointment/${
+												data.id
+											}/update-appointment/${true}`}
+										>
+											<IconButton>
+												<FiCalendar size={20} />
+											</IconButton>
+										</Link>
+									</Tooltip>
+								)}
 								<Tooltip title="Ver cita">
 									<Link
-										to={`/patient-profile/${data.id_patient}/appointment/${data.id}`}
+										to={
+											i === 0
+												? `/patient-profile/${
+														data.id_patient
+												  }/appointment/${
+														data.id
+												  }/${true}`
+												: `/patient-profile/${data.id_patient}/appointment/${data.id}`
+										}
 									>
 										<IconButton>
-											<FiCalendar size={20} />
+											<FiBookmark size={20} />
 										</IconButton>
 									</Link>
 								</Tooltip>
