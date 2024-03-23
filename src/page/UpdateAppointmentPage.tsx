@@ -1,16 +1,16 @@
 import { Button } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import InputDate from '@/components/InputDate'
+import TeethForm from '@/components/TeethForm'
 import InputBasic from '@/components/InputBasic'
+import TeethTable from '@/components/TeethTable'
 import { FiSave, FiXCircle } from 'react-icons/fi'
+import BreadCrumbs from '@/components/BreadCrumbs'
 import InputSelect from '@/components/InputSelect'
 import HeadComponent from '@/components/HeadComponent'
 import InputNumericFormat from '@/components/NumericFormatCustom '
 import useUpdateAppointmentPage from '@/hooks/useUpdateAppointmentPage'
 import '@/styles/UpdateAppointmentPage.css'
-import TeethTable from '@/components/TeethTable'
-import BreadCrumbs from '@/components/BreadCrumbs'
-import TeethForm from '@/components/TeethForm'
 
 function UpdateAppointmentPage() {
 	const {
@@ -121,9 +121,9 @@ function UpdateAppointmentPage() {
 									name="dateChange"
 									key="dateChange"
 									label="Fecha del cambio"
-									value={newChanges.date}
+									value={newChanges.dateChange}
 									onChange={handleReasonChangeInputDate}
-									helperText={newChanges.formatDate.toUpperCase()}
+									helperText={newChanges.formatdateChange.toUpperCase()}
 									disabled
 								/>
 								<InputBasic
@@ -132,7 +132,7 @@ function UpdateAppointmentPage() {
 									id="reasonChange"
 									key="reasonChange"
 									label="Razón del cambio"
-									value={newChanges.reason}
+									value={newChanges.reasonChange}
 									onChange={handleReasonChangeInput}
 								/>
 							</div>

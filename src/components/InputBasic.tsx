@@ -12,7 +12,7 @@ interface InputBasicProps {
 	onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
-const InputBasic = (props: InputBasicProps) => {
+const InputBasic = React.memo((props: InputBasicProps) => {
 	return (
 		<TextField
 			minRows={4}
@@ -28,6 +28,6 @@ const InputBasic = (props: InputBasicProps) => {
 			InputProps={{ inputProps: { min: 1, max: 10 } }}
 		/>
 	)
-}
+})
 
 export default InputBasic

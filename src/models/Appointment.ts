@@ -104,20 +104,40 @@ class Appointment {
 	async updateAppoinment(
 		id_patient: string,
 		id_appointment: string,
-		appointmentData: appointment,
+		appointmentData: appointment & {
+			dateChange?: Date
+			reasonChange?: string
+		},
 	) {
 		try {
 			const appointmentRef = doc(db, `patients/${id_patient}/appointment/${id_appointment}`)
 
-			const updateData = await updateDoc(appointmentRef, {
-				date: appointmentData.date,
-				treatment: appointmentData.treatment,
-				cost: appointmentData.cost,
-				doctor: appointmentData.doctor,
-				teeth: appointmentData.teeth,
-				created_at: appointmentData.created_at,
-				updated_at: serverTimestamp(),
-			})
+			let updateAppointment
+			if (appointmentData.dateChange && appointmentData.reasonChange) {
+				updateAppointment = {
+					date: appointmentData.date,
+					treatment: appointmentData.treatment,
+					cost: appointmentData.cost,
+					doctor: appointmentData.doctor,
+					teeth: JSON.stringify(appointmentData.teeth),
+					created_at: appointmentData.created_at,
+					updated_at: serverTimestamp(),
+					dateChange: appointmentData.dateChange,
+					reasonChange: appointmentData.reasonChange,
+				}
+			} else {
+				updateAppointment = {
+					date: appointmentData.date,
+					treatment: appointmentData.treatment,
+					cost: appointmentData.cost,
+					doctor: appointmentData.doctor,
+					teeth: appointmentData.teeth,
+					created_at: appointmentData.created_at,
+					updated_at: serverTimestamp(),
+				}
+			}
+
+			const updateData = await updateDoc(appointmentRef, updateAppointment)
 				.then(() => true)
 				.catch(() => false)
 			return updateData

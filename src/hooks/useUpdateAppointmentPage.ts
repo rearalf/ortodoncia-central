@@ -14,16 +14,16 @@ function useUpdateAppointmentPage() {
 	const { setHandleState } = useAlertState()
 	const { id_patient, id_appointment, last_appointment } = useParams()
 	const { patientData, setPatientData } = usePatientState()
-	const { appointment, setAppointment, setTeethList } = useTeethState()
+	const { appointment, teethList, setAppointment, setTeethList } = useTeethState()
 	const [staticTeethList, setStaticTeethList] = useState<string>('')
 	const [newChanges, setNewChange] = useState<{
-		date: Date
-		formatDate: string
-		reason: string
+		dateChange: Date
+		formatdateChange: string
+		reasonChange: string
 	}>({
-		date: new Date(),
-		formatDate: formatDate({ date: new Date() }),
-		reason: '',
+		dateChange: new Date(),
+		formatdateChange: formatDate({ date: new Date() }),
+		reasonChange: '',
 	})
 
 	const handleChangeInputDate = (value: Date | null) => {
@@ -82,7 +82,7 @@ function useUpdateAppointmentPage() {
 		try {
 			setNewChange({
 				...newChanges,
-				reason: e.target.value,
+				reasonChange: e.target.value,
 			})
 		} catch (error) {
 			console.log(error)
@@ -102,24 +102,59 @@ function useUpdateAppointmentPage() {
 
 	const handleSave = async () => {
 		try {
-			const appointmentClass = new Appointment()
 			if (patientData.id && appointment.id) {
-				const updateAppoinment = await appointmentClass.updateAppoinment(
-					patientData.id,
-					appointment.id,
-					appointment,
-				)
+				const appointmentClass = new Appointment()
+				if (last_appointment && staticTeethList !== JSON.stringify(teethList)) {
+					if (!newChanges.reasonChange) {
+						setHandleState({
+							severity: 'error',
+							variant: 'filled',
+							show: true,
+							text: 'Debe agregar una razón para hacer el cambio.',
+						})
+						throw 'Debe agregar una razón para hacer el cambio.'
+					}
 
-				if (updateAppoinment) {
-					setHandleState({
-						severity: 'success',
-						variant: 'filled',
-						show: true,
-						text: 'La actualización de la cita fue exitosa.',
-					})
-					navigate(`/patient-profile/${patientData.id}/appointment/${appointment.id}`)
+					const updateAppoinment = await appointmentClass.updateAppoinment(
+						patientData.id,
+						appointment.id,
+						{
+							...appointment,
+							teeth: teethList,
+							dateChange: newChanges.dateChange,
+							reasonChange: newChanges.reasonChange,
+						},
+					)
+
+					if (updateAppoinment) {
+						setHandleState({
+							severity: 'success',
+							variant: 'filled',
+							show: true,
+							text: 'La actualización de la cita fue exitosa.',
+						})
+						navigate(`/patient-profile/${patientData.id}/appointment/${appointment.id}`)
+					} else {
+						throw 'Error updating in update appointment.'
+					}
 				} else {
-					throw 'Error updating in update appointment.'
+					const updateAppoinment = await appointmentClass.updateAppoinment(
+						patientData.id,
+						appointment.id,
+						appointment,
+					)
+
+					if (updateAppoinment) {
+						setHandleState({
+							severity: 'success',
+							variant: 'filled',
+							show: true,
+							text: 'La actualización de la cita fue exitosa.',
+						})
+						navigate(`/patient-profile/${patientData.id}/appointment/${appointment.id}`)
+					} else {
+						throw 'Error updating in update appointment.'
+					}
 				}
 			}
 		} catch (error) {
@@ -128,7 +163,7 @@ function useUpdateAppointmentPage() {
 				severity: 'error',
 				variant: 'filled',
 				show: true,
-				text: 'Ocurrio un error al actualizar.',
+				text: typeof error === 'string' ? error : 'Ocurrio un error al actualizar.',
 			})
 		}
 	}
@@ -145,7 +180,7 @@ function useUpdateAppointmentPage() {
 
 	const getAppointmentData = useCallback(async () => {
 		try {
-			if (!patientData.id && !appointment.id && id_appointment && id_patient) {
+			if (id_appointment && id_patient) {
 				const appointmentClass = new Appointment()
 				const appointmentById = await appointmentClass.getAppointment(
 					id_patient,
@@ -166,6 +201,21 @@ function useUpdateAppointmentPage() {
 						}),
 						id: id_appointment,
 					})
+					if (appointmentById.reasonChange) {
+						setNewChange({
+							dateChange: new Date(
+								appointmentById.dateChange.seconds * 1000 +
+									appointmentById.dateChange.nanoseconds / 1000000,
+							),
+							formatdateChange: formatDate({
+								date: new Date(
+									appointmentById.dateChange.seconds * 1000 +
+										appointmentById.dateChange.nanoseconds / 1000000,
+								),
+							}),
+							reasonChange: appointmentById.reasonChange,
+						})
+					}
 					const teeth = JSON.parse(JSON.parse(JSON.stringify(appointmentById.teeth)))
 					setTeethList(teeth)
 					setStaticTeethList(appointmentById.teeth)

@@ -10,4 +10,7 @@ interface appointment {
 	formatDate?: string
 	format_created_at?: string
 	teeth?: toothObject[][][]
+	dateChang?: Date
+	formatdateChange?: string
+	reasonChange?: string
 }
