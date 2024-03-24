@@ -78,10 +78,10 @@ const AppointmentsTable = () => {
 											i === 0
 												? `/patient-profile/${
 														data.id_patient
-												  }/appointment/${
-														data.id
-												  }/${true}`
-												: `/patient-profile/${data.id_patient}/appointment/${data.id}`
+												  }/appointment/${data.id}/${true}`
+												: `/patient-profile/${
+														data.id_patient
+												  }/appointment/${data.id}/${false}`
 										}
 									>
 										<IconButton>

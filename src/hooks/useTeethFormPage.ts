@@ -48,7 +48,6 @@ function useTeethFormPage() {
 					throw 'Error to saving data'
 				}
 			}
-			console.log('first')
 		} catch (error) {
 			console.log('Error button teeth form: ' + error)
 			setHandleState({
@@ -163,7 +162,7 @@ function useTeethFormPage() {
 
 	useEffect(() => {
 		if (appointment.id) setAppointment(constantAppointment)
-	}, [])
+	}, [appointment.id, setAppointment])
 
 	return {
 		appointment,

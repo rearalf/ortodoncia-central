@@ -56,9 +56,9 @@ function AppointmentPage() {
 					</h1>
 					<Link
 						to={
-							last_appointment
+							last_appointment === "true"
 								? `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment/true`
-								: `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment`
+								: `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment/false`
 						}
 					>
 						<Button variant="contained">Modificar cita</Button>

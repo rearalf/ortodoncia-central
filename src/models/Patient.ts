@@ -170,6 +170,22 @@ class Patient {
 			throw error
 		}
 	}
+
+	async updateOnlyTeeth(id: string, teeth: toothObject[][][]) {
+		try {
+			const patientRef = doc(db, 'patients', id)
+			const updateData = await updateDoc(patientRef, {
+				teeth: JSON.stringify(teeth),
+				updated_at: serverTimestamp(),
+			})
+				.then(() => true)
+				.catch(() => false)
+			return updateData
+		} catch (error) {
+			console.error('Error updating odontograma:', error)
+			throw error
+		}
+	}
 }
 
 export default Patient

@@ -12,7 +12,8 @@ import { constantTeethList } from '@/utils/constants'
 function useAppointment() {
 	const { id_patient, id_appointment, last_appointment } = useParams()
 	const { patientData, setPatientData } = usePatientState()
-	const { appointment, setTeethList, setAppointment } = useTeethState()
+	const { appointment, setTeethList, setAppointment, setToothState, setPositionState } =
+		useTeethState()
 	const { setHandleState } = useAlertState()
 
 	const getPatientData = useCallback(async () => {
@@ -62,8 +63,8 @@ function useAppointment() {
 						id: id_appointment,
 					})
 
-					const teeth = JSON.parse(JSON.parse(JSON.stringify(appointmentById.teeth)))
-					setTeethList(teeth)
+					const teeth = JSON.parse(appointmentById.teeth)
+					if (typeof teeth !== 'string') setTeethList(teeth)
 				}
 			}
 		} catch (error) {
@@ -88,6 +89,11 @@ function useAppointment() {
 	useEffect(() => {
 		getPatientData()
 	}, [id_patient, getPatientData])
+
+	useEffect(() => {
+		setToothState('')
+		setPositionState('')
+	}, [setToothState, setPositionState])
 
 	return {
 		patientData,

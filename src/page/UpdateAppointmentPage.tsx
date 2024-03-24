@@ -54,7 +54,7 @@ function UpdateAppointmentPage() {
 							}`,
 							link_to: last_appointment
 								? `/patient-profile/${patientData.id}/appointment/${appointment.id}/true`
-								: `/patient-profile/${patientData.id}/appointment/${appointment.id}`,
+								: `/patient-profile/${patientData.id}/appointment/${appointment.id}/false`,
 						},
 						{
 							link_name: 'Modificar cita',
@@ -113,7 +113,7 @@ function UpdateAppointmentPage() {
 						/>
 					</div>
 
-					{last_appointment && (
+					{last_appointment === 'true' && (
 						<section className="form_reason-change">
 							<h2>Razón del cambio</h2>
 							<div className="reason-change_inputs">
@@ -141,7 +141,7 @@ function UpdateAppointmentPage() {
 
 					<section className="form_odontograma">
 						<h2>Odontograma al finalizar la cita</h2>
-						{last_appointment ? <TeethForm /> : <TeethTable />}
+						{last_appointment === 'true' ? <TeethForm /> : <TeethTable />}
 					</section>
 
 					<div className="btn_group">

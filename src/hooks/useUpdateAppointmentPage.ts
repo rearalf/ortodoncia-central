@@ -67,8 +67,8 @@ function useUpdateAppointmentPage() {
 			if (value) {
 				setNewChange({
 					...newChanges,
-					date: value,
-					formatDate: formatDate({ date: new Date(value) }),
+					dateChange: value,
+					formatdateChange: formatDate({ date: new Date(value) }),
 				})
 			}
 		} catch (error) {
@@ -104,7 +104,7 @@ function useUpdateAppointmentPage() {
 		try {
 			if (patientData.id && appointment.id) {
 				const appointmentClass = new Appointment()
-				if (last_appointment && staticTeethList !== JSON.stringify(teethList)) {
+				if (last_appointment === 'true' && staticTeethList !== JSON.stringify(teethList)) {
 					if (!newChanges.reasonChange) {
 						setHandleState({
 							severity: 'error',
@@ -126,17 +126,39 @@ function useUpdateAppointmentPage() {
 						},
 					)
 
-					if (updateAppoinment) {
+					const ModelPatient = new Patient()
+					const updateTeeth = await ModelPatient.updateOnlyTeeth(
+						patientData.id,
+						teethList,
+					)
+
+					if (updateAppoinment && updateTeeth) {
 						setHandleState({
 							severity: 'success',
 							variant: 'filled',
 							show: true,
 							text: 'La actualización de la cita fue exitosa.',
 						})
-						navigate(`/patient-profile/${patientData.id}/appointment/${appointment.id}`)
+					} else if (updateAppoinment) {
+						setHandleState({
+							severity: 'info',
+							variant: 'filled',
+							show: true,
+							text: 'El odontograma se actualizó, pero no la cita.',
+						})
+					} else if (updateTeeth) {
+						setHandleState({
+							severity: 'info',
+							variant: 'filled',
+							show: true,
+							text: 'La actualización de la cita fue exitosa, no se actualizó el odontograma.',
+						})
 					} else {
 						throw 'Error updating in update appointment.'
 					}
+					navigate(
+						`/patient-profile/${patientData.id}/appointment/${appointment.id}/${true}`,
+					)
 				} else {
 					const updateAppoinment = await appointmentClass.updateAppoinment(
 						patientData.id,
@@ -151,7 +173,10 @@ function useUpdateAppointmentPage() {
 							show: true,
 							text: 'La actualización de la cita fue exitosa.',
 						})
-						navigate(`/patient-profile/${patientData.id}/appointment/${appointment.id}`)
+						const address = `/patient-profile/${patientData.id}/appointment/${appointment.id}/`
+						last_appointment === 'true'
+							? navigate(address + '/true')
+							: navigate(address + '/false')
 					} else {
 						throw 'Error updating in update appointment.'
 					}
@@ -216,7 +241,7 @@ function useUpdateAppointmentPage() {
 							reasonChange: appointmentById.reasonChange,
 						})
 					}
-					const teeth = JSON.parse(JSON.parse(JSON.stringify(appointmentById.teeth)))
+					const teeth = JSON.parse(appointmentById.teeth)
 					setTeethList(teeth)
 					setStaticTeethList(appointmentById.teeth)
 				}
@@ -224,7 +249,7 @@ function useUpdateAppointmentPage() {
 		} catch (error) {
 			console.log(error)
 		}
-	}, [id_appointment, setAppointment, setTeethList, id_patient, appointment.id, patientData.id])
+	}, [id_appointment, setAppointment, setTeethList, id_patient])
 
 	const getPatientData = useCallback(async () => {
 		try {
