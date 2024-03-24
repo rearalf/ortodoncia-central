@@ -11,13 +11,17 @@
 }
 
 .appointment-page_main .main_patient,
-.appointment-page_main .main_detail-appointment {
+.appointment-page_main .main_detail-appointment,
+.appointment-page_main .main_odontogram-changes {
 	background-color: var(--background-color-3);
 	padding: 24px;
 	border-radius: 4px;
 	width: 100%;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
+.appointment-page_main .main_odontogram-changes .odontogram-changes_data .info_data,
 .appointment-page_main .detail-patient_data .info_data,
 .appointment-page_main .main_detail-appointment .info_data {
 	display: flex;
@@ -51,8 +55,9 @@
 
 @media (width >= 768px) {
 	.appointment-page_main .main_content {
-		display: flex;
-		flex-direction: row;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		align-items: start;
 		justify-content: space-between;
 		gap: 24px;
 	}

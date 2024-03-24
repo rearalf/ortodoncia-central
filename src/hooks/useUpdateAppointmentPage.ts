@@ -173,7 +173,7 @@ function useUpdateAppointmentPage() {
 							show: true,
 							text: 'La actualización de la cita fue exitosa.',
 						})
-						const address = `/patient-profile/${patientData.id}/appointment/${appointment.id}/`
+						const address = `/patient-profile/${patientData.id}/appointment/${appointment.id}`
 						last_appointment === 'true'
 							? navigate(address + '/true')
 							: navigate(address + '/false')

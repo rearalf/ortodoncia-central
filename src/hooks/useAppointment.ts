@@ -39,6 +39,7 @@ function useAppointment() {
 			if (id_patient && id_appointment) {
 				const appointment = new Appointment()
 				const appointmentById = await appointment.getAppointment(id_patient, id_appointment)
+				console.log(appointmentById.dateChange)
 				if (appointmentById) {
 					setAppointment({
 						...appointmentById,
@@ -61,6 +62,14 @@ function useAppointment() {
 							),
 						}),
 						id: id_appointment,
+						dateChange: appointmentById.dateChange,
+						formatdateChange: formatDate({
+							date: new Date(
+								appointmentById.dateChange.seconds * 1000 +
+									appointmentById.dateChange.nanoseconds / 1000000,
+							),
+						}),
+						reasonChange: appointmentById.reasonChange,
 					})
 
 					const teeth = JSON.parse(appointmentById.teeth)

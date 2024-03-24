@@ -56,7 +56,7 @@ function AppointmentPage() {
 					</h1>
 					<Link
 						to={
-							last_appointment === "true"
+							last_appointment === 'true'
 								? `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment/true`
 								: `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment/false`
 						}
@@ -113,6 +113,34 @@ function AppointmentPage() {
 							</div>
 						</div>
 					</article>
+
+					{appointment.formatdateChange && appointment.reasonChange && (
+						<article className="main_odontogram-changes">
+							<h2>Cambios en el odontograma</h2>
+							<div className="odontogram-changes_data">
+								{appointment.formatdateChange && (
+									<p className="info_data">
+										Fecha del cambio:{' '}
+										<span className="info">
+											{appointment.formatdateChange.toUpperCase()}
+										</span>
+									</p>
+								)}
+								{appointment.reasonChange && (
+									<div className="info_data info_data_big">
+										Razón del cambio:
+										<div className="info info_big">
+											{appointment.reasonChange
+												.split('\n')
+												.map((line, index) => (
+													<p key={index}>{line}</p>
+												))}
+										</div>
+									</div>
+								)}
+							</div>
+						</article>
+					)}
 				</div>
 
 				<section className="main_odontograma">
