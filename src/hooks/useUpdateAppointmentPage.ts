@@ -242,7 +242,12 @@ function useUpdateAppointmentPage() {
 						})
 					}
 					const teeth = JSON.parse(appointmentById.teeth)
-					setTeethList(teeth)
+					if (typeof teeth !== 'string') {
+						setTeethList(teeth)
+					} else {
+						const teeth1 = JSON.parse(teeth)
+						setTeethList(teeth1)
+					}
 					setStaticTeethList(appointmentById.teeth)
 				}
 			}

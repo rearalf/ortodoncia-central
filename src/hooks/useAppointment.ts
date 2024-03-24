@@ -39,9 +39,15 @@ function useAppointment() {
 			if (id_patient && id_appointment) {
 				const appointment = new Appointment()
 				const appointmentById = await appointment.getAppointment(id_patient, id_appointment)
-				console.log(appointmentById.dateChange)
-				if (appointmentById) {
-					setAppointment({
+
+				/* const informationChanges = {
+					
+				} */
+
+				let addInfoAppointment
+
+				if (appointmentById.dateChange) {
+					addInfoAppointment = {
 						...appointmentById,
 						date: new Date(
 							appointmentById.date.seconds * 1000 +
@@ -70,10 +76,44 @@ function useAppointment() {
 							),
 						}),
 						reasonChange: appointmentById.reasonChange,
-					})
+					}
+				} else {
+					addInfoAppointment = {
+						...appointmentById,
+						date: new Date(
+							appointmentById.date.seconds * 1000 +
+								appointmentById.date.nanoseconds / 1000000,
+						),
+
+						formatDate: formatDate({
+							date: new Date(
+								appointmentById.date.seconds * 1000 +
+									appointmentById.date.nanoseconds / 1000000,
+							),
+						}),
+
+						format_created_at: formatDate({
+							date: new Date(
+								appointmentById.created_at.seconds * 1000 +
+									appointmentById.created_at.nanoseconds / 1000000,
+							),
+						}),
+						id: id_appointment,
+					}
+				}
+
+				if (appointmentById) {
+					setAppointment(addInfoAppointment)
 
 					const teeth = JSON.parse(appointmentById.teeth)
-					if (typeof teeth !== 'string') setTeethList(teeth)
+					if (typeof teeth !== 'string') {
+						setTeethList(teeth)
+					} else {
+						const teeth1 = JSON.parse(teeth)
+						setTeethList(teeth1)
+					}
+				} else {
+					throw 'Error'
 				}
 			}
 		} catch (error) {
