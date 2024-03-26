@@ -1,6 +1,7 @@
 import { FiSave, FiUploadCloud, FiXCircle } from 'react-icons/fi'
 import { Button, IconButton, Tooltip } from '@mui/material'
 import HeadComponent from '@/components/HeadComponent'
+import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
 import useAddXRays from '@/hooks/useAddXRays'
@@ -13,9 +14,13 @@ const AddXRaysPage = () => {
 		isDragging,
 		description,
 		patientData,
+		currentImage,
+		isViewerOpen,
 		onDrop,
 		onDragOver,
 		onDragLeave,
+		openImageViewer,
+		closeImageViewer,
 		handleChangeFile,
 		handleSavePhotos,
 		handleDeleteImage,
@@ -121,11 +126,25 @@ const AddXRaysPage = () => {
 									<FiXCircle size={30} />
 								</IconButton>
 							</Tooltip>
-							<img src={image} className="images_img" />
+							<Button onClick={() => openImageViewer(index)}>
+								<img src={image} className="images_img" />
+							</Button>
 						</div>
 					))}
 				</div>
 			</main>
+			{isViewerOpen && (
+				<ImageViewer
+					src={images}
+					currentIndex={currentImage}
+					disableScroll={false}
+					closeOnClickOutside={true}
+					onClose={closeImageViewer}
+					backgroundStyle={{
+						backgroundColor: '#000000f0',
+					}}
+				/>
+			)}
 		</>
 	)
 }

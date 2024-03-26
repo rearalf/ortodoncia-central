@@ -71,7 +71,7 @@
 	position: absolute;
 	top: 0;
 	right: 30px;
-	z-index: 2;
+	z-index: 1;
 }
 
 @media (width >= 768px) {

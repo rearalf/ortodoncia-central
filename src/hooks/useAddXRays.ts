@@ -18,6 +18,19 @@ function useAddXRays() {
 	const [description, setDescription] = useState<string>('')
 	const [isDragging, setIsDragging] = useState(false)
 
+	const [currentImage, setCurrentImage] = useState(0)
+	const [isViewerOpen, setIsViewerOpen] = useState(false)
+
+	const openImageViewer = useCallback((index: number) => {
+		setCurrentImage(index)
+		setIsViewerOpen(true)
+	}, [])
+
+	const closeImageViewer = () => {
+		setCurrentImage(0)
+		setIsViewerOpen(false)
+	}
+
 	const getPatientData = useCallback(async () => {
 		try {
 			if (id) {
@@ -138,9 +151,7 @@ function useAddXRays() {
 		setIsDragging(true)
 	}
 
-	const onDragLeave = () => {
-		setIsDragging(false)
-	}
+	const onDragLeave = () => setIsDragging(false)
 
 	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
@@ -162,9 +173,13 @@ function useAddXRays() {
 		isDragging,
 		description,
 		patientData,
+		currentImage,
+		isViewerOpen,
 		onDrop,
 		onDragOver,
 		onDragLeave,
+		openImageViewer,
+		closeImageViewer,
 		handleChangeFile,
 		handleSavePhotos,
 		handleDeleteImage,
