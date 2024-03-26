@@ -10,8 +10,12 @@ import '@/styles/AddXRaysPage.css'
 const AddXRaysPage = () => {
 	const {
 		images,
+		isDragging,
 		description,
 		patientData,
+		onDrop,
+		onDragOver,
+		onDragLeave,
 		handleChangeFile,
 		handleSavePhotos,
 		handleDeleteImage,
@@ -57,11 +61,20 @@ const AddXRaysPage = () => {
 							onChange={handleOnChangeInput}
 						/>
 						<label htmlFor="upload-files">
-							<div className="drap-drop_content">
+							<div
+								onDrop={onDrop}
+								onDragOver={onDragOver}
+								onDragLeave={onDragLeave}
+								className={`drap-drop_content ${isDragging && 'isDragging'}`}
+							>
 								<FiUploadCloud size={40} />
-								<h2 className="content_title">
-									Arrastra y suelta <br /> tus imagenes aqui
-								</h2>
+								{isDragging ? (
+									<h2 className="content_title">Suelta para agregar</h2>
+								) : (
+									<h2 className="content_title">
+										Arrastra y suelta <br /> tus imagenes aqui
+									</h2>
+								)}
 								<input
 									multiple
 									type="file"

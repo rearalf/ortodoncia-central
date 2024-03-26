@@ -16,6 +16,7 @@ function useAddXRays() {
 	const [files, setFiles] = useState<FileList | undefined>(undefined)
 	const [images, setImages] = useState<string[]>([])
 	const [description, setDescription] = useState<string>('')
+	const [isDragging, setIsDragging] = useState(false)
 
 	const getPatientData = useCallback(async () => {
 		try {
@@ -55,7 +56,7 @@ function useAddXRays() {
 		try {
 			if (e.target.files !== null) {
 				const addFiles = e.target.files
-				setFiles(addFiles) // Cambiado aquí
+				setFiles(addFiles)
 				getUrlFileList(addFiles)
 			}
 		} catch (error) {
@@ -132,6 +133,25 @@ function useAddXRays() {
 		})
 	}
 
+	const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault()
+		setIsDragging(true)
+	}
+
+	const onDragLeave = () => {
+		setIsDragging(false)
+	}
+
+	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault()
+		setIsDragging(false)
+		if (e.dataTransfer.files !== null) {
+			const addFiles = e.dataTransfer.files
+			setFiles(addFiles)
+			getUrlFileList(addFiles)
+		}
+	}
+
 	useEffect(() => {
 		getPatientData()
 	}, [id, getPatientData])
@@ -139,8 +159,12 @@ function useAddXRays() {
 	return {
 		images,
 		loading,
+		isDragging,
 		description,
 		patientData,
+		onDrop,
+		onDragOver,
+		onDragLeave,
 		handleChangeFile,
 		handleSavePhotos,
 		handleDeleteImage,
