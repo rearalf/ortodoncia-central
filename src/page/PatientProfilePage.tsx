@@ -5,14 +5,19 @@ import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import AppointmentsTable from '@/components/AppointmentsTable'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
-import { FiCalendar, FiSmartphone, FiUserPlus } from 'react-icons/fi'
+import { FiCalendar, FiSmartphone, FiUpload, FiUserPlus } from 'react-icons/fi'
 import '@/styles/PatientProfilePage.css'
 import AvatarComponent from '@/components/AvatarComponent'
 import BackdropLoading from '@/components/BackdropLoading'
 
 const PatientProfilePage = () => {
-	const { patientData, loading, handleGoToTeethForm, handleGoToUpdatePatient } =
-		usePatientProfilePage()
+	const {
+		patientData,
+		loading,
+		handleGoToAddXRays,
+		handleGoToTeethForm,
+		handleGoToUpdatePatient,
+	} = usePatientProfilePage()
 	return (
 		<>
 			<BackdropLoading loading={loading} />
@@ -45,6 +50,13 @@ const PatientProfilePage = () => {
 						}`}
 					</h1>
 					<div className="header_btnGroup">
+						<Button
+							variant="contained"
+							startIcon={<FiUpload />}
+							onClick={handleGoToAddXRays}
+						>
+							Agregar imagenes
+						</Button>
 						<Button
 							variant="contained"
 							startIcon={<FiUserPlus />}

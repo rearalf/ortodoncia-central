@@ -1,11 +1,12 @@
 import App from '@/App'
 import HomePage from '@/page/HomePage'
+import AddXRaysPage from '../page/AddXRaysPage'
 import TeethFormPage from '@/page/TeethFormPage'
+import AppointmentPage from '@/page/AppointmentPage'
+import { createBrowserRouter } from 'react-router-dom'
 import CreatePatientPage from '@/page/CreatePatientPage'
 import UpdatePatientPage from '@/page/UpdatePatientPage'
 import PatientProfilePage from '@/page/PatientProfilePage'
-import { createBrowserRouter } from 'react-router-dom'
-import AppointmentPage from '@/page/AppointmentPage'
 import UpdateAppointmentPage from '@/page/UpdateAppointmentPage'
 
 const router = createBrowserRouter(
@@ -25,6 +26,10 @@ const router = createBrowserRouter(
 				{
 					path: '/patient-profile/:id',
 					element: <PatientProfilePage />,
+				},
+				{
+					path: '/patient-profile/:id/add-xrays',
+					element: <AddXRaysPage />,
 				},
 				{
 					path: '/teeth-form/:id_patient',
