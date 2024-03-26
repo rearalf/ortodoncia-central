@@ -13,10 +13,13 @@ function useAddXRays() {
 	const { setHandleState } = useAlertState()
 
 	const [loading, setLoading] = useState<boolean>(false)
-	const [files, setFiles] = useState<FileList | undefined>(undefined)
+
+	const [files, setFiles] = useState<FileList | null>(null)
 	const [images, setImages] = useState<string[]>([])
-	const [description, setDescription] = useState<string>('')
+	const [imagesNames, setImagesNames] = useState<string[]>([])
 	const [isDragging, setIsDragging] = useState(false)
+
+	const [description, setDescription] = useState<string>('')
 
 	const [currentImage, setCurrentImage] = useState(0)
 	const [isViewerOpen, setIsViewerOpen] = useState(false)
@@ -69,15 +72,17 @@ function useAddXRays() {
 		try {
 			if (e.target.files !== null) {
 				const addFiles = e.target.files
-				setFiles(addFiles)
-				getUrlFileList(addFiles)
+				// validateAndAddFiles(addFiles)
+				for (const file of addFiles) {
+					console.log(file.name)
+				}
 			}
 		} catch (error) {
 			console.log('Handle change file error: ' + error)
 		}
 	}
 
-	const getUrlFileList = (fileList: FileList) => {
+	/* const getUrlFileList = (fileList: FileList) => {
 		try {
 			const newImages: string[] = []
 			for (let i = 0; i < fileList.length; i++) {
@@ -88,7 +93,7 @@ function useAddXRays() {
 		} catch (error) {
 			console.log(error)
 		}
-	}
+	} */
 
 	const handleDeleteImage = (index: number) => {
 		setImages(prevImages => {
@@ -158,9 +163,56 @@ function useAddXRays() {
 		setIsDragging(false)
 		if (e.dataTransfer.files !== null) {
 			const addFiles = e.dataTransfer.files
-			setFiles(addFiles)
-			getUrlFileList(addFiles)
+			validateAndAddFiles(addFiles)
 		}
+	}
+
+	const validateAndAddFiles = (fileList: FileList) => {
+		const newImages: string[] = []
+		const newFiles: File[] = []
+		const newImagesNames: string[] = []
+
+		for (let i = 0; i < fileList.length; i++) {
+			const newFile = fileList[i]
+
+			if (!newFile.type.startsWith('image/')) {
+				setHandleState({
+					severity: 'error',
+					variant: 'filled',
+					show: true,
+					text: 'Por favor, selecciona solo archivos de imagen.',
+				})
+				continue
+			}
+
+			if (imagesNames.includes(newFile.name)) {
+				setHandleState({
+					severity: 'error',
+					variant: 'filled',
+					show: true,
+					text: `El archivo ${newFile.name} ya ha sido agregado.`,
+				})
+				continue
+			}
+
+			newImages.push(URL.createObjectURL(newFile))
+			newFiles.push(newFile)
+			newImagesNames.push(newFile.name)
+		}
+
+		setImagesNames(prevImagesNames => prevImagesNames.concat(newImagesNames))
+		setImages(prevImages => prevImages.concat(newImages))
+		setFiles(prevFiles => {
+			if (!prevFiles) return fileList
+			const mergedFiles = new DataTransfer()
+			for (let i = 0; i < prevFiles.length; i++) {
+				mergedFiles.items.add(prevFiles[i])
+			}
+			for (let i = 0; i < newFiles.length; i++) {
+				mergedFiles.items.add(newFiles[i])
+			}
+			return mergedFiles.files
+		})
 	}
 
 	useEffect(() => {
