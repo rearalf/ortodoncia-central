@@ -5,6 +5,10 @@ import useAlertState from '@/states/useAlertState'
 import formatDate from '@/utils/formatDate'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
+import PatientPhotos from '@/models/PatientPhotos'
+
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { storage } from '@/database/firebase'
 
 function useAddXRays() {
 	const { id } = useParams()
@@ -23,6 +27,8 @@ function useAddXRays() {
 
 	const [currentImage, setCurrentImage] = useState(0)
 	const [isViewerOpen, setIsViewerOpen] = useState(false)
+	const [progress, setProgress] = useState(0)
+	const [numberImages, setNumberImages] = useState(0)
 
 	const openImageViewer = useCallback((index: number) => {
 		setCurrentImage(index)
@@ -72,28 +78,12 @@ function useAddXRays() {
 		try {
 			if (e.target.files !== null) {
 				const addFiles = e.target.files
-				// validateAndAddFiles(addFiles)
-				for (const file of addFiles) {
-					console.log(file.name)
-				}
+				validateAndAddFiles(addFiles)
 			}
 		} catch (error) {
 			console.log('Handle change file error: ' + error)
 		}
 	}
-
-	/* const getUrlFileList = (fileList: FileList) => {
-		try {
-			const newImages: string[] = []
-			for (let i = 0; i < fileList.length; i++) {
-				const imgUrl = URL.createObjectURL(fileList[i])
-				newImages.push(imgUrl)
-			}
-			setImages(prevImages => prevImages.concat(newImages))
-		} catch (error) {
-			console.log(error)
-		}
-	} */
 
 	const handleDeleteImage = (index: number) => {
 		setImages(prevImages => {
@@ -114,7 +104,7 @@ function useAddXRays() {
 		})
 	}
 
-	const handleSavePhotos = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSavePhotos = async (e: React.FormEvent<HTMLFormElement>) => {
 		try {
 			e.preventDefault()
 			if (!files || files.length === 0) {
@@ -136,8 +126,109 @@ function useAddXRays() {
 				})
 				throw 'Debe de agregar una descripción a la imagen.'
 			}
+
+			setNumberImages(files.length)
+
+			if (patientData.id) {
+				const imagesLinks: string[] = []
+				const imagesNames: string[] = []
+				let lengthFiles = files.length
+				for (let i = 0; i < files.length; i++) {
+					const photoName = `${new Date().getTime()}_${patientData.id}_${i + 1}`
+					const photosRef = ref(storage, `${patientData.id}/` + photoName)
+
+					const file = files.item(i)
+					if (file) {
+						const uploadTask = uploadBytesResumable(photosRef, file)
+
+						uploadTask.on(
+							'state_changed',
+							snapshot => {
+								const progress =
+									(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+								setProgress(progress)
+								if (progress === 100) {
+									setNumberImages(preventValue => preventValue - 1)
+								}
+							},
+							error => {
+								setHandleState({
+									severity: 'error',
+									variant: 'filled',
+									show: true,
+									text: 'Error al subir la imagen.',
+								})
+								throw error
+							},
+							() => {
+								getDownloadURL(uploadTask.snapshot.ref).then(
+									(downloadURL: string) => {
+										imagesLinks.push(downloadURL)
+										imagesNames.push(photoName)
+										lengthFiles--
+										if (lengthFiles === 0) {
+											saveData(imagesLinks, imagesNames)
+										}
+									},
+								)
+							},
+						)
+					}
+				}
+			} else {
+				setHandleState({
+					severity: 'error',
+					variant: 'filled',
+					show: true,
+					text: 'Ocurrio un error al guardar.',
+				})
+				throw 'Debe de agregar una descripción a la imagen.'
+			}
 		} catch (error) {
 			console.log('Error saving expedient photos: ' + error)
+		}
+	}
+
+	const saveData = async (imagesLinks: string[], imagesNames: string[]) => {
+		try {
+			if (patientData.id) {
+				const patientPhotos = new PatientPhotos()
+				const saveDate = await patientPhotos.savePatientPhotos(patientData.id, {
+					date: new Date(),
+					description,
+					imagesLinks,
+					imagesNames,
+				})
+
+				if (saveDate?.id) {
+					console.log(saveDate)
+					setHandleState({
+						severity: 'success',
+						variant: 'filled',
+						show: true,
+						text: 'Datos e imagenes guardados exitosamente.',
+					})
+					navigate('/patient-profile/' + patientData.id)
+				} else {
+					setHandleState({
+						severity: 'error',
+						variant: 'filled',
+						show: true,
+						text: 'Error al guardar los datos.',
+					})
+					throw saveDate
+				}
+			} else {
+				setHandleState({
+					severity: 'error',
+					variant: 'filled',
+					show: true,
+					text: 'Error al guardar los datos.',
+				})
+				throw patientData
+			}
+		} catch (error) {
+			console.log('Saving data error: ' + error)
 		}
 	}
 
@@ -222,9 +313,11 @@ function useAddXRays() {
 	return {
 		images,
 		loading,
+		progress,
 		isDragging,
 		description,
 		patientData,
+		numberImages,
 		currentImage,
 		isViewerOpen,
 		onDrop,

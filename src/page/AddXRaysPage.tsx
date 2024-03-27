@@ -1,5 +1,5 @@
 import { FiSave, FiUploadCloud, FiXCircle } from 'react-icons/fi'
-import { Button, IconButton, Tooltip } from '@mui/material'
+import { Button, IconButton, LinearProgress, Tooltip } from '@mui/material'
 import HeadComponent from '@/components/HeadComponent'
 import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
@@ -11,9 +11,11 @@ import '@/styles/AddXRaysPage.css'
 const AddXRaysPage = () => {
 	const {
 		images,
+		progress,
 		isDragging,
 		description,
 		patientData,
+		numberImages,
 		currentImage,
 		isViewerOpen,
 		onDrop,
@@ -114,6 +116,12 @@ const AddXRaysPage = () => {
 						</Button>
 					</div>
 				</form>
+				{numberImages !== 0 && (
+					<div>
+						<p>{numberImages}</p>
+						<LinearProgress variant="determinate" value={progress} />
+					</div>
+				)}
 				<div className="main_images">
 					{images.map((image, index) => (
 						<div className="images_content" key={image}>
