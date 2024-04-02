@@ -1,5 +1,5 @@
-import { FiSave, FiUploadCloud, FiXCircle } from 'react-icons/fi'
 import { Button, IconButton, LinearProgress, Tooltip } from '@mui/material'
+import { FiSave, FiUploadCloud, FiXCircle } from 'react-icons/fi'
 import HeadComponent from '@/components/HeadComponent'
 import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
@@ -8,7 +8,7 @@ import useAddXRays from '@/hooks/useAddXRays'
 import Navbar from '@/components/Navbar'
 import '@/styles/AddXRaysPage.css'
 
-const AddXRaysPage = () => {
+const AddPhotosPage = () => {
 	const {
 		images,
 		progress,
@@ -49,8 +49,12 @@ const AddXRaysPage = () => {
 							link_to: `/patient-profile/${patientData.id}`,
 						},
 						{
-							link_name: 'Agregar imagens al expediente',
-							link_to: `/patient-profile/${patientData.id}/add-xrays`,
+							link_name: 'Fotos e imagenes',
+							link_to: `/patient-profile/${patientData.id}/photos`,
+						},
+						{
+							link_name: 'Agregar fotos e imagenes',
+							link_to: `/patient-profile/${patientData.id}/photos/add-photos`,
 						},
 					]}
 				/>
@@ -157,4 +161,4 @@ const AddXRaysPage = () => {
 	)
 }
 
-export default AddXRaysPage
+export default AddPhotosPage

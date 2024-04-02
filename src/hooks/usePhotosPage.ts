@@ -20,6 +20,8 @@ function usePhotosPage() {
 	const [isViewerOpen, setIsViewerOpen] = useState(false)
 	const [currentImage, setCurrentImage] = useState(0)
 
+	const handleGoToAddPhotos = () => navigate(`/patient-profile/${id_patient}/photos/add-photos`)
+
 	const closeImageViewer = () => {
 		setCurrentImage(0)
 		setIsViewerOpen(false)
@@ -120,6 +122,7 @@ function usePhotosPage() {
 		isViewerOpen,
 		openImageViewer,
 		closeImageViewer,
+		handleGoToAddPhotos,
 	}
 }
 

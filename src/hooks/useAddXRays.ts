@@ -11,7 +11,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '@/database/firebase'
 
 function useAddXRays() {
-	const { id } = useParams()
+	const { id_patient } = useParams()
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
@@ -42,10 +42,10 @@ function useAddXRays() {
 
 	const getPatientData = useCallback(async () => {
 		try {
-			if (id) {
+			if (id_patient) {
 				setLoading(true)
 				const modelPatient = new Patient()
-				const data = await modelPatient.getPatient(id)
+				const data = await modelPatient.getPatient(id_patient)
 				if (data !== undefined) {
 					setLoading(false)
 					setPatientData({
@@ -66,7 +66,7 @@ function useAddXRays() {
 			})
 			navigate('/')
 		}
-	}, [id, setPatientData, setHandleState, navigate])
+	}, [id_patient, setPatientData, setHandleState, navigate])
 
 	const handleOnChangeInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
@@ -308,7 +308,7 @@ function useAddXRays() {
 
 	useEffect(() => {
 		getPatientData()
-	}, [id, getPatientData])
+	}, [id_patient, getPatientData])
 
 	return {
 		images,

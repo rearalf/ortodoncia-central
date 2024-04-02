@@ -1,24 +1,18 @@
-import Navbar from '@/components/Navbar'
-import { Button, Tooltip } from '@mui/material'
-import TeethTable from '@/components/TeethTable'
-import BreadCrumbs from '@/components/BreadCrumbs'
-import HeadComponent from '@/components/HeadComponent'
-import AppointmentsTable from '@/components/AppointmentsTable'
+import { FiBookOpen, FiCalendar, FiSmartphone, FiUserPlus } from 'react-icons/fi'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
-import { FiCalendar, FiFile, FiSmartphone, FiUpload, FiUserPlus } from 'react-icons/fi'
-import '@/styles/PatientProfilePage.css'
-import AvatarComponent from '@/components/AvatarComponent'
+import AppointmentsTable from '@/components/AppointmentsTable'
 import BackdropLoading from '@/components/BackdropLoading'
+import AvatarComponent from '@/components/AvatarComponent'
+import HeadComponent from '@/components/HeadComponent'
+import BreadCrumbs from '@/components/BreadCrumbs'
+import TeethTable from '@/components/TeethTable'
+import { Button, Tooltip } from '@mui/material'
+import Navbar from '@/components/Navbar'
+import '@/styles/PatientProfilePage.css'
 
 const PatientProfilePage = () => {
-	const {
-		patientData,
-		loading,
-		handleGoToPhotos,
-		handleGoToAddXRays,
-		handleGoToTeethForm,
-		handleGoToUpdatePatient,
-	} = usePatientProfilePage()
+	const { patientData, loading, handleGoToPhotos, handleGoToTeethForm, handleGoToUpdatePatient } =
+		usePatientProfilePage()
 	return (
 		<>
 			<BackdropLoading loading={loading} />
@@ -53,13 +47,6 @@ const PatientProfilePage = () => {
 					<div className="header_btnGroup">
 						<Button
 							variant="contained"
-							startIcon={<FiUpload />}
-							onClick={handleGoToAddXRays}
-						>
-							Agregar imagenes
-						</Button>
-						<Button
-							variant="contained"
 							startIcon={<FiUserPlus />}
 							onClick={handleGoToUpdatePatient}
 						>
@@ -72,11 +59,14 @@ const PatientProfilePage = () => {
 						>
 							Nueva cita
 						</Button>
-						<Tooltip title="Fotos del expediente">
-							<Button variant="contained" onClick={handleGoToPhotos}>
-								<FiFile />
-							</Button>
-						</Tooltip>
+
+						<Button
+							variant="contained"
+							onClick={handleGoToPhotos}
+							startIcon={<FiBookOpen />}
+						>
+							Fotos Expediente
+						</Button>
 					</div>
 				</header>
 

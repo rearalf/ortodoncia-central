@@ -4,6 +4,8 @@ import BreadCrumbs from '@/components/BreadCrumbs'
 import usePhotosPage from '@/hooks/usePhotosPage'
 import Navbar from '@/components/Navbar'
 import '@/styles/PhtosPage.css'
+import { Button } from '@mui/material'
+import { FiUpload } from 'react-icons/fi'
 
 const PhtosPage = () => {
 	const {
@@ -14,6 +16,7 @@ const PhtosPage = () => {
 		isViewerOpen,
 		openImageViewer,
 		closeImageViewer,
+		handleGoToAddPhotos,
 	} = usePhotosPage()
 	return (
 		<>
@@ -40,7 +43,16 @@ const PhtosPage = () => {
 						},
 					]}
 				/>
-				<h1 className="main_title">Fotos e imagenes</h1>
+				<header className="main_header">
+					<h1 className="header_title">Fotos e imagenes</h1>
+					<Button
+						variant="contained"
+						startIcon={<FiUpload />}
+						onClick={handleGoToAddPhotos}
+					>
+						Agregar imagenes
+					</Button>
+				</header>
 				<div className="main_content">
 					{data.map(photo => (
 						<article key={photo.id} className="content_article">

@@ -1,6 +1,6 @@
 import App from '@/App'
 import HomePage from '@/page/HomePage'
-import AddXRaysPage from '../page/AddXRaysPage'
+import AddPhotosPage from '../page/AddPhotosPage'
 import TeethFormPage from '@/page/TeethFormPage'
 import AppointmentPage from '@/page/AppointmentPage'
 import { createBrowserRouter } from 'react-router-dom'
@@ -28,10 +28,7 @@ const router = createBrowserRouter(
 					path: '/patient-profile/:id',
 					element: <PatientProfilePage />,
 				},
-				{
-					path: '/patient-profile/:id/add-xrays',
-					element: <AddXRaysPage />,
-				},
+
 				{
 					path: '/teeth-form/:id_patient',
 					element: <TeethFormPage />,
@@ -51,6 +48,10 @@ const router = createBrowserRouter(
 				{
 					path: '/patient-profile/:id_patient/photos',
 					element: <PhtosPage />,
+				},
+				{
+					path: '/patient-profile/:id_patient/photos/add-photos',
+					element: <AddPhotosPage />,
 				},
 			],
 		},
