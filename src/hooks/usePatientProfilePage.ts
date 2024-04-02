@@ -22,6 +22,7 @@ function usePatientProfilePage() {
 	const handleGoToTeethForm = () => navigate('/teeth-form/' + id)
 	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
 	const handleGoToAddXRays = () => navigate(`/patient-profile/${id}/add-xrays`)
+	const handleGoToPhotos = () => navigate(`/patient-profile/${id}/photos`)
 
 	const getPatientData = useCallback(async () => {
 		try {
@@ -132,6 +133,7 @@ function usePatientProfilePage() {
 	return {
 		loading,
 		patientData,
+		handleGoToPhotos,
 		handleGoToAddXRays,
 		handleGoToTeethForm,
 		handleGoToUpdatePatient,

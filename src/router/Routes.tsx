@@ -8,6 +8,7 @@ import CreatePatientPage from '@/page/CreatePatientPage'
 import UpdatePatientPage from '@/page/UpdatePatientPage'
 import PatientProfilePage from '@/page/PatientProfilePage'
 import UpdateAppointmentPage from '@/page/UpdateAppointmentPage'
+import PhtosPage from '@/page/PhtosPage'
 
 const router = createBrowserRouter(
 	[
@@ -46,6 +47,10 @@ const router = createBrowserRouter(
 				{
 					path: '/patient-profile/:id_patient/appointment/:id_appointment/update-appointment/:last_appointment',
 					element: <UpdateAppointmentPage />,
+				},
+				{
+					path: '/patient-profile/:id_patient/photos',
+					element: <PhtosPage />,
 				},
 			],
 		},

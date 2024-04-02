@@ -5,7 +5,7 @@ import BreadCrumbs from '@/components/BreadCrumbs'
 import HeadComponent from '@/components/HeadComponent'
 import AppointmentsTable from '@/components/AppointmentsTable'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
-import { FiCalendar, FiSmartphone, FiUpload, FiUserPlus } from 'react-icons/fi'
+import { FiCalendar, FiFile, FiSmartphone, FiUpload, FiUserPlus } from 'react-icons/fi'
 import '@/styles/PatientProfilePage.css'
 import AvatarComponent from '@/components/AvatarComponent'
 import BackdropLoading from '@/components/BackdropLoading'
@@ -14,6 +14,7 @@ const PatientProfilePage = () => {
 	const {
 		patientData,
 		loading,
+		handleGoToPhotos,
 		handleGoToAddXRays,
 		handleGoToTeethForm,
 		handleGoToUpdatePatient,
@@ -71,6 +72,11 @@ const PatientProfilePage = () => {
 						>
 							Nueva cita
 						</Button>
+						<Tooltip title="Fotos del expediente">
+							<Button variant="contained" onClick={handleGoToPhotos}>
+								<FiFile />
+							</Button>
+						</Tooltip>
 					</div>
 				</header>
 
