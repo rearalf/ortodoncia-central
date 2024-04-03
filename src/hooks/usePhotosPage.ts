@@ -20,6 +20,11 @@ function usePhotosPage() {
 	const [isViewerOpen, setIsViewerOpen] = useState(false)
 	const [currentImage, setCurrentImage] = useState(0)
 
+	const limit = 5
+	const [page, setPage] = useState(1)
+	const [count, setCount] = useState(0)
+	const [totalPage, setTotalPage] = useState(count / limit)
+
 	const handleGoToAddPhotos = () => navigate(`/patient-profile/${id_patient}/photos/add-photos`)
 
 	const closeImageViewer = () => {
@@ -68,13 +73,13 @@ function usePhotosPage() {
 		try {
 			if (id_patient) {
 				const patientPhotos = new PatientPhotos()
-				const data = await patientPhotos.getPhotosByPatient(id_patient)
+				const data = await patientPhotos.getPhotosByPatient(id_patient, limit)
 
 				const photoArray: PhotosByPatientInterface[] = []
 				const imagesStrings: string[] = []
 
 				if (data) {
-					data.map((photo: getPhotosByPatientInterface) => {
+					data.dataPhotos.map((photo: getPhotosByPatientInterface) => {
 						photoArray.push({
 							...photo,
 							formatDate: formatDate({
@@ -96,6 +101,12 @@ function usePhotosPage() {
 							photo.imagesLinks.map(link => imagesStrings.push(link))
 						}
 					})
+					setCount(data.count)
+					if (data.count <= limit) {
+						setTotalPage(1)
+					} else {
+						setTotalPage(data.count / limit)
+					}
 				}
 				setImages(imagesStrings)
 				setData(photoArray)
@@ -104,6 +115,107 @@ function usePhotosPage() {
 			console.log(error)
 		}
 	}, [id_patient])
+
+	const getNextPhotos = async () => {
+		try {
+			if (id_patient) {
+				const patientPhotos = new PatientPhotos()
+				const dataPhotos = await patientPhotos.getNextPhotosByPatient(
+					id_patient,
+					limit,
+					data[data.length - 1],
+				)
+
+				const photoArray: PhotosByPatientInterface[] = []
+				const imagesStrings: string[] = []
+
+				if (dataPhotos) {
+					if (dataPhotos.length > 0) {
+						dataPhotos.map((photo: getPhotosByPatientInterface) => {
+							photoArray.push({
+								...photo,
+								formatDate: formatDate({
+									date: photo.date,
+								}),
+								formatCreated_at: formatDate({
+									date: photo.created_at,
+								}),
+								formatUpdated_at: formatDate({
+									date: photo.updated_at,
+								}),
+								imagesLinks:
+									typeof photo.imagesLinks !== 'string' ? photo.imagesLinks : [],
+								imagesNames:
+									typeof photo.imagesNames !== 'string' ? photo.imagesNames : [],
+							})
+
+							if (typeof photo.imagesLinks === 'object') {
+								photo.imagesLinks.map(link => imagesStrings.push(link))
+							}
+						})
+					}
+				}
+
+				if (dataPhotos !== undefined && dataPhotos.length > 0) {
+					setImages(imagesStrings)
+					setData(photoArray)
+					setPage(page + 1)
+				}
+			}
+		} catch (error) {
+			console.log('Error gettign next photos: ' + error)
+		}
+	}
+
+	const getBeforePhotos = async () => {
+		try {
+			if (id_patient) {
+				const patientPhotos = new PatientPhotos()
+				const dataPhotos = await patientPhotos.getEndBeforePhotosByPatient(
+					id_patient,
+					limit,
+					data[0],
+				)
+
+				const photoArray: PhotosByPatientInterface[] = []
+				const imagesStrings: string[] = []
+				if (dataPhotos) {
+					if (dataPhotos.length > 0) {
+						dataPhotos.map((photo: getPhotosByPatientInterface) => {
+							photoArray.push({
+								...photo,
+								formatDate: formatDate({
+									date: photo.date,
+								}),
+								formatCreated_at: formatDate({
+									date: photo.created_at,
+								}),
+								formatUpdated_at: formatDate({
+									date: photo.updated_at,
+								}),
+								imagesLinks:
+									typeof photo.imagesLinks !== 'string' ? photo.imagesLinks : [],
+								imagesNames:
+									typeof photo.imagesNames !== 'string' ? photo.imagesNames : [],
+							})
+
+							if (typeof photo.imagesLinks === 'object') {
+								photo.imagesLinks.map(link => imagesStrings.push(link))
+							}
+						})
+					}
+				}
+
+				if (dataPhotos !== undefined && dataPhotos.length > 0) {
+					setImages(imagesStrings)
+					setData(photoArray)
+					setPage(page - 1)
+				}
+			}
+		} catch (error) {
+			console.log('Error getting before photos: ' + error)
+		}
+	}
 
 	useEffect(() => {
 		getPatientData()
@@ -114,12 +226,16 @@ function usePhotosPage() {
 	}, [id_patient, getPhotos])
 
 	return {
+		page,
 		data,
 		images,
 		loading,
+		totalPage,
 		patientData,
 		currentImage,
 		isViewerOpen,
+		getNextPhotos,
+		getBeforePhotos,
 		openImageViewer,
 		closeImageViewer,
 		handleGoToAddPhotos,

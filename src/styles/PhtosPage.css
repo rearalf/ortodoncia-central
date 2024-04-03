@@ -28,6 +28,13 @@
 	transition: transform 0.5s ease-in-out;
 }
 
+.photos-page_main .main_btn-group {
+	display: flex;
+	justify-content: center;
+	margin-top: 42px;
+	gap: 24px;
+}
+
 @media (width >= 768px) {
 	.main_content .content_article .article_photos .photo-button_photo {
 		width: calc(75% - 20px);

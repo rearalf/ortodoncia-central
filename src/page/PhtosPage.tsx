@@ -4,16 +4,20 @@ import BreadCrumbs from '@/components/BreadCrumbs'
 import usePhotosPage from '@/hooks/usePhotosPage'
 import Navbar from '@/components/Navbar'
 import '@/styles/PhtosPage.css'
-import { Button } from '@mui/material'
-import { FiUpload } from 'react-icons/fi'
+import { Button, Tooltip } from '@mui/material'
+import { FiChevronLeft, FiChevronRight, FiUpload } from 'react-icons/fi'
 
 const PhtosPage = () => {
 	const {
+		page,
 		data,
 		images,
+		totalPage,
 		patientData,
 		currentImage,
 		isViewerOpen,
+		getNextPhotos,
+		getBeforePhotos,
 		openImageViewer,
 		closeImageViewer,
 		handleGoToAddPhotos,
@@ -78,6 +82,26 @@ const PhtosPage = () => {
 							</div>
 						</article>
 					))}
+				</div>
+				<div className="main_btn-group">
+					{page === 1 ? (
+						''
+					) : (
+						<Tooltip title="Anterior" arrow>
+							<Button variant="contained" onClick={getBeforePhotos}>
+								<FiChevronLeft size={28} />
+							</Button>
+						</Tooltip>
+					)}
+					{totalPage === page ? (
+						''
+					) : (
+						<Tooltip title="Siguiente" arrow>
+							<Button variant="contained" onClick={getNextPhotos}>
+								<FiChevronRight size={28} />
+							</Button>
+						</Tooltip>
+					)}
 				</div>
 			</main>
 			{isViewerOpen && (
