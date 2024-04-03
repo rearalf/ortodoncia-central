@@ -44,11 +44,9 @@ function usePhotosPage() {
 	const getPatientData = useCallback(async () => {
 		try {
 			if (id_patient) {
-				setLoading(true)
 				const patient = new Patient()
 				const data = await patient.getPatient(id_patient)
 				if (data !== undefined) {
-					setLoading(false)
 					setPatientData({
 						...data,
 						age: getAge(new Date(data.birthdate).toISOString()),
@@ -57,7 +55,6 @@ function usePhotosPage() {
 				}
 			}
 		} catch (error) {
-			setLoading(false)
 			console.log('Error getting patient data usePatient: ' + error)
 			setHandleState({
 				severity: 'error',
