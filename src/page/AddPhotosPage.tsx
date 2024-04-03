@@ -4,7 +4,7 @@ import HeadComponent from '@/components/HeadComponent'
 import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
-import useAddXRays from '@/hooks/useAddXRays'
+import useAddPhotos from '@/hooks/useAddPhotos'
 import Navbar from '@/components/Navbar'
 import '@/styles/AddPhotosPage.css'
 
@@ -28,7 +28,7 @@ const AddPhotosPage = () => {
 		handleDeleteImage,
 		handleCancelButton,
 		handleOnChangeInput,
-	} = useAddXRays()
+	} = useAddPhotos()
 	return (
 		<>
 			<HeadComponent title="Agregar imagenes al expediente" />

@@ -10,7 +10,7 @@ import PatientPhotos from '@/models/PatientPhotos'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '@/database/firebase'
 
-function useAddXRays() {
+function useAddPhotos() {
 	const { id_patient } = useParams()
 	const navigate = useNavigate()
 	const { patientData, setPatientData } = usePatientState()
@@ -233,7 +233,7 @@ function useAddXRays() {
 	}
 
 	const handleCancelButton = () => {
-		navigate(`/patient-profile/${patientData.id}`)
+		navigate(`/patient-profile/${patientData.id}/photos`)
 		setHandleState({
 			severity: 'info',
 			variant: 'filled',
@@ -333,4 +333,4 @@ function useAddXRays() {
 	}
 }
 
-export default useAddXRays
+export default useAddPhotos
