@@ -7,6 +7,18 @@
 .main_content {
 	display: flex;
 	flex-direction: column;
+	gap: 24px;
+}
+
+.main_content .content_article {
+	padding: 24px;
+	border-radius: 4px;
+	background-color: var(--background-color-3);
+}
+
+.main_content .content_article .article_header {
+	display: flex;
+	justify-content: space-between;
 }
 
 .main_content .content_article .article_description p {

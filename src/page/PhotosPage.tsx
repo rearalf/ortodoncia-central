@@ -1,10 +1,10 @@
-import { FiChevronLeft, FiChevronRight, FiUpload } from 'react-icons/fi'
+import { FiChevronLeft, FiChevronRight, FiEdit, FiTrash, FiUpload } from 'react-icons/fi'
+import { Button, IconButton, Tooltip } from '@mui/material'
 import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
 import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import usePhotosPage from '@/hooks/usePhotosPage'
-import { Button, Tooltip } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import '@/styles/PhtosPage.css'
 
@@ -63,9 +63,19 @@ const PhtosPage = () => {
 				<div className="main_content">
 					{data.map(photo => (
 						<article key={photo.id} className="content_article">
-							<h3 className="article_title">
-								{photo.formatDate?.toLocaleUpperCase()}
-							</h3>
+							<header className="article_header">
+								<h3 className="header_title">
+									{photo.formatDate?.toLocaleUpperCase()}
+								</h3>
+								<div className="header_btn-group">
+									<IconButton aria-label="Eliminar" color="error">
+										<FiTrash />
+									</IconButton>
+									<IconButton aria-label="Editar" color="info">
+										<FiEdit />
+									</IconButton>
+								</div>
+							</header>
 							<div className="article_description">
 								{photo.description.split('\n').map((line, index) => (
 									<p key={index}>{line}</p>
