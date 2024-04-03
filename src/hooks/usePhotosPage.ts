@@ -72,6 +72,7 @@ function usePhotosPage() {
 	const getPhotos = useCallback(async () => {
 		try {
 			if (id_patient) {
+				setLoading(true)
 				const patientPhotos = new PatientPhotos()
 				const data = await patientPhotos.getPhotosByPatient(id_patient, limit)
 
@@ -110,15 +111,24 @@ function usePhotosPage() {
 				}
 				setImages(imagesStrings)
 				setData(photoArray)
+				setLoading(false)
 			}
 		} catch (error) {
+			setLoading(false)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del las fotos.',
+			})
 			console.log(error)
 		}
-	}, [id_patient])
+	}, [id_patient, setHandleState])
 
 	const getNextPhotos = async () => {
 		try {
 			if (id_patient) {
+				setLoading(true)
 				const patientPhotos = new PatientPhotos()
 				const dataPhotos = await patientPhotos.getNextPhotosByPatient(
 					id_patient,
@@ -161,8 +171,16 @@ function usePhotosPage() {
 					setData(photoArray)
 					setPage(page + 1)
 				}
+				setLoading(false)
 			}
 		} catch (error) {
+			setLoading(false)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del las fotos.',
+			})
 			console.log('Error gettign next photos: ' + error)
 		}
 	}
@@ -170,6 +188,7 @@ function usePhotosPage() {
 	const getBeforePhotos = async () => {
 		try {
 			if (id_patient) {
+				setLoading(true)
 				const patientPhotos = new PatientPhotos()
 				const dataPhotos = await patientPhotos.getEndBeforePhotosByPatient(
 					id_patient,
@@ -211,8 +230,16 @@ function usePhotosPage() {
 					setData(photoArray)
 					setPage(page - 1)
 				}
+				setLoading(false)
 			}
 		} catch (error) {
+			setLoading(false)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del las fotos.',
+			})
 			console.log('Error getting before photos: ' + error)
 		}
 	}

@@ -1,17 +1,19 @@
+import { FiChevronLeft, FiChevronRight, FiUpload } from 'react-icons/fi'
+import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
 import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import usePhotosPage from '@/hooks/usePhotosPage'
+import { Button, Tooltip } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import '@/styles/PhtosPage.css'
-import { Button, Tooltip } from '@mui/material'
-import { FiChevronLeft, FiChevronRight, FiUpload } from 'react-icons/fi'
 
 const PhtosPage = () => {
 	const {
 		page,
 		data,
 		images,
+		loading,
 		totalPage,
 		patientData,
 		currentImage,
@@ -24,6 +26,7 @@ const PhtosPage = () => {
 	} = usePhotosPage()
 	return (
 		<>
+			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
 			<main className="photos-page_main">
