@@ -6,7 +6,7 @@ import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
 import useAddXRays from '@/hooks/useAddXRays'
 import Navbar from '@/components/Navbar'
-import '@/styles/AddXRaysPage.css'
+import '@/styles/AddPhotosPage.css'
 
 const AddPhotosPage = () => {
 	const {

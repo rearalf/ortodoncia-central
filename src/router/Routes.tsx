@@ -1,6 +1,7 @@
 import App from '@/App'
 import HomePage from '@/page/HomePage'
-import AddPhotosPage from '../page/AddPhotosPage'
+import PhotosPage from '@/page/PhotosPage'
+import AddPhotosPage from '@/page/AddPhotosPage'
 import TeethFormPage from '@/page/TeethFormPage'
 import AppointmentPage from '@/page/AppointmentPage'
 import { createBrowserRouter } from 'react-router-dom'
@@ -8,7 +9,6 @@ import CreatePatientPage from '@/page/CreatePatientPage'
 import UpdatePatientPage from '@/page/UpdatePatientPage'
 import PatientProfilePage from '@/page/PatientProfilePage'
 import UpdateAppointmentPage from '@/page/UpdateAppointmentPage'
-import PhtosPage from '@/page/PhtosPage'
 
 const router = createBrowserRouter(
 	[
@@ -47,7 +47,7 @@ const router = createBrowserRouter(
 				},
 				{
 					path: '/patient-profile/:id_patient/photos',
-					element: <PhtosPage />,
+					element: <PhotosPage />,
 				},
 				{
 					path: '/patient-profile/:id_patient/photos/add-photos',

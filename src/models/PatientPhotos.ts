@@ -1,19 +1,18 @@
 import { db } from '@/database/firebase'
 import {
-	AggregateField,
-	DocumentData,
-	DocumentReference,
-	addDoc,
-	collection,
-	endBefore,
-	getCountFromServer,
-	getDocs,
-	limit,
-	limitToLast,
-	orderBy,
 	query,
-	serverTimestamp,
+	limit,
+	addDoc,
+	orderBy,
+	getDocs,
+	endBefore,
+	collection,
 	startAfter,
+	limitToLast,
+	DocumentData,
+	serverTimestamp,
+	DocumentReference,
+	getCountFromServer,
 } from 'firebase/firestore'
 
 class PatientPhotos {
