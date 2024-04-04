@@ -49,6 +49,11 @@
 	gap: 24px;
 }
 
+.MuiDialog-paper.MuiDialog-paperScrollPaper .delete-dialog_btn-group {
+	display: flex;
+	gap: 24px;
+}
+
 @media (width >= 768px) {
 	.main_content .content_article .article_photos .photo-button_photo {
 		width: calc(75% - 20px);

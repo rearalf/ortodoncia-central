@@ -178,3 +178,12 @@ ul {
 	overflow-y: auto !important;
 	min-height: 100px;
 }
+
+.MuiDialog-paper.MuiDialog-paperScrollPaper {
+	padding: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 24px;
+}

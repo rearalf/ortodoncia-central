@@ -1,10 +1,12 @@
-import { FiChevronLeft, FiChevronRight, FiEdit, FiTrash, FiUpload } from 'react-icons/fi'
-import { Button, IconButton, Tooltip } from '@mui/material'
+import { FiChevronLeft, FiChevronRight, FiUpload } from 'react-icons/fi'
+import DialogDeletePhotos from '@/components/DialogDeletePhotos'
 import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
+import ArticlePhoto from '@/components/ArticlePhoto'
 import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import usePhotosPage from '@/hooks/usePhotosPage'
+import { Button, Tooltip } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import '@/styles/PhtosPage.css'
 
@@ -14,6 +16,7 @@ const PhtosPage = () => {
 		data,
 		images,
 		loading,
+		openModal,
 		totalPage,
 		patientData,
 		currentImage,
@@ -22,6 +25,9 @@ const PhtosPage = () => {
 		getBeforePhotos,
 		openImageViewer,
 		closeImageViewer,
+		handleOpenDialog,
+		handleCancelDialog,
+		handleDeleteDialog,
 		handleGoToAddPhotos,
 	} = usePhotosPage()
 	return (
@@ -29,6 +35,11 @@ const PhtosPage = () => {
 			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
+			<DialogDeletePhotos
+				openModal={openModal}
+				handleDeleteDialog={handleDeleteDialog}
+				handleCancelDialog={handleCancelDialog}
+			/>
 			<main className="photos-page_main">
 				<BreadCrumbs
 					links={[
@@ -62,38 +73,16 @@ const PhtosPage = () => {
 				</header>
 				<div className="main_content">
 					{data.map(photo => (
-						<article key={photo.id} className="content_article">
-							<header className="article_header">
-								<h3 className="header_title">
-									{photo.formatDate?.toLocaleUpperCase()}
-								</h3>
-								<div className="header_btn-group">
-									<IconButton aria-label="Eliminar" color="error">
-										<FiTrash />
-									</IconButton>
-									<IconButton aria-label="Editar" color="info">
-										<FiEdit />
-									</IconButton>
-								</div>
-							</header>
-							<div className="article_description">
-								{photo.description.split('\n').map((line, index) => (
-									<p key={index}>{line}</p>
-								))}
-							</div>
-							<div className="article_photos">
-								{typeof photo.imagesLinks !== 'string' &&
-									photo.imagesLinks.map((imagesLink, i) => (
-										<img
-											src={imagesLink}
-											alt={photo.imagesNames[i]}
-											key={photo.imagesNames[i]}
-											className="photo-button_photo"
-											onClick={() => openImageViewer(imagesLink)}
-										/>
-									))}
-							</div>
-						</article>
+						<ArticlePhoto
+							id={photo.id}
+							key={photo.id}
+							description={photo.description}
+							formatDate={photo.formatDate}
+							imagesLinks={photo.imagesLinks}
+							imagesNames={photo.imagesNames}
+							openImageViewer={openImageViewer}
+							handleDeleteArticle={handleOpenDialog}
+						/>
 					))}
 				</div>
 				<div className="main_btn-group">

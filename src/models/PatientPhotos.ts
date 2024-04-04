@@ -13,6 +13,8 @@ import {
 	serverTimestamp,
 	DocumentReference,
 	getCountFromServer,
+	doc,
+	deleteDoc,
 } from 'firebase/firestore'
 
 class PatientPhotos {
@@ -164,6 +166,20 @@ class PatientPhotos {
 			return dataPhotos
 		} catch (error) {
 			console.log('Error getting before photos by patients')
+			return undefined
+		}
+	}
+
+	async deletePhotosByPhoto(id_patient: string, id_photo: string) {
+		try {
+			const photoRef = doc(db, `patients/${id_patient}/photos/${id_photo}`)
+			const photosDetele = await deleteDoc(photoRef)
+				.then(() => true)
+				.catch(() => false)
+
+			return photosDetele
+		} catch (error) {
+			console.log('Error deleting photos by photo: ' + error)
 			return undefined
 		}
 	}

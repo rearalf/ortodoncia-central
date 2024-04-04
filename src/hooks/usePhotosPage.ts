@@ -25,6 +25,9 @@ function usePhotosPage() {
 	const [count, setCount] = useState(0)
 	const [totalPage, setTotalPage] = useState(count / limit)
 
+	const [idSelect, setIdSelect] = useState<string>('')
+	const [openModal, setOpenModal] = useState<boolean>(false)
+
 	const handleGoToAddPhotos = () => navigate(`/patient-profile/${id_patient}/photos/add-photos`)
 
 	const closeImageViewer = () => {
@@ -241,6 +244,39 @@ function usePhotosPage() {
 		}
 	}
 
+	const handleOpenDialog = (id: string) => {
+		setOpenModal(true)
+		setIdSelect(id)
+	}
+
+	const handleCancelDialog = () => {
+		setOpenModal(false)
+		setIdSelect('')
+	}
+
+	const handleDeleteDialog = async () => {
+		try {
+			if (id_patient) {
+				const foundPhotos = data.filter(photo => photo.id === idSelect)
+				console.log(foundPhotos[0].imagesNames)
+				/* 	const patientPhotos = new PatientPhotos()
+			
+				const photosDelete = await patientPhotos.deletePhotosByPhoto(id_patient, idSelect)
+				console.log(photosDelete) */
+			} else {
+				throw new Error('No tiene id')
+			}
+		} catch (error) {
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del las fotos.',
+			})
+			console.log('Error getting before photos: ' + error)
+		}
+	}
+
 	useEffect(() => {
 		getPatientData()
 	}, [id_patient, getPatientData])
@@ -254,6 +290,7 @@ function usePhotosPage() {
 		data,
 		images,
 		loading,
+		openModal,
 		totalPage,
 		patientData,
 		currentImage,
@@ -262,6 +299,9 @@ function usePhotosPage() {
 		getBeforePhotos,
 		openImageViewer,
 		closeImageViewer,
+		handleOpenDialog,
+		handleCancelDialog,
+		handleDeleteDialog,
 		handleGoToAddPhotos,
 	}
 }
