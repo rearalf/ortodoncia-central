@@ -51,6 +51,19 @@
 	display: none;
 }
 
+/* .add-x-rays-page_main .main_loading {
+	display: flex;
+	justify-content: center;
+	gap: 24px;
+	width: 100%;
+} */
+
+.add-x-rays-page_main .main_loading .loading_title {
+	font-size: 20px;
+	margin-bottom: 24px;
+	text-align: center;
+}
+
 .add-x-rays-page_main .main_images {
 	display: flex;
 	gap: 24px;

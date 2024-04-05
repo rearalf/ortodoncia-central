@@ -1,5 +1,6 @@
 import { Button, IconButton, LinearProgress, Tooltip } from '@mui/material'
 import { FiSave, FiUploadCloud, FiXCircle } from 'react-icons/fi'
+import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
 import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
@@ -11,6 +12,7 @@ import '@/styles/AddPhotosPage.css'
 const AddPhotosPage = () => {
 	const {
 		images,
+		loading,
 		progress,
 		isDragging,
 		description,
@@ -31,6 +33,7 @@ const AddPhotosPage = () => {
 	} = useAddPhotos()
 	return (
 		<>
+			<BackdropLoading loading={loading} />
 			<HeadComponent title="Agregar imagenes al expediente" />
 			<Navbar />
 			<main className="add-x-rays-page_main">
@@ -121,8 +124,8 @@ const AddPhotosPage = () => {
 					</div>
 				</form>
 				{numberImages !== 0 && (
-					<div>
-						<p>{numberImages}</p>
+					<div className="main_loading">
+						<h3 className="loading_title">{numberImages}</h3>
 						<LinearProgress variant="determinate" value={progress} />
 					</div>
 				)}

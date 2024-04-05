@@ -1,10 +1,12 @@
-import { db, storage } from '@/database/firebase'
+import { db } from '@/database/firebase'
 import {
+	doc,
 	query,
 	limit,
 	addDoc,
 	orderBy,
 	getDocs,
+	deleteDoc,
 	endBefore,
 	collection,
 	startAfter,
@@ -13,10 +15,7 @@ import {
 	serverTimestamp,
 	DocumentReference,
 	getCountFromServer,
-	doc,
-	deleteDoc,
 } from 'firebase/firestore'
-import { deleteObject, ref } from 'firebase/storage'
 
 class PatientPhotos {
 	async savePatientPhotos(

@@ -128,6 +128,7 @@ function useAddPhotos() {
 			}
 
 			setNumberImages(files.length)
+			setLoading(true)
 
 			if (patientData.id) {
 				const imagesLinks: string[] = []
@@ -152,6 +153,7 @@ function useAddPhotos() {
 								}
 							},
 							error => {
+								setLoading(false)
 								setHandleState({
 									severity: 'error',
 									variant: 'filled',
@@ -201,15 +203,16 @@ function useAddPhotos() {
 				})
 
 				if (saveDate?.id) {
-					console.log(saveDate)
+					setLoading(false)
 					setHandleState({
 						severity: 'success',
 						variant: 'filled',
 						show: true,
 						text: 'Datos e imagenes guardados exitosamente.',
 					})
-					navigate('/patient-profile/' + patientData.id)
+					navigate('/patient-profile/' + patientData.id + '/photos')
 				} else {
+					setLoading(false)
 					setHandleState({
 						severity: 'error',
 						variant: 'filled',
@@ -219,6 +222,7 @@ function useAddPhotos() {
 					throw saveDate
 				}
 			} else {
+				setLoading(false)
 				setHandleState({
 					severity: 'error',
 					variant: 'filled',
