@@ -1,8 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
+import { deleteObject, ref } from 'firebase/storage'
 import usePatientState from '@/states/patientState'
 import useAlertState from '@/states/useAlertState'
 import PatientPhotos from '@/models/PatientPhotos'
+import { storage } from '@/database/firebase'
 import formatDate from '@/utils/formatDate'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
@@ -25,7 +27,15 @@ function usePhotosPage() {
 	const [count, setCount] = useState(0)
 	const [totalPage, setTotalPage] = useState(count / limit)
 
-	const [idSelect, setIdSelect] = useState<string>('')
+	const [idSelect, setIdSelect] = useState<{
+		id: string
+		imagesNames: string[]
+		totalImageDeleted: number
+	}>({
+		id: '',
+		imagesNames: [],
+		totalImageDeleted: 0,
+	})
 	const [openModal, setOpenModal] = useState<boolean>(false)
 
 	const handleGoToAddPhotos = () => navigate(`/patient-profile/${id_patient}/photos/add-photos`)
@@ -244,29 +254,74 @@ function usePhotosPage() {
 		}
 	}
 
-	const handleOpenDialog = (id: string) => {
+	const handleOpenDialog = (id: string, imagesNames: string[]) => {
 		setOpenModal(true)
-		setIdSelect(id)
+		setIdSelect({ id, imagesNames, totalImageDeleted: imagesNames.length })
 	}
 
 	const handleCancelDialog = () => {
 		setOpenModal(false)
-		setIdSelect('')
+		setIdSelect({
+			id: '',
+			imagesNames: [],
+			totalImageDeleted: 0,
+		})
 	}
 
 	const handleDeleteDialog = async () => {
 		try {
 			if (id_patient) {
-				const foundPhotos = data.filter(photo => photo.id === idSelect)
-				console.log(foundPhotos[0].imagesNames)
-				/* 	const patientPhotos = new PatientPhotos()
-			
-				const photosDelete = await patientPhotos.deletePhotosByPhoto(id_patient, idSelect)
-				console.log(photosDelete) */
+				setLoading(true)
+				setOpenModal(false)
+				let totalImageDeleted = idSelect.imagesNames.length
+				idSelect.imagesNames.map(async name => {
+					const photoRef = ref(storage, `/${id_patient}/${name}`)
+					const deletePhoto = await deleteObject(photoRef)
+						.then(() => {
+							return true
+						})
+						.catch(() => false)
+					if (deletePhoto) {
+						setIdSelect({
+							...idSelect,
+							totalImageDeleted: idSelect.totalImageDeleted - 1,
+						})
+						totalImageDeleted = totalImageDeleted - 1
+					}
+				})
+				const patientPhotos = new PatientPhotos()
+				const photosDelete = await patientPhotos.deletePhotosByPhoto(
+					id_patient,
+					idSelect.id,
+				)
+				if (photosDelete) {
+					setHandleState({
+						severity: 'success',
+						variant: 'filled',
+						show: true,
+						text: 'Se elimino todos los datos.',
+					})
+				} else {
+					setHandleState({
+						severity: 'error',
+						variant: 'filled',
+						show: true,
+						text: 'Error al eliminar este expediente.',
+					})
+					setLoading(false)
+				}
+				setOpenModal(false)
+				getPhotos()
+				setIdSelect({
+					id: '',
+					imagesNames: [],
+					totalImageDeleted: 0,
+				})
 			} else {
 				throw new Error('No tiene id')
 			}
 		} catch (error) {
+			setLoading(false)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
@@ -290,6 +345,7 @@ function usePhotosPage() {
 		data,
 		images,
 		loading,
+		idSelect,
 		openModal,
 		totalPage,
 		patientData,

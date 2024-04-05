@@ -8,7 +8,7 @@ interface ArticlePhotoProps {
 	imagesLinks: string[]
 	imagesNames: string[]
 	openImageViewer: (value: string) => void
-	handleDeleteArticle: (id: string) => void
+	handleDeleteArticle: (id: string, imagesNames: string[]) => void
 }
 
 const ArticlePhoto = (props: ArticlePhotoProps) => {
@@ -20,7 +20,7 @@ const ArticlePhoto = (props: ArticlePhotoProps) => {
 					<IconButton
 						aria-label="Eliminar"
 						color="error"
-						onClick={() => props.handleDeleteArticle(props.id)}
+						onClick={() => props.handleDeleteArticle(props.id, props.imagesNames)}
 					>
 						<FiTrash />
 					</IconButton>

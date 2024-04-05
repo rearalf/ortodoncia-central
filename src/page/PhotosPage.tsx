@@ -16,6 +16,7 @@ const PhtosPage = () => {
 		data,
 		images,
 		loading,
+		idSelect,
 		openModal,
 		totalPage,
 		patientData,
@@ -39,6 +40,7 @@ const PhtosPage = () => {
 				openModal={openModal}
 				handleDeleteDialog={handleDeleteDialog}
 				handleCancelDialog={handleCancelDialog}
+				data={idSelect}
 			/>
 			<main className="photos-page_main">
 				<BreadCrumbs

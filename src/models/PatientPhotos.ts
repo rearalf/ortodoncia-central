@@ -1,4 +1,4 @@
-import { db } from '@/database/firebase'
+import { db, storage } from '@/database/firebase'
 import {
 	query,
 	limit,
@@ -16,6 +16,7 @@ import {
 	doc,
 	deleteDoc,
 } from 'firebase/firestore'
+import { deleteObject, ref } from 'firebase/storage'
 
 class PatientPhotos {
 	async savePatientPhotos(
@@ -176,7 +177,6 @@ class PatientPhotos {
 			const photosDetele = await deleteDoc(photoRef)
 				.then(() => true)
 				.catch(() => false)
-
 			return photosDetele
 		} catch (error) {
 			console.log('Error deleting photos by photo: ' + error)

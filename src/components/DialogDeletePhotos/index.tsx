@@ -5,13 +5,22 @@ interface DialogDeletePhotosProps {
 	openModal: boolean
 	handleCancelDialog: () => void
 	handleDeleteDialog: () => void
+	data: {
+		id: string
+		imagesNames: string[]
+		totalImageDeleted: number
+	}
 }
 
 const DialogDeletePhotos = (props: DialogDeletePhotosProps) => {
 	return (
 		<Dialog open={props.openModal} className="delete-dialog">
 			<h1>Seguro desea eliminarlo?</h1>
-			<p>Eliminara fotos y descripción y no podra ser recuperado nada.</p>
+			<p>
+				Eliminara {props.data.totalImageDeleted} fotos y descripción y no podra ser
+				recuperado nada.
+			</p>
+
 			<div className="delete-dialog_btn-group">
 				<Button
 					variant="contained"
