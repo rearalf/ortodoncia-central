@@ -1,15 +1,14 @@
 import { Button, IconButton, LinearProgress, Tooltip } from '@mui/material'
 import { FiSave, FiUploadCloud, FiXCircle } from 'react-icons/fi'
+import ReactSimpleImageViewer from 'react-simple-image-viewer'
+import useUpdatePhotosPage from '@/hooks/useUpdatePhotosPage'
 import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
-import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
-import useAddPhotos from '@/hooks/useAddPhotos'
 import Navbar from '@/components/Navbar'
-import '@/styles/AddPhotosPage.css'
 
-const AddPhotosPage = () => {
+function UpdatePhotosPage() {
 	const {
 		images,
 		loading,
@@ -30,7 +29,7 @@ const AddPhotosPage = () => {
 		handleDeleteImage,
 		handleCancelButton,
 		handleOnChangeInput,
-	} = useAddPhotos()
+	} = useUpdatePhotosPage()
 	return (
 		<>
 			<BackdropLoading loading={loading} />
@@ -56,12 +55,12 @@ const AddPhotosPage = () => {
 							link_to: `/patient-profile/${patientData.id}/photos`,
 						},
 						{
-							link_name: 'Agregar fotos e imagenes',
+							link_name: 'Modificar fotos e imagenes',
 							link_to: `/patient-profile/${patientData.id}/photos/add-photos`,
 						},
 					]}
 				/>
-				<h1 className="main_title">Agregar fotos e imagenes</h1>
+				<h1 className="main_title">Modificar fotos e imagenes</h1>
 				<form className="main_form" onSubmit={handleSavePhotos}>
 					<div className="form_first-section">
 						<InputBasic
@@ -102,7 +101,7 @@ const AddPhotosPage = () => {
 							</div>
 						</label>
 					</div>
-					<div className="form_draq-drop"></div>
+
 					<div className="btn_group">
 						<Button
 							variant="contained"
@@ -110,7 +109,7 @@ const AddPhotosPage = () => {
 							type="submit"
 							startIcon={<FiSave />}
 						>
-							Guardar
+							Actualizar
 						</Button>
 						<Button
 							variant="outlined"
@@ -135,7 +134,7 @@ const AddPhotosPage = () => {
 							<Tooltip title="Eliminar imagen">
 								<IconButton
 									color="error"
-									onClick={() => handleDeleteImage(index)}
+									onClick={() => handleDeleteImage(index, image)}
 									className="imagens_delete-button"
 								>
 									<FiXCircle size={30} />
@@ -149,7 +148,7 @@ const AddPhotosPage = () => {
 				</div>
 			</main>
 			{isViewerOpen && (
-				<ImageViewer
+				<ReactSimpleImageViewer
 					src={images}
 					currentIndex={currentImage}
 					disableScroll={false}
@@ -164,4 +163,4 @@ const AddPhotosPage = () => {
 	)
 }
 
-export default AddPhotosPage
+export default UpdatePhotosPage

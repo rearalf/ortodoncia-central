@@ -30,6 +30,7 @@ const PhtosPage = () => {
 		handleCancelDialog,
 		handleDeleteDialog,
 		handleGoToAddPhotos,
+		handleGoToUpdatePhotos,
 	} = usePhotosPage()
 	return (
 		<>
@@ -84,6 +85,7 @@ const PhtosPage = () => {
 							imagesNames={photo.imagesNames}
 							openImageViewer={openImageViewer}
 							handleDeleteArticle={handleOpenDialog}
+							handleGoToUpdatePhotos={handleGoToUpdatePhotos}
 						/>
 					))}
 				</div>

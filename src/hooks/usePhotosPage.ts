@@ -39,6 +39,8 @@ function usePhotosPage() {
 	const [openModal, setOpenModal] = useState<boolean>(false)
 
 	const handleGoToAddPhotos = () => navigate(`/patient-profile/${id_patient}/photos/add-photos`)
+	const handleGoToUpdatePhotos = (id_photo: string) =>
+		navigate(`/patient-profile/${id_patient}/photos/update-photos/${id_photo}`)
 
 	const closeImageViewer = () => {
 		setCurrentImage(0)
@@ -359,6 +361,7 @@ function usePhotosPage() {
 		handleCancelDialog,
 		handleDeleteDialog,
 		handleGoToAddPhotos,
+		handleGoToUpdatePhotos,
 	}
 }
 

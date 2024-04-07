@@ -51,13 +51,6 @@
 	display: none;
 }
 
-/* .add-x-rays-page_main .main_loading {
-	display: flex;
-	justify-content: center;
-	gap: 24px;
-	width: 100%;
-} */
-
 .add-x-rays-page_main .main_loading .loading_title {
 	font-size: 20px;
 	margin-bottom: 24px;
@@ -99,15 +92,6 @@
 }
 
 @media (min-width: 1024px) {
-	.add-x-rays-page_main .main_form .form_draq-drop {
-		width: 50%;
-	}
-
-	.add-x-rays-page_main .form_draq-drop .drap-drop_content .content_title {
-		text-align: center;
-		font-size: 18px;
-	}
-
 	.add-x-rays-page_main .main_images .images_img {
 		width: calc(100% - 30px);
 	}
