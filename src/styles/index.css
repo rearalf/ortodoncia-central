@@ -195,6 +195,7 @@ ul {
 	.MuiButtonBase-root {
 	color: var(--paragrap);
 }
+
 .MuiTable-root
 	.MuiTableFooter-root
 	.MuiTableRow-root.MuiTableRow-footer
@@ -203,6 +204,11 @@ ul {
 	.MuiButtonBase-root.Mui-disabled {
 	color: var(--paragrap);
 	opacity: 0.5;
+}
+
+.MuiTable-root
+	.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiTablePagination-selectIcon.MuiSelect-iconStandard {
+	color: var(--paragrap);
 }
 
 /* 
@@ -226,6 +232,11 @@ ul {
 	height: 100% !important;
 	overflow-y: auto !important;
 	min-height: 100px;
+}
+
+.MuiInputBase-input.MuiOutlinedInput-input.Mui-disabled {
+	color: #d9d9d9;
+	-webkit-text-fill-color: #d9d9d9;
 }
 
 /* 

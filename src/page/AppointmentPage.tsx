@@ -1,11 +1,11 @@
-import Navbar from '@/components/Navbar'
-import TeethTable from '@/components/TeethTable'
-import useAppointment from '@/hooks/useAppointment'
 import HeadComponent from '@/components/HeadComponent'
-import '@/styles/AppointmentPage.css'
+import useAppointment from '@/hooks/useAppointment'
+import BreadCrumbs from '@/components/BreadCrumbs'
+import TeethTable from '@/components/TeethTable'
+import Navbar from '@/components/Navbar'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
-import BreadCrumbs from '@/components/BreadCrumbs'
+import '@/styles/AppointmentPage.css'
 
 function AppointmentPage() {
 	const { appointment, patientData, last_appointment } = useAppointment()
