@@ -56,7 +56,9 @@ const TeethFormPage = () => {
 					}`}
 				</h1>
 
-				<TeethForm />
+				<div className="main_teethForm">
+					<TeethForm />
+				</div>
 
 				<form onSubmit={handleSaveTeeth} className="main_lastform">
 					<h2 className="lastform_title">Cita de hoy</h2>

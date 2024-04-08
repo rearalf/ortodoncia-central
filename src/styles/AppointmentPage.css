@@ -49,11 +49,19 @@
 .appointment-page_main .main_odontograma {
 	margin-top: 24px;
 	background-color: var(--background-color-3);
-	padding: 24px;
+	padding: 0;
 	border-radius: 4px;
 	width: 100%;
 	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.appointment-page_main .main_odontograma h2 {
+	padding: 24px 24px 0;
+}
+
+.appointment-page_main .main_odontograma .teethFirstRow {
+	padding-bottom: 24px;
 }
 
 .appointment-page_main .main_odontograma .odontograma_title {

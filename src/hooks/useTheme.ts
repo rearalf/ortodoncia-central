@@ -73,7 +73,7 @@ function useTheme() {
 							color: '#d9d9d9',
 						},
 						'& fieldset': {
-							'border-color': '#d9d9d9',
+							borderColor: '#d9d9d9',
 						},
 					},
 				},
@@ -82,10 +82,10 @@ function useTheme() {
 				styleOverrides: {
 					root: {
 						'& fieldset': {
-							'border-color': '#d9d9d9',
+							borderColor: '#d9d9d9',
 						},
 						'& .MuiInputBase-root.MuiOutlinedInput-root:hover fieldset': {
-							'border-color': '#808080',
+							borderColor: '#808080',
 						},
 						'& .MuiSvgIcon-root.MuiSelect-icon': {
 							color: '#d9d9d9',
@@ -101,7 +101,7 @@ function useTheme() {
 							color: '#d9d9d945',
 						},
 						'& fieldset': {
-							'border-color': '#d9d9d9',
+							borderColor: '#d9d9d9',
 						},
 					},
 				},
@@ -110,13 +110,13 @@ function useTheme() {
 				styleOverrides: {
 					root: {
 						'& fieldset': {
-							'border-color': '#d9d9d9',
+							borderColor: '#d9d9d9',
 						},
 						'& .MuiInputBase-root.Mui-disabled fieldset': {
-							'border-color': '#d9d9d945',
+							borderColor: '#d9d9d945',
 						},
 						'& .MuiInputBase-root.MuiOutlinedInput-root:hover fieldset': {
-							'border-color': '#808080',
+							borderColor: '#808080',
 						},
 					},
 				},

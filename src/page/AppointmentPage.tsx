@@ -1,3 +1,4 @@
+import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
 import useAppointment from '@/hooks/useAppointment'
 import BreadCrumbs from '@/components/BreadCrumbs'
@@ -8,10 +9,11 @@ import { Button } from '@mui/material'
 import '@/styles/AppointmentPage.css'
 
 function AppointmentPage() {
-	const { appointment, patientData, last_appointment } = useAppointment()
+	const { loading, appointment, patientData, last_appointment } = useAppointment()
 
 	return (
 		<>
+			<BackdropLoading loading={loading} />
 			<HeadComponent
 				title={`Cita de ${patientData.name.split(' ')[0]} ${
 					patientData.name.split(' ')[2]

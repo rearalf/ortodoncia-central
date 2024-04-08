@@ -34,7 +34,6 @@
 	flex-direction: column;
 }
 
-.patientprofile_main .main_teethTable,
 .main_information .information_basicInformation,
 .main_information .information_additionalInfo {
 	background-color: var(--background-color-3);
@@ -43,6 +42,23 @@
 	position: relative;
 	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.patientprofile_main .main_teethTable {
+	background-color: var(--background-color-3);
+	padding: 0;
+	border-radius: 4px;
+	position: relative;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.patientprofile_main .main_teethTable h2 {
+	padding: 24px 24px 0;
+}
+
+.patientprofile_main .main_teethTable .teethFirstRow {
+	padding: 0 10px 24px;
 }
 
 .main_information .information_basicInformation .avatar_photo {

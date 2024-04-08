@@ -2,7 +2,7 @@ import getAge from '@/utils/getAge'
 import Patient from '@/models/Patient'
 import formatDate from '@/utils/formatDate'
 import { useParams } from 'react-router-dom'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Appointment from '@/models/Appointment'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
@@ -15,9 +15,11 @@ function useAppointment() {
 	const { appointment, setTeethList, setAppointment, setToothState, setPositionState } =
 		useTeethState()
 	const { setHandleState } = useAlertState()
+	const [loading, setLoading] = useState(false)
 
 	const getPatientData = useCallback(async () => {
 		try {
+			setLoading(true)
 			if (!patientData.id && id_patient) {
 				const patient = new Patient()
 				const data = await patient.getPatient(id_patient)
@@ -28,25 +30,25 @@ function useAppointment() {
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
 				}
+				setLoading(false)
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log('Error getting patient data usePatient: ' + error)
 		}
 	}, [id_patient, patientData.id, setPatientData])
 
 	const getAppointment = useCallback(async () => {
 		try {
+			setLoading(true)
 			if (id_patient && id_appointment) {
 				const appointment = new Appointment()
 				const appointmentById = await appointment.getAppointment(id_patient, id_appointment)
 
-				/* const informationChanges = {
-					
-				} */
-
 				let addInfoAppointment
 
 				if (appointmentById.dateChange) {
+					setLoading(false)
 					addInfoAppointment = {
 						...appointmentById,
 						date: new Date(
@@ -78,6 +80,7 @@ function useAppointment() {
 						reasonChange: appointmentById.reasonChange,
 					}
 				} else {
+					setLoading(false)
 					addInfoAppointment = {
 						...appointmentById,
 						date: new Date(
@@ -104,7 +107,7 @@ function useAppointment() {
 
 				if (appointmentById) {
 					setAppointment(addInfoAppointment)
-
+					setLoading(false)
 					const teeth = JSON.parse(appointmentById.teeth)
 					if (typeof teeth !== 'string') {
 						setTeethList(teeth)
@@ -113,11 +116,14 @@ function useAppointment() {
 						setTeethList(teeth1)
 					}
 				} else {
-					throw 'Error'
+					throw new Error('Error getting appointment data')
 				}
+			} else {
+				throw new Error('Error getting appointment data')
 			}
 		} catch (error) {
 			console.log(error)
+			setLoading(false)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
@@ -145,6 +151,7 @@ function useAppointment() {
 	}, [setToothState, setPositionState])
 
 	return {
+		loading,
 		patientData,
 		appointment,
 		last_appointment,
