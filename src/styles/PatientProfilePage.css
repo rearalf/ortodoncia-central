@@ -34,6 +34,7 @@
 	flex-direction: column;
 }
 
+.patientprofile_main .main_teethTable,
 .main_information .information_basicInformation,
 .main_information .information_additionalInfo {
 	background-color: var(--background-color-3);

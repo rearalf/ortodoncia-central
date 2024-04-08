@@ -4,49 +4,59 @@
 	--background-secundary: hsl(0, 0%, 92%);
 	--background-third: hsl(0, 0%, 90%);
 
-	--background-color-1: #fcfcfc;
-	--background-color-2: #ebebeb;
-	--background-color-3: #f7f7f7;
+	--background-color-1: #18191b;
+	--background-color-2: #1f2023;
+	--background-color-3: #27292d;
 
 	/* Text color */
-	--paragrap: #333333;
-	--header-white: #fff;
-	--header-3: #292929;
-	--header-2: #1f1f1f;
-	--header-1: #141414;
+	--paragrap: #f3f3f0;
+	--header-3: #bbbbb3;
+	--header-2: #e8e8e1;
+	--header-1: #f3f3f0;
 
 	/* Color text */
-	--color-text-100: #ebf4f6;
-	--color-text-200: #d8e9ed;
-	--color-text-300: #aec3c9;
-	--color-text-400: #7b8d94;
-	--color-text-500: #3c474d;
-	--color-text-600: #2b3842;
-	--color-text-700: #1e2b37;
-	--color-text-800: #131e2c;
-	--color-text-900: #0b1524;
+	--color-text-100: #f2f2f2;
+	--color-text-200: hsl(0, 0%, 92%);
+	--color-text-300: hsl(0, 0%, 90%);
+	--color-text-400: hsl(0, 0%, 87%);
+	--color-text-500: #d9d9d9;
+	--color-text-600: hsl(0, 0%, 83%);
+	--color-text-700: hsl(0, 0%, 80%);
+	--color-text-800: hsl(0, 0%, 77%);
+	--color-text-900: #bfbfbf;
 
 	/* Principal color */
-	--base-100: #fdf09b;
-	--base-500: #fec200;
-	--base-600: #daa100;
+	--base-100: #cafaec;
+	--base-200: #96f6e2;
+	--base-300: #5fe5d4;
+	--base-400: #37ccc5;
+	--base-500: #05a3aa;
+	--base-600: #038092;
+	--base-700: #02617a;
+	--base-800: #014562;
+	--base-900: #003251;
+
 	/* Success color */
-	--success-400: #c4f489;
-	--success-500: #a8ed63;
-	--success-600: #83cb48;
-	--success-700: #62aa31;
-	--success-800: #44891f;
-	--success-900: #2f7113;
+	--success-100: #effbce;
+	--success-200: #dbf7a0;
+	--success-300: #bbe76d;
+	--success-400: #97cf46;
+	--success-500: #6aaf15;
+	--success-600: #53960f;
+	--success-700: #3f7d0a;
+	--success-800: #2e6506;
+	--success-900: #215304;
+
 	/* Danger color */
-	--danger-100: #ffeadc;
-	--danger-200: #ffd0b9;
-	--danger-300: #ffb096;
-	--danger-400: #ff927c;
-	--danger-500: #ff6051;
-	--danger-600: #db3b3b;
-	--danger-700: #b72833;
-	--danger-800: #93192d;
-	--danger-900: #7a0f29;
+	--danger-100: #fde2d5;
+	--danger-200: #fcbfac;
+	--danger-300: #f69381;
+	--danger-400: #ed6a60;
+	--danger-500: #e22f32;
+	--danger-600: #c22233;
+	--danger-700: #a21732;
+	--danger-800: #830e2f;
+	--danger-900: #6c092d;
 }
 
 * {
@@ -115,7 +125,7 @@ ul {
 	Tables
 */
 .MuiPaper-root.MuiTableContainer-root {
-	background-color: var(--background-color-1);
+	background-color: var(--background-color-3);
 	color: var(--paragrap);
 	border-radius: 4px;
 	box-shadow: none;
@@ -126,7 +136,7 @@ ul {
 }
 
 .MuiPaper-root.MuiTableContainer-root .MuiTableRow-root.MuiTableRow-head {
-	background-color: var(--background-color-1);
+	background-color: var(--background-color-3);
 }
 
 .MuiPaper-root.MuiTableContainer-root .MuiTableRow-root.MuiTableRow-head .MuiTableCell-head {
@@ -138,6 +148,7 @@ ul {
 
 .MuiTableRow-root .MuiTableCell-root.MuiTableCell-body {
 	font-size: 14px;
+	color: var(--paragrap);
 }
 .MuiTableRow-root:hover {
 	background-color: var(--background-color-2);
@@ -160,6 +171,44 @@ ul {
 	color: var(--color-text-900);
 }
 
+.MuiTable-root
+	.MuiTableFooter-root
+	.MuiTableRow-root.MuiTableRow-footer
+	.MuiTableCell-root.MuiTableCell-footer {
+	border: none;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.MuiTable-root
+	.MuiTableFooter-root
+	.MuiTableRow-root.MuiTableRow-footer
+	.MuiTableCell-root.MuiTableCell-footer
+	.MuiToolbar-root.MuiToolbar-gutters {
+	color: var(--paragrap);
+}
+.MuiTable-root
+	.MuiTableFooter-root
+	.MuiTableRow-root.MuiTableRow-footer
+	.MuiTableCell-root.MuiTableCell-footer
+	.MuiToolbar-root.MuiToolbar-gutters
+	.MuiButtonBase-root {
+	color: var(--paragrap);
+}
+.MuiTable-root
+	.MuiTableFooter-root
+	.MuiTableRow-root.MuiTableRow-footer
+	.MuiTableCell-root.MuiTableCell-footer
+	.MuiToolbar-root.MuiToolbar-gutters
+	.MuiButtonBase-root.Mui-disabled {
+	color: var(--paragrap);
+	opacity: 0.5;
+}
+
+/* 
+	Breadcrumbs
+*/
+
 .MuiBreadcrumbs-ol a,
 .MuiBreadcrumbs-ol p {
 	margin: 0;
@@ -179,6 +228,10 @@ ul {
 	min-height: 100px;
 }
 
+/* 
+	Dialog
+*/
+
 .MuiDialog-paper.MuiDialog-paperScrollPaper {
 	padding: 24px;
 	display: flex;
@@ -186,4 +239,6 @@ ul {
 	align-items: center;
 	flex-direction: column;
 	gap: 24px;
+	background-color: var(--background-color-1);
+	color: var(--color-text-500);
 }

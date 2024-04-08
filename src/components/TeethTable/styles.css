@@ -47,6 +47,7 @@
 	border: none;
 	cursor: pointer;
 	transition: font-size 0.5s ease-in-out;
+	color: var(--paragrap);
 }
 
 .toothButtonNumberOver {
