@@ -1,17 +1,17 @@
 import { FiBookOpen, FiCalendar, FiSmartphone, FiUserPlus } from 'react-icons/fi'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
 import AppointmentsTable from '@/components/AppointmentsTable'
+import TeethTable from '@/components/Odontogram/TeethTable'
 import BackdropLoading from '@/components/BackdropLoading'
 import AvatarComponent from '@/components/AvatarComponent'
 import HeadComponent from '@/components/HeadComponent'
 import BreadCrumbs from '@/components/BreadCrumbs'
-import TeethTable from '@/components/TeethTable'
 import { Button, Tooltip } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import '@/styles/PatientProfilePage.css'
 
 const PatientProfilePage = () => {
-	const { patientData, loading, handleGoToPhotos, handleGoToTeethForm, handleGoToUpdatePatient } =
+	const { loading, patientData, handleGoToPhotos, handleGoToTeethForm, handleGoToUpdatePatient } =
 		usePatientProfilePage()
 	return (
 		<>

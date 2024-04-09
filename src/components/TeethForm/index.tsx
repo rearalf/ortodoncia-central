@@ -1,7 +1,7 @@
-import React from 'react'
-import TeethTable from '../TeethTable'
-import RadioGroupComponent from '../RadioGroup'
 import useTeethState from '@/states/toothFormState'
+import TeethTable from '../Odontogram/TeethTable'
+import RadioGroupComponent from '../RadioGroup'
+import React from 'react'
 import './styles.css'
 
 const TeethForm = () => {
@@ -21,6 +21,7 @@ const TeethForm = () => {
 		}
 	}
 
+	
 	return (
 		<div className="teethForm">
 			<div className="optionsTeethForm">

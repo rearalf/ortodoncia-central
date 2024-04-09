@@ -1,14 +1,14 @@
-import getAge from '@/utils/getAge'
-import Patient from '@/models/Patient'
-import formatDate from '@/utils/formatDate'
-import Appointment from '@/models/Appointment'
-import { SelectChangeEvent } from '@mui/material'
-import useAlertState from '@/states/useAlertState'
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
+import { constantAppointment, constantTeethList } from '@/utils/constants'
+import { useNavigate, useParams } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
-import { useNavigate, useParams } from 'react-router-dom'
-import { ChangeEvent, FormEvent, useCallback, useEffect } from 'react'
-import { constantAppointment, constantTeethList } from '@/utils/constants'
+import useAlertState from '@/states/useAlertState'
+import { SelectChangeEvent } from '@mui/material'
+import Appointment from '@/models/Appointment'
+import formatDate from '@/utils/formatDate'
+import Patient from '@/models/Patient'
+import getAge from '@/utils/getAge'
 
 function useTeethFormPage() {
 	const navigate = useNavigate()
@@ -16,13 +16,15 @@ function useTeethFormPage() {
 	const { setHandleState } = useAlertState()
 	const { patientData, setPatientData } = usePatientState()
 	const {
-		appointment,
-		setAppointment,
 		teethList,
+		appointment,
 		setTeethList,
 		setToothState,
+		setAppointment,
 		setPositionState,
 	} = useTeethState()
+
+	const [steps, setSteps] = useState<number>(1)
 
 	const handleSaveTeeth = async (e: FormEvent<HTMLFormElement>) => {
 		try {
@@ -60,15 +62,19 @@ function useTeethFormPage() {
 	}
 
 	const handleCancelButton = () => {
-		if (patientData.id) navigate(`/patient-profile/${patientData.id}`)
-		else navigate('/')
-		handleCleanStates()
-		setHandleState({
-			severity: 'warning',
-			variant: 'filled',
-			show: true,
-			text: 'Datos no guardados.',
-		})
+		if (steps === 1) {
+			if (patientData.id) navigate(`/patient-profile/${patientData.id}`)
+			else navigate('/')
+			handleCleanStates()
+			setHandleState({
+				severity: 'warning',
+				variant: 'filled',
+				show: true,
+				text: 'Datos no guardados.',
+			})
+		} else {
+			setSteps(1)
+		}
 	}
 
 	const handleCleanStates = () => {
@@ -154,6 +160,10 @@ function useTeethFormPage() {
 		}
 	}, [id_patient, navigate, setHandleState, setTeethList, setPatientData])
 
+	const handleNextStep = () => {
+		setSteps(prevStep => prevStep + 1)
+	}
+
 	useEffect(() => {
 		if (patientData.id === undefined) {
 			getPatientData()
@@ -165,8 +175,10 @@ function useTeethFormPage() {
 	}, [appointment.id, setAppointment])
 
 	return {
+		steps,
 		appointment,
 		patientData,
+		handleNextStep,
 		handleSaveTeeth,
 		handleChangeCost,
 		handleChangeInput,
