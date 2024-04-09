@@ -1,6 +1,6 @@
 import { Button } from '@mui/material'
 import Navbar from '@/components/Navbar'
-import TeethForm from '@/components/TeethForm'
+import TeethForm from '@/components/Odontogram/TeethForm'
 import InputDate from '@/components/InputDate'
 import InputBasic from '@/components/InputBasic'
 import { FiArrowLeft, FiArrowRight, FiSave, FiXCircle } from 'react-icons/fi'

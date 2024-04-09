@@ -1,5 +1,5 @@
 import useTeethState from '@/states/toothFormState'
-import Tooth from '../Tooth'
+import Tooth from './Tooth'
 import './styles.css'
 
 const TeethTable = () => {
