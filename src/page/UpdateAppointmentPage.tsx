@@ -1,19 +1,21 @@
 import useUpdateAppointmentPage from '@/hooks/useUpdateAppointmentPage'
 import InputNumericFormat from '@/components/NumericFormatCustom '
 import TeethTable from '@/components/Odontogram/TeethTable'
+import BackdropLoading from '@/components/BackdropLoading'
+import TeethForm from '@/components/Odontogram/TeethForm'
 import HeadComponent from '@/components/HeadComponent'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputSelect from '@/components/InputSelect'
 import { FiSave, FiXCircle } from 'react-icons/fi'
 import InputBasic from '@/components/InputBasic'
 import InputDate from '@/components/InputDate'
-import TeethForm from '@/components/Odontogram/TeethForm'
 import Navbar from '@/components/Navbar'
 import { Button } from '@mui/material'
 import '@/styles/UpdateAppointmentPage.css'
 
 function UpdateAppointmentPage() {
 	const {
+		loading,
 		newChanges,
 		appointment,
 		patientData,
@@ -60,6 +62,7 @@ function UpdateAppointmentPage() {
 	]
 	return (
 		<>
+			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Cita de`} />
 			<Navbar />
 			<main className="update-appointment-page_main">

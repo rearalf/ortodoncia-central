@@ -17,6 +17,7 @@ function useUpdateAppointmentPage() {
 	const { appointment, teethList, setAppointment, setTeethList } = useTeethState()
 	const [staticTeethList, setStaticTeethList] = useState<string>('')
 	const [showOdontogram, setShowOdontogram] = useState<boolean>(false)
+	const [loading, setLoading] = useState<boolean>(false)
 	const [newChanges, setNewChange] = useState<{
 		dateChange: Date
 		formatdateChange: string
@@ -105,6 +106,7 @@ function useUpdateAppointmentPage() {
 
 	const handleSave = async () => {
 		try {
+			setLoading(true)
 			if (patientData.id && appointment.id) {
 				const appointmentClass = new Appointment()
 				if (last_appointment === 'true' && staticTeethList !== JSON.stringify(teethList)) {
@@ -142,7 +144,9 @@ function useUpdateAppointmentPage() {
 							show: true,
 							text: 'La actualización de la cita fue exitosa.',
 						})
+						setLoading(false)
 					} else if (updateAppoinment) {
+						setLoading(false)
 						setHandleState({
 							severity: 'info',
 							variant: 'filled',
@@ -150,6 +154,7 @@ function useUpdateAppointmentPage() {
 							text: 'El odontograma se actualizó, pero no la cita.',
 						})
 					} else if (updateTeeth) {
+						setLoading(false)
 						setHandleState({
 							severity: 'info',
 							variant: 'filled',
@@ -157,6 +162,7 @@ function useUpdateAppointmentPage() {
 							text: 'La actualización de la cita fue exitosa, no se actualizó el odontograma.',
 						})
 					} else {
+						setLoading(false)
 						throw 'Error updating in update appointment.'
 					}
 					navigate(
@@ -170,6 +176,7 @@ function useUpdateAppointmentPage() {
 					)
 
 					if (updateAppoinment) {
+						setLoading(false)
 						setHandleState({
 							severity: 'success',
 							variant: 'filled',
@@ -181,11 +188,13 @@ function useUpdateAppointmentPage() {
 							? navigate(address + '/true')
 							: navigate(address + '/false')
 					} else {
+						setLoading(false)
 						throw 'Error updating in update appointment.'
 					}
 				}
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log(error)
 			setHandleState({
 				severity: 'error',
@@ -208,6 +217,7 @@ function useUpdateAppointmentPage() {
 
 	const getAppointmentData = useCallback(async () => {
 		try {
+			setLoading(true)
 			if (id_appointment && id_patient) {
 				const appointmentClass = new Appointment()
 				const appointmentById = await appointmentClass.getAppointment(
@@ -215,6 +225,7 @@ function useUpdateAppointmentPage() {
 					id_appointment,
 				)
 				if (appointmentById) {
+					setLoading(false)
 					setAppointment({
 						...appointmentById,
 						date: new Date(
@@ -255,24 +266,29 @@ function useUpdateAppointmentPage() {
 				}
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log(error)
 		}
 	}, [id_appointment, setAppointment, setTeethList, id_patient])
 
 	const getPatientData = useCallback(async () => {
 		try {
+			setLoading(true)
 			const patientClass = new Patient()
 			if (!patientData.id && id_patient) {
 				const data = await patientClass.getPatient(id_patient)
 				if (data !== undefined) {
+					setLoading(false)
 					setPatientData({
 						...data,
 						age: getAge(data.birthdate.toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
 				}
+				setLoading(false)
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log(error)
 		}
 	}, [id_patient, setPatientData, patientData.id])
@@ -283,6 +299,7 @@ function useUpdateAppointmentPage() {
 	}, [id_patient, id_appointment, getPatientData, getAppointmentData])
 
 	return {
+		loading,
 		newChanges,
 		appointment,
 		patientData,

@@ -10,10 +10,12 @@ import useTeethFormPage from '@/hooks/useTeethFormPage'
 import InputNumericFormat from '@/components/NumericFormatCustom '
 import '@/styles/TeethFormPage.css'
 import BreadCrumbs from '@/components/BreadCrumbs'
+import BackdropLoading from '@/components/BackdropLoading'
 
 const TeethFormPage = () => {
 	const {
 		steps,
+		loading,
 		appointment,
 		patientData,
 		handleNextStep,
@@ -26,6 +28,7 @@ const TeethFormPage = () => {
 	} = useTeethFormPage()
 	return (
 		<>
+			<BackdropLoading loading={loading} />
 			<HeadComponent title="Odontograma de " />
 			<Navbar />
 			<main className="teethform_main">

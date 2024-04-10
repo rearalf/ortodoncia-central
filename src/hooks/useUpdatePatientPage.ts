@@ -134,8 +134,9 @@ function useUpdatePatientPage() {
 					avatarURL: uploadURL,
 					avatarName: avatarNewName,
 				})
-
+				
 				if (patient) {
+					setLoadingPatient(false)
 					setPatientData({
 						...patientData,
 					})
@@ -153,6 +154,7 @@ function useUpdatePatientPage() {
 				}
 			}
 		} catch (error) {
+			setLoadingPatient(false)
 			console.log(error)
 			setHandleState({
 				severity: 'error',
@@ -176,14 +178,17 @@ function useUpdatePatientPage() {
 	const getPatient = useCallback(async () => {
 		try {
 			if (!patientData.id) {
+				setLoadingPatient(true)
 				const ModelPatient = new Patient()
 				if (id) {
+					setLoadingPatient(false)
 					const getPatientData = await ModelPatient.getPatient(id)
 					if (getPatientData) {
 						if (getPatientData.avatarURL) setAvatarURL(getPatientData.avatarURL)
 						setPatientData(getPatientData)
 					}
 				} else {
+					setLoadingPatient(false)
 					setHandleState({
 						severity: 'error',
 						variant: 'filled',
@@ -193,9 +198,10 @@ function useUpdatePatientPage() {
 				}
 			}
 		} catch (error) {
+			setLoadingPatient(false)
 			console.log(error)
 		}
-	}, [id, patientData.name, setPatientData, setHandleState, patientData.id])
+	}, [id, setPatientData, setHandleState, patientData.id, setLoadingPatient])
 
 	const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
@@ -231,7 +237,7 @@ function useUpdatePatientPage() {
 		} else {
 			if (patientData.avatarURL) setAvatarURL(patientData.avatarURL)
 		}
-	}, [id, getPatient])
+	}, [id, getPatient, patientData.avatarURL])
 
 	useEffect(() => {
 		if (progress === 100) setLoading(false)

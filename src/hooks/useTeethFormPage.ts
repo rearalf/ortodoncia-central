@@ -24,11 +24,13 @@ function useTeethFormPage() {
 		setPositionState,
 	} = useTeethState()
 
+	const [loading, setLoading] = useState<boolean>(false)
 	const [steps, setSteps] = useState<number>(1)
 
 	const handleSaveTeeth = async (e: FormEvent<HTMLFormElement>) => {
 		try {
 			e.preventDefault()
+			setLoading(true)
 			if (patientData.id) {
 				const saveNewAppointment = new Appointment()
 				const newAppointment = await saveNewAppointment.saveNewAppointment(
@@ -37,6 +39,7 @@ function useTeethFormPage() {
 					teethList,
 				)
 				if (newAppointment !== undefined) {
+					setLoading(false)
 					handleCleanStates()
 					navigate(-1)
 					setHandleState({
@@ -46,11 +49,13 @@ function useTeethFormPage() {
 						text: 'Datos de la cita guardados.',
 					})
 				} else {
+					setLoading(false)
 					handleCleanStates()
 					throw 'Error to saving data'
 				}
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log('Error button teeth form: ' + error)
 			setHandleState({
 				severity: 'error',
@@ -132,9 +137,11 @@ function useTeethFormPage() {
 	const getPatientData = useCallback(async () => {
 		try {
 			if (id_patient) {
+				setLoading(true)
 				const patient = new Patient()
 				const data = await patient.getPatient(id_patient)
 				if (data !== undefined) {
+					setLoading(false)
 					setPatientData({
 						...data,
 						age: getAge(data.birthdate.toISOString()),
@@ -147,8 +154,10 @@ function useTeethFormPage() {
 						setTeethList(constantTeethList)
 					}
 				}
+				setLoading(false)
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log(error)
 			navigate(`patient-profile/${id_patient}`)
 			setHandleState({
@@ -160,9 +169,7 @@ function useTeethFormPage() {
 		}
 	}, [id_patient, navigate, setHandleState, setTeethList, setPatientData])
 
-	const handleNextStep = () => {
-		setSteps(prevStep => prevStep + 1)
-	}
+	const handleNextStep = () => setSteps(prevStep => prevStep + 1)
 
 	useEffect(() => {
 		if (patientData.id === undefined) {
@@ -176,6 +183,7 @@ function useTeethFormPage() {
 
 	return {
 		steps,
+		loading,
 		appointment,
 		patientData,
 		handleNextStep,

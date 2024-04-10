@@ -1,13 +1,15 @@
-import Navbar from '@/components/Navbar'
-import { SlArrowDown } from 'react-icons/sl'
-import InputDate from '@/components/InputDate'
-import InputBasic from '@/components/InputBasic'
-import InputCheckbox from '@/components/Checkbox'
-import { FiSave, FiUpload, FiXCircle } from 'react-icons/fi'
-import BreadCrumbs from '@/components/BreadCrumbs'
-import HeadComponent from '@/components/HeadComponent'
-import PhoneNumberInput from '@/components/PhoneNumberInput'
 import useUpdatePatientPage from '@/hooks/useUpdatePatientPage'
+import { FiSave, FiUpload, FiXCircle } from 'react-icons/fi'
+import PhoneNumberInput from '@/components/PhoneNumberInput'
+import AvatarComponent from '@/components/AvatarComponent'
+import BackdropLoading from '@/components/BackdropLoading'
+import HeadComponent from '@/components/HeadComponent'
+import BreadCrumbs from '@/components/BreadCrumbs'
+import InputCheckbox from '@/components/Checkbox'
+import InputBasic from '@/components/InputBasic'
+import InputDate from '@/components/InputDate'
+import { SlArrowDown } from 'react-icons/sl'
+import Navbar from '@/components/Navbar'
 import {
 	Accordion,
 	AccordionDetails,
@@ -15,8 +17,6 @@ import {
 	Button,
 	CircularProgress,
 } from '@mui/material'
-import AvatarComponent from '@/components/AvatarComponent'
-import BackdropLoading from '@/components/BackdropLoading'
 
 function UpdatePatientPage() {
 	const {
