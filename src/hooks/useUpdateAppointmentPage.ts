@@ -16,6 +16,7 @@ function useUpdateAppointmentPage() {
 	const { patientData, setPatientData } = usePatientState()
 	const { appointment, teethList, setAppointment, setTeethList } = useTeethState()
 	const [staticTeethList, setStaticTeethList] = useState<string>('')
+	const [showOdontogram, setShowOdontogram] = useState<boolean>(false)
 	const [newChanges, setNewChange] = useState<{
 		dateChange: Date
 		formatdateChange: string
@@ -25,6 +26,8 @@ function useUpdateAppointmentPage() {
 		formatdateChange: formatDate({ date: new Date() }),
 		reasonChange: '',
 	})
+
+	const handleChangeShowOdonto = () => setShowOdontogram(prev => !prev)
 
 	const handleChangeInputDate = (value: Date | null) => {
 		try {
@@ -283,12 +286,14 @@ function useUpdateAppointmentPage() {
 		newChanges,
 		appointment,
 		patientData,
+		showOdontogram,
 		last_appointment,
 		handleSave,
 		handleCancel,
 		handleChangeCost,
 		handleChangeInput,
 		handleChangeInputDate,
+		handleChangeShowOdonto,
 		handleChangeSelectInput,
 		handleReasonChangeInput,
 		handleReasonChangeInputDate,

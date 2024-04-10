@@ -9,6 +9,10 @@
 	flex-direction: column;
 	gap: 24px;
 }
+.main_form .form_content {
+	display: grid;
+	gap: 24px;
+}
 
 .main_form .form_reason-change,
 .main_form .form_content {
@@ -19,27 +23,9 @@
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-.main_form .form_odontograma {
-	background-color: var(--background-color-3);
-	padding: 0;
-	padding-bottom: 24px;
-	border-radius: 4px;
-	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-}
-
-.main_form .form_odontograma h2 {
-	padding: 24px 24px 0;
-	margin-bottom: 24px;
-}
-
-.main_form .form_odontograma .teethForm .optionsTeethForm {
-	padding: 0 24px;
-}
-
 .main_form .form_reason-change .reason-change_inputs,
 .main_form .form_reason-change,
-.main_form .form_content {
+.main_form .form_content .content_inputs {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
@@ -51,9 +37,27 @@
 	gap: 16px;
 }
 
+.update-appointment-page_main .main_odontograma {
+	background-color: var(--background-color-3);
+	padding: 0;
+	padding-bottom: 24px;
+	border-radius: 4px;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.update-appointment-page_main .main_odontograma h2 {
+	padding: 24px 24px 0;
+	margin-bottom: 24px;
+}
+
+.update-appointment-page_main .main_odontograma .teethForm .optionsTeethForm {
+	padding: 0 24px;
+}
+
 @media (width >= 768px) {
 	.main_form .form_reason-change .reason-change_inputs,
-	.main_form .form_content {
+	.main_form .form_content .content_inputs {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 	}
