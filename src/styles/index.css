@@ -106,6 +106,7 @@ ul {
 
 .info_data_big.info_data {
 	align-items: start;
+	flex-direction: column;
 }
 
 .info_data_big .info {

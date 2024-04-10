@@ -11,32 +11,24 @@ import Navbar from '@/components/Navbar'
 import '@/styles/PatientProfilePage.css'
 
 const PatientProfilePage = () => {
-	const { loading, patientData, handleGoToPhotos, handleGoToTeethForm, handleGoToUpdatePatient } =
-		usePatientProfilePage()
+	const {
+		links,
+		loading,
+		patientData,
+		handleGoToPhotos,
+		handleGoToTeethForm,
+		handleGoToUpdatePatient,
+	} = usePatientProfilePage()
+	console.log(patientData.reason)
 	return (
 		<>
 			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
 			<main className="patientprofile_main">
-				<BreadCrumbs
-					links={[
-						{
-							link_name: 'Inicio',
-							link_to: '/',
-						},
-						{
-							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
-								patientData.name.split(' ')[2]
-									? patientData.name.split(' ')[2]
-									: patientData.name.split(' ')[1]
-							}`,
-							link_to: `/patient-profile/${patientData.id}`,
-						},
-					]}
-				/>
+				<BreadCrumbs links={links} />
 				<header className="main_header">
-					<h1>
+					<h1 className="header_title">
 						Paciente
 						{` ${patientData.name.split(' ')[0]} ${
 							patientData.name.split(' ')[2]
@@ -126,7 +118,7 @@ const PatientProfilePage = () => {
 
 							<div className="info_data info_data_big">
 								Tratamiento sistematico actual:{' '}
-								<div className="info">
+								<div className="info info_big">
 									{patientData.currentSystemicTreatment
 										.split('\n')
 										.map((line, index) => (
@@ -137,7 +129,7 @@ const PatientProfilePage = () => {
 
 							<div className="info_data info_data_big">
 								Referencias de laboratorio:{' '}
-								<div className="info">
+								<div className="info info_big">
 									{patientData.currentSystemicTreatment
 										.split('\n')
 										.map((line, index) => (
@@ -149,10 +141,61 @@ const PatientProfilePage = () => {
 							<div className="info_data info_data_big">
 								Motivo de consulta:{' '}
 								<div className="info info_big">
-									{patientData.reason.split('\n').map((line, index) => (
-										<p key={index}>{line}</p>
-									))}
+									{patientData.reason.split('\n').map((line, index) => {
+										if (line.length > 0) {
+											return <p key={index}>{line}</p>
+										} else {
+											return <br />
+										}
+									})}
 								</div>
+							</div>
+						</div>
+					</article>
+
+					<article className="information_systemic-analysis">
+						<h2 className="systemic-analysis_title">Análisis Sistémico</h2>
+						<div className="systemic-analysis_content">
+							<div className="systemic-analysis_info">
+								<p className="info_data">
+									SNC:{' '}
+									<span className="info">{patientData.SNC ? 'Si' : 'No'}</span>
+								</p>
+								<p className="info_data">
+									SVC:{' '}
+									<span className="info">{patientData.SVC ? 'Si' : 'No'}</span>
+								</p>
+								<p className="info_data">
+									SE: <span className="info">{patientData.SE ? 'Si' : 'No'}</span>
+								</p>
+								<p className="info_data">
+									SME:{' '}
+									<span className="info">{patientData.SME ? 'Si' : 'No'}</span>
+								</p>
+								{patientData.comments1.split('\n').map((line, index) => (
+									<p key={index}>{line}</p>
+								))}
+							</div>
+							<div className="systemic-analysis_info">
+								<p className="info_data">
+									SR:{' '}
+									<span className="info">{patientData.SNC ? 'Si' : 'No'}</span>
+								</p>
+								<p className="info_data">
+									SU:{' '}
+									<span className="info">{patientData.SVC ? 'Si' : 'No'}</span>
+								</p>
+								<p className="info_data">
+									SGU:{' '}
+									<span className="info">{patientData.SE ? 'Si' : 'No'}</span>
+								</p>
+								<p className="info_data">
+									SGI:{' '}
+									<span className="info">{patientData.SME ? 'Si' : 'No'}</span>
+								</p>
+								{patientData.comments2.split('\n').map((line, index) => (
+									<p key={index}>{line}</p>
+								))}
 							</div>
 						</div>
 					</article>

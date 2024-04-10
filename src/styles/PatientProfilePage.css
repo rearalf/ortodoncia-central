@@ -9,11 +9,14 @@
 	flex-direction: column;
 }
 
+.patientprofile_main .main_header .header_title {
+	text-align: center;
+}
+
 .patientprofile_main .main_header .header_btnGroup {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	width: 100%;
 	gap: 12px;
-	justify-content: center;
 }
 
 .main_information {
@@ -30,10 +33,11 @@
 
 .main_information .information_additionalInfo .additionalInfo_info {
 	display: flex;
-	gap: 8px;
+	gap: 12px;
 	flex-direction: column;
 }
 
+.main_information .information_systemic-analysis,
 .main_information .information_basicInformation,
 .main_information .information_additionalInfo {
 	background-color: var(--background-color-3);
@@ -108,5 +112,22 @@
 
 	.main_information {
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.patientprofile_main .main_header .header_btnGroup {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		width: auto;
+	}
+
+	.main_information .information_systemic-analysis {
+		grid-column: span 2;
+	}
+
+	.main_information .information_systemic-analysis .systemic-analysis_content {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
 	}
 }

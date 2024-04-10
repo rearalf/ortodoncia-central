@@ -19,6 +19,21 @@ function usePatientProfilePage() {
 	const { setHandleState } = useAlertState()
 	const [loading, setLoading] = useState<boolean>(false)
 
+	const links = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: `Paciente ${patientData.name.split(' ')[0]} ${
+				patientData.name.split(' ')[2]
+					? patientData.name.split(' ')[2]
+					: patientData.name.split(' ')[1]
+			}`,
+			link_to: `/patient-profile/${patientData.id}`,
+		},
+	]
+
 	const handleGoToTeethForm = () => navigate('/teeth-form/' + id)
 	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
 	const handleGoToPhotos = () => navigate(`/patient-profile/${id}/photos`)
@@ -130,6 +145,7 @@ function usePatientProfilePage() {
 	}, [setToothState, setPositionState])
 
 	return {
+		links,
 		loading,
 		patientData,
 		handleGoToPhotos,
