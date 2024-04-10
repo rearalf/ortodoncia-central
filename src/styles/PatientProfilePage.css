@@ -23,6 +23,7 @@
 	display: grid;
 	gap: 24px;
 	margin-bottom: 24px;
+	align-items: start;
 }
 
 .main_information .information_additionalInfo {
@@ -84,7 +85,8 @@
 	font-weight: 600;
 }
 .main_information .info_data .info {
-	font-weight: 800;
+	font-weight: 500;
+	letter-spacing: 1px;
 }
 
 .main_information .info_data a {

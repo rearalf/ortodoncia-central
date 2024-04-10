@@ -19,7 +19,7 @@ const PatientProfilePage = () => {
 		handleGoToTeethForm,
 		handleGoToUpdatePatient,
 	} = usePatientProfilePage()
-	console.log(patientData.reason)
+
 	return (
 		<>
 			<BackdropLoading loading={loading} />
@@ -110,9 +110,13 @@ const PatientProfilePage = () => {
 								<div className="info info_big">
 									{patientData.allergicReactions
 										.split('\n')
-										.map((line, index) => (
-											<p key={index}>{line}</p>
-										))}
+										.map((line, index) =>
+											line.length > 0 ? (
+												<p key={index}>{line}</p>
+											) : (
+												<br key={index} />
+											),
+										)}
 								</div>
 							</div>
 
@@ -121,9 +125,13 @@ const PatientProfilePage = () => {
 								<div className="info info_big">
 									{patientData.currentSystemicTreatment
 										.split('\n')
-										.map((line, index) => (
-											<p key={index}>{line}</p>
-										))}
+										.map((line, index) =>
+											line.length > 0 ? (
+												<p key={index}>{line}</p>
+											) : (
+												<br key={index} />
+											),
+										)}
 								</div>
 							</div>
 
@@ -132,22 +140,28 @@ const PatientProfilePage = () => {
 								<div className="info info_big">
 									{patientData.currentSystemicTreatment
 										.split('\n')
-										.map((line, index) => (
-											<p key={index}>{line}</p>
-										))}
+										.map((line, index) =>
+											line.length > 0 ? (
+												<p key={index}>{line}</p>
+											) : (
+												<br key={index} />
+											),
+										)}
 								</div>
 							</div>
 
 							<div className="info_data info_data_big">
 								Motivo de consulta:{' '}
 								<div className="info info_big">
-									{patientData.reason.split('\n').map((line, index) => {
-										if (line.length > 0) {
-											return <p key={index}>{line}</p>
-										} else {
-											return <br />
-										}
-									})}
+									{patientData.reason
+										.split('\n')
+										.map((line, index) =>
+											line.length > 0 ? (
+												<p key={index}>{line}</p>
+											) : (
+												<br key={index} />
+											),
+										)}
 								</div>
 							</div>
 						</div>

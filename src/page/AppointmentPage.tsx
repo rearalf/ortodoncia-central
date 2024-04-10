@@ -74,7 +74,7 @@ function AppointmentPage() {
 								Fecha: <span className="info">{appointment?.formatDate}</span>
 							</p>
 							<p className="info_data">
-								Costo: <span className="info">$ {appointment?.cost}</span>
+								Costo: <span className="info">${appointment?.cost}</span>
 							</p>
 							<p className="info_data">
 								Doctor: <span className="info">{appointment?.doctor}</span>
@@ -82,9 +82,15 @@ function AppointmentPage() {
 							<div className="info_data info_data_big">
 								Tratamiento:{' '}
 								<div className="info info_big">
-									{appointment.treatment.split('\n').map((line, index) => (
-										<p key={index}>{line}</p>
-									))}
+									{appointment.treatment
+										.split('\n')
+										.map((line, index) =>
+											line.length > 0 ? (
+												<p key={index}>{line}</p>
+											) : (
+												<br key={index} />
+											),
+										)}
 								</div>
 							</div>
 						</div>
@@ -108,9 +114,15 @@ function AppointmentPage() {
 							<div className="info_data info_data_big">
 								Razón:{' '}
 								<div className="info info_big">
-									{patientData.reason.split('\n').map((line, index) => (
-										<p key={index}>{line}</p>
-									))}
+									{patientData.reason
+										.split('\n')
+										.map((line, index) =>
+											line.length > 0 ? (
+												<p key={index}>{line}</p>
+											) : (
+												<br key={index} />
+											),
+										)}
 								</div>
 							</div>
 						</div>
@@ -134,9 +146,13 @@ function AppointmentPage() {
 										<div className="info info_big">
 											{appointment.reasonChange
 												.split('\n')
-												.map((line, index) => (
-													<p key={index}>{line}</p>
-												))}
+												.map((line, index) =>
+													line.length > 0 ? (
+														<p key={index}>{line}</p>
+													) : (
+														<br key={index} />
+													),
+												)}
 										</div>
 									</div>
 								)}
