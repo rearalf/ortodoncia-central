@@ -4,6 +4,7 @@ interface PatientDataInterface {
 	avatarName?: number
 	avatarURL?: string
 	name: string
+	direction: string
 	age?: number
 	birthdate: Date
 	formatBirthdate?: string

@@ -138,15 +138,6 @@ function UpdatePatientPage() {
 								minDate={minDate}
 							/>
 
-							<InputBasic
-								type="text"
-								id="occupation"
-								key="occupation"
-								label="Ocupación"
-								value={patientData.occupation || ''}
-								onChange={handleInput}
-							/>
-
 							<PhoneNumberInput
 								required
 								key="phone"
@@ -154,6 +145,24 @@ function UpdatePatientPage() {
 								label="Teléfono"
 								value={patientData.phone}
 								onChange={handleChangePhone}
+							/>
+
+							<InputBasic
+								type="text"
+								id="direction"
+								key="direction"
+								label="Dirección"
+								value={patientData.direction || ''}
+								onChange={handleInput}
+							/>
+
+							<InputBasic
+								type="text"
+								id="occupation"
+								key="occupation"
+								label="Ocupación"
+								value={patientData.occupation || ''}
+								onChange={handleInput}
 							/>
 						</div>
 					</div>

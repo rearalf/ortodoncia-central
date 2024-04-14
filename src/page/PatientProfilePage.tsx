@@ -97,6 +97,9 @@ const PatientProfilePage = () => {
 								</Tooltip>
 							</p>
 							<p className="info_data">
+								Dirección: <span className="info">{patientData.direction}</span>
+							</p>
+							<p className="info_data">
 								Ocupación: <span className="info">{patientData.occupation}</span>
 							</p>
 						</div>

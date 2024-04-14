@@ -129,6 +129,14 @@ const CreatePatientPage = () => {
 							/>
 							<InputBasic
 								type="text"
+								id="direction"
+								key="direction"
+								label="Dirección"
+								value={patientData.direction || ''}
+								onChange={handleInput}
+							/>
+							<InputBasic
+								type="text"
 								id="occupation"
 								key="occupation"
 								label="Ocupación"
