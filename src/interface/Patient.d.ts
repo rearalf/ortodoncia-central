@@ -10,6 +10,7 @@ interface PatientDataInterface {
 	formatBirthdate?: string
 	occupation: string
 	phone: string
+	completeOdontogram: boolean
 	reason: string
 	allergicReactions: string
 	currentSystemicTreatment: string

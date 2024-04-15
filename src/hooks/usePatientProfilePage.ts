@@ -1,19 +1,19 @@
-import getAge from '@/utils/getAge'
-import Patient from '@/models/Patient'
+import useAppointmentState from '@/states/appointmentsState'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
+import { constantTeethList } from '@/utils/constants'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
-import { useNavigate, useParams } from 'react-router-dom'
-import formatDate from '@/utils/formatDate'
-import { constantTeethList } from '@/utils/constants'
-import Appointment from '@/models/Appointment'
-import useAppointmentState from '@/states/appointmentsState'
 import useAlertState from '@/states/useAlertState'
+import Appointment from '@/models/Appointment'
+import formatDate from '@/utils/formatDate'
+import Patient from '@/models/Patient'
+import getAge from '@/utils/getAge'
 
 function usePatientProfilePage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const { setTeethList, setToothState, setPositionState } = useTeethState()
+	const { setTeethList, setToothState, setPositionState, setCompleteOdontogram } = useTeethState()
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
 	const { setHandleState } = useAlertState()
@@ -56,6 +56,7 @@ function usePatientProfilePage() {
 						age: getAge(new Date(data.birthdate).toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setCompleteOdontogram(data.completeOdontogram)
 					if (data.teeth !== undefined) {
 						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
 						setTeethList(teeth)
@@ -75,7 +76,7 @@ function usePatientProfilePage() {
 			})
 			navigate('/')
 		}
-	}, [id, setPatientData, setTeethList, setHandleState, navigate])
+	}, [id, setPatientData, setTeethList, setHandleState, navigate, setCompleteOdontogram])
 
 	const getAppointments = useCallback(async () => {
 		try {

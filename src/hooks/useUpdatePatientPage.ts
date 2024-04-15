@@ -46,11 +46,19 @@ function useUpdatePatientPage() {
 					...patientData,
 					[e.target.id]: e.target.checked,
 				})
-			else
-				setPatientData({
-					...patientData,
-					[e.target.id]: e.target.value,
-				})
+			else {
+				if (e.target.id === 'completeOdontogram') {
+					setPatientData({
+						...patientData,
+						completeOdontogram: e.target.checked,
+					})
+				} else {
+					setPatientData({
+						...patientData,
+						[e.target.id]: e.target.value,
+					})
+				}
+			}
 		} else if (e.target instanceof HTMLTextAreaElement)
 			setPatientData({
 				...patientData,
@@ -134,7 +142,7 @@ function useUpdatePatientPage() {
 					avatarURL: uploadURL,
 					avatarName: avatarNewName,
 				})
-				
+
 				if (patient) {
 					setLoadingPatient(false)
 					setPatientData({

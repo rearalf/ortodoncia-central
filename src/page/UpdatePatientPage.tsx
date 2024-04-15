@@ -164,6 +164,13 @@ function UpdatePatientPage() {
 								value={patientData.occupation || ''}
 								onChange={handleInput}
 							/>
+							<InputCheckbox
+								id="completeOdontogram"
+								key="completeOdontogram"
+								label="Odontograma completo"
+								checked={patientData.completeOdontogram}
+								onChange={handleInput}
+							/>
 						</div>
 					</div>
 					<div className="first_section-optional_section">

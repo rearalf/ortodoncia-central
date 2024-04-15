@@ -526,6 +526,7 @@ export const patientBasicData: PatientDataInterface = {
 	direction: '',
 	phone: '',
 	occupation: '',
+	completeOdontogram: false,
 	reason: '',
 	allergicReactions: '',
 	currentSystemicTreatment: '',

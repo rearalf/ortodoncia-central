@@ -12,8 +12,14 @@ import { constantTeethList } from '@/utils/constants'
 function useAppointment() {
 	const { id_patient, id_appointment, last_appointment } = useParams()
 	const { patientData, setPatientData } = usePatientState()
-	const { appointment, setTeethList, setAppointment, setToothState, setPositionState } =
-		useTeethState()
+	const {
+		appointment,
+		setTeethList,
+		setAppointment,
+		setToothState,
+		setPositionState,
+		setCompleteOdontogram,
+	} = useTeethState()
 	const { setHandleState } = useAlertState()
 	const [loading, setLoading] = useState(false)
 
@@ -29,6 +35,7 @@ function useAppointment() {
 						age: getAge(data.birthdate.toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setCompleteOdontogram(data.completeOdontogram)
 				}
 				setLoading(false)
 			}
@@ -36,7 +43,7 @@ function useAppointment() {
 			setLoading(false)
 			console.log('Error getting patient data usePatient: ' + error)
 		}
-	}, [id_patient, patientData.id, setPatientData])
+	}, [id_patient, patientData.id, setPatientData, setCompleteOdontogram])
 
 	const getAppointment = useCallback(async () => {
 		try {

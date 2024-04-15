@@ -22,6 +22,7 @@ function useTeethFormPage() {
 		setToothState,
 		setAppointment,
 		setPositionState,
+		setCompleteOdontogram,
 	} = useTeethState()
 
 	const [loading, setLoading] = useState<boolean>(false)
@@ -147,6 +148,7 @@ function useTeethFormPage() {
 						age: getAge(data.birthdate.toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setCompleteOdontogram(data.completeOdontogram)
 					if (data.teeth !== undefined) {
 						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
 						setTeethList(teeth)
@@ -167,7 +169,7 @@ function useTeethFormPage() {
 				text: 'Datos del paciente no obtenidos.',
 			})
 		}
-	}, [id_patient, navigate, setHandleState, setTeethList, setPatientData])
+	}, [id_patient, navigate, setHandleState, setTeethList, setPatientData, setCompleteOdontogram])
 
 	const handleNextStep = () => setSteps(prevStep => prevStep + 1)
 

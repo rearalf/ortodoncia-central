@@ -3,7 +3,8 @@ import Tooth from './Tooth'
 import './styles.css'
 
 const TeethTable = () => {
-	const { teethList, toothState, positionState, setTeethList } = useTeethState()
+	const { completeOdontogram, teethList, toothState, positionState, setTeethList } =
+		useTeethState()
 
 	const hanldeModifyStateTooth = (tooth: number, position?: toothPosition) => {
 		const updatedTeethList = [...teethList]
@@ -41,23 +42,43 @@ const TeethTable = () => {
 	return (
 		<div className="teethFirstRow">
 			{teethList.map((value, i) => {
-				return (
-					<div className="teethFirstRow_row" key={`value${i}`}>
-						{value.map((number, i) => {
-							return (
-								<div className="row" key={`row${i}`}>
-									{number.map(tooth => (
-										<Tooth
-											tooth={tooth}
-											key={tooth.tooth}
-											hanldeModifyStateTooth={hanldeModifyStateTooth}
-										/>
-									))}
-								</div>
-							)
-						})}
-					</div>
-				)
+				if (completeOdontogram) {
+					if (i === 0 || i === 3)
+						return (
+							<div className="teethFirstRow_row" key={`value${i}`}>
+								{value.map((number, i) => {
+									return (
+										<div className="row" key={`row${i}`}>
+											{number.map(tooth => (
+												<Tooth
+													tooth={tooth}
+													key={tooth.tooth}
+													hanldeModifyStateTooth={hanldeModifyStateTooth}
+												/>
+											))}
+										</div>
+									)
+								})}
+							</div>
+						)
+				} else
+					return (
+						<div className="teethFirstRow_row" key={`value${i}`}>
+							{value.map((number, i) => {
+								return (
+									<div className="row" key={`row${i}`}>
+										{number.map(tooth => (
+											<Tooth
+												tooth={tooth}
+												key={tooth.tooth}
+												hanldeModifyStateTooth={hanldeModifyStateTooth}
+											/>
+										))}
+									</div>
+								)
+							})}
+						</div>
+					)
 			})}
 		</div>
 	)

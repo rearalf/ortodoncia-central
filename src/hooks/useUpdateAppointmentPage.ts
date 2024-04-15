@@ -14,7 +14,8 @@ function useUpdateAppointmentPage() {
 	const { setHandleState } = useAlertState()
 	const { id_patient, id_appointment, last_appointment } = useParams()
 	const { patientData, setPatientData } = usePatientState()
-	const { appointment, teethList, setAppointment, setTeethList } = useTeethState()
+	const { appointment, teethList, setAppointment, setTeethList, setCompleteOdontogram } =
+		useTeethState()
 	const [staticTeethList, setStaticTeethList] = useState<string>('')
 	const [showOdontogram, setShowOdontogram] = useState<boolean>(false)
 	const [loading, setLoading] = useState<boolean>(false)
@@ -284,6 +285,7 @@ function useUpdateAppointmentPage() {
 						age: getAge(data.birthdate.toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setCompleteOdontogram(data.completeOdontogram)
 				}
 				setLoading(false)
 			}
@@ -291,7 +293,7 @@ function useUpdateAppointmentPage() {
 			setLoading(false)
 			console.log(error)
 		}
-	}, [id_patient, setPatientData, patientData.id])
+	}, [id_patient, setPatientData, patientData.id, setCompleteOdontogram])
 
 	useEffect(() => {
 		getAppointmentData()

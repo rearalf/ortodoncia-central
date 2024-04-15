@@ -4,6 +4,8 @@ import { create } from 'zustand'
 interface TeethStateInterface {
 	teethList: toothObject[][][]
 	appointment: appointment
+	completeOdontogram: boolean
+	setCompleteOdontogram: (value: boolean) => void
 	setAppointment: (value: appointment) => void
 	setTeethList: (value: TeethStateInterface['teethList']) => void
 	toothState: toothStateType
@@ -25,6 +27,8 @@ const useTeethState = create<TeethStateInterface>()(set => ({
 	setToothState: value => set(state => ({ ...state, toothState: value })),
 	positionState: '',
 	setPositionState: value => set(state => ({ ...state, positionState: value })),
+	completeOdontogram: false,
+	setCompleteOdontogram: value => set(state => ({ ...state, completeOdontogram: value })),
 }))
 
 export default useTeethState

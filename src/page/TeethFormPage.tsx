@@ -1,16 +1,16 @@
-import { Button } from '@mui/material'
-import Navbar from '@/components/Navbar'
-import TeethForm from '@/components/Odontogram/TeethForm'
-import InputDate from '@/components/InputDate'
-import InputBasic from '@/components/InputBasic'
 import { FiArrowLeft, FiArrowRight, FiSave, FiXCircle } from 'react-icons/fi'
-import InputSelect from '@/components/InputSelect'
-import HeadComponent from '@/components/HeadComponent'
-import useTeethFormPage from '@/hooks/useTeethFormPage'
 import InputNumericFormat from '@/components/NumericFormatCustom '
-import '@/styles/TeethFormPage.css'
-import BreadCrumbs from '@/components/BreadCrumbs'
 import BackdropLoading from '@/components/BackdropLoading'
+import TeethForm from '@/components/Odontogram/TeethForm'
+import useTeethFormPage from '@/hooks/useTeethFormPage'
+import HeadComponent from '@/components/HeadComponent'
+import BreadCrumbs from '@/components/BreadCrumbs'
+import InputSelect from '@/components/InputSelect'
+import InputBasic from '@/components/InputBasic'
+import InputDate from '@/components/InputDate'
+import Navbar from '@/components/Navbar'
+import { Button } from '@mui/material'
+import '@/styles/TeethFormPage.css'
 
 const TeethFormPage = () => {
 	const {
@@ -53,7 +53,7 @@ const TeethFormPage = () => {
 					]}
 				/>
 				<h1 className="main_title">
-					Odontograma de{' '}
+					Nueava cita de{' '}
 					{` ${patientData.name.split(' ')[0]} ${
 						patientData.name.split(' ')[2]
 							? patientData.name.split(' ')[2]

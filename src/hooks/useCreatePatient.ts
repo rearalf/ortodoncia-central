@@ -48,16 +48,24 @@ function useCreatePatient() {
 				e.target.id === OrthoTerms.SR ||
 				e.target.id === OrthoTerms.SU ||
 				e.target.id === OrthoTerms.SVC
-			)
+			) {
 				setPatientData({
 					...patientData,
 					[e.target.id]: e.target.checked,
 				})
-			else
-				setPatientData({
-					...patientData,
-					[e.target.id]: e.target.value,
-				})
+			} else {
+				if (e.target.id === 'completeOdontogram') {
+					setPatientData({
+						...patientData,
+						completeOdontogram: e.target.checked,
+					})
+				} else {
+					setPatientData({
+						...patientData,
+						[e.target.id]: e.target.value,
+					})
+				}
+			}
 		} else if (e.target instanceof HTMLTextAreaElement)
 			setPatientData({
 				...patientData,
