@@ -31,9 +31,6 @@ const useAlertState = create<AlertComponentInterface>()(set => ({
 	onClose: () =>
 		set(state => ({
 			...state,
-			severity: 'info',
-			text: '',
-			variant: 'filled',
 			show: false,
 		})),
 }))
