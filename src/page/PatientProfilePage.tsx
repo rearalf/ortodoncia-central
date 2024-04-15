@@ -1,16 +1,16 @@
 import { FiBookOpen, FiCalendar, FiSmartphone, FiUserPlus } from 'react-icons/fi'
 import usePatientProfilePage from '@/hooks/usePatientProfilePage'
 import AppointmentsTable from '@/components/AppointmentsTable'
+import { Button, Divider, Tab, Tooltip } from '@mui/material'
 import TeethTable from '@/components/Odontogram/TeethTable'
 import BackdropLoading from '@/components/BackdropLoading'
 import AvatarComponent from '@/components/AvatarComponent'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
 import HeadComponent from '@/components/HeadComponent'
 import BreadCrumbs from '@/components/BreadCrumbs'
-import { Button, Divider, Tab, Tooltip } from '@mui/material'
+import InputBasic from '@/components/InputBasic'
 import Navbar from '@/components/Navbar'
 import '@/styles/PatientProfilePage.css'
-import { TabContext, TabList, TabPanel } from '@mui/lab'
-import InputBasic from '@/components/InputBasic'
 
 const PatientProfilePage = () => {
 	const {
@@ -81,19 +81,27 @@ const PatientProfilePage = () => {
 							<div className="profile-primary_info">
 								<h3 className="primary_info-name">{patientData.name}</h3>
 								<div className="primary_info-more_info">
-									<p className="more_info-info">{`Edad: ${patientData.age}`}</p>
-									<p className="more_info-info">
-										{`Cumpleaños: ${patientData.formatBirthdate?.toLocaleUpperCase()}`}
-									</p>
-									<p className="more_info-info">
-										{`Ocupación: ${patientData.occupation}`}
-									</p>
+									{patientData.age && (
+										<p className="more_info-info">{`Edad: ${patientData.age}`}</p>
+									)}
+									{patientData.formatBirthdate && (
+										<p className="more_info-info">
+											{`Cumpleaños: ${patientData.formatBirthdate?.toLocaleUpperCase()}`}
+										</p>
+									)}
+									{patientData.occupation && (
+										<p className="more_info-info">
+											{`Ocupación: ${patientData.occupation}`}
+										</p>
+									)}
 								</div>
 							</div>
 						</div>
 
 						<div className="basic_information-aditional">
-							<p className="aditional-data">{`Dirección: ${patientData.direction}`}</p>
+							{patientData.direction && (
+								<p className="aditional-data">{`Dirección: ${patientData.direction}`}</p>
+							)}
 							<Tooltip title="Llamar" arrow>
 								<a
 									className="aditional-data_phone"

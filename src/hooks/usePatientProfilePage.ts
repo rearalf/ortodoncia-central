@@ -17,6 +17,7 @@ function usePatientProfilePage() {
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
 	const { setHandleState } = useAlertState()
+
 	const [loading, setLoading] = useState<boolean>(false)
 	const [tabValue, setTabValue] = useState<string>('1')
 

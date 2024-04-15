@@ -90,6 +90,9 @@ function useTheme() {
 						'& .MuiSvgIcon-root.MuiSelect-icon': {
 							color: '#d9d9d9',
 						},
+						'& .MuiInputBase-root .MuiInputBase-input': {
+							color: '#d9d9d9',
+						},
 					},
 				},
 			},
