@@ -1,135 +1,274 @@
-.patientprofile_main {
+.patient_profile-main {
 	margin: 0 auto;
 	max-width: 1280px;
 	padding: 32px 16px;
 }
 
-.patientprofile_main .main_header {
+.patient_profile-main .main_header {
 	display: flex;
 	flex-direction: column;
 }
 
-.patientprofile_main .main_header .header_title {
+.patient_profile-main .main_header .header_title {
 	text-align: center;
 }
 
-.patientprofile_main .main_header .header_btnGroup {
+.patient_profile-main .main_header .header_btnGroup {
 	display: grid;
 	width: 100%;
 	gap: 12px;
 }
 
-.main_information {
-	display: grid;
+.patient_profile-main .main-information_patient {
+	display: flex;
+	flex-direction: column;
 	gap: 24px;
 	margin-bottom: 24px;
-	align-items: start;
+	position: relative;
 }
 
-.main_information .information_additionalInfo {
-	display: flex;
-	gap: 14px;
-	flex-direction: column;
-}
-
-.main_information .information_additionalInfo .additionalInfo_info {
-	display: flex;
-	gap: 12px;
-	flex-direction: column;
-}
-
-.main_information .information_systemic-analysis,
-.main_information .information_basicInformation,
-.main_information .information_additionalInfo {
+.patient_profile-main .main_teethTable,
+.patient_profile-main .main-information_patient .information_patient-basic_information {
 	background-color: var(--background-color-3);
 	padding: 24px;
 	border-radius: 4px;
-	position: relative;
 	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-.patientprofile_main .main_teethTable {
+.patient_profile-main .main-information_patient .information_patient-additional_content {
 	background-color: var(--background-color-3);
-	padding: 0;
 	border-radius: 4px;
 	position: relative;
 	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-.patientprofile_main .main_teethTable h2 {
-	padding: 24px 24px 0;
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 14px;
 }
 
-.patientprofile_main .main_teethTable .teethFirstRow {
-	padding: 0 10px 24px;
-}
-
-.main_information .information_basicInformation .avatar_photo {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-}
-
-.main_information .information_basicInformation .avatar_photo .MuiAvatar-root {
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-profile
+	.MuiAvatar-root {
 	width: 100px;
 	height: 100px;
-	font-size: 50px;
+	font-size: 42px;
 }
 
-.main_information .info_data {
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-profile
+	.profile-primary_info {
 	display: flex;
-	align-items: center;
-	gap: 4px;
-	font-weight: 600;
-}
-.main_information .info_data .info {
-	font-weight: 500;
-	letter-spacing: 1px;
+	flex-direction: column;
+	text-align: center;
+	gap: 14px;
 }
 
-.main_information .info_data a {
-	text-decoration: none;
-	color: var(--paragrap);
-}
-.main_information .info_data a:hover {
-	color: var(--success-600);
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-profile
+	.profile-primary_info
+	.primary_info-name {
+	margin: 0;
 }
 
-.main_appointments,
-.main_teethTable {
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-profile
+	.profile-primary_info
+	.primary_info-more_info {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-profile
+	.profile-primary_info
+	.primary_info-more_info
+	.more_info-info {
+	margin: 0;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-aditional {
+	display: flex;
+	flex-direction: column;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-basic_information
+	.basic_information-aditional
+	.aditional-data_phone {
+	background-color: var(--background-color-2);
+	padding: 12px;
+	border-radius: 4px;
+	display: grid;
+	gap: 8px;
+	font-size: 16px;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-content {
+	display: grid;
+	gap: 24px;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-content
+	.MuiFormControl-root.MuiTextField-root
+	.MuiOutlinedInput-root.MuiInputBase-root.MuiInputBase-multiline
+	textarea {
+	min-height: 150px;
+}
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-content
+	.MuiFormControl-root.MuiTextField-root
+	.MuiOutlinedInput-root.MuiInputBase-root.MuiInputBase-multiline
+	textarea,
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-systemic_analysis
+	.MuiFormControl-root.MuiTextField-root
+	.MuiOutlinedInput-root.MuiInputBase-root.MuiInputBase-multiline
+	textarea {
+	min-height: 150px;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-systemic_analysis {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-systemic_analysis
+	.systemic_analysis-content {
+	display: grid;
+	gap: 12px;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-systemic_analysis
+	.systemic_analysis-content
+	.MuiFormControl-root.MuiTextField-root {
+	grid-column-start: span 2;
+}
+
+.patient_profile-main
+	.main-information_patient
+	.information_patient-additional_content
+	.additional_content-systemic_analysis
+	.content-divider_vertical.MuiDivider-root {
+	display: none;
+}
+
+.patient_profile-main .main_teethTable {
 	margin-bottom: 24px;
 }
 
-.main_appointments .appointments_title,
-.main_teethTable .teethTable_title {
+.patient_profile-main .main_appointments .appointments_title,
+.patient_profile-main .main_teethTable .teethTable_title {
 	margin-bottom: 24px;
+}
+
+.patient_profile-main .main_appointments {
+	background-color: var(--background-color-3);
+	padding: 24px;
+	border-radius: 4px;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 @media (width >= 768px) {
-	.patientprofile_main .main_header {
-		flex-direction: row;
-	}
-
-	.main_information {
+	.patient_profile-main
+		.main-information_patient
+		.information_patient-additional_content
+		.additional_content-content {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
-	.patientprofile_main .main_header .header_btnGroup {
+	.patient_profile-main
+		.main-information_patient
+		.information_patient-additional_content
+		.additional_content-systemic_analysis {
+		display: grid;
+		grid-template-columns: 1fr 2px 1fr;
+		gap: 18px;
+	}
+
+	.patient_profile-main
+		.main-information_patient
+		.information_patient-additional_content
+		.additional_content-systemic_analysis
+		.content-divider_horizontal.MuiDivider-root {
+		display: none;
+	}
+
+	.patient_profile-main
+		.main-information_patient
+		.information_patient-additional_content
+		.additional_content-systemic_analysis
+		.content-divider_vertical.MuiDivider-root {
+		display: block;
+	}
+
+	.patient_profile-main .main_header .header_btnGroup {
+		width: auto;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-end;
-		width: auto;
 	}
+}
 
-	.main_information .information_systemic-analysis {
-		grid-column: span 2;
-	}
-
-	.main_information .information_systemic-analysis .systemic-analysis_content {
+@media (width >= 1024px) {
+	.patient_profile-main .main-information_patient {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 24px;
+		grid-template-columns: 300px 1fr;
+		align-items: start;
+	}
+
+	.patient_profile-main .main_header .header_btnGroup {
+		width: auto;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+	}
+
+	.patient_profile-main .main_header {
+		flex-direction: row;
 	}
 }

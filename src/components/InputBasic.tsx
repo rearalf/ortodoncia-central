@@ -5,6 +5,7 @@ interface InputBasicProps {
 	id: string
 	label?: string
 	required?: boolean
+	disabled?: boolean
 	multiline?: boolean
 	placeholder?: string
 	value: string | number
@@ -22,6 +23,7 @@ const InputBasic = React.memo((props: InputBasicProps) => {
 			variant="outlined"
 			label={props.label}
 			value={props.value}
+			disabled={props.disabled}
 			required={props.required}
 			onChange={props.onChange}
 			multiline={props.multiline}

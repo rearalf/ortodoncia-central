@@ -240,6 +240,20 @@ function useTheme() {
 					},
 				},
 			},
+			MuiTab: {
+				styleOverrides: {
+					textColorPrimary: {
+						color: '#d9d9d9',
+					},
+				},
+			},
+			MuiDivider: {
+				styleOverrides: {
+					root: {
+						borderColor: '#d9d9d9',
+					},
+				},
+			},
 		},
 	})
 

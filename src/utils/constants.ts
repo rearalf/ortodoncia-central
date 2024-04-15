@@ -523,6 +523,7 @@ export const patientBasicData: PatientDataInterface = {
 	birthdate: sub(new Date(), {
 		years: 1,
 	}),
+	direction: '',
 	phone: '',
 	occupation: '',
 	reason: '',

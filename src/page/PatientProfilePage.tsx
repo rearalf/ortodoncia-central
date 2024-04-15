@@ -6,15 +6,19 @@ import BackdropLoading from '@/components/BackdropLoading'
 import AvatarComponent from '@/components/AvatarComponent'
 import HeadComponent from '@/components/HeadComponent'
 import BreadCrumbs from '@/components/BreadCrumbs'
-import { Button, Tooltip } from '@mui/material'
+import { Button, Divider, Tab, Tooltip } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import '@/styles/PatientProfilePage.css'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
+import InputBasic from '@/components/InputBasic'
 
 const PatientProfilePage = () => {
 	const {
 		links,
 		loading,
+		tabValue,
 		patientData,
+		handleTabs,
 		handleGoToPhotos,
 		handleGoToTeethForm,
 		handleGoToUpdatePatient,
@@ -25,7 +29,7 @@ const PatientProfilePage = () => {
 			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
 			<Navbar />
-			<main className="patientprofile_main">
+			<main className="patient_profile-main">
 				<BreadCrumbs links={links} />
 				<header className="main_header">
 					<h1 className="header_title">
@@ -62,9 +66,9 @@ const PatientProfilePage = () => {
 					</div>
 				</header>
 
-				<div className="main_information">
-					<article className="information_basicInformation">
-						<div className="avatar_photo">
+				<div className="main-information_patient">
+					<article className="information_patient-basic_information">
+						<div className="basic_information-profile">
 							<AvatarComponent
 								srcImage={patientData.avatarURL}
 								name={`${patientData.name.split(' ')[0]} ${
@@ -73,149 +77,151 @@ const PatientProfilePage = () => {
 										: patientData.name.split(' ')[1]
 								}`}
 							/>
+
+							<div className="profile-primary_info">
+								<h3 className="primary_info-name">{patientData.name}</h3>
+								<div className="primary_info-more_info">
+									<p className="more_info-info">{`Edad: ${patientData.age}`}</p>
+									<p className="more_info-info">
+										{`Cumpleaños: ${patientData.formatBirthdate?.toLocaleUpperCase()}`}
+									</p>
+									<p className="more_info-info">
+										{`Ocupación: ${patientData.occupation}`}
+									</p>
+								</div>
+							</div>
 						</div>
-						<h2 className="basicInformation_title">Datos personales</h2>
-						<div className="basicInformation__info">
-							<p className="info_data">
-								Nombre: <span className="info">{patientData.name}</span>
-							</p>
-							<p className="info_data">
-								Edad: <span className="info">{patientData.age}</span>
-							</p>
-							<p className="info_data">
-								Cumpleaños:{' '}
-								<span className="info">
-									{patientData.formatBirthdate?.toLocaleUpperCase()}
-								</span>
-							</p>
-							<p className="info_data">
-								<FiSmartphone size={24} /> Teléfono:
-								<Tooltip title="Llamar">
-									<a href={`tel:+${patientData.phone}`} className="info">
-										{patientData.phone}
-									</a>
-								</Tooltip>
-							</p>
-							<p className="info_data">
-								Dirección: <span className="info">{patientData.direction}</span>
-							</p>
-							<p className="info_data">
-								Ocupación: <span className="info">{patientData.occupation}</span>
-							</p>
+
+						<div className="basic_information-aditional">
+							<p className="aditional-data">{`Dirección: ${patientData.direction}`}</p>
+							<Tooltip title="Llamar" arrow>
+								<a
+									className="aditional-data_phone"
+									href={`tel:+${patientData.phone}`}
+								>
+									<FiSmartphone size={24} />
+									{patientData.phone}
+								</a>
+							</Tooltip>
 						</div>
 					</article>
 
-					<article className="information_additionalInfo">
-						<h2 className="additionalInfo_title">Información adicional</h2>
-						<div className="additionalInfo_info">
-							<div className="info_data info_data_big">
-								Alérgias:{' '}
-								<div className="info info_big">
-									{patientData.allergicReactions
-										.split('\n')
-										.map((line, index) =>
-											line.length > 0 ? (
-												<p key={index}>{line}</p>
-											) : (
-												<br key={index} />
-											),
-										)}
-								</div>
-							</div>
+					<div className="information_patient-additional_content">
+						<TabContext value={tabValue}>
+							<TabList
+								onChange={handleTabs}
+								aria-label="Más información del paciente"
+								variant="scrollable"
+								scrollButtons="auto"
+								allowScrollButtonsMobile
+							>
+								<Tab label="Información adicional" value="1" />
+								<Tab label="Análisis Sistémico" value="2" />
+							</TabList>
 
-							<div className="info_data info_data_big">
-								Tratamiento sistematico actual:{' '}
-								<div className="info info_big">
-									{patientData.currentSystemicTreatment
-										.split('\n')
-										.map((line, index) =>
-											line.length > 0 ? (
-												<p key={index}>{line}</p>
-											) : (
-												<br key={index} />
-											),
-										)}
-								</div>
-							</div>
+							<TabPanel value="1">
+								<div className="additional_content-content">
+									<InputBasic
+										disabled
+										multiline
+										type="text"
+										id="reason"
+										key="reason"
+										label="Motivo de consulta"
+										value={patientData.reason}
+										onChange={() => {}}
+									/>
 
-							<div className="info_data info_data_big">
-								Referencias de laboratorio:{' '}
-								<div className="info info_big">
-									{patientData.currentSystemicTreatment
-										.split('\n')
-										.map((line, index) =>
-											line.length > 0 ? (
-												<p key={index}>{line}</p>
-											) : (
-												<br key={index} />
-											),
-										)}
-								</div>
-							</div>
+									<InputBasic
+										disabled
+										multiline
+										type="text"
+										id="allergicReactions"
+										key="allergicReactions"
+										label="Reacciones Alérgicas"
+										value={patientData.allergicReactions}
+										onChange={() => {}}
+									/>
 
-							<div className="info_data info_data_big">
-								Motivo de consulta:{' '}
-								<div className="info info_big">
-									{patientData.reason
-										.split('\n')
-										.map((line, index) =>
-											line.length > 0 ? (
-												<p key={index}>{line}</p>
-											) : (
-												<br key={index} />
-											),
-										)}
+									<InputBasic
+										disabled
+										multiline
+										type="text"
+										id="currentSystemicTreatment"
+										key="currentSystemicTreatment"
+										label="Tratamiento sistémico actual"
+										value={patientData.currentSystemicTreatment}
+										onChange={() => {}}
+									/>
+									<InputBasic
+										disabled
+										multiline
+										type="text"
+										id="references"
+										key="references"
+										label="Referencias del laboratorio"
+										value={patientData.references}
+										onChange={() => {}}
+									/>
 								</div>
-							</div>
-						</div>
-					</article>
-
-					<article className="information_systemic-analysis">
-						<h2 className="systemic-analysis_title">Análisis Sistémico</h2>
-						<div className="systemic-analysis_content">
-							<div className="systemic-analysis_info">
-								<p className="info_data">
-									SNC:{' '}
-									<span className="info">{patientData.SNC ? 'Si' : 'No'}</span>
-								</p>
-								<p className="info_data">
-									SVC:{' '}
-									<span className="info">{patientData.SVC ? 'Si' : 'No'}</span>
-								</p>
-								<p className="info_data">
-									SE: <span className="info">{patientData.SE ? 'Si' : 'No'}</span>
-								</p>
-								<p className="info_data">
-									SME:{' '}
-									<span className="info">{patientData.SME ? 'Si' : 'No'}</span>
-								</p>
-								{patientData.comments1.split('\n').map((line, index) => (
-									<p key={index}>{line}</p>
-								))}
-							</div>
-							<div className="systemic-analysis_info">
-								<p className="info_data">
-									SR:{' '}
-									<span className="info">{patientData.SNC ? 'Si' : 'No'}</span>
-								</p>
-								<p className="info_data">
-									SU:{' '}
-									<span className="info">{patientData.SVC ? 'Si' : 'No'}</span>
-								</p>
-								<p className="info_data">
-									SGU:{' '}
-									<span className="info">{patientData.SE ? 'Si' : 'No'}</span>
-								</p>
-								<p className="info_data">
-									SGI:{' '}
-									<span className="info">{patientData.SME ? 'Si' : 'No'}</span>
-								</p>
-								{patientData.comments2.split('\n').map((line, index) => (
-									<p key={index}>{line}</p>
-								))}
-							</div>
-						</div>
-					</article>
+							</TabPanel>
+							<TabPanel value="2">
+								<div className="additional_content-systemic_analysis">
+									<div className="systemic_analysis-content">
+										<p className="info_data">
+											SNC: {patientData.SNC ? 'Si' : 'No'}
+										</p>
+										<p className="info_data">
+											SVC: {patientData.SVC ? 'Si' : 'No'}
+										</p>
+										<p className="info_data">
+											SE: {patientData.SE ? 'Si' : 'No'}
+										</p>
+										<p className="info_data">
+											SME: {patientData.SME ? 'Si' : 'No'}
+										</p>
+										<InputBasic
+											disabled
+											multiline
+											type="text"
+											id="comments1"
+											key="comments1"
+											value={patientData.comments1}
+											onChange={() => {}}
+										/>
+									</div>
+									<Divider
+										orientation="vertical"
+										className="content-divider_vertical"
+									/>
+									<Divider className="content-divider_horizontal" />
+									<div className="systemic_analysis-content">
+										<p className="info_data">
+											SR: {patientData.SNC ? 'Si' : 'No'}
+										</p>
+										<p className="info_data">
+											SU: {patientData.SVC ? 'Si' : 'No'}
+										</p>
+										<p className="info_data">
+											SGU: {patientData.SE ? 'Si' : 'No'}
+										</p>
+										<p className="info_data">
+											SGI: {patientData.SME ? 'Si' : 'No'}
+										</p>
+										<InputBasic
+											disabled
+											multiline
+											type="text"
+											id="comments2"
+											key="comments2"
+											value={patientData.comments2}
+											onChange={() => {}}
+										/>
+									</div>
+								</div>
+							</TabPanel>
+						</TabContext>
+					</div>
 				</div>
 
 				<section className="main_teethTable">

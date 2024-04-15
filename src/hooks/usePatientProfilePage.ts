@@ -18,6 +18,7 @@ function usePatientProfilePage() {
 	const { setAppoinments } = useAppointmentState()
 	const { setHandleState } = useAlertState()
 	const [loading, setLoading] = useState<boolean>(false)
+	const [tabValue, setTabValue] = useState<string>('1')
 
 	const links = [
 		{
@@ -37,6 +38,9 @@ function usePatientProfilePage() {
 	const handleGoToTeethForm = () => navigate('/teeth-form/' + id)
 	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
 	const handleGoToPhotos = () => navigate(`/patient-profile/${id}/photos`)
+
+	// eslint-disable-next-line
+	const handleTabs = (_event: any, newValue: string) => setTabValue(newValue)
 
 	const getPatientData = useCallback(async () => {
 		try {
@@ -147,7 +151,9 @@ function usePatientProfilePage() {
 	return {
 		links,
 		loading,
+		tabValue,
 		patientData,
+		handleTabs,
 		handleGoToPhotos,
 		handleGoToTeethForm,
 		handleGoToUpdatePatient,
