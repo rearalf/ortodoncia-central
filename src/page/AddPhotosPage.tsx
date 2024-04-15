@@ -36,7 +36,7 @@ const AddPhotosPage = () => {
 			<BackdropLoading loading={loading} />
 			<HeadComponent title="Agregar imagenes al expediente" />
 			<Navbar />
-			<main className="add-x-rays-page_main">
+			<main className="add_x_rays_page-main">
 				<BreadCrumbs
 					links={[
 						{
@@ -61,9 +61,9 @@ const AddPhotosPage = () => {
 						},
 					]}
 				/>
-				<h1 className="main_title">Agregar fotos e imagenes</h1>
-				<form className="main_form" onSubmit={handleSavePhotos}>
-					<div className="form_first-section">
+				<h1 className="main-title">Agregar fotos e imagenes</h1>
+				<form className="main-form" onSubmit={handleSavePhotos}>
+					<div className="form-inputs_section">
 						<InputBasic
 							required
 							multiline
@@ -79,13 +79,13 @@ const AddPhotosPage = () => {
 								onDrop={onDrop}
 								onDragOver={onDragOver}
 								onDragLeave={onDragLeave}
-								className={`drap-drop_content ${isDragging && 'isDragging'}`}
+								className={`drap_drop-content ${isDragging && 'isDragging'}`}
 							>
 								<FiUploadCloud size={40} />
 								{isDragging ? (
-									<h2 className="content_title">Suelta para agregar</h2>
+									<h2 className="content-title">Suelta para agregar</h2>
 								) : (
-									<h2 className="content_title">
+									<h2 className="content-title">
 										Arrastra y suelta <br /> tus imagenes aqui
 									</h2>
 								)}
@@ -93,7 +93,7 @@ const AddPhotosPage = () => {
 									multiple
 									type="file"
 									id="upload-files"
-									className="content_input-file"
+									className="content-input_file"
 									onChange={handleChangeFile}
 								/>
 								<Button variant="contained" startIcon={<FiUploadCloud />}>
@@ -102,7 +102,6 @@ const AddPhotosPage = () => {
 							</div>
 						</label>
 					</div>
-					<div className="form_draq-drop"></div>
 					<div className="btn_group">
 						<Button
 							variant="contained"
@@ -124,25 +123,25 @@ const AddPhotosPage = () => {
 					</div>
 				</form>
 				{numberImages !== 0 && (
-					<div className="main_loading">
-						<h3 className="loading_title">{numberImages}</h3>
+					<div className="main-loading">
+						<h3 className="loading-title">{numberImages}</h3>
 						<LinearProgress variant="determinate" value={progress} />
 					</div>
 				)}
-				<div className="main_images">
+				<div className="main-images">
 					{images.map((image, index) => (
-						<div className="images_content" key={image}>
+						<div className="images-content" key={image}>
 							<Tooltip title="Eliminar imagen">
 								<IconButton
 									color="error"
 									onClick={() => handleDeleteImage(index)}
-									className="imagens_delete-button"
+									className="content-delete_button"
 								>
 									<FiXCircle size={30} />
 								</IconButton>
 							</Tooltip>
 							<Button onClick={() => openImageViewer(index)}>
-								<img src={image} className="images_img" />
+								<img src={image} className="content-img" />
 							</Button>
 						</div>
 					))}
