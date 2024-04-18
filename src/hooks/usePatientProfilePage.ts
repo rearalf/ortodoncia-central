@@ -1,18 +1,18 @@
+'use client'
 import useAppointmentState from '@/states/appointmentsState'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
 import { constantTeethList } from '@/utils/constants'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import useAlertState from '@/states/useAlertState'
 import Appointment from '@/models/Appointment'
+import { useRouter } from 'next/navigation'
 import formatDate from '@/utils/formatDate'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
 
-function usePatientProfilePage() {
-	const { id } = useParams()
-	const navigate = useNavigate()
+function usePatientProfilePage(id: string) {
+	const router = useRouter()
 	const { setTeethList, setToothState, setPositionState, setCompleteOdontogram } = useTeethState()
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
@@ -36,11 +36,12 @@ function usePatientProfilePage() {
 		},
 	]
 
-	const handleGoToTeethForm = () => navigate('/teeth-form/' + id)
-	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
-	const handleGoToPhotos = () => navigate(`/patient-profile/${id}/photos`)
+	const handleGoToTeethForm = () => router.push('/patient/teeth-form/' + id)
+	const handleGoToUpdatePatient = () => router.push('/patient/update/' + id)
+	const handleGoToPhotos = () => {
+		router.push(`/patient/profile/${id}/photos`)
+	}
 
-	// eslint-disable-next-line
 	const handleTabs = (_event: any, newValue: string) => setTabValue(newValue)
 
 	const getPatientData = useCallback(async () => {
@@ -74,9 +75,9 @@ function usePatientProfilePage() {
 				show: true,
 				text: 'Error al obtener los datos del paciente.',
 			})
-			navigate('/')
+			router.push('/')
 		}
-	}, [id, setPatientData, setTeethList, setHandleState, navigate, setCompleteOdontogram])
+	}, [id, setPatientData, setTeethList, setHandleState, setCompleteOdontogram])
 
 	const getAppointments = useCallback(async () => {
 		try {

@@ -1,13 +1,16 @@
-import Logo from '@/assets/images/logo.png'
-import { Link } from 'react-router-dom'
-import './styles.css'
+import Link from 'next/link'
+import styles from './styles.module.css'
 
 const Navbar = () => {
 	return (
-		<header className="navbar-header">
-			<nav className="navbar">
-				<Link to="/" className="brand">
-					<img src={Logo} className="logo" alt="Logo Ortodoncia Central" />
+		<header className={styles['navbar-header']}>
+			<nav className={styles.navbar}>
+				<Link href="/" className={styles.brand}>
+					<img
+						src="/images/logo.png"
+						className={styles.logo}
+						alt="Logo Ortodoncia Central"
+					/>
 				</Link>
 			</nav>
 		</header>

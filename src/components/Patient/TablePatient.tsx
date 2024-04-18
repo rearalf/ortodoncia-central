@@ -1,4 +1,7 @@
-import React from 'react'
+import TablePaginationActions from '../TablePaginationActions'
+import usePatientsState from '@/states/patientsState'
+import { FiUser } from 'react-icons/fi'
+import Link from 'next/link'
 import {
 	Button,
 	IconButton,
@@ -13,10 +16,6 @@ import {
 	TableRow,
 	Tooltip,
 } from '@mui/material'
-import { FiUser } from 'react-icons/fi'
-import usePatientsState from '@/states/patientsState'
-import TablePaginationActions from '../TablePaginationActions'
-import { Link } from 'react-router-dom'
 
 const TablePatient = () => {
 	const { page, setPage, rowsPerPage, allPatients, setRowsPerPage } = usePatientsState()
@@ -58,10 +57,7 @@ const TablePatient = () => {
 						>
 							<TableCell scope="patient">
 								<Tooltip title="Ir al perfil">
-									<Link
-										to={`/patient-profile/${patient.id}`}
-										className="patient-name-link"
-									>
+									<Link href={`/patient/profile/${patient.id}`}>
 										<Button variant="text">{patient.name}</Button>
 									</Link>
 								</Tooltip>
@@ -74,9 +70,7 @@ const TablePatient = () => {
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								<Tooltip title="Llamar">
-									<a href={`tel:+${patient.phone}`} className="info">
-										{patient.phone}
-									</a>
+									<a href={`tel:+${patient.phone}`}>{patient.phone}</a>
 								</Tooltip>
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
@@ -84,7 +78,7 @@ const TablePatient = () => {
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								<Tooltip title="Ir al perfil">
-									<Link to={`/patient-profile/${patient.id}`}>
+									<Link href={`/patient/profile/${patient.id}`}>
 										<IconButton>
 											<FiUser size={20} />
 										</IconButton>

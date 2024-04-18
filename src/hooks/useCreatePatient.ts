@@ -1,9 +1,9 @@
-import Patient from '@/models/Patient'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import useAlertState from '@/states/useAlertState'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
+import { useRouter } from 'next/navigation'
+import Patient from '@/models/Patient'
 import {
 	maxDate,
 	minDate,
@@ -13,7 +13,7 @@ import {
 } from '@/utils/constants'
 
 function useCreatePatient() {
-	const navigate = useNavigate()
+	const router = useRouter()
 	const { patientData, setPatientData } = usePatientState()
 	const { teethList, setTeethList } = useTeethState()
 	const { setHandleState } = useAlertState()
@@ -143,8 +143,7 @@ function useCreatePatient() {
 					...patientData,
 					id: patient,
 				})
-
-				navigate(`/patient-profile/${patient}`)
+				router.push(`/patient/profile/${patient}`)
 
 				setHandleState({
 					severity: 'success',
@@ -168,7 +167,7 @@ function useCreatePatient() {
 	}
 
 	const handleCancelButton = () => {
-		navigate(-1)
+		router.push('/')
 		setHandleState({
 			severity: 'warning',
 			variant: 'filled',

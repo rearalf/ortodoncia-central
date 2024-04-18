@@ -1,3 +1,6 @@
+import TablePaginationActions from './TablePaginationActions'
+import useAppointmentState from '@/states/appointmentsState'
+import { FiBookmark, FiCalendar } from 'react-icons/fi'
 import {
 	IconButton,
 	Paper,
@@ -11,10 +14,7 @@ import {
 	TableRow,
 	Tooltip,
 } from '@mui/material'
-import useAppointmentState from '@/states/appointmentsState'
-import TablePaginationActions from './TablePaginationActions'
-import { FiBookmark, FiCalendar } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 const AppointmentsTable = () => {
 	const { appointments, setPage, setRowsPerPage, page, rowsPerPage } = useAppointmentState()
@@ -62,9 +62,9 @@ const AppointmentsTable = () => {
 								{i === 0 && (
 									<Tooltip title="Modificar cita">
 										<Link
-											to={`/patient-profile/${data.id_patient}/appointment/${
-												data.id
-											}/update-appointment/${true}`}
+											href={`/patient-profile/${
+												data.id_patient
+											}/appointment/${data.id}/update-appointment/${true}`}
 										>
 											<IconButton>
 												<FiCalendar size={20} />
@@ -74,7 +74,7 @@ const AppointmentsTable = () => {
 								)}
 								<Tooltip title="Ver cita">
 									<Link
-										to={
+										href={
 											i === 0
 												? `/patient-profile/${
 														data.id_patient

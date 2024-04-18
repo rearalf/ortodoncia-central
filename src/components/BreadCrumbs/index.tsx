@@ -1,6 +1,6 @@
 import { Breadcrumbs, Skeleton } from '@mui/material'
 import { FiChevronRight } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 interface BreadCrumbsProps {
 	loading?: boolean
@@ -29,7 +29,7 @@ const BreadCrumbs = ({
 				index === links.length - 1 ? (
 					<p key={link.link_to}>{link.link_name}</p>
 				) : (
-					<Link to={link.link_to} key={link.link_to}>
+					<Link href={link.link_to} key={link.link_to}>
 						{link.link_name}
 					</Link>
 				),
