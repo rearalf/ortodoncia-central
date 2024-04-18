@@ -32,12 +32,12 @@ function usePatientProfilePage(id: string) {
 					? patientData.name.split(' ')[2]
 					: patientData.name.split(' ')[1]
 			}`,
-			link_to: `/patient-profile/${patientData.id}`,
+			link_to: `/patient/profile/${patientData.id}`,
 		},
 	]
 
-	const handleGoToTeethForm = () => router.push('/patient/teeth-form/' + id)
-	const handleGoToUpdatePatient = () => router.push('/patient/update/' + id)
+	const handleGoToTeethForm = () => router.push('/appointment/create-appointment/' + id)
+	const handleGoToUpdatePatient = () => router.push('/patient/profile/' + id + '/update-patient')
 	const handleGoToPhotos = () => {
 		router.push(`/patient/profile/${id}/photos`)
 	}

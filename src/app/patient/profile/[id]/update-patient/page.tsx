@@ -2,9 +2,9 @@
 import useUpdatePatientPage from '@/hooks/useUpdatePatientPage'
 import { FiSave, FiUpload, FiXCircle } from 'react-icons/fi'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
-import AvatarComponent from '@/components/AvatarComponent'
 import BackdropLoading from '@/components/BackdropLoading'
-import HeadComponent from '@/components/HeadComponent'
+import styles from '@/styles/CreatePatientPage.module.css'
+import AvatarComponent from '@/components/AvatarComponent'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputCheckbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
@@ -19,7 +19,7 @@ import {
 	CircularProgress,
 } from '@mui/material'
 
-function UpdatePatientPage() {
+function UpdatePatientPage({ params }: { params: { id: string } }) {
 	const {
 		minDate,
 		maxDate,
@@ -34,13 +34,12 @@ function UpdatePatientPage() {
 		handleChangeFile,
 		handleChangePhone,
 		handleCancelButton,
-	} = useUpdatePatientPage()
+	} = useUpdatePatientPage(params.id)
 	return (
 		<>
 			<BackdropLoading loading={loadingPatient} />
-			<HeadComponent title={`Actualizar paciente | `} />
 			<Navbar />
-			<main className="createPatient_main">
+			<main className={styles['create_patient-main']}>
 				<BreadCrumbs
 					links={[
 						{
@@ -48,42 +47,57 @@ function UpdatePatientPage() {
 							link_to: '/',
 						},
 						{
-							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
-								patientData.name.split(' ')[2]
+							link_name: `Paciente ${
+								patientData.name ? patientData.name.split(' ')[0] : ''
+							} ${
+								patientData.name
 									? patientData.name.split(' ')[2]
-									: patientData.name.split(' ')[1]
+										? patientData.name.split(' ')[2]
+										: patientData.name.split(' ')[1]
+									: ''
 							}`,
-							link_to: `/patient-profile/${patientData.id}`,
+							link_to: `/patient/profile/${patientData.id}`,
 						},
 						{
-							link_name: `Actualizar datos de ${patientData.name.split(' ')[0]} ${
-								patientData.name.split(' ')[2]
+							link_name: `Actualizar datos de ${
+								patientData.name ? patientData.name.split(' ')[0] : ''
+							} ${
+								patientData.name
 									? patientData.name.split(' ')[2]
-									: patientData.name.split(' ')[1]
+										? patientData.name.split(' ')[2]
+										: patientData.name.split(' ')[1]
+									: ''
 							}`,
 							link_to: '/',
 						},
 					]}
 				/>
-				<h1 className="createPatient_main-title">
-					Actualizar paciente -{' '}
-					{`${patientData.name.split(' ')[0]} ${
-						patientData.name.split(' ')[2]
+				<h1 className={styles.title}>
+					{`Actualizar paciente - ${
+						patientData.name ? patientData.name.split(' ')[0] : ''
+					} ${
+						patientData.name
 							? patientData.name.split(' ')[2]
-							: patientData.name.split(' ')[1]
+								? patientData.name.split(' ')[2]
+								: patientData.name.split(' ')[1]
+							: ''
 					}`}
 				</h1>
-				<form className="form_patient" onSubmit={handleSaveData}>
-					<div className="form_patient-first_section">
-						<div className="first_section-avatar_component">
+				<form className={styles.form} onSubmit={handleSaveData}>
+					<div className={styles.first_section}>
+						<div className={styles.avatar_component}>
 							{loading && (
-								<div className="avatar_component-loading">
+								<div className={styles.loading}>
 									<CircularProgress />
 								</div>
 							)}
 							<Button aria-label="Agregar foto">
 								<label htmlFor="avatar">
-									<AvatarComponent srcImage={avatarURL} name={patientData.name} />
+									<AvatarComponent
+										srcImage={avatarURL}
+										name={patientData.name}
+										className={styles.avatar}
+									/>
 								</label>
 							</Button>
 							<input
@@ -91,13 +105,13 @@ function UpdatePatientPage() {
 								name="avatar"
 								type="file"
 								accept="image/*"
-								className="btn-get-picture_input"
+								className={styles.input}
 								onChange={handleChangeFile}
 								style={{ display: 'none' }}
 								multiple={false}
 							/>
-							<div className="btn-group">
-								<Button variant="contained" className="btn_btn-get-picture">
+							<div className={styles.btn_group}>
+								<Button variant="contained" className={styles.btn_get_picture}>
 									<label htmlFor="avatar" className="upload-label">
 										<FiUpload /> Subir imagen
 									</label>
@@ -106,7 +120,7 @@ function UpdatePatientPage() {
 										name="avatar"
 										type="file"
 										accept="image/*"
-										className="btn-get-picture_input"
+										className={styles.input}
 										onChange={handleChangeFile}
 										style={{ display: 'none' }}
 										multiple={false}
@@ -117,7 +131,7 @@ function UpdatePatientPage() {
 								</Button>
 							</div>
 						</div>
-						<div className="first_section-required_inputs">
+						<div className={styles.required_inputs}>
 							<InputBasic
 								required
 								id="name"
@@ -127,7 +141,6 @@ function UpdatePatientPage() {
 								onChange={handleInput}
 								label="Nombre completo"
 							/>
-
 							<InputDate
 								name="birthdate"
 								key="birthdate"
@@ -138,7 +151,6 @@ function UpdatePatientPage() {
 								maxDate={maxDate}
 								minDate={minDate}
 							/>
-
 							<PhoneNumberInput
 								required
 								key="phone"
@@ -147,7 +159,6 @@ function UpdatePatientPage() {
 								value={patientData.phone}
 								onChange={handleChangePhone}
 							/>
-
 							<InputBasic
 								type="text"
 								id="direction"
@@ -156,7 +167,6 @@ function UpdatePatientPage() {
 								value={patientData.direction || ''}
 								onChange={handleInput}
 							/>
-
 							<InputBasic
 								type="text"
 								id="occupation"
@@ -174,7 +184,8 @@ function UpdatePatientPage() {
 							/>
 						</div>
 					</div>
-					<div className="first_section-optional_section">
+
+					<div className={styles.optional_section}>
 						<InputBasic
 							multiline
 							type="text"
@@ -223,7 +234,7 @@ function UpdatePatientPage() {
 						>
 							Analisis Sistémico
 						</AccordionSummary>
-						<AccordionDetails className="accordion-systemic_analysis">
+						<AccordionDetails className={styles.systemic_analysis}>
 							<div className="systemic_analysis-content">
 								<ul className="contetn-checks">
 									<InputCheckbox
@@ -260,6 +271,7 @@ function UpdatePatientPage() {
 									type="text"
 									id="comments1"
 									key="comments1"
+									className={styles.input}
 									value={patientData.comments1}
 									onChange={handleInput}
 								/>
@@ -300,6 +312,7 @@ function UpdatePatientPage() {
 									type="text"
 									id="comments2"
 									key="comments2"
+									className={styles.input}
 									value={patientData.comments2}
 									onChange={handleInput}
 								/>
@@ -307,7 +320,7 @@ function UpdatePatientPage() {
 						</AccordionDetails>
 					</Accordion>
 
-					<div className="btn_group">
+					<div className={styles.btn_group}>
 						<Button
 							variant="contained"
 							color="success"

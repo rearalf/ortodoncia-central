@@ -4,7 +4,12 @@ import TeethTable from './TeethTable'
 import React from 'react'
 import './styles.css'
 
-const TeethForm = () => {
+interface Props {
+	className1?: string
+	className2?: string
+}
+
+const TeethForm = (props: Props) => {
 	const { toothState, positionState, setToothState, setPositionState } = useTeethState()
 
 	const handlePositionState = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,8 +27,8 @@ const TeethForm = () => {
 	}
 
 	return (
-		<div className="teethForm">
-			<div className="optionsTeethForm">
+		<div className={`${props.className1} teethForm`}>
+			<div className={`${props.className2} optionsTeethForm`}>
 				<RadioGroupComponent
 					row
 					id="positionState"

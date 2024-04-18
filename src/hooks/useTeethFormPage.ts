@@ -1,18 +1,18 @@
+'use client'
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 import { constantAppointment, constantTeethList } from '@/utils/constants'
-import { useNavigate, useParams } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import useAlertState from '@/states/useAlertState'
 import { SelectChangeEvent } from '@mui/material'
 import Appointment from '@/models/Appointment'
 import formatDate from '@/utils/formatDate'
+import { useRouter } from 'next/navigation'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
 
-function useTeethFormPage() {
-	const navigate = useNavigate()
-	const { id_patient } = useParams()
+function useTeethFormPage(id_patient: string) {
+	const router = useRouter()
 	const { setHandleState } = useAlertState()
 	const { patientData, setPatientData } = usePatientState()
 	const {
@@ -42,7 +42,7 @@ function useTeethFormPage() {
 				if (newAppointment !== undefined) {
 					setLoading(false)
 					handleCleanStates()
-					navigate(-1)
+					router.back()
 					setHandleState({
 						severity: 'success',
 						variant: 'filled',
@@ -69,8 +69,8 @@ function useTeethFormPage() {
 
 	const handleCancelButton = () => {
 		if (steps === 1) {
-			if (patientData.id) navigate(`/patient-profile/${patientData.id}`)
-			else navigate('/')
+			if (patientData.id) router.push(`/patient/profile/${patientData.id}`)
+			else router.back()
 			handleCleanStates()
 			setHandleState({
 				severity: 'warning',
@@ -161,7 +161,7 @@ function useTeethFormPage() {
 		} catch (error) {
 			setLoading(false)
 			console.log(error)
-			navigate(`patient-profile/${id_patient}`)
+			router.push(`/patient/profile/${id_patient}`)
 			setHandleState({
 				severity: 'warning',
 				variant: 'filled',
@@ -169,7 +169,7 @@ function useTeethFormPage() {
 				text: 'Datos del paciente no obtenidos.',
 			})
 		}
-	}, [id_patient, navigate, setHandleState, setTeethList, setPatientData, setCompleteOdontogram])
+	}, [id_patient, setHandleState, setTeethList, setPatientData, setCompleteOdontogram])
 
 	const handleNextStep = () => setSteps(prevStep => prevStep + 1)
 
@@ -177,7 +177,7 @@ function useTeethFormPage() {
 		if (patientData.id === undefined) {
 			getPatientData()
 		}
-	}, [patientData.id, navigate, setHandleState, id_patient, getPatientData])
+	}, [patientData.id, setHandleState, id_patient, getPatientData])
 
 	useEffect(() => {
 		if (appointment.id) setAppointment(constantAppointment)

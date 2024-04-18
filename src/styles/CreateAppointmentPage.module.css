@@ -1,0 +1,68 @@
+.main {
+	margin: 0 auto;
+	max-width: 1280px;
+	padding: 32px 16px;
+}
+
+.main .teeth_form {
+	background-color: var(--background-color-3);
+	border-radius: 4px;
+	width: 100%;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+	padding-bottom: 24px;
+}
+
+.main .teeth_form .form_controls {
+	padding: 24px 24px;
+}
+
+.main .last_form {
+	margin-top: 24px;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--background-color-3);
+	padding: 24px;
+	border-radius: 4px;
+	width: 100%;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.main .last_form .last_form-title {
+	margin-bottom: 24px;
+}
+
+.main .last_form .last_form-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.main .last_form .last_form-form > * {
+	margin-bottom: 18px;
+}
+
+.main .btn_group {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+@media (width >= 768px) {
+	.main .btn_group {
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+	}
+
+	.main .last_form .last_form-form {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px;
+		margin-bottom: 24px;
+	}
+
+	.main .last_form .last_form-form > * {
+		margin-bottom: 0;
+	}
+}

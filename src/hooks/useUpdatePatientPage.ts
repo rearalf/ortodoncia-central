@@ -1,13 +1,12 @@
-import Patient from '@/models/Patient'
-import { useCallback, useEffect, useState } from 'react'
 import { OrthoTerms, maxDate, minDate } from '@/utils/constants'
-import useAlertState from '@/states/useAlertState'
+import { useCallback, useEffect, useState } from 'react'
 import usePatientState from '@/states/patientState'
-import { useNavigate, useParams } from 'react-router-dom'
+import useAlertState from '@/states/useAlertState'
+import { useRouter } from 'next/navigation'
+import Patient from '@/models/Patient'
 
-function useUpdatePatientPage() {
-	const { id } = useParams()
-	const navigate = useNavigate()
+function useUpdatePatientPage(id: string) {
+	const router = useRouter()
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
 	const [progress, setUploadTask] = useState(0)
@@ -149,7 +148,7 @@ function useUpdatePatientPage() {
 						...patientData,
 					})
 
-					navigate(`/patient-profile/${id}`)
+					router.push(`/patient/profile/${id}`)
 
 					setHandleState({
 						severity: 'success',
@@ -174,7 +173,7 @@ function useUpdatePatientPage() {
 	}
 
 	const handleCancelButton = () => {
-		navigate(-1)
+		router.push('/patient/profile/' + id)
 		setHandleState({
 			severity: 'warning',
 			variant: 'filled',
