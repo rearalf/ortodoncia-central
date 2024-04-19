@@ -62,9 +62,9 @@ const AppointmentsTable = () => {
 								{i === 0 && (
 									<Tooltip title="Modificar cita">
 										<Link
-											href={`/patient-profile/${
+											href={`/appointment/update-appointment/${
 												data.id_patient
-											}/appointment/${data.id}/update-appointment/${true}`}
+											}/${data.id}/${true}`}
 										>
 											<IconButton>
 												<FiCalendar size={20} />
@@ -76,12 +76,12 @@ const AppointmentsTable = () => {
 									<Link
 										href={
 											i === 0
-												? `/patient-profile/${
-														data.id_patient
-												  }/appointment/${data.id}/${true}`
-												: `/patient-profile/${
-														data.id_patient
-												  }/appointment/${data.id}/${false}`
+												? `/appointment/${data.id_patient}/${
+														data.id
+												  }/${true}`
+												: `/appointment/${data.id_patient}/${
+														data.id
+												  }/${false}`
 										}
 									>
 										<IconButton>

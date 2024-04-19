@@ -1,16 +1,15 @@
-import getAge from '@/utils/getAge'
-import Patient from '@/models/Patient'
-import formatDate from '@/utils/formatDate'
-import { useParams } from 'react-router-dom'
+'use client'
 import { useCallback, useEffect, useState } from 'react'
-import Appointment from '@/models/Appointment'
-import useAlertState from '@/states/useAlertState'
-import usePatientState from '@/states/patientState'
-import useTeethState from '@/states/toothFormState'
 import { constantTeethList } from '@/utils/constants'
+import useTeethState from '@/states/toothFormState'
+import usePatientState from '@/states/patientState'
+import useAlertState from '@/states/useAlertState'
+import Appointment from '@/models/Appointment'
+import formatDate from '@/utils/formatDate'
+import Patient from '@/models/Patient'
+import getAge from '@/utils/getAge'
 
-function useAppointment() {
-	const { id_patient, id_appointment, last_appointment } = useParams()
+function useAppointment(id_patient: string, id_appointment: string, last_appointment: string) {
 	const { patientData, setPatientData } = usePatientState()
 	const {
 		appointment,
@@ -22,6 +21,36 @@ function useAppointment() {
 	} = useTeethState()
 	const { setHandleState } = useAlertState()
 	const [loading, setLoading] = useState(false)
+
+	const links = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: `Paciente ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to: `/patient/profile/${patientData.id}`,
+		},
+		{
+			link_name: `Cita de ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to:
+				last_appointment === 'true'
+					? `/appointment/${patientData.id}/${appointment.id}/true`
+					: `/appointment/${patientData.id}/${appointment.id}/false`,
+		},
+	]
 
 	const getPatientData = useCallback(async () => {
 		try {
@@ -158,6 +187,7 @@ function useAppointment() {
 	}, [setToothState, setPositionState])
 
 	return {
+		links,
 		loading,
 		patientData,
 		appointment,

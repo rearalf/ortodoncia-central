@@ -2,7 +2,11 @@ import useTeethState from '@/states/toothFormState'
 import Tooth from './Tooth'
 import './styles.css'
 
-const TeethTable = () => {
+interface Props {
+	className?: string
+}
+
+const TeethTable = (props: Props) => {
 	const { completeOdontogram, teethList, toothState, positionState, setTeethList } =
 		useTeethState()
 
@@ -40,7 +44,7 @@ const TeethTable = () => {
 	}
 
 	return (
-		<div className="teethFirstRow">
+		<div className={`${props.className ? props.className : ''} teethFirstRow`}>
 			{teethList.map((value, i) => {
 				if (completeOdontogram) {
 					if (i === 0 || i === 3)

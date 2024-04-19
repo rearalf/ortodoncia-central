@@ -1,6 +1,7 @@
-import { Alert } from '@mui/material'
+'use client'
 import useAlertComponent from '@/hooks/useAlertComponent'
 import '@/components/AlertComponent/styles.css'
+import { Alert } from '@mui/material'
 
 const AlertComponent = () => {
 	const { severity, text, variant, show, onClose } = useAlertComponent()

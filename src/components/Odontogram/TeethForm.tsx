@@ -27,8 +27,8 @@ const TeethForm = (props: Props) => {
 	}
 
 	return (
-		<div className={`${props.className1} teethForm`}>
-			<div className={`${props.className2} optionsTeethForm`}>
+		<div className={`${props.className1 ? props.className1 : ''} teethForm`}>
+			<div className={`${props.className2 ? props.className2 : ''} optionsTeethForm`}>
 				<RadioGroupComponent
 					row
 					id="positionState"

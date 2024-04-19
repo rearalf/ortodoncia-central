@@ -1,3 +1,4 @@
+'use client'
 import useAlertState from '@/states/useAlertState'
 import { useEffect, useState } from 'react'
 

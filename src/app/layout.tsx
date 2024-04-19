@@ -1,3 +1,4 @@
+import AlertComponent from '@/components/AlertComponent'
 import { ThemeProvider } from '@mui/material'
 import theme from '@/utils/Theme'
 import '@/styles/globals.css'
@@ -10,6 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
+			<AlertComponent />
 			<ThemeProvider theme={theme}>
 				<body>{children}</body>
 			</ThemeProvider>

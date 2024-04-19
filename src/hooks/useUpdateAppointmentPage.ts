@@ -1,18 +1,22 @@
-import getAge from '@/utils/getAge'
-import Patient from '@/models/Patient'
-import formatDate from '@/utils/formatDate'
-import Appointment from '@/models/Appointment'
-import { SelectChangeEvent } from '@mui/material'
-import useAlertState from '@/states/useAlertState'
-import usePatientState from '@/states/patientState'
-import useTeethState from '@/states/toothFormState'
-import { useNavigate, useParams } from 'react-router-dom'
+'use client'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import useTeethState from '@/states/toothFormState'
+import usePatientState from '@/states/patientState'
+import useAlertState from '@/states/useAlertState'
+import { SelectChangeEvent } from '@mui/material'
+import Appointment from '@/models/Appointment'
+import formatDate from '@/utils/formatDate'
+import { useRouter } from 'next/navigation'
+import Patient from '@/models/Patient'
+import getAge from '@/utils/getAge'
 
-function useUpdateAppointmentPage() {
-	const navigate = useNavigate()
+function useUpdateAppointmentPage(
+	id_patient: string,
+	id_appointment: string,
+	last_appointment: string,
+) {
+	const router = useRouter()
 	const { setHandleState } = useAlertState()
-	const { id_patient, id_appointment, last_appointment } = useParams()
 	const { patientData, setPatientData } = usePatientState()
 	const { appointment, teethList, setAppointment, setTeethList, setCompleteOdontogram } =
 		useTeethState()
@@ -28,6 +32,47 @@ function useUpdateAppointmentPage() {
 		formatdateChange: formatDate({ date: new Date() }),
 		reasonChange: '',
 	})
+
+	const links = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: `Paciente ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to: `/patient/profile/${patientData.id}`,
+		},
+		{
+			link_name: `Cita de ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to: last_appointment
+				? `/appointment/${patientData.id}/${appointment.id}/true`
+				: `/appointment/${patientData.id}/${appointment.id}/false`,
+		},
+		{
+			link_name: `Modificar cita ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to: last_appointment
+				? `/appointment/update-appointment/${patientData.id}/${appointment.id}/true`
+				: `/appointment/update-appointment/${patientData.id}/${appointment.id}/false`,
+		},
+	]
 
 	const handleChangeShowOdonto = () => setShowOdontogram(prev => !prev)
 
@@ -166,9 +211,7 @@ function useUpdateAppointmentPage() {
 						setLoading(false)
 						throw 'Error updating in update appointment.'
 					}
-					navigate(
-						`/patient-profile/${patientData.id}/appointment/${appointment.id}/${true}`,
-					)
+					router.push(`/appointment/${patientData.id}//${appointment.id}/${true}`)
 				} else {
 					const updateAppoinment = await appointmentClass.updateAppoinment(
 						patientData.id,
@@ -184,10 +227,10 @@ function useUpdateAppointmentPage() {
 							show: true,
 							text: 'La actualización de la cita fue exitosa.',
 						})
-						const address = `/patient-profile/${patientData.id}/appointment/${appointment.id}`
+						const address = `/appointment/${patientData.id}/${appointment.id}`
 						last_appointment === 'true'
-							? navigate(address + '/true')
-							: navigate(address + '/false')
+							? router.push(address + '/true')
+							: router.push(address + '/false')
 					} else {
 						setLoading(false)
 						throw 'Error updating in update appointment.'
@@ -207,7 +250,7 @@ function useUpdateAppointmentPage() {
 	}
 
 	const handleCancel = () => {
-		navigate(-1)
+		router.back()
 		setHandleState({
 			severity: 'warning',
 			variant: 'filled',
@@ -301,6 +344,7 @@ function useUpdateAppointmentPage() {
 	}, [id_patient, id_appointment, getPatientData, getAppointmentData])
 
 	return {
+		links,
 		loading,
 		newChanges,
 		appointment,

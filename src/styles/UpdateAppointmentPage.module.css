@@ -1,0 +1,103 @@
+.main {
+	margin: 1rem auto;
+	max-width: 1280px;
+	padding: 32px 16px;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 30px;
+}
+
+.title {
+	text-align: center;
+}
+
+.link {
+	width: 100%;
+}
+
+.main .odontograma {
+	background-color: var(--background-color-3);
+	padding: 0;
+	padding-bottom: 24px;
+	border-radius: 4px;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.main .odontograma .title {
+	padding: 24px 24px 0;
+}
+
+.main .odontograma .teeth_form {
+	padding: 24px 24px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.form .content {
+	display: grid;
+	gap: 24px;
+}
+
+.form .form_reason_change,
+.form .content {
+	background-color: var(--background-color-3);
+	padding: 24px;
+	border-radius: 4px;
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.form .form_reason_change .inputs,
+.form .form_reason_change,
+.form .content .inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.form .btn_group {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.main .odontograma .odontograma_content {
+	margin: 0;
+}
+
+@media (width >= 768px) {
+	.header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.title {
+		text-align: left;
+	}
+
+	.link {
+		width: auto;
+	}
+
+	.form .form_reason_change .inputs,
+	.form .content .inputs {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.form .btn_group {
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+}
