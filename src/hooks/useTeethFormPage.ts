@@ -69,7 +69,7 @@ function useTeethFormPage(id_patient: string) {
 
 	const handleCancelButton = () => {
 		if (steps === 1) {
-			if (patientData.id) router.push(`/patient/profile/${patientData.id}`)
+			if (patientData.id) router.push(`/patient/profile/${patientData.id}`, { scroll: false })
 			else router.back()
 			handleCleanStates()
 			setHandleState({
@@ -161,7 +161,9 @@ function useTeethFormPage(id_patient: string) {
 		} catch (error) {
 			setLoading(false)
 			console.log(error)
-			router.push(`/patient/profile/${id_patient}`)
+			router.push(`/patient/profile/${id_patient}`, {
+				scroll: false,
+			})
 			setHandleState({
 				severity: 'warning',
 				variant: 'filled',

@@ -65,6 +65,7 @@ const AppointmentsTable = () => {
 											href={`/appointment/update-appointment/${
 												data.id_patient
 											}/${data.id}/${true}`}
+											scroll={false}
 										>
 											<IconButton>
 												<FiCalendar size={20} />
@@ -83,6 +84,7 @@ const AppointmentsTable = () => {
 														data.id
 												  }/${false}`
 										}
+										scroll={false}
 									>
 										<IconButton>
 											<FiBookmark size={20} />

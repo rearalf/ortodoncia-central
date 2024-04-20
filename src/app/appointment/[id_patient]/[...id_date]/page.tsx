@@ -39,6 +39,7 @@ function AppointmentPage({ params }: { params: { id_patient: string; id_date: st
 								? `/appointment/update-appointment/${patientData.id}/${appointment.id}/true`
 								: `/appointment/update-appointment/${patientData.id}/${appointment.id}/false`
 						}
+						scroll={false}
 					>
 						<Button variant="contained" className={styles.link}>
 							Modificar cita

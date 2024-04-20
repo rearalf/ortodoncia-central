@@ -143,7 +143,7 @@ function useCreatePatient() {
 					...patientData,
 					id: patient,
 				})
-				router.push(`/patient/profile/${patient}`)
+				router.push(`/patient/profile/${patient}`, { scroll: false })
 
 				setHandleState({
 					severity: 'success',
@@ -167,7 +167,7 @@ function useCreatePatient() {
 	}
 
 	const handleCancelButton = () => {
-		router.push('/')
+		router.push('/', { scroll: false })
 		setHandleState({
 			severity: 'warning',
 			variant: 'filled',

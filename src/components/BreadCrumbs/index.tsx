@@ -29,7 +29,7 @@ const BreadCrumbs = ({
 				index === links.length - 1 ? (
 					<p key={link.link_to}>{link.link_name}</p>
 				) : (
-					<Link href={link.link_to} key={link.link_to}>
+					<Link href={link.link_to} key={link.link_to} scroll={false}>
 						{link.link_name}
 					</Link>
 				),

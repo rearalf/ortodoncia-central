@@ -57,7 +57,7 @@ const TablePatient = () => {
 						>
 							<TableCell scope="patient">
 								<Tooltip title="Ir al perfil">
-									<Link href={`/patient/profile/${patient.id}`}>
+									<Link href={`/patient/profile/${patient.id}`} scroll={false}>
 										<Button variant="text">{patient.name}</Button>
 									</Link>
 								</Tooltip>
@@ -78,7 +78,7 @@ const TablePatient = () => {
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								<Tooltip title="Ir al perfil">
-									<Link href={`/patient/profile/${patient.id}`}>
+									<Link href={`/patient/profile/${patient.id}`} scroll={false}>
 										<IconButton>
 											<FiUser size={20} />
 										</IconButton>

@@ -211,7 +211,9 @@ function useUpdateAppointmentPage(
 						setLoading(false)
 						throw 'Error updating in update appointment.'
 					}
-					router.push(`/appointment/${patientData.id}//${appointment.id}/${true}`)
+					router.push(`/appointment/${patientData.id}//${appointment.id}/${true}`, {
+						scroll: false,
+					})
 				} else {
 					const updateAppoinment = await appointmentClass.updateAppoinment(
 						patientData.id,
@@ -229,8 +231,8 @@ function useUpdateAppointmentPage(
 						})
 						const address = `/appointment/${patientData.id}/${appointment.id}`
 						last_appointment === 'true'
-							? router.push(address + '/true')
-							: router.push(address + '/false')
+							? router.push(address + '/true', { scroll: false })
+							: router.push(address + '/false', { scroll: false })
 					} else {
 						setLoading(false)
 						throw 'Error updating in update appointment.'

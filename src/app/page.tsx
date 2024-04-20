@@ -19,7 +19,7 @@ function Home() {
 				<BreadCrumbs />
 				<div className={styles['main-header']}>
 					<h1>Pacientes</h1>
-					<Link href="/patient/create-patient">
+					<Link href="/patient/create-patient" scroll={false}>
 						<Button variant="contained" startIcon={<FiUserPlus />}>
 							Paciente nuevo
 						</Button>

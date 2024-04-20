@@ -148,7 +148,7 @@ function useUpdatePatientPage(id: string) {
 						...patientData,
 					})
 
-					router.push(`/patient/profile/${id}`)
+					router.push(`/patient/profile/${id}`, { scroll: false })
 
 					setHandleState({
 						severity: 'success',
@@ -173,7 +173,7 @@ function useUpdatePatientPage(id: string) {
 	}
 
 	const handleCancelButton = () => {
-		router.push('/patient/profile/' + id)
+		router.push('/patient/profile/' + id, { scroll: false })
 		setHandleState({
 			severity: 'warning',
 			variant: 'filled',

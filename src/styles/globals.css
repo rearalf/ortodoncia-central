@@ -104,20 +104,6 @@ ul {
 	margin: 0;
 }
 
-.info_data_big.info_data {
-	align-items: start;
-	flex-direction: column;
-}
-
-.info_data_big .info {
-	font-weight: 500;
-	margin: 0;
-}
-
-.info_data .info.info_big p {
-	margin: 0;
-}
-
 .MuiFormControl-root.input-select {
 	min-width: 150px;
 }

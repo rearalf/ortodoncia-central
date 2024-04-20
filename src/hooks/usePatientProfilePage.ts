@@ -36,10 +36,14 @@ function usePatientProfilePage(id: string) {
 		},
 	]
 
-	const handleGoToTeethForm = () => router.push('/appointment/create-appointment/' + id)
-	const handleGoToUpdatePatient = () => router.push('/patient/profile/' + id + '/update-patient')
+	const handleGoToTeethForm = () =>
+		router.push('/appointment/create-appointment/' + id, {
+			scroll: false,
+		})
+	const handleGoToUpdatePatient = () =>
+		router.push('/patient/profile/' + id + '/update-patient', { scroll: false })
 	const handleGoToPhotos = () => {
-		router.push(`/patient/profile/${id}/photos`)
+		router.push(`/patient/profile/${id}/photos`, { scroll: false })
 	}
 
 	const handleTabs = (_event: any, newValue: string) => setTabValue(newValue)
