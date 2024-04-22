@@ -65,7 +65,7 @@
 	display: flex;
 	gap: 24px;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: start;
 	align-items: start;
 	margin-top: 24px;
 }
