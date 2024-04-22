@@ -1,14 +1,14 @@
-.add_x_rays_page-main {
+.main {
 	margin: 1rem auto;
 	max-width: 1280px;
 	padding: 32px 16px;
 }
 
-.add_x_rays_page-main .main-title {
+.main .title {
 	margin-bottom: 24px;
 }
 
-.add_x_rays_page-main .main-form {
+.main .form {
 	display: grid;
 	gap: 24px;
 	background-color: var(--background-color-3);
@@ -19,12 +19,12 @@
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-.add_x_rays_page-main .main-form .form-inputs_section {
+.main .form .inputs_section {
 	display: grid;
 	gap: 24px;
 }
 
-.add_x_rays_page-main .main-form .form-inputs_section .drap_drop-content {
+.main .form .inputs_section .drap_drop_content {
 	border: 1px solid var(--color-text-900);
 	border-radius: 4px;
 	padding: 14px;
@@ -36,32 +36,32 @@
 	width: 100%;
 }
 
-.add_x_rays_page-main .main-form .form-inputs_section .drap_drop-content.isDragging {
+.main .form .inputs_section .drap_drop_content.is_dragging {
 	border-style: dashed;
 }
 
-.add_x_rays_page-main .main-form .form-inputs_section .drap_drop-content .content-title {
+.main .form .inputs_section .drap_drop_content .upload_title {
 	text-align: center;
 	font-size: 18px;
 }
 
-.add_x_rays_page-main .main-form .form-inputs_section .drap_drop-content .content-input_file {
+.main .form .inputs_section .drap_drop_content .input_file {
 	display: none;
 }
 
-.add_x_rays_page-main .main-form .btn_group {
+.main .form .btn_group {
 	display: flex;
 	justify-content: center;
 	gap: 32px;
 }
 
-.add_x_rays_page-main .main-loading .loading-title {
+.main .loading_section .loading_title {
 	font-size: 20px;
 	margin-bottom: 24px;
 	text-align: center;
 }
 
-.add_x_rays_page-main .main-images {
+.main .images {
 	display: flex;
 	gap: 24px;
 	flex-wrap: wrap;
@@ -69,15 +69,15 @@
 	align-items: start;
 	margin-top: 24px;
 }
-.add_x_rays_page-main .main-images .images-content {
+.main .images .images_content {
 	position: relative;
 }
 
-.add_x_rays_page-main .main-images .content-img {
+.main .images .content_img {
 	max-width: 100%;
 }
 
-.add_x_rays_page-main .main-images .content-delete_button {
+.main .images .delete_button {
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -85,24 +85,24 @@
 }
 
 @media (width >= 768px) {
-	.add_x_rays_page-main .form-inputs_section {
+	.main .inputs_section {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 	}
 
-	.add_x_rays_page-main .main-images .content-img {
+	.main .images .content_img {
 		width: calc(50% - 20px);
 		max-width: 300px;
 	}
 
-	.add_x_rays_page-main .main-images .content-delete_button {
+	.main .images .delete_button {
 		top: 5px;
 		right: 20px;
 	}
 }
 
 @media (min-width: 1024px) {
-	.add_x_rays_page-main .main-images .content-img {
+	.main .images .content_img {
 		width: calc(100% - 30px);
 	}
 }

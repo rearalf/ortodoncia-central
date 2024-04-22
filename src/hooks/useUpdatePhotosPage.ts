@@ -1,18 +1,18 @@
-import { useNavigate, useParams } from 'react-router-dom'
+'use client'
 import { useCallback, useEffect, useState } from 'react'
 import usePatientState from '@/states/patientState'
+import PatientPhotos from '@/models/PatientPhotos'
 import useAlertState from '@/states/useAlertState'
+import { useRouter } from 'next/navigation'
 import formatDate from '@/utils/formatDate'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
-import PatientPhotos from '@/models/PatientPhotos'
 
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '@/database/firebase'
 
-function useUpdatePhotosPage() {
-	const navigate = useNavigate()
-	const { id_patient, id_photo } = useParams()
+function useUpdatePhotosPage(id_patient: string, id_photo: string) {
+	const router = useRouter()
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
 
@@ -51,6 +51,31 @@ function useUpdatePhotosPage() {
 	const [imagesNamesStay, setImagesNamesStay] = useState<string[]>([])
 	const [imagesLinksStay, setImagesLinksStay] = useState<string[]>([])
 
+	const links = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: `Paciente ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to: `/patient/profile/${patientData.id}`,
+		},
+		{
+			link_name: 'Fotos e imagenes',
+			link_to: `/photos/${patientData.id}`,
+		},
+		{
+			link_name: 'Modificar fotos e imagenes',
+			link_to: `/photos/${patientData.id}/${id_photo}/update-photos`,
+		},
+	]
+
 	const openImageViewer = useCallback((index: number) => {
 		setCurrentImage(index)
 		setIsViewerOpen(true)
@@ -85,9 +110,9 @@ function useUpdatePhotosPage() {
 				show: true,
 				text: 'Error al obtener los datos del paciente.',
 			})
-			navigate('/')
+			router.push('/', { scroll: false })
 		}
-	}, [id_patient, setPatientData, setHandleState, navigate])
+	}, [id_patient, setPatientData, setHandleState])
 
 	const getPhotos = useCallback(async () => {
 		try {
@@ -117,9 +142,9 @@ function useUpdatePhotosPage() {
 		} catch (error) {
 			setLoading(false)
 			console.log('Error getting patient data usePatient: ' + error)
-			navigate('/')
+			router.push('/', { scroll: false })
 		}
-	}, [id_photo, id_patient, navigate, setHandleState])
+	}, [id_photo, id_patient, setHandleState])
 
 	const handleOnChangeInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
@@ -226,7 +251,7 @@ function useUpdatePhotosPage() {
 									show: true,
 									text: 'Actualización exitosa.',
 								})
-								navigate('/patient-profile/' + patientData.id + '/photos')
+								router.push('/photos/' + patientData.id, { scroll: false })
 								setLoading(false)
 							} else {
 								setHandleState({
@@ -244,7 +269,7 @@ function useUpdatePhotosPage() {
 								show: true,
 								text: 'Actualización exitosa.',
 							})
-							navigate('/patient-profile/' + patientData.id + '/photos')
+							router.push('/photos/' + patientData.id, { scroll: false })
 							setLoading(false)
 						}
 					} else {
@@ -277,7 +302,7 @@ function useUpdatePhotosPage() {
 								show: true,
 								text: 'Actualización exitosa.',
 							})
-							navigate('/patient-profile/' + patientData.id + '/photos')
+							router.push('/photos/' + patientData.id, { scroll: false })
 							setLoading(false)
 						} else {
 							setHandleState({
@@ -384,7 +409,7 @@ function useUpdatePhotosPage() {
 						show: true,
 						text: 'Actualización exitosa.',
 					})
-					navigate('/patient-profile/' + patientData.id + '/photos')
+					router.push('/photos/' + patientData.id)
 					setLoading(false)
 				} else {
 					setHandleState({
@@ -411,7 +436,7 @@ function useUpdatePhotosPage() {
 	}
 
 	const handleCancelButton = () => {
-		navigate(`/patient-profile/${patientData.id}/photos`)
+		router.push(`/photos/${patientData.id}`, { scroll: false })
 		setHandleState({
 			severity: 'info',
 			variant: 'filled',
@@ -493,6 +518,7 @@ function useUpdatePhotosPage() {
 	}, [id_photo, getPhotos])
 
 	return {
+		links,
 		images,
 		loading,
 		progress,

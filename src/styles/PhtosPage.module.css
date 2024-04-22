@@ -1,16 +1,24 @@
-.photos-page_main {
+.main {
 	margin: 1rem auto;
 	max-width: 1280px;
 	padding: 32px 16px;
 }
 
-.main_content {
+.main .header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 30px;
+}
+
+.content {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
 }
 
-.main_content .content_article {
+.content .article {
 	padding: 24px;
 	border-radius: 4px;
 	background-color: var(--background-color-3);
@@ -18,56 +26,60 @@
 		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-.main_content .content_article .article_header {
+.content .article .header {
 	display: flex;
 	justify-content: space-between;
 }
 
-.main_content .content_article .article_description p {
+.content .article .article_description p {
 	margin: 0;
 }
 
-.main_content .content_article .article_photos {
+.content .article .photos {
 	display: flex;
 	gap: 26px;
 	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: start;
+	align-items: flex-start;
 	margin-top: 24px;
 }
 
-.main_content .content_article .article_photos .photo-button_photo {
+.content .article .photos .photo {
 	width: 100%;
 	cursor: pointer;
 	transition: transform 0.5s ease-in-out;
 }
 
-.photos-page_main .main_btn-group {
+.main .main_btn-group {
 	display: flex;
 	justify-content: center;
 	margin-top: 42px;
 	gap: 24px;
 }
 
-.MuiDialog-paper.MuiDialog-paperScrollPaper .delete-dialog_btn-group {
+.delete_dialog .btn_group {
 	display: flex;
 	gap: 24px;
 }
 
 @media (width >= 768px) {
-	.main_content .content_article .article_photos .photo-button_photo {
+	.main .header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.content .article .photos .photo {
 		width: calc(75% - 20px);
 		max-width: 300px;
 	}
 }
 
 @media (min-width: 1024px) {
-	.main_content .content_article .article_photos .photo-button_photo {
+	.content .article .photos .photo {
 		width: calc(33.333% - 20px);
 		max-width: 400px;
 	}
 
-	.main_content .content_article .article_photos .photo-button_photo:hover {
+	.content .article .photos .photo:hover {
 		transform: scale(1.05);
 	}
 }

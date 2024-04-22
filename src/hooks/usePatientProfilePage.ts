@@ -43,7 +43,7 @@ function usePatientProfilePage(id: string) {
 	const handleGoToUpdatePatient = () =>
 		router.push('/patient/profile/' + id + '/update-patient', { scroll: false })
 	const handleGoToPhotos = () => {
-		router.push(`/patient/profile/${id}/photos`, { scroll: false })
+		router.push(`/photos/${id}`, { scroll: false })
 	}
 
 	const handleTabs = (_event: any, newValue: string) => setTabValue(newValue)

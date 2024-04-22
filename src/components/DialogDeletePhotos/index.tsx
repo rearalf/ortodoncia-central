@@ -1,5 +1,6 @@
 import { FiTrash, FiXCircle } from 'react-icons/fi'
 import { Button, Dialog } from '@mui/material'
+import styles from '@/styles/PhtosPage.module.css'
 
 interface DialogDeletePhotosProps {
 	openModal: boolean
@@ -14,14 +15,14 @@ interface DialogDeletePhotosProps {
 
 const DialogDeletePhotos = (props: DialogDeletePhotosProps) => {
 	return (
-		<Dialog open={props.openModal} className="delete-dialog">
+		<Dialog open={props.openModal} className={styles.delete_dialog}>
 			<h1>Seguro desea eliminarlo?</h1>
 			<p>
 				Eliminara {props.data.totalImageDeleted} fotos y descripción y no podra ser
 				recuperado nada.
 			</p>
 
-			<div className="delete-dialog_btn-group">
+			<div className={styles.btn_group}>
 				<Button
 					variant="contained"
 					color="error"

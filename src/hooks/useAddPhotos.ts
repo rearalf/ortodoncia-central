@@ -1,18 +1,18 @@
-import { useNavigate, useParams } from 'react-router-dom'
+'use client'
 import { useCallback, useEffect, useState } from 'react'
 import usePatientState from '@/states/patientState'
+import PatientPhotos from '@/models/PatientPhotos'
 import useAlertState from '@/states/useAlertState'
 import formatDate from '@/utils/formatDate'
+import { useRouter } from 'next/navigation'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
-import PatientPhotos from '@/models/PatientPhotos'
 
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { storage } from '@/database/firebase'
 
-function useAddPhotos() {
-	const { id_patient } = useParams()
-	const navigate = useNavigate()
+function useAddPhotos(id_patient: string) {
+	const router = useRouter()
 	const { patientData, setPatientData } = usePatientState()
 	const { setHandleState } = useAlertState()
 
@@ -29,6 +29,31 @@ function useAddPhotos() {
 	const [isViewerOpen, setIsViewerOpen] = useState(false)
 	const [progress, setProgress] = useState(0)
 	const [numberImages, setNumberImages] = useState(0)
+
+	const links = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: `Paciente ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to: `/patient/profile/${patientData.id}`,
+		},
+		{
+			link_name: 'Fotos e imagenes',
+			link_to: `/photos/${patientData.id}/`,
+		},
+		{
+			link_name: 'Agregar fotos e imagenes',
+			link_to: `/photos/${patientData.id}/add-photos`,
+		},
+	]
 
 	const openImageViewer = useCallback((index: number) => {
 		setCurrentImage(index)
@@ -64,9 +89,9 @@ function useAddPhotos() {
 				show: true,
 				text: 'Error al obtener los datos del paciente.',
 			})
-			navigate('/')
+			router.replace('/', { scroll: false })
 		}
-	}, [id_patient, setPatientData, setHandleState, navigate])
+	}, [id_patient, setPatientData, setHandleState])
 
 	const handleOnChangeInput = (
 		e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
@@ -210,7 +235,7 @@ function useAddPhotos() {
 						show: true,
 						text: 'Datos e imagenes guardados exitosamente.',
 					})
-					navigate('/patient-profile/' + patientData.id + '/photos')
+					router.push('/photos/' + patientData.id, { scroll: false })
 				} else {
 					setLoading(false)
 					setHandleState({
@@ -237,7 +262,7 @@ function useAddPhotos() {
 	}
 
 	const handleCancelButton = () => {
-		navigate(`/patient-profile/${patientData.id}/photos`)
+		router.push(`/photos/${patientData.id}/`, { scroll: false })
 		setHandleState({
 			severity: 'info',
 			variant: 'filled',
@@ -315,6 +340,7 @@ function useAddPhotos() {
 	}, [id_patient, getPatientData])
 
 	return {
+		links,
 		images,
 		loading,
 		progress,

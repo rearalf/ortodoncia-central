@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+'use client'
 import { useCallback, useEffect, useState } from 'react'
 import { deleteObject, ref } from 'firebase/storage'
 import usePatientState from '@/states/patientState'
@@ -6,12 +6,12 @@ import useAlertState from '@/states/useAlertState'
 import PatientPhotos from '@/models/PatientPhotos'
 import { storage } from '@/database/firebase'
 import formatDate from '@/utils/formatDate'
+import { useRouter } from 'next/navigation'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
 
-function usePhotosPage() {
-	const navigate = useNavigate()
-	const { id_patient } = useParams()
+function usePhotosPage(id_patient: string) {
+	const router = useRouter()
 	const { setHandleState } = useAlertState()
 	const { setPatientData, patientData } = usePatientState()
 
@@ -38,9 +38,31 @@ function usePhotosPage() {
 	})
 	const [openModal, setOpenModal] = useState<boolean>(false)
 
-	const handleGoToAddPhotos = () => navigate(`/patient-profile/${id_patient}/photos/add-photos`)
+	const links = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: `Paciente ${patientData.name ? patientData.name.split(' ')[0] : ''} ${
+				patientData.name
+					? patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+					: ''
+			}`,
+			link_to: `/patient/profile/${patientData.id}`,
+		},
+		{
+			link_name: `Fotos e imagenes`,
+			link_to: `/photos/${patientData.id}`,
+		},
+	]
+
+	const handleGoToAddPhotos = () =>
+		router.push(`/photos/${id_patient}/add-photos`, { scroll: false })
 	const handleGoToUpdatePhotos = (id_photo: string) =>
-		navigate(`/patient-profile/${id_patient}/photos/update-photos/${id_photo}`)
+		router.push(`/photos/${id_patient}/${id_photo}/update-photos`, { scroll: false })
 
 	const closeImageViewer = () => {
 		setCurrentImage(0)
@@ -77,9 +99,9 @@ function usePhotosPage() {
 				show: true,
 				text: 'Error al obtener los datos del paciente.',
 			})
-			navigate('/')
+			router.push('/', { scroll: false })
 		}
-	}, [id_patient, setPatientData, setHandleState, navigate])
+	}, [id_patient, setPatientData, setHandleState])
 
 	const getPhotos = useCallback(async () => {
 		try {
@@ -345,6 +367,7 @@ function usePhotosPage() {
 	return {
 		page,
 		data,
+		links,
 		images,
 		loading,
 		idSelect,
