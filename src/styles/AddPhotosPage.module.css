@@ -65,8 +65,8 @@
 	display: flex;
 	gap: 24px;
 	flex-wrap: wrap;
-	justify-content: start;
-	align-items: start;
+	justify-content: flex-start;
+	align-items: flex-start;
 	margin-top: 24px;
 }
 .main .images .images_content {
