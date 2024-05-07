@@ -1,85 +1,191 @@
 import useTeethState from '@/states/toothFormState'
 import Tooth from './Tooth'
 import './styles.css'
+import { useState } from 'react'
+import useAlertState from '@/states/useAlertState'
+import { modifyExtractionStatus, modifyFixedPartialBridge, modifyPositionStatus } from './functions'
 
 const TeethTable = () => {
-	const { completeOdontogram, teethList, toothState, positionState, setTeethList } =
-		useTeethState()
+	const {
+		completeOdontogram,
+		teethList,
+		toothState,
+		positionState,
+		abutmentToothState,
+		setTeethList,
+		setAbutmentTooth,
+	} = useTeethState()
+	const { setHandleState } = useAlertState()
 
-	const hanldeModifyStateTooth = (tooth: number, position?: toothPosition) => {
-		const updatedTeethList = [...teethList]
-		if (toothState === '' && positionState !== '') {
-			if (position !== undefined) {
-				updatedTeethList.forEach(row => {
-					row.forEach(side => {
-						side.forEach(toothObj => {
-							if (toothObj.tooth === tooth) {
-								toothObj[position] =
-									positionState === 'disable' ? '' : positionState
-								toothObj.toothState = ''
-							}
-						})
-					})
-				})
-				setTeethList(updatedTeethList)
-			}
+	const [abutmentToothInitial, setAbutmentToothInitial] = useState<number>(0)
+	const [quadrantAbutmentTooth, setQuadrantAbutmentTooth] = useState<number>(0)
+
+	const hanldeModifyStateTooth = (quadrant: number, tooth: number, position?: toothPosition) => {
+		if (positionState === '' && toothState === '' && abutmentToothState === '') {
+			setHandleState({
+				severity: 'info',
+				variant: 'filled',
+				show: true,
+				text: 'Debe seleccionar una opción para modificar los estados del diente.',
+			})
+			return
+		}
+
+		if (toothState === '' && positionState !== '' && position !== undefined) {
+			const updatedTeethList = modifyPositionStatus(
+				quadrant,
+				tooth,
+				teethList,
+				positionState,
+				position,
+				setHandleState,
+			)
+			if (updatedTeethList) setTeethList(updatedTeethList)
 		}
 
 		if (toothState !== '' && positionState === '') {
-			updatedTeethList.forEach(row => {
-				row.forEach(side => {
-					side.forEach(toothObj => {
-						if (toothObj.tooth === tooth) {
-							toothObj.toothState = toothState === 'disable' ? '' : toothState
-						}
-					})
-				})
-			})
-			setTeethList(updatedTeethList)
+			const updatedTeethList = modifyExtractionStatus(
+				quadrant,
+				tooth,
+				toothState,
+				teethList,
+				setHandleState,
+			)
+			if (updatedTeethList) setTeethList(updatedTeethList)
+		}
+
+		if (toothState === '' && positionState === '' && abutmentToothState !== '') {
+			const updatedTeethList = modifyFixedPartialBridge(
+				quadrant,
+				tooth,
+				teethList,
+				abutmentToothState,
+				abutmentToothInitial,
+				quadrantAbutmentTooth,
+				setAbutmentTooth,
+				setAbutmentToothInitial,
+				setQuadrantAbutmentTooth,
+				setHandleState,
+			)
+			if (updatedTeethList) setTeethList(updatedTeethList)
 		}
 	}
 
 	return (
-		<div className="teethFirstRow">
-			{teethList.map((value, i) => {
-				if (completeOdontogram) {
-					if (i === 0 || i === 3)
+		<div className="teeth_table">
+			<div id="teeth_permanent_maxillary" className="quadrants">
+				<div id="maxillary_right" className="quadrant">
+					{teethList.permanent['1'].map(tooth => {
 						return (
-							<div className="teethFirstRow_row" key={`value${i}`}>
-								{value.map((number, i) => {
-									return (
-										<div className="row" key={`row${i}`}>
-											{number.map(tooth => (
-												<Tooth
-													tooth={tooth}
-													key={tooth.tooth}
-													hanldeModifyStateTooth={hanldeModifyStateTooth}
-												/>
-											))}
-										</div>
-									)
-								})}
-							</div>
+							<Tooth
+								quadrant={1}
+								tooth={tooth}
+								key={tooth.tooth}
+								hanldeModifyStateTooth={hanldeModifyStateTooth}
+							/>
 						)
-				} else
-					return (
-						<div className="teethFirstRow_row" key={`value${i}`}>
-							{value.map((number, i) => {
+					})}
+				</div>
+
+				<div id="maxillary_left" className="quadrant">
+					{teethList.permanent['2'].map(tooth => {
+						return (
+							<Tooth
+								quadrant={2}
+								tooth={tooth}
+								key={tooth.tooth}
+								hanldeModifyStateTooth={hanldeModifyStateTooth}
+							/>
+						)
+					})}
+				</div>
+			</div>
+			{completeOdontogram && (
+				<>
+					<div id="teeth_temporary_maxillary" className="quadrants">
+						<div id="maxillary_right" className="quadrant">
+							{teethList.temporary['5'].map(tooth => {
 								return (
-									<div className="row" key={`row${i}`}>
-										{number.map(tooth => (
-											<Tooth
-												tooth={tooth}
-												key={tooth.tooth}
-												hanldeModifyStateTooth={hanldeModifyStateTooth}
-											/>
-										))}
-									</div>
+									<Tooth
+										quadrant={5}
+										tooth={tooth}
+										key={tooth.tooth}
+										hanldeModifyStateTooth={hanldeModifyStateTooth}
+									/>
 								)
 							})}
 						</div>
-					)
-			})}
+
+						<div id="maxillary_left" className="quadrant">
+							{teethList.temporary['6'].map(tooth => {
+								return (
+									<Tooth
+										quadrant={6}
+										tooth={tooth}
+										key={tooth.tooth}
+										hanldeModifyStateTooth={hanldeModifyStateTooth}
+									/>
+								)
+							})}
+						</div>
+					</div>
+
+					<div id="teeth_temporary_mandibular" className="quadrants">
+						<div id="mandibular_right" className="quadrant">
+							{teethList.temporary['7'].map(tooth => {
+								return (
+									<Tooth
+										quadrant={7}
+										tooth={tooth}
+										key={tooth.tooth}
+										hanldeModifyStateTooth={hanldeModifyStateTooth}
+									/>
+								)
+							})}
+						</div>
+
+						<div id="mandibular_left" className="quadrant">
+							{teethList.temporary['8'].map(tooth => {
+								return (
+									<Tooth
+										quadrant={8}
+										tooth={tooth}
+										key={tooth.tooth}
+										hanldeModifyStateTooth={hanldeModifyStateTooth}
+									/>
+								)
+							})}
+						</div>
+					</div>
+				</>
+			)}
+			<div id="teeth_permanent_mandibular" className="quadrants">
+				<div id="mandibular_right" className="quadrant">
+					{teethList.permanent['4'].map(tooth => {
+						return (
+							<Tooth
+								quadrant={4}
+								tooth={tooth}
+								key={tooth.tooth}
+								hanldeModifyStateTooth={hanldeModifyStateTooth}
+							/>
+						)
+					})}
+				</div>
+
+				<div id="mandibular_left" className="quadrant">
+					{teethList.permanent['3'].map(tooth => {
+						return (
+							<Tooth
+								quadrant={3}
+								tooth={tooth}
+								key={tooth.tooth}
+								hanldeModifyStateTooth={hanldeModifyStateTooth}
+							/>
+						)
+					})}
+				</div>
+			</div>
 		</div>
 	)
 }

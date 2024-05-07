@@ -28,6 +28,8 @@ interface toothObject {
 	mesial: toothPositionStateType
 	vestibular: toothPositionStateType
 	oclusal: toothPositionStateType
+	abutmentTooth: boolean
+	falseTooth: boolean
 }
 
 interface appointmentInterface {
@@ -35,4 +37,11 @@ interface appointmentInterface {
 	treatment: string
 	cost: string
 	doctor: string
+}
+
+type Quadrant = ToothObject[]
+
+interface Odontogram {
+	permanent: Record<string, Quadrant>
+	temporary: Record<string, Quadrant>
 }

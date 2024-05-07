@@ -49,7 +49,7 @@
 	gap: 3px;
 }
 
-.toothButton {
+.tooth_button {
 	--sizeBox: 35px;
 	position: relative;
 	width: var(--sizeBox);
@@ -100,7 +100,7 @@
 	display: block;
 }
 
-.toothButton .palatina {
+.tooth_button .palatina {
 	position: absolute;
 	top: 0;
 	left: 15%;
@@ -112,7 +112,7 @@
 	border-bottom-right-radius: 60%;
 }
 
-.toothButton .mesial {
+.tooth_button .mesial {
 	position: absolute;
 	top: 20%;
 	left: 0;
@@ -124,7 +124,7 @@
 	border-bottom-right-radius: 60%;
 }
 
-.toothButton .distal {
+.tooth_button .distal {
 	position: absolute;
 	right: 0;
 	top: 20%;
@@ -136,7 +136,7 @@
 	border-top-left-radius: 60%;
 }
 
-.toothButton .vestibular {
+.tooth_button .vestibular {
 	position: absolute;
 	left: 15%;
 	bottom: 0;
@@ -148,7 +148,7 @@
 	border-top-right-radius: 60%;
 }
 
-.toothButton .oclusal {
+.tooth_button .oclusal {
 	--sizeBox: 15px;
 	position: absolute;
 	left: 50%;
@@ -171,7 +171,7 @@
 		gap: 4px;
 	}
 
-	.toothButton {
+	.tooth_button {
 		--sizeBox: 45px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
@@ -181,17 +181,17 @@
 		font-size: 11px;
 	}
 
-	.toothButton .vestibular,
-	.toothButton .palatina {
+	.tooth_button .vestibular,
+	.tooth_button .palatina {
 		height: 12px;
 	}
 
-	.toothButton .distal,
-	.toothButton .mesial {
+	.tooth_button .distal,
+	.tooth_button .mesial {
 		min-width: 12px;
 	}
 
-	.toothButton .oclusal {
+	.tooth_button .oclusal {
 		--sizeBox: 20px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
@@ -230,7 +230,7 @@
 		gap: 12px;
 	}
 
-	.toothButton {
+	.tooth_button {
 		--sizeBox: 50px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
@@ -240,17 +240,17 @@
 		font-size: 12px;
 	}
 
-	.toothButton .vestibular,
-	.toothButton .palatina {
+	.tooth_button .vestibular,
+	.tooth_button .palatina {
 		height: 15px;
 	}
 
-	.toothButton .distal,
-	.toothButton .mesial {
+	.tooth_button .distal,
+	.tooth_button .mesial {
 		min-width: 15px;
 	}
 
-	.toothButton .oclusal {
+	.tooth_button .oclusal {
 		--sizeBox: 20px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
@@ -267,7 +267,7 @@
 }
 
 @media (width >= 1200px) {
-	.toothButton {
+	.tooth_button {
 		--sizeBox: 55px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
@@ -277,7 +277,7 @@
 		font-size: 15px;
 	}
 
-	.toothButton .oclusal {
+	.tooth_button .oclusal {
 		--sizeBox: 25px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
@@ -294,7 +294,7 @@
 }
 
 @media (width >= 1440px) {
-	.toothButton {
+	.tooth_button {
 		--sizeBox: 65px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
@@ -304,19 +304,19 @@
 		font-size: 18px;
 	}
 
-	.toothButton .oclusal {
+	.tooth_button .oclusal {
 		--sizeBox: 28px;
 		width: var(--sizeBox);
 		height: var(--sizeBox);
 	}
 
-	.toothButton .vestibular,
-	.toothButton .palatina {
+	.tooth_button .vestibular,
+	.tooth_button .palatina {
 		height: 18px;
 	}
 
-	.toothButton .distal,
-	.toothButton .mesial {
+	.tooth_button .distal,
+	.tooth_button .mesial {
 		min-width: 18px;
 	}
 
@@ -328,4 +328,67 @@
 	.toothState:hover {
 		font-size: 82px;
 	}
+}
+
+/* 
+	New Styles
+*/
+
+.teeth_table {
+	padding: 0 8px;
+	display: grid;
+	gap: 20px;
+}
+
+.teeth_table .quadrants {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+}
+
+.teeth_table .quadrants .quadrant {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+}
+
+@media (width >= 768px) {
+	.teeth_table {
+		gap: 25px;
+	}
+
+	.teeth_table .quadrants {
+		gap: 15px;
+	}
+}
+
+.tooth_button .abutment_tooth_state {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 0;
+	font-size: 9px;
+	transform: translate(-50%, -50%);
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	transition: font-size 0.5s ease-in-out;
+	z-index: 3;
+}
+
+.tooth_button .abutment_tooth_state.abutment_tooth {
+	border: 3px solid #8ae0ff;
+	padding: 24px;
+	background: #00000080;
+	border-radius: 50%;
+}
+
+.tooth_button .abutment_tooth_state.false_tooth {
+	width: 85%;
+	height: 85%;
+	background: #00000080;
+	border-top: 2px solid #8ae0ff;
+	border-bottom: 2px solid #8ae0ff;
 }
