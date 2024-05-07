@@ -9,7 +9,7 @@ interface appointment {
 	id_patient?: string
 	formatDate?: string
 	format_created_at?: string
-	teeth?: toothObject[][][]
+	teeth?: Odontogram
 	dateChange?: Date
 	formatdateChange?: string
 	reasonChange?: string

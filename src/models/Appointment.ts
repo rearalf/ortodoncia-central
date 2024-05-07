@@ -15,7 +15,7 @@ class Appointment {
 	async saveNewAppointment(
 		id: string,
 		appointment: appointmentInterface,
-		teeth: toothObject[][][],
+		teeth: Odontogram,
 		// eslint-disable-next-line
 	): Promise<any | undefined> {
 		try {

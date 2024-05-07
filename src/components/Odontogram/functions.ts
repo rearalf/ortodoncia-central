@@ -151,7 +151,7 @@ export function modifyFixedPartialBridge(
 				while (forwardIndex < updatedTeethList.permanent[quadrant].length) {
 					const forwardTooth = updatedTeethList.permanent[quadrant][forwardIndex]
 					if (forwardTooth.abutmentTooth) {
-						forwardTooth.abutmentTooth = false // Desactivar el abutmentTooth si es inmediatamente adyacente
+						forwardTooth.abutmentTooth = false
 						break
 					}
 					forwardTooth.falseTooth = false

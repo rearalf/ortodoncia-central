@@ -25,5 +25,5 @@ interface PatientDataInterface {
 	SGU: boolean
 	SGI: boolean
 	comments2: string
-	teeth?: toothObject[][][] | string
+	teeth?: Odontogram | string
 }

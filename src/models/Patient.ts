@@ -16,10 +16,7 @@ import {
 } from 'firebase/firestore'
 
 class Patient {
-	async save(
-		patientData: PatientDataInterface,
-		teeth: toothObject[][][],
-	): Promise<string | undefined> {
+	async save(patientData: PatientDataInterface, teeth: Odontogram): Promise<string | undefined> {
 		try {
 			const patient = await addDoc(collection(db, 'patients'), {
 				...patientData,
@@ -171,7 +168,7 @@ class Patient {
 		}
 	}
 
-	async updateOnlyTeeth(id: string, teeth: toothObject[][][]) {
+	async updateOnlyTeeth(id: string, teeth: Odontogram) {
 		try {
 			const patientRef = doc(db, 'patients', id)
 			const updateData = await updateDoc(patientRef, {

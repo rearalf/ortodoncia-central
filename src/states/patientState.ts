@@ -4,7 +4,7 @@ import { constantTeethList, patientBasicData } from '@/utils/constants'
 interface PatientStateInterface {
 	patientData: PatientDataInterface
 	setPatientData: (value: PatientDataInterface) => void
-	teeth: toothObject[][][]
+	teeth: Odontogram
 	setTeeth: (value: PatientStateInterface['teeth']) => void
 }
 
