@@ -5,7 +5,10 @@ interface InputSelectProps {
 	label: string
 	value: string
 	required?: boolean
-	items: { value: string | number; item: string }[]
+	// eslint-disable-next-line
+	items: any
+	propName: string
+	propValue: string
 	onChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void
 }
 
@@ -20,16 +23,27 @@ const InputSelect = (props: InputSelectProps) => (
 			labelId={props.id}
 			label={props.label}
 			value={props.value}
+			placeholder={
+				!Array.isArray(props.items) && props.items.length === 0
+					? 'No hay Doctores disponibles'
+					: ''
+			}
 			onChange={props.onChange}
 			required={props.required}
 		>
-			{props.items.map(item => {
-				return (
-					<MenuItem value={item.value} key={item.value}>
-						{item.item}
-					</MenuItem>
-				)
-			})}
+			{Array.isArray(props.items) ? (
+				props.items.map(item => {
+					return (
+						<MenuItem value={item[props.propValue]} key={item[props.propValue]}>
+							{item[props.propName]}
+						</MenuItem>
+					)
+				})
+			) : (
+				<MenuItem value="" key="">
+					No hay Doctores disponibles
+				</MenuItem>
+			)}
 		</Select>
 	</FormControl>
 )

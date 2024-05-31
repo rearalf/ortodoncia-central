@@ -4,17 +4,20 @@ import { useNavigate, useParams } from 'react-router-dom'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import useAlertState from '@/states/useAlertState'
+import useDoctorsState from '@/states/doctosState'
 import { SelectChangeEvent } from '@mui/material'
 import Appointment from '@/models/Appointment'
 import formatDate from '@/utils/formatDate'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
+import Doctors from '@/models/Doctors'
 
 function useTeethFormPage() {
 	const navigate = useNavigate()
 	const { id_patient } = useParams()
 	const { setHandleState } = useAlertState()
 	const { patientData, setPatientData } = usePatientState()
+	const { doctors, setDoctors } = useDoctorsState()
 	const {
 		teethList,
 		appointment,
@@ -173,6 +176,16 @@ function useTeethFormPage() {
 
 	const handleNextStep = () => setSteps(prevStep => prevStep + 1)
 
+	const getDoctors = useCallback(async () => {
+		try {
+			const doctorsModel = new Doctors()
+			const doctorsData = await doctorsModel.getDoctors()
+			if (Array.isArray(doctorsData)) setDoctors(doctorsData)
+		} catch (error) {
+			console.log(error)
+		}
+	}, [setDoctors])
+
 	useEffect(() => {
 		if (patientData.id === undefined) {
 			getPatientData()
@@ -183,8 +196,13 @@ function useTeethFormPage() {
 		if (appointment.id) setAppointment(constantAppointment)
 	}, [appointment.id, setAppointment])
 
+	useEffect(() => {
+		getDoctors()
+	}, [getDoctors])
+
 	return {
 		steps,
+		doctors,
 		loading,
 		appointment,
 		patientData,

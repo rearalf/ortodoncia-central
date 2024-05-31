@@ -15,6 +15,7 @@ import '@/styles/TeethFormPage.css'
 const TeethFormPage = () => {
 	const {
 		steps,
+		doctors,
 		loading,
 		appointment,
 		patientData,
@@ -115,16 +116,9 @@ const TeethFormPage = () => {
 								label="Doctor"
 								value={appointment.doctor}
 								onChange={handleChangeSelectInput}
-								items={[
-									{
-										item: 'Lorena',
-										value: 'Lorena',
-									},
-									{
-										item: 'Marenco',
-										value: 'Marenco',
-									},
-								]}
+								items={doctors}
+								propName="fullName"
+								propValue="fullName"
 							/>
 							<InputBasic
 								required
