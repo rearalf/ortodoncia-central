@@ -32,6 +32,35 @@ function useUpdateAppointmentPage() {
 		reasonChange: '',
 	})
 
+	const breadCrumbsLinks = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: `Paciente ${patientData.name.split(' ')[0]} ${
+				patientData.name.split(' ')[2]
+					? patientData.name.split(' ')[2]
+					: patientData.name.split(' ')[1]
+			}`,
+			link_to: `/patient-profile/${patientData.id}`,
+		},
+		{
+			link_name: `Cita de ${patientData.name.split(' ')[0]} ${
+				patientData.name.split(' ')[2]
+					? patientData.name.split(' ')[2]
+					: patientData.name.split(' ')[1]
+			}`,
+			link_to: last_appointment
+				? `/patient-profile/${patientData.id}/appointment/${appointment.id}/true`
+				: `/patient-profile/${patientData.id}/appointment/${appointment.id}/false`,
+		},
+		{
+			link_name: 'Modificar cita',
+			link_to: `/patient-profile/${patientData.id}/appointment/${appointment.id}/update-appointment`,
+		},
+	]
+
 	const handleChangeShowOdonto = () => setShowOdontogram(prev => !prev)
 
 	const handleChangeInputDate = (value: Date | null) => {
@@ -325,6 +354,7 @@ function useUpdateAppointmentPage() {
 		patientData,
 		showOdontogram,
 		last_appointment,
+		breadCrumbsLinks,
 		handleSave,
 		handleCancel,
 		handleChangeCost,
