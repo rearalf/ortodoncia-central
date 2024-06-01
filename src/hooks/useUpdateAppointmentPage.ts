@@ -1,13 +1,15 @@
-import getAge from '@/utils/getAge'
-import Patient from '@/models/Patient'
-import formatDate from '@/utils/formatDate'
-import Appointment from '@/models/Appointment'
-import { SelectChangeEvent } from '@mui/material'
-import useAlertState from '@/states/useAlertState'
-import usePatientState from '@/states/patientState'
-import useTeethState from '@/states/toothFormState'
-import { useNavigate, useParams } from 'react-router-dom'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import useTeethState from '@/states/toothFormState'
+import usePatientState from '@/states/patientState'
+import useDoctorsState from '@/states/doctosState'
+import useAlertState from '@/states/useAlertState'
+import { SelectChangeEvent } from '@mui/material'
+import Appointment from '@/models/Appointment'
+import formatDate from '@/utils/formatDate'
+import Doctors from '@/models/Doctors'
+import Patient from '@/models/Patient'
+import getAge from '@/utils/getAge'
 
 function useUpdateAppointmentPage() {
 	const navigate = useNavigate()
@@ -19,6 +21,7 @@ function useUpdateAppointmentPage() {
 	const [staticTeethList, setStaticTeethList] = useState<string>('')
 	const [showOdontogram, setShowOdontogram] = useState<boolean>(false)
 	const [loading, setLoading] = useState<boolean>(false)
+	const { doctors, setDoctors } = useDoctorsState()
 	const [newChanges, setNewChange] = useState<{
 		dateChange: Date
 		formatdateChange: string
@@ -295,12 +298,27 @@ function useUpdateAppointmentPage() {
 		}
 	}, [id_patient, setPatientData, patientData.id, setCompleteOdontogram])
 
+	const getDoctors = useCallback(async () => {
+		try {
+			const doctorsModel = new Doctors()
+			const doctorsData = await doctorsModel.getDoctors()
+			if (Array.isArray(doctorsData)) setDoctors(doctorsData)
+		} catch (error) {
+			console.log(error)
+		}
+	}, [setDoctors])
+
 	useEffect(() => {
 		getAppointmentData()
 		getPatientData()
 	}, [id_patient, id_appointment, getPatientData, getAppointmentData])
 
+	useEffect(() => {
+		getDoctors()
+	}, [getDoctors])
+
 	return {
+		doctors,
 		loading,
 		newChanges,
 		appointment,

@@ -15,6 +15,7 @@ import '@/styles/UpdateAppointmentPage.css'
 
 function UpdateAppointmentPage() {
 	const {
+		doctors,
 		loading,
 		newChanges,
 		appointment,
@@ -106,16 +107,9 @@ function UpdateAppointmentPage() {
 									label="Doctor"
 									value={appointment.doctor}
 									onChange={handleChangeSelectInput}
-									items={[
-										{
-											item: 'Lorena',
-											value: 'Lorena',
-										},
-										{
-											item: 'Marenco',
-											value: 'Marenco',
-										},
-									]}
+									items={doctors}
+									propName="fullName"
+									propValue="fullName"
 								/>
 								<InputBasic
 									multiline
