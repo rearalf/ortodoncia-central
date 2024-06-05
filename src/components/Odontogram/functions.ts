@@ -41,8 +41,8 @@ export function modifyPositionStatus(
 }
 
 export function modifyExtractionStatus(
-	quadrant: number,
 	tooth: number,
+	quadrant: number,
 	toothState: toothStateType,
 	teethList: Odontogram,
 	setHandleState: (values: {
@@ -296,6 +296,37 @@ export function modifyFixedPartialBridge(
 			text: 'No se hacen puentes en este cuadrante.',
 		})
 		return
+	}
+	return updatedTeethList
+}
+
+export function modifyPitFissuereSealant(
+	tooth: number,
+	quadrant: number,
+	teethList: Odontogram,
+	pitFissureSealant: pitFissureSealantType,
+	setHandleState: (values: {
+		variant: 'filled' | 'outlined'
+		severity: 'success' | 'info' | 'warning' | 'error'
+		text: string
+		show: boolean
+	}) => void,
+) {
+	const updatedTeethList = { ...teethList }
+	if (quadrant < 5) {
+		updatedTeethList.permanent[quadrant].map(toothObj => {
+			if (toothObj.tooth === tooth) {
+				toothObj.pitFissureSealant = pitFissureSealant
+				return
+			}
+		})
+	} else {
+		setHandleState({
+			severity: 'warning',
+			variant: 'filled',
+			show: true,
+			text: 'No se deben de marcar sellantes en este cuadrante.',
+		})
 	}
 	return updatedTeethList
 }

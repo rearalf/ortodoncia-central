@@ -13,7 +13,14 @@ import getAge from '@/utils/getAge'
 function usePatientProfilePage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const { setTeethList, setToothState, setPositionState, setCompleteOdontogram } = useTeethState()
+	const {
+		setTeethList,
+		setToothState,
+		setPositionState,
+		setAbutmentTooth,
+		setPitFissureSealant,
+		setCompleteOdontogram,
+	} = useTeethState()
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
 	const { setHandleState } = useAlertState()
@@ -148,7 +155,9 @@ function usePatientProfilePage() {
 	useEffect(() => {
 		setToothState('')
 		setPositionState('')
-	}, [setToothState, setPositionState])
+		setAbutmentTooth('')
+		setPitFissureSealant('')
+	}, [setToothState, setPositionState, setAbutmentTooth, setPitFissureSealant])
 
 	return {
 		links,

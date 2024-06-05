@@ -14,3 +14,10 @@ interface appointment {
 	formatdateChange?: string
 	reasonChange?: string
 }
+
+interface appointmentInterface {
+	date: Date
+	treatment: string
+	cost: string
+	doctor: string
+}

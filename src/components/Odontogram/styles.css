@@ -92,11 +92,11 @@
 }
 
 .toothState.activeExtraction {
-	color: red;
+	color: #e22f32;
 	display: block;
 }
 .toothState.activeExtracted {
-	color: blue;
+	color: #00A6E2;
 	display: block;
 }
 
@@ -391,4 +391,30 @@
 	background: #00000080;
 	border-top: 2px solid #8ae0ff;
 	border-bottom: 2px solid #8ae0ff;
+}
+
+.tooth_button .pit_fissure_sealant {
+	top: 50%;
+	left: 50%;
+	z-index: 3;
+	width: 100%;
+	height: 4px;
+	border: none;
+	display: none;
+	font-size: 9px;
+	cursor: pointer;
+	position: absolute;
+	background-color: transparent;
+	transform: translate(-50%, -50%);
+	transition: font-size 0.5s ease-in-out;
+}
+
+.tooth_button .pit_fissure_sealant.sealant_tooth_red {
+	background-color: #e22f32;
+	display: block;
+}
+
+.tooth_button .pit_fissure_sealant.sealant_tooth_blue {
+	background-color: #00A6E2;
+	display: block;
 }

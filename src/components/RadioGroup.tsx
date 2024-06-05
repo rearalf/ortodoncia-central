@@ -11,7 +11,7 @@ interface RadioGroupComponent {
 	defaultValue?: any
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	options: {
-		value: string
+		value: string | number
 		label: string
 	}[]
 }

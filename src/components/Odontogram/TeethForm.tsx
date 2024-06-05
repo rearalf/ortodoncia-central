@@ -8,17 +8,20 @@ const TeethForm = () => {
 	const {
 		toothState,
 		positionState,
+		pitFissureSealant,
 		abutmentToothState,
 		setToothState,
 		setPositionState,
 		setAbutmentTooth,
+		setPitFissureSealant,
 	} = useTeethState()
 
 	const handlePositionState = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPositionState(e.target.value as toothPositionStateType)
 		if (e.target.value !== '') {
-			setAbutmentTooth('')
 			setToothState('')
+			setAbutmentTooth('')
+			setPitFissureSealant("")
 		}
 	}
 
@@ -27,6 +30,7 @@ const TeethForm = () => {
 		if (e.target.value !== '') {
 			setAbutmentTooth('')
 			setPositionState('')
+			setPitFissureSealant("")
 		}
 	}
 
@@ -35,8 +39,20 @@ const TeethForm = () => {
 			e.target.value === 'true' ? true : e.target.value === 'disable' ? 'disable' : '',
 		)
 		if (e.target.value !== '') {
-			setPositionState('')
 			setToothState('')
+			setPositionState('')
+			setPitFissureSealant("")
+		}
+	}
+
+	const handlePitFissureSealant = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = Number(e.target.value)
+		if (value === 0 || value === 1 || value === 2) setPitFissureSealant(value)
+
+		if (e.target.value !== '') {
+			setToothState('')
+			setPositionState('')
+			setAbutmentTooth('')
 		}
 	}
 
@@ -76,6 +92,18 @@ const TeethForm = () => {
 					options={[
 						{ label: 'Pilar', value: 'true' },
 						{ label: 'Deshacer', value: 'disable' },
+					]}
+				/>
+				<RadioGroupComponent
+					row
+					id="pitFissureSealant"
+					label="Sellante de fosas y fisuras"
+					value={pitFissureSealant}
+					onChange={handlePitFissureSealant}
+					options={[
+						{ label: 'Sellante hecho', value: 1 },
+						{ label: 'Sellante por hacer', value: 2 },
+						{ label: 'Deshacer', value: 0 },
 					]}
 				/>
 			</div>

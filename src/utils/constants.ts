@@ -13,6 +13,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 17,
@@ -24,6 +25,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 16,
@@ -35,6 +37,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 15,
@@ -46,6 +49,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 14,
@@ -57,6 +61,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 13,
@@ -68,6 +73,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 12,
@@ -79,6 +85,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 11,
@@ -90,6 +97,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 11 al 18
 		'2': [
@@ -103,6 +111,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 22,
@@ -114,6 +123,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 23,
@@ -125,6 +135,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 24,
@@ -136,6 +147,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 25,
@@ -147,6 +159,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 26,
@@ -158,6 +171,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 27,
@@ -169,6 +183,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 28,
@@ -180,6 +195,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 21 al 28
 		'3': [
@@ -193,6 +209,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 47,
@@ -204,6 +221,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 46,
@@ -215,6 +233,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 45,
@@ -226,6 +245,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 44,
@@ -237,6 +257,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 43,
@@ -248,6 +269,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 42,
@@ -259,6 +281,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 41,
@@ -270,6 +293,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 41 al 48
 		'4': [
@@ -283,6 +307,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 32,
@@ -294,6 +319,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 33,
@@ -305,6 +331,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 34,
@@ -316,6 +343,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 35,
@@ -327,6 +355,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 36,
@@ -338,6 +367,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 37,
@@ -349,6 +379,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 38,
@@ -360,6 +391,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 31 al 38
 	},
@@ -375,6 +407,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 54,
@@ -386,6 +419,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 53,
@@ -397,6 +431,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 52,
@@ -408,6 +443,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 51,
@@ -419,6 +455,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 51 al 55
 		'6': [
@@ -432,6 +469,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 62,
@@ -443,6 +481,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 63,
@@ -454,6 +493,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 64,
@@ -465,6 +505,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 65,
@@ -476,6 +517,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 61 al 65
 		'7': [
@@ -489,6 +531,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 72,
@@ -500,6 +543,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 73,
@@ -511,6 +555,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 74,
@@ -522,6 +567,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 75,
@@ -533,6 +579,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 71 al 75
 		'8': [
@@ -546,6 +593,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 84,
@@ -557,6 +605,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 83,
@@ -568,6 +617,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 82,
@@ -579,6 +629,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 			{
 				tooth: 81,
@@ -590,6 +641,7 @@ export const constantTeethList: Odontogram = {
 				oclusal: '',
 				abutmentTooth: false,
 				falseTooth: false,
+				pitFissureSealant: 0,
 			},
 		], // Dientes del 81 al 85
 	},

@@ -14,6 +14,8 @@ interface TeethStateInterface {
 	setPositionState: (value: toothPositionStateType) => void
 	abutmentToothState: boolean | '' | 'disable'
 	setAbutmentTooth: (value: boolean | '' | 'disable') => void
+	pitFissureSealant: pitFissureSealantType
+	setPitFissureSealant: (value: pitFissureSealantType) => void
 }
 
 const useTeethState = create<TeethStateInterface>()(set => ({
@@ -33,6 +35,8 @@ const useTeethState = create<TeethStateInterface>()(set => ({
 	setCompleteOdontogram: value => set(state => ({ ...state, completeOdontogram: value })),
 	abutmentToothState: false,
 	setAbutmentTooth: value => set(state => ({ ...state, abutmentToothState: value })),
+	pitFissureSealant: '',
+	setPitFissureSealant: value => set(state => ({ ...state, pitFissureSealant: value })),
 }))
 
 export default useTeethState

@@ -30,6 +30,17 @@ const Tooth = (props: Props) => (
 		></button>
 
 		<button
+			className={`pit_fissure_sealant ${
+				props.tooth.pitFissureSealant === 1
+					? 'sealant_tooth_red'
+					: props.tooth.pitFissureSealant === 2
+					? 'sealant_tooth_blue'
+					: ''
+			}`}
+			onClick={() => props.hanldeModifyStateTooth(props.quadrant, props.tooth.tooth)}
+		></button>
+
+		<button
 			className={`${'toothButtonNumber'} ${
 				props.tooth.oclusal !== '' ? 'toothButtonNumberOver' : ''
 			}`}

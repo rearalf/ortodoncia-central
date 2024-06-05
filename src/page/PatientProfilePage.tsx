@@ -234,7 +234,7 @@ const PatientProfilePage = () => {
 
 				<section className="main_teethTable">
 					<h2 className="teethTable_title">Odontograma</h2>
-					<TeethTable />
+					<TeethTable enableButton={false} />
 				</section>
 
 				<section className="main_appointments">

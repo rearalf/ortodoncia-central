@@ -1,16 +1,26 @@
+import {
+	modifyExtractionStatus,
+	modifyFixedPartialBridge,
+	modifyPitFissuereSealant,
+	modifyPositionStatus,
+} from './functions'
 import useTeethState from '@/states/toothFormState'
+import useAlertState from '@/states/useAlertState'
+import { useState } from 'react'
 import Tooth from './Tooth'
 import './styles.css'
-import { useState } from 'react'
-import useAlertState from '@/states/useAlertState'
-import { modifyExtractionStatus, modifyFixedPartialBridge, modifyPositionStatus } from './functions'
 
-const TeethTable = () => {
+interface Props {
+	enableButton?: boolean
+}
+
+const TeethTable = ({ enableButton = true }: Props) => {
 	const {
 		completeOdontogram,
 		teethList,
 		toothState,
 		positionState,
+		pitFissureSealant,
 		abutmentToothState,
 		setTeethList,
 		setAbutmentTooth,
@@ -21,7 +31,13 @@ const TeethTable = () => {
 	const [quadrantAbutmentTooth, setQuadrantAbutmentTooth] = useState<number>(0)
 
 	const hanldeModifyStateTooth = (quadrant: number, tooth: number, position?: toothPosition) => {
-		if (positionState === '' && toothState === '' && abutmentToothState === '') {
+		if (!enableButton) return
+		if (
+			positionState === '' &&
+			toothState === '' &&
+			abutmentToothState === '' &&
+			pitFissureSealant === ''
+		) {
 			setHandleState({
 				severity: 'info',
 				variant: 'filled',
@@ -65,6 +81,22 @@ const TeethTable = () => {
 				setAbutmentTooth,
 				setAbutmentToothInitial,
 				setQuadrantAbutmentTooth,
+				setHandleState,
+			)
+			if (updatedTeethList) setTeethList(updatedTeethList)
+		}
+
+		if (
+			toothState === '' &&
+			positionState === '' &&
+			abutmentToothState === '' &&
+			pitFissureSealant !== ''
+		) {
+			const updatedTeethList = modifyPitFissuereSealant(
+				tooth,
+				quadrant,
+				teethList,
+				pitFissureSealant,
 				setHandleState,
 			)
 			if (updatedTeethList) setTeethList(updatedTeethList)

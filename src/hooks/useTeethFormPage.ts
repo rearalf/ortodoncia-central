@@ -25,6 +25,8 @@ function useTeethFormPage() {
 		setToothState,
 		setAppointment,
 		setPositionState,
+		setAbutmentTooth,
+		setPitFissureSealant,
 		setCompleteOdontogram,
 	} = useTeethState()
 
@@ -89,6 +91,8 @@ function useTeethFormPage() {
 	const handleCleanStates = () => {
 		setToothState('')
 		setPositionState('')
+		setAbutmentTooth('')
+		setPitFissureSealant('')
 	}
 
 	const handleChangeInputDate = (value: Date | null) => {

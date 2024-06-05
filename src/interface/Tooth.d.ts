@@ -10,16 +10,6 @@ const toothPositionState = {
 	filling: 'filling',
 }
 
-interface toothPositionInterface {
-	tooth: number
-	stateTooth: toothStateType
-	palatina: toothPositionStateType
-	mesial: toothPositionStateType
-	distal: toothPositionStateType
-	vestibular: toothPositionStateType
-	oclusal: toothPositionStateType
-}
-
 interface toothObject {
 	tooth: number
 	toothState: toothStateType
@@ -30,18 +20,14 @@ interface toothObject {
 	oclusal: toothPositionStateType
 	abutmentTooth: boolean
 	falseTooth: boolean
+	pitFissureSealant: pitFissureSealantType
 }
 
-interface appointmentInterface {
-	date: Date
-	treatment: string
-	cost: string
-	doctor: string
-}
-
-type Quadrant = ToothObject[]
+type Quadrant = toothObject[]
 
 interface Odontogram {
 	permanent: Record<string, Quadrant>
 	temporary: Record<string, Quadrant>
 }
+
+type pitFissureSealantType = 0 | 1 | 2 | ''
