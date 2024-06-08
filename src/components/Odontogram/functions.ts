@@ -316,6 +316,15 @@ export function modifyPitFissuereSealant(
 	if (quadrant < 5) {
 		updatedTeethList.permanent[quadrant].map(toothObj => {
 			if (toothObj.tooth === tooth) {
+				if (toothObj.abutmentTooth || toothObj.falseTooth || toothObj.toothState !== '') {
+					setHandleState({
+						severity: 'warning',
+						variant: 'filled',
+						show: true,
+						text: 'No puede marcar este diente',
+					})
+					return
+				}
 				toothObj.pitFissureSealant = pitFissureSealant
 				return
 			}
