@@ -4,12 +4,7 @@ export function modifyPositionStatus(
 	teethList: Odontogram,
 	positionState: toothPositionStateType,
 	position: toothPosition,
-	setHandleState: (values: {
-		variant: 'filled' | 'outlined'
-		severity: 'success' | 'info' | 'warning' | 'error'
-		text: string
-		show: boolean
-	}) => void,
+	setHandleState: setAlertType,
 ) {
 	const updatedTeethList = { ...teethList }
 	if (quadrant < 5) {
@@ -45,12 +40,7 @@ export function modifyExtractionStatus(
 	quadrant: number,
 	toothState: toothStateType,
 	teethList: Odontogram,
-	setHandleState: (values: {
-		variant: 'filled' | 'outlined'
-		severity: 'success' | 'info' | 'warning' | 'error'
-		text: string
-		show: boolean
-	}) => void,
+	setHandleState: setAlertType,
 ) {
 	const updatedTeethList = { ...teethList }
 	if (quadrant < 5) {
@@ -89,12 +79,7 @@ export function modifyFixedPartialBridge(
 	setAbutmentTooth: (value: boolean | '' | 'disable') => void,
 	setAbutmentToothInitial: (value: number) => void,
 	setQuadrantAbutmentTooth: (value: number) => void,
-	setHandleState: (values: {
-		variant: 'filled' | 'outlined'
-		severity: 'success' | 'info' | 'warning' | 'error'
-		text: string
-		show: boolean
-	}) => void,
+	setHandleState: setAlertType,
 ) {
 	const updatedTeethList = { ...teethList }
 	if (quadrant < 5) {
@@ -305,12 +290,7 @@ export function modifyPitFissuereSealant(
 	quadrant: number,
 	teethList: Odontogram,
 	pitFissureSealant: pitFissureSealantType,
-	setHandleState: (values: {
-		variant: 'filled' | 'outlined'
-		severity: 'success' | 'info' | 'warning' | 'error'
-		text: string
-		show: boolean
-	}) => void,
+	setHandleState: setAlertType,
 ) {
 	const updatedTeethList = { ...teethList }
 	if (quadrant < 5) {

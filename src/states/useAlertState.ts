@@ -5,13 +5,7 @@ interface AlertComponentInterface {
 	severity: 'success' | 'info' | 'warning' | 'error'
 	text: string
 	show: boolean
-	setHandleState: (values: {
-		variant: 'filled' | 'outlined'
-		severity: 'success' | 'info' | 'warning' | 'error'
-		text: string
-		show: boolean
-	}) => void
-
+	setHandleState: setAlertType
 	onClose: () => void
 }
 

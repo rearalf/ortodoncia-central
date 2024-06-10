@@ -47,6 +47,12 @@ const TeethTable = ({ enableButton = true }: Props) => {
 			return
 		}
 
+		/* console.log({
+			quadrant,
+			tooth,
+			position,
+		}) */
+
 		if (toothState === '' && positionState !== '' && position !== undefined) {
 			const updatedTeethList = modifyPositionStatus(
 				quadrant,
@@ -61,8 +67,8 @@ const TeethTable = ({ enableButton = true }: Props) => {
 
 		if (toothState !== '' && positionState === '') {
 			const updatedTeethList = modifyExtractionStatus(
-				quadrant,
 				tooth,
+				quadrant,
 				toothState,
 				teethList,
 				setHandleState,
