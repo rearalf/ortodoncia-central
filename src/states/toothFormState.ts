@@ -12,8 +12,8 @@ interface TeethStateInterface {
 	setToothState: (value: toothStateType) => void
 	positionState: toothPositionStateType
 	setPositionState: (value: toothPositionStateType) => void
-	abutmentToothState: boolean | '' | 'disable'
-	setAbutmentTooth: (value: boolean | '' | 'disable') => void
+	abutmentToothState: abutmentToothStateType
+	setAbutmentTooth: (value: abutmentToothStateType) => void
 	pitFissureSealant: pitFissureSealantType
 	setPitFissureSealant: (value: pitFissureSealantType) => void
 }

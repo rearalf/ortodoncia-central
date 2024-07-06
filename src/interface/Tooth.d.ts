@@ -4,6 +4,8 @@ type toothStateType = '' | 'extraction' | 'extracted' | 'disable'
 
 type toothPosition = 'palatina' | 'mesial' | 'distal' | 'vestibular' | 'oclusal'
 
+type abutmentToothStateType = boolean | '' | 'disable' | 'falseTooth'
+
 // eslint-disable-next-line
 const toothPositionState = {
 	decay: 'decay',

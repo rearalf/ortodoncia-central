@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 
 interface AlertComponentInterface {
-	variant: 'filled' | 'outlined'
-	severity: 'success' | 'info' | 'warning' | 'error'
+	variant: variantType
+	severity: severityType
 	text: string
 	show: boolean
 	setHandleState: setAlertType

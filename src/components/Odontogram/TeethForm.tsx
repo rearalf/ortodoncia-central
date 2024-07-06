@@ -21,7 +21,7 @@ const TeethForm = () => {
 		if (e.target.value !== '') {
 			setToothState('')
 			setAbutmentTooth('')
-			setPitFissureSealant("")
+			setPitFissureSealant('')
 		}
 	}
 
@@ -30,18 +30,24 @@ const TeethForm = () => {
 		if (e.target.value !== '') {
 			setAbutmentTooth('')
 			setPositionState('')
-			setPitFissureSealant("")
+			setPitFissureSealant('')
 		}
 	}
 
 	const handleAbutmentToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setAbutmentTooth(
-			e.target.value === 'true' ? true : e.target.value === 'disable' ? 'disable' : '',
+			e.target.value === 'true'
+				? true
+				: e.target.value === 'disable'
+				? 'disable'
+				: e.target.value === 'falseTooth'
+				? 'falseTooth'
+				: '',
 		)
 		if (e.target.value !== '') {
 			setToothState('')
 			setPositionState('')
-			setPitFissureSealant("")
+			setPitFissureSealant('')
 		}
 	}
 
@@ -89,10 +95,18 @@ const TeethForm = () => {
 					label="Puente parcial fijo"
 					value={abutmentToothState}
 					onChange={handleAbutmentToothState}
-					options={[
-						{ label: 'Pilar', value: 'true' },
-						{ label: 'Deshacer', value: 'disable' },
-					]}
+					options={
+						abutmentToothState === 'falseTooth' || abutmentToothState 
+							? [
+									{ label: 'Pilar', value: 'true' },
+									{ label: 'Puente', value: 'falseTooth' },
+									{ label: 'Deshacer', value: 'disable' },
+							  ]
+							: [
+									{ label: 'Pilar', value: 'true' },
+									{ label: 'Deshacer', value: 'disable' },
+							  ]
+					}
 				/>
 				<RadioGroupComponent
 					row

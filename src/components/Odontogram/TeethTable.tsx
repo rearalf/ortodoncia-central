@@ -6,7 +6,6 @@ import {
 } from './functions'
 import useTeethState from '@/states/toothFormState'
 import useAlertState from '@/states/useAlertState'
-import { useState } from 'react'
 import Tooth from './Tooth'
 import './styles.css'
 
@@ -23,15 +22,12 @@ const TeethTable = ({ enableButton = true }: Props) => {
 		pitFissureSealant,
 		abutmentToothState,
 		setTeethList,
-		setAbutmentTooth,
 	} = useTeethState()
 	const { setHandleState } = useAlertState()
 
-	const [abutmentToothInitial, setAbutmentToothInitial] = useState<number>(0)
-	const [quadrantAbutmentTooth, setQuadrantAbutmentTooth] = useState<number>(0)
-
 	const hanldeModifyStateTooth = (quadrant: number, tooth: number, position?: toothPosition) => {
 		if (!enableButton) return
+
 		if (
 			positionState === '' &&
 			toothState === '' &&
@@ -46,12 +42,6 @@ const TeethTable = ({ enableButton = true }: Props) => {
 			})
 			return
 		}
-
-		/* console.log({
-			quadrant,
-			tooth,
-			position,
-		}) */
 
 		if (toothState === '' && positionState !== '' && position !== undefined) {
 			const updatedTeethList = modifyPositionStatus(
@@ -82,11 +72,6 @@ const TeethTable = ({ enableButton = true }: Props) => {
 				tooth,
 				teethList,
 				abutmentToothState,
-				abutmentToothInitial,
-				quadrantAbutmentTooth,
-				setAbutmentTooth,
-				setAbutmentToothInitial,
-				setQuadrantAbutmentTooth,
 				setHandleState,
 			)
 			if (updatedTeethList) setTeethList(updatedTeethList)

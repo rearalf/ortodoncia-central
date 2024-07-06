@@ -4,3 +4,7 @@ type setAlertType = (values: {
 	text: string
 	show: boolean
 }) => void
+
+type severityType = 'success' | 'info' | 'warning' | 'error'
+
+type variantType = 'filled' | 'outlined'
