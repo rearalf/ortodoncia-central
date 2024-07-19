@@ -38,6 +38,8 @@ function usePatientProfilePage() {
 				patientData.name.split(' ')[2]
 					? patientData.name.split(' ')[2]
 					: patientData.name.split(' ')[1]
+					? patientData.name.split(' ')[1]
+					: ''
 			}`,
 			link_to: `/patient-profile/${patientData.id}`,
 		},

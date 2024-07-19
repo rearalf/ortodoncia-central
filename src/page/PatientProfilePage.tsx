@@ -38,6 +38,8 @@ const PatientProfilePage = () => {
 							patientData.name.split(' ')[2]
 								? patientData.name.split(' ')[2]
 								: patientData.name.split(' ')[1]
+								? patientData.name.split(' ')[1]
+								: ''
 						}`}
 					</h1>
 					<div className="header_btnGroup">
@@ -71,11 +73,17 @@ const PatientProfilePage = () => {
 						<div className="basic_information-profile">
 							<AvatarComponent
 								srcImage={patientData.avatarURL}
-								name={`${patientData.name.split(' ')[0]} ${
-									patientData.name.split(' ')[2]
-										? patientData.name.split(' ')[2]
-										: patientData.name.split(' ')[1]
-								}`}
+								name={
+									!loading
+										? `${patientData.name.split(' ')[0]} ${
+												patientData.name.split(' ')[2]
+													? patientData.name.split(' ')[2]
+													: patientData.name.split(' ')[1]
+													? patientData.name.split(' ')[1]
+													: ''
+										  }`
+										: ''
+								}
 							/>
 
 							<div className="profile-primary_info">
