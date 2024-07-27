@@ -11,7 +11,8 @@ function useHome() {
 
 	const [search, setSearch] = useState<string>('')
 
-	const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
+	const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) =>
+		setSearch(e.target.value.toUpperCase())
 
 	const handleSearchPatient = async (e: FormEvent<HTMLFormElement>) => {
 		try {

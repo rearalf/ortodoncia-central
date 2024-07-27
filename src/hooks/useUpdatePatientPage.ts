@@ -216,12 +216,24 @@ function useUpdatePatientPage() {
 						text: 'Error al obtener los datos.',
 					})
 				}
+			} else {
+				if (patientData.name) {
+					setTitleName(
+						` ${patientData.name.split(' ')[0]} ${
+							patientData.name.split(' ')[2]
+								? patientData.name.split(' ')[2]
+								: patientData.name.split(' ')[1]
+								? patientData.name.split(' ')[1]
+								: ''
+						}`,
+					)
+				}
 			}
 		} catch (error) {
 			setLoadingPatient(false)
 			console.log(error)
 		}
-	}, [id, setPatientData, setHandleState, patientData.id, setLoadingPatient])
+	}, [id, setPatientData, setHandleState, patientData.id, setLoadingPatient, patientData.name])
 
 	const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
 		try {
