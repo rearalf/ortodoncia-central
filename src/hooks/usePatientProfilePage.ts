@@ -27,6 +27,7 @@ function usePatientProfilePage() {
 
 	const [loading, setLoading] = useState<boolean>(false)
 	const [tabValue, setTabValue] = useState<string>('1')
+	const [titleName, setTitleName] = useState('')
 
 	const links = [
 		{
@@ -34,13 +35,7 @@ function usePatientProfilePage() {
 			link_to: '/',
 		},
 		{
-			link_name: `Paciente ${patientData.name.split(' ')[0]} ${
-				patientData.name.split(' ')[2]
-					? patientData.name.split(' ')[2]
-					: patientData.name.split(' ')[1]
-					? patientData.name.split(' ')[1]
-					: ''
-			}`,
+			link_name: `Paciente ${titleName}`,
 			link_to: `/patient-profile/${patientData.id}`,
 		},
 	]
@@ -65,6 +60,15 @@ function usePatientProfilePage() {
 						age: getAge(new Date(data.birthdate).toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setTitleName(
+						` ${data.name.split(' ')[0]} ${
+							data.name.split(' ')[2]
+								? data.name.split(' ')[2]
+								: data.name.split(' ')[1]
+								? data.name.split(' ')[1]
+								: ''
+						}`,
+					)
 					setCompleteOdontogram(data.completeOdontogram)
 					if (data.teeth !== undefined) {
 						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
@@ -165,6 +169,7 @@ function usePatientProfilePage() {
 		links,
 		loading,
 		tabValue,
+		titleName,
 		patientData,
 		handleTabs,
 		handleGoToPhotos,

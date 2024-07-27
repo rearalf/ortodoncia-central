@@ -62,7 +62,8 @@ function useCreatePatient() {
 				} else {
 					setPatientData({
 						...patientData,
-						[e.target.id]: e.target.value,
+						[e.target.id]:
+							e.target.id === 'name' ? e.target.value.toUpperCase() : e.target.value,
 					})
 				}
 			}

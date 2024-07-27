@@ -24,6 +24,7 @@ function UpdatePatientPage() {
 		maxDate,
 		loading,
 		avatarURL,
+		titleName,
 		patientData,
 		loadingPatient,
 		handleInput,
@@ -55,22 +56,13 @@ function UpdatePatientPage() {
 							link_to: `/patient-profile/${patientData.id}`,
 						},
 						{
-							link_name: `Actualizar datos de ${patientData.name.split(' ')[0]} ${
-								patientData.name.split(' ')[2]
-									? patientData.name.split(' ')[2]
-									: patientData.name.split(' ')[1]
-							}`,
+							link_name: `Actualizar datos de ${titleName}`,
 							link_to: '/',
 						},
 					]}
 				/>
 				<h1 className="createPatient_main-title">
-					Actualizar paciente -{' '}
-					{`${patientData.name.split(' ')[0]} ${
-						patientData.name.split(' ')[2]
-							? patientData.name.split(' ')[2]
-							: patientData.name.split(' ')[1]
-					}`}
+					Actualizar paciente - {!loading ? `${titleName}` : ''}
 				</h1>
 				<form className="form_patient" onSubmit={handleSaveData}>
 					<div className="form_patient-first_section">

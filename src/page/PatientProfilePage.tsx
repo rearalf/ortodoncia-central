@@ -17,6 +17,7 @@ const PatientProfilePage = () => {
 		links,
 		loading,
 		tabValue,
+		titleName,
 		patientData,
 		handleTabs,
 		handleGoToPhotos,
@@ -32,16 +33,7 @@ const PatientProfilePage = () => {
 			<main className="patient_profile-main">
 				<BreadCrumbs links={links} />
 				<header className="main_header">
-					<h1 className="header_title">
-						Paciente
-						{` ${patientData.name.split(' ')[0]} ${
-							patientData.name.split(' ')[2]
-								? patientData.name.split(' ')[2]
-								: patientData.name.split(' ')[1]
-								? patientData.name.split(' ')[1]
-								: ''
-						}`}
-					</h1>
+					<h1 className="header_title">Paciente {titleName}</h1>
 					<div className="header_btnGroup">
 						<Button
 							variant="contained"
@@ -73,17 +65,7 @@ const PatientProfilePage = () => {
 						<div className="basic_information-profile">
 							<AvatarComponent
 								srcImage={patientData.avatarURL}
-								name={
-									!loading
-										? `${patientData.name.split(' ')[0]} ${
-												patientData.name.split(' ')[2]
-													? patientData.name.split(' ')[2]
-													: patientData.name.split(' ')[1]
-													? patientData.name.split(' ')[1]
-													: ''
-										  }`
-										: ''
-								}
+								name={!loading ? titleName : ''}
 							/>
 
 							<div className="profile-primary_info">

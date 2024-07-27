@@ -15,6 +15,7 @@ function useUpdatePatientPage() {
 	const [avatar, setAvatar] = useState<File | undefined>(undefined)
 	const [loading, setLoading] = useState<boolean>(false)
 	const [loadingPatient, setLoadingPatient] = useState<boolean>(false)
+	const [titleName, setTitleName] = useState('')
 
 	const handleChangePhone = (
 		e: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -55,7 +56,8 @@ function useUpdatePatientPage() {
 				} else {
 					setPatientData({
 						...patientData,
-						[e.target.id]: e.target.value,
+						[e.target.id]:
+							e.target.id === 'name' ? e.target.value.toUpperCase() : e.target.value,
 					})
 				}
 			}
@@ -188,12 +190,22 @@ function useUpdatePatientPage() {
 			if (!patientData.id) {
 				setLoadingPatient(true)
 				const ModelPatient = new Patient()
+
 				if (id) {
 					setLoadingPatient(false)
 					const getPatientData = await ModelPatient.getPatient(id)
 					if (getPatientData) {
 						if (getPatientData.avatarURL) setAvatarURL(getPatientData.avatarURL)
 						setPatientData(getPatientData)
+						setTitleName(
+							` ${getPatientData.name.split(' ')[0]} ${
+								getPatientData.name.split(' ')[2]
+									? getPatientData.name.split(' ')[2]
+									: getPatientData.name.split(' ')[1]
+									? getPatientData.name.split(' ')[1]
+									: ''
+							}`,
+						)
 					}
 				} else {
 					setLoadingPatient(false)
@@ -255,6 +267,7 @@ function useUpdatePatientPage() {
 		minDate,
 		maxDate,
 		loading,
+		titleName,
 		avatarURL,
 		patientData,
 		loadingPatient,
