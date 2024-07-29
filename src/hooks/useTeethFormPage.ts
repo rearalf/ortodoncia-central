@@ -18,6 +18,7 @@ function useTeethFormPage() {
 	const { setHandleState } = useAlertState()
 	const { patientData, setPatientData } = usePatientState()
 	const { doctors, setDoctors } = useDoctorsState()
+	const [titleName, setTitleName] = useState('')
 	const {
 		teethList,
 		appointment,
@@ -155,6 +156,15 @@ function useTeethFormPage() {
 						age: getAge(data.birthdate.toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setTitleName(
+						` ${data.name.split(' ')[0]} ${
+							data.name.split(' ')[2]
+								? data.name.split(' ')[2]
+								: data.name.split(' ')[1]
+								? data.name.split(' ')[1]
+								: ''
+						}`,
+					)
 					setCompleteOdontogram(data.completeOdontogram)
 					if (data.teeth !== undefined) {
 						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
@@ -193,6 +203,16 @@ function useTeethFormPage() {
 	useEffect(() => {
 		if (patientData.id === undefined) {
 			getPatientData()
+		} else {
+			setTitleName(
+				` ${patientData.name.split(' ')[0]} ${
+					patientData.name.split(' ')[2]
+						? patientData.name.split(' ')[2]
+						: patientData.name.split(' ')[1]
+						? patientData.name.split(' ')[1]
+						: ''
+				}`,
+			)
 		}
 	}, [patientData.id, navigate, setHandleState, id_patient, getPatientData])
 
@@ -208,6 +228,7 @@ function useTeethFormPage() {
 		steps,
 		doctors,
 		loading,
+		titleName,
 		appointment,
 		patientData,
 		handleNextStep,

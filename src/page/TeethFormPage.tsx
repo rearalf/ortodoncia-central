@@ -17,6 +17,7 @@ const TeethFormPage = () => {
 		steps,
 		doctors,
 		loading,
+		titleName,
 		appointment,
 		patientData,
 		handleNextStep,
@@ -40,11 +41,7 @@ const TeethFormPage = () => {
 							link_to: '/',
 						},
 						{
-							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
-								patientData.name.split(' ')[2]
-									? patientData.name.split(' ')[2]
-									: patientData.name.split(' ')[1]
-							}`,
+							link_name: `Paciente ${titleName}`,
 							link_to: `/patient-profile/${patientData.id}`,
 						},
 						{
@@ -53,14 +50,7 @@ const TeethFormPage = () => {
 						},
 					]}
 				/>
-				<h1 className="main_title">
-					Nueava cita de{' '}
-					{` ${patientData.name.split(' ')[0]} ${
-						patientData.name.split(' ')[2]
-							? patientData.name.split(' ')[2]
-							: patientData.name.split(' ')[1]
-					}`}
-				</h1>
+				<h1 className="main_title">Nueava cita de {titleName}</h1>
 
 				{steps === 1 ? (
 					<div className="main_teethForm">
