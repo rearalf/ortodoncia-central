@@ -214,7 +214,7 @@ function useTeethFormPage() {
 				}`,
 			)
 		}
-	}, [patientData.id, navigate, setHandleState, id_patient, getPatientData])
+	}, [patientData.id, navigate, setHandleState, id_patient, getPatientData, patientData.name])
 
 	useEffect(() => {
 		if (appointment.id) setAppointment(constantAppointment)
