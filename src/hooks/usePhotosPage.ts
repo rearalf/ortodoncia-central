@@ -17,6 +17,7 @@ function usePhotosPage() {
 
 	const [loading, setLoading] = useState<boolean>(false)
 	const [data, setData] = useState<PhotosByPatientInterface[]>([])
+	const [titleName, setTitleName] = useState('')
 
 	const [images, setImages] = useState<string[]>([])
 	const [isViewerOpen, setIsViewerOpen] = useState(false)
@@ -67,6 +68,15 @@ function usePhotosPage() {
 						age: getAge(new Date(data.birthdate).toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setTitleName(
+						` ${data.name.split(' ')[0]} ${
+							data.name.split(' ')[2]
+								? data.name.split(' ')[2]
+								: data.name.split(' ')[1]
+								? data.name.split(' ')[1]
+								: ''
+						}`,
+					)
 				}
 			}
 		} catch (error) {
@@ -348,6 +358,7 @@ function usePhotosPage() {
 		images,
 		loading,
 		idSelect,
+		titleName,
 		openModal,
 		totalPage,
 		patientData,

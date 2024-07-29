@@ -22,6 +22,7 @@ function useUpdatePhotosPage() {
 	const [images, setImages] = useState<string[]>([])
 	const [imagesNames, setImagesNames] = useState<string[]>([])
 	const [isDragging, setIsDragging] = useState(false)
+	const [titleName, setTitleName] = useState('')
 
 	const [description, setDescription] = useState<string>('')
 
@@ -74,6 +75,15 @@ function useUpdatePhotosPage() {
 						age: getAge(new Date(data.birthdate).toISOString()),
 						formatBirthdate: formatDate({ date: data.birthdate }),
 					})
+					setTitleName(
+						` ${data.name.split(' ')[0]} ${
+							data.name.split(' ')[2]
+								? data.name.split(' ')[2]
+								: data.name.split(' ')[1]
+								? data.name.split(' ')[1]
+								: ''
+						}`,
+					)
 				}
 			}
 		} catch (error) {
@@ -496,6 +506,7 @@ function useUpdatePhotosPage() {
 		images,
 		loading,
 		progress,
+		titleName,
 		isDragging,
 		description,
 		patientData,

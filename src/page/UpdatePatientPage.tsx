@@ -48,11 +48,7 @@ function UpdatePatientPage() {
 							link_to: '/',
 						},
 						{
-							link_name: `Paciente ${patientData.name.split(' ')[0]} ${
-								patientData.name.split(' ')[2]
-									? patientData.name.split(' ')[2]
-									: patientData.name.split(' ')[1]
-							}`,
+							link_name: `Paciente ${titleName}`,
 							link_to: `/patient-profile/${patientData.id}`,
 						},
 						{
