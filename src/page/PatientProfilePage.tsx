@@ -11,6 +11,7 @@ import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
 import Navbar from '@/components/Navbar'
 import '@/styles/PatientProfilePage.css'
+import Footer from '@/components/Footer'
 
 const PatientProfilePage = () => {
 	const {
@@ -232,6 +233,7 @@ const PatientProfilePage = () => {
 					<AppointmentsTable />
 				</section>
 			</main>
+			<Footer />
 		</>
 	)
 }

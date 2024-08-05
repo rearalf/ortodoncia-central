@@ -9,6 +9,7 @@ import usePhotosPage from '@/hooks/usePhotosPage'
 import { Button, Tooltip } from '@mui/material'
 import Navbar from '@/components/Navbar'
 import '@/styles/PhtosPage.css'
+import Footer from '@/components/Footer'
 
 const PhtosPage = () => {
 	const {
@@ -119,6 +120,7 @@ const PhtosPage = () => {
 					}}
 				/>
 			)}
+			<Footer />
 		</>
 	)
 }

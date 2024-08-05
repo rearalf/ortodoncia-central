@@ -8,6 +8,7 @@ import TablePatient from '@/components/Patient/TablePatient'
 import SkeletonComponent from '@/components/SkeletonComponent'
 import { Button, InputAdornment, TextField, Tooltip } from '@mui/material'
 import '@/styles/HomePage.css'
+import Footer from '@/components/Footer'
 
 const HomePage = () => {
 	const { search, loading, handleChangeInput, handleSearchPatient, handleClearSearchPatient } =
@@ -62,6 +63,7 @@ const HomePage = () => {
 					<TablePatient />
 				)}
 			</main>
+			<Footer />
 		</>
 	)
 }

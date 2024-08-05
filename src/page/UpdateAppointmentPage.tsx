@@ -12,6 +12,7 @@ import InputDate from '@/components/InputDate'
 import Navbar from '@/components/Navbar'
 import { Button } from '@mui/material'
 import '@/styles/UpdateAppointmentPage.css'
+import Footer from '@/components/Footer'
 
 function UpdateAppointmentPage() {
 	const {
@@ -164,6 +165,7 @@ function UpdateAppointmentPage() {
 						)}
 					</form>
 				)}
+				<Footer />
 			</main>
 		</>
 	)

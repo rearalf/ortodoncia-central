@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
 import '@/styles/AppointmentPage.css'
+import Footer from '@/components/Footer'
 
 function AppointmentPage() {
 	const { loading, appointment, patientData, last_appointment } = useAppointment()
@@ -166,6 +167,7 @@ function AppointmentPage() {
 					<TeethTable />
 				</section>
 			</main>
+			<Footer />
 		</>
 	)
 }

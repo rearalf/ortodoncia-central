@@ -17,6 +17,7 @@ import {
 	Button,
 	CircularProgress,
 } from '@mui/material'
+import Footer from '@/components/Footer'
 
 function UpdatePatientPage() {
 	const {
@@ -315,6 +316,7 @@ function UpdatePatientPage() {
 					</div>
 				</form>
 			</main>
+			<Footer />
 		</>
 	)
 }
