@@ -1,5 +1,5 @@
 import { db } from '@/database/firebase'
-import { collection, getDocs } from 'firebase/firestore'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 
 class Doctors {
 	async getDoctors(): Promise<DoctorsInterface[] | undefined> {
@@ -18,9 +18,21 @@ class Doctors {
 				})
 			})
 
-            return doctors
+			return doctors
 		} catch (error) {
 			console.log('Error saving teeth form: ' + error)
+			return undefined
+		}
+	}
+
+	async createDoctor(fullName: string): Promise<string | undefined> {
+		try {
+			const doctor = await addDoc(collection(db, 'doctors'), {
+				fullName,
+			})
+
+			return doctor.id
+		} catch (error) {
 			return undefined
 		}
 	}
