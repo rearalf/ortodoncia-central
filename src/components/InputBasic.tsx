@@ -27,6 +27,7 @@ const InputBasic = React.memo((props: InputBasicProps) => {
 			required={props.required}
 			onChange={props.onChange}
 			multiline={props.multiline}
+			placeholder={props.placeholder}
 			InputProps={{ inputProps: { min: 1, max: 10 } }}
 		/>
 	)

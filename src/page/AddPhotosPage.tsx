@@ -8,6 +8,7 @@ import InputBasic from '@/components/InputBasic'
 import useAddPhotos from '@/hooks/useAddPhotos'
 import Navbar from '@/components/Navbar'
 import '@/styles/AddPhotosPage.css'
+import Footer from '@/components/Footer'
 
 const AddPhotosPage = () => {
 	const {
@@ -156,6 +157,7 @@ const AddPhotosPage = () => {
 					}}
 				/>
 			)}
+			<Footer />
 		</>
 	)
 }

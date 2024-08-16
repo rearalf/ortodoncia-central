@@ -18,6 +18,7 @@ import {
 	CircularProgress,
 } from '@mui/material'
 import '@/styles/CreatePatientPage.css'
+import Footer from '@/components/Footer'
 
 const CreatePatientPage = () => {
 	const {
@@ -307,6 +308,7 @@ const CreatePatientPage = () => {
 					</div>
 				</form>
 			</main>
+			<Footer />
 		</>
 	)
 }

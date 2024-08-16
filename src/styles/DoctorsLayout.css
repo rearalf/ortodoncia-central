@@ -1,0 +1,47 @@
+.doctosr_main {
+	margin: 1rem auto;
+	max-width: 1280px;
+	padding: 32px 16px;
+}
+
+.modal_doctor {
+	background-color: var(--background-color-2);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 600px;
+	border-radius: 8px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px,
+	rgba(0, 0, 0, 0.12) 0px 9px 46px 8px;
+	padding: 32px;
+}
+
+.modal_doctor .doctot_form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 225px;
+}
+
+.modal_doctor .close_button {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.modal_doctor .form_title {
+	text-align: center;
+	margin-bottom: 24px;
+}
+
+.modal_doctor .MuiFormControl-root.MuiTextField-root {
+	width: 100%;
+	margin-bottom: 24px;
+}
+
+.modal_doctor .btn_group {
+	display: flex;
+	justify-content: center;
+	gap: 24px;
+}

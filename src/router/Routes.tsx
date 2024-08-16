@@ -1,15 +1,17 @@
-import App from '@/App'
-import HomePage from '@/page/HomePage'
-import PhotosPage from '@/page/PhotosPage'
-import AddPhotosPage from '@/page/AddPhotosPage'
-import TeethFormPage from '@/page/TeethFormPage'
-import AppointmentPage from '@/page/AppointmentPage'
-import { createBrowserRouter } from 'react-router-dom'
+import UpdateAppointmentPage from '@/page/UpdateAppointmentPage'
+import PatientProfilePage from '@/page/PatientProfilePage'
 import CreatePatientPage from '@/page/CreatePatientPage'
 import UpdatePatientPage from '@/page/UpdatePatientPage'
-import PatientProfilePage from '@/page/PatientProfilePage'
-import UpdateAppointmentPage from '@/page/UpdateAppointmentPage'
+import { createBrowserRouter } from 'react-router-dom'
 import UpdatePhotosPage from '@/page/UpdatePhotosPage'
+import AppointmentPage from '@/page/AppointmentPage'
+import AddPhotosPage from '@/page/AddPhotosPage'
+import TeethFormPage from '@/page/TeethFormPage'
+import DoctorsPage from '@/page/DoctorsPage'
+import PhotosPage from '@/page/PhotosPage'
+import HomePage from '@/page/HomePage'
+import App from '@/App'
+import LayoutDoctors from '@/Layout/LayoutDoctors'
 
 const router = createBrowserRouter(
 	[
@@ -57,6 +59,16 @@ const router = createBrowserRouter(
 				{
 					path: '/patient-profile/:id_patient/photos/update-photos/:id_photo',
 					element: <UpdatePhotosPage />,
+				},
+				{
+					path: '/doctors',
+					element: <LayoutDoctors />,
+					children: [
+						{
+							path: '/doctors',
+							element: <DoctorsPage />,
+						},
+					],
 				},
 			],
 		},

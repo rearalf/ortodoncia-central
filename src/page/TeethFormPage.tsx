@@ -11,6 +11,7 @@ import InputDate from '@/components/InputDate'
 import Navbar from '@/components/Navbar'
 import { Button } from '@mui/material'
 import '@/styles/TeethFormPage.css'
+import Footer from '@/components/Footer'
 
 const TeethFormPage = () => {
 	const {
@@ -142,6 +143,7 @@ const TeethFormPage = () => {
 						</div>
 					</form>
 				)}
+				<Footer />
 			</main>
 		</>
 	)
