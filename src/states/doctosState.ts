@@ -10,6 +10,11 @@ interface doctorsStateInterface {
 	action: 'edit' | 'create'
 	inputValue: string
 	showModal: boolean
+	error: {
+		error: boolean
+		helperText: string
+	}
+	setError: (error: { error: boolean; helperText: string }) => void
 	setPage: (value: number) => void
 	setLoading: (value: boolean) => void
 	setShowModal: (value: boolean) => void
@@ -33,17 +38,46 @@ const useDoctorsState = create<doctorsStateInterface>()(set => ({
 	allDoctors: [],
 	inputValue: '',
 	showModal: false,
+	error: {
+		error: false,
+		helperText: '',
+	},
+	setError: value =>
+		set(state => ({
+			...state,
+			error: {
+				error: value.error,
+				helperText: value.helperText,
+			},
+		})),
 	setShowModal: value =>
 		set(state => ({
 			...state,
 			inputValue: '',
 			showModal: value,
 		})),
-	setInputValue: value =>
-		set(state => ({
-			...state,
-			inputValue: value,
-		})),
+	setInputValue: value => {
+		const letters = /^[A-Za-z]+$/
+		if (!value.match(letters) && value.length > 0) {
+			set(state => ({
+				...state,
+				error: {
+					error: true,
+					helperText: 'Solo se aceptan letras.',
+				},
+				inputValue: value,
+			}))
+		} else {
+			set(state => ({
+				...state,
+				error: {
+					error: false,
+					helperText: '',
+				},
+				inputValue: value,
+			}))
+		}
+	},
 	setLoading: value =>
 		set(state => ({
 			...state,

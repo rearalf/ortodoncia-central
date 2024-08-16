@@ -4,8 +4,10 @@ import TextField from '@mui/material/TextField'
 interface InputBasicProps {
 	id: string
 	label?: string
+	error?: boolean
 	required?: boolean
 	disabled?: boolean
+	helperText?: string
 	multiline?: boolean
 	placeholder?: string
 	value: string | number
@@ -23,10 +25,12 @@ const InputBasic = React.memo((props: InputBasicProps) => {
 			variant="outlined"
 			label={props.label}
 			value={props.value}
+			error={props.error}
 			disabled={props.disabled}
 			required={props.required}
 			onChange={props.onChange}
 			multiline={props.multiline}
+			helperText={props.helperText}
 			placeholder={props.placeholder}
 			InputProps={{ inputProps: { min: 1, max: 10 } }}
 		/>

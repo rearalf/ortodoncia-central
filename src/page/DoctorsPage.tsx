@@ -8,18 +8,11 @@ import { FiUserPlus } from 'react-icons/fi'
 import { Button } from '@mui/material'
 
 const DoctorsPage = () => {
-	const { loading,handleCreateDoctor, handleOpenCreateForm } = useDoctorsPage()
+	const { links, loading, handleCreateDoctor, handleOpenCreateForm } = useDoctorsPage()
 	return (
 		<>
 			<HeadComponent title="Doctores" />
-			<BreadCrumbs
-				links={[
-					{
-						link_name: 'Doctores',
-						link_to: '/doctors',
-					},
-				]}
-			/>
+			<BreadCrumbs links={links} />
 
 			<div className="main_header">
 				<h1>Doctores</h1>

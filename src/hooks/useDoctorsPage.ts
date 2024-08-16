@@ -5,8 +5,20 @@ import { FormEvent, useCallback, useEffect, useState } from 'react'
 
 function useDoctorsPage() {
 	const [loading, setLoading] = useState(false)
-	const { allDoctors, setAllDoctors, setShowModal, setAction, inputValue } = useDoctorsState()
+	const { allDoctors, setAllDoctors, setShowModal, setAction, inputValue, setError } =
+		useDoctorsState()
 	const { setHandleState } = useAlertState()
+
+	const links = [
+		{
+			link_name: 'Inicio',
+			link_to: '/',
+		},
+		{
+			link_name: 'Doctores',
+			link_to: '/doctors',
+		},
+	]
 
 	const handleOpenCreateForm = () => {
 		setShowModal(true)
@@ -16,7 +28,7 @@ function useDoctorsPage() {
 	const handleCreateDoctor = async (e: FormEvent<HTMLFormElement>) => {
 		try {
 			e.preventDefault()
-			if (inputValue !== '') {
+			if (inputValue.length > 0) {
 				const doctorsModel = new Doctors()
 				const newDoctor = await doctorsModel.createDoctor(inputValue)
 				if (newDoctor) {
@@ -27,18 +39,32 @@ function useDoctorsPage() {
 						variant: 'filled',
 					})
 					getDoctors()
+					setShowModal(false)
+					setError({
+						error: false,
+						helperText: '',
+					})
+				} else {
+					setError({
+						error: true,
+						helperText: 'Error al crear el doctor.',
+					})
+					throw new Error('Error al agregar nuevo doctor.')
 				}
+			} else {
+				setError({
+					error: true,
+					helperText: 'Debe de agregar un nombre.',
+				})
 			}
 		} catch (error) {
 			console.log(error)
 			setHandleState({
 				severity: 'error',
 				show: true,
-				text: 'Error al obtener el listado de doctores.',
+				text: 'Error al crear el doctor.',
 				variant: 'filled',
 			})
-		} finally {
-			setShowModal(false)
 		}
 	}
 
@@ -66,6 +92,7 @@ function useDoctorsPage() {
 	}, [getDoctors])
 
 	return {
+		links,
 		loading,
 		allDoctors,
 		handleCreateDoctor,

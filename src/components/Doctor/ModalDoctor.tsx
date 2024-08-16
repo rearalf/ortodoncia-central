@@ -2,14 +2,14 @@ import { Button, IconButton, Modal } from '@mui/material'
 import { FiSave, FiX, FiXCircle } from 'react-icons/fi'
 import useDoctorsState from '@/states/doctosState'
 import InputBasic from '../InputBasic'
-import { FormEvent} from 'react'
+import { FormEvent } from 'react'
 
 interface Props {
 	handleCreateDoctor: (e: FormEvent<HTMLFormElement>) => void
 }
 
 const ModalDoctor = (props: Props) => {
-	const { inputValue, setInputValue, showModal, setShowModal } = useDoctorsState()
+	const { inputValue, error, setInputValue, showModal, setShowModal } = useDoctorsState()
 	return (
 		<Modal
 			open={showModal}
@@ -25,12 +25,15 @@ const ModalDoctor = (props: Props) => {
 					>
 						<FiX />
 					</IconButton>
-					<h2 className="form_title">Agregar nueva doctora</h2>
+					<h2 className="form_title">Agregar nuevo doctor</h2>
 
 					<InputBasic
+						required
 						type="text"
 						id="fullName"
 						value={inputValue}
+						error={error.error}
+						helperText={error.helperText}
 						placeholder="Nombre del doctor"
 						onChange={value => setInputValue(value.target.value)}
 					/>
