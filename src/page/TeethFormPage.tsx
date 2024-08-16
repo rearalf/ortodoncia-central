@@ -51,7 +51,7 @@ const TeethFormPage = () => {
 						},
 					]}
 				/>
-				<h1 className="main_title">Nueava cita de {titleName}</h1>
+				<h1 className="main_title">Nueva cita de {titleName}</h1>
 
 				{steps === 1 ? (
 					<div className="main_teethForm">
