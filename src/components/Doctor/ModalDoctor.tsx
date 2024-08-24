@@ -7,6 +7,7 @@ import { FormEvent } from 'react'
 interface Props {
 	handleCreateDoctor: (e: FormEvent<HTMLFormElement>) => void
 	handleUpdateDoctor: (e: FormEvent<HTMLFormElement>) => void
+	handleDeleteDoctor: (e: FormEvent<HTMLFormElement>) => void
 }
 
 const ModalDoctor = (props: Props) => {
@@ -21,7 +22,11 @@ const ModalDoctor = (props: Props) => {
 				<form
 					className="doctot_form"
 					onSubmit={
-						action === 'create' ? props.handleCreateDoctor : props.handleUpdateDoctor
+						action === 'create'
+							? props.handleCreateDoctor
+							: action === 'edit'
+							? props.handleUpdateDoctor
+							: props.handleDeleteDoctor
 					}
 				>
 					<IconButton
@@ -32,8 +37,14 @@ const ModalDoctor = (props: Props) => {
 						<FiX />
 					</IconButton>
 					<h2 className="form_title">
-						{action === 'create' ? 'Agregar nuevo doctor' : 'Editar doctor'}
+						{action === 'create'
+							? 'Agregar nuevo doctor'
+							: action === 'edit'
+							? 'Editar doctor'
+							: 'Eliminar doctor'}
 					</h2>
+
+					{action === 'delete' && <p>Esta acción será irreversible.</p>}
 
 					<InputBasic
 						required
@@ -42,6 +53,7 @@ const ModalDoctor = (props: Props) => {
 						value={inputValue}
 						error={error.error}
 						helperText={error.helperText}
+						disabled={action === 'delete'}
 						placeholder="Nombre del doctor"
 						onChange={value => setInputValue(value.target.value)}
 					/>
@@ -49,14 +61,18 @@ const ModalDoctor = (props: Props) => {
 					<div className="btn_group">
 						<Button
 							type="submit"
-							color="success"
+							color={action === 'delete' ? 'error' : 'success'}
 							variant="contained"
 							startIcon={<FiSave />}
 						>
-							{action === 'create' ? 'Guardar' : 'Editar'}
+							{action === 'create'
+								? 'Guardar'
+								: action == 'edit'
+								? 'Editar'
+								: 'Eliminar'}
 						</Button>
 						<Button
-							color="error"
+							color={action === 'delete' ? 'info' : 'error'}
 							type="button"
 							variant="outlined"
 							onClick={() => setShowModal(false)}

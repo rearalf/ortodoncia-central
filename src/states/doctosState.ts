@@ -8,13 +8,18 @@ interface doctorsStateInterface {
 	rowsPerPage: number
 	allDoctors: DoctorsInterface[]
 	doctorSelect: { fullName: string; id: string }
-	action: 'edit' | 'create'
+	action: 'edit' | 'create' | 'delete'
 	inputValue: string
 	showModal: boolean
 	error: {
 		error: boolean
 		helperText: string
 	}
+	// deleteDoctor: {
+	// 	id: string
+	// 	showModal: boolean
+	// }
+	// setDeleteDoctor: (value: { id: string; showModal: boolean }) => void
 	setDoctorSelect: (value: { fullName: string; id: string }) => void
 	setError: (error: { error: boolean; helperText: string }) => void
 	setPage: (value: number) => void
@@ -22,7 +27,7 @@ interface doctorsStateInterface {
 	setShowModal: (value: boolean) => void
 	setInputValue: (value: string) => void
 	setRowsPerPage: (value: number) => void
-	setAction: (value: 'edit' | 'create') => void
+	setAction: (value: 'edit' | 'create' | 'delete') => void
 	setAllDoctors: (value: DoctorsInterface[]) => void
 }
 
@@ -48,6 +53,18 @@ const useDoctorsState = create<doctorsStateInterface>()(set => ({
 		fullName: '',
 		id: '',
 	},
+	// deleteDoctor: {
+	// 	id: '',
+	// 	showModal: false,
+	// },
+	// setDeleteDoctor: value =>
+	// 	set(state => ({
+	// 		...state,
+	// 		deleteDoctors: {
+	// 			id: value.id,
+	// 			showModal: value.showModal,
+	// 		},
+	// 	})),
 	setDoctorSelect: value =>
 		set(state => ({
 			...state,

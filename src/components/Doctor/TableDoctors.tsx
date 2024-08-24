@@ -13,7 +13,7 @@ import {
 	TableRow,
 	Tooltip,
 } from '@mui/material'
-import { FiEdit } from 'react-icons/fi'
+import { FiEdit, FiTrash } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import TablePaginationActions from '../TablePaginationActions'
 
@@ -73,7 +73,7 @@ const TableDoctors = () => {
 							</TableCell>
 
 							<TableCell style={{ width: 160 }} align="center">
-								<Tooltip title="Ir al perfil">
+								<Tooltip title="Modificar nombre">
 									<IconButton
 										onClick={() => {
 											setShowModal(true)
@@ -86,6 +86,21 @@ const TableDoctors = () => {
 										}}
 									>
 										<FiEdit size={20} />
+									</IconButton>
+								</Tooltip>
+								<Tooltip title="Modificar nombre">
+									<IconButton
+										onClick={() => {
+											setShowModal(true)
+											setAction('delete')
+											setDoctorSelect({
+												id: doctor.id || '',
+												fullName: doctor.fullName,
+											})
+											setInputValue(doctor.fullName)
+										}}
+									>
+										<FiTrash size={20} />
 									</IconButton>
 								</Tooltip>
 							</TableCell>

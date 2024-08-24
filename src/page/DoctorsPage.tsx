@@ -8,8 +8,14 @@ import { FiUserPlus } from 'react-icons/fi'
 import { Button } from '@mui/material'
 
 const DoctorsPage = () => {
-	const { links, loading, handleCreateDoctor, handleOpenCreateForm, handleUpdateDoctor } =
-		useDoctorsPage()
+	const {
+		links,
+		loading,
+		handleCreateDoctor,
+		handleDeleteDoctor,
+		handleOpenCreateForm,
+		handleUpdateDoctor,
+	} = useDoctorsPage()
 	return (
 		<>
 			<HeadComponent title="Doctores" />
@@ -35,6 +41,7 @@ const DoctorsPage = () => {
 			<ModalDoctor
 				handleCreateDoctor={handleCreateDoctor}
 				handleUpdateDoctor={handleUpdateDoctor}
+				handleDeleteDoctor={handleDeleteDoctor}
 			/>
 		</>
 	)

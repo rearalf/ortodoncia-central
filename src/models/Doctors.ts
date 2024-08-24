@@ -1,5 +1,13 @@
 import { db } from '@/database/firebase'
-import { addDoc, collection, doc, getDocs, serverTimestamp, updateDoc } from 'firebase/firestore'
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	getDocs,
+	serverTimestamp,
+	updateDoc,
+} from 'firebase/firestore'
 
 class Doctors {
 	async getDoctors(): Promise<DoctorsInterface[] | undefined> {
@@ -47,6 +55,19 @@ class Doctors {
 				.then(() => true)
 				.catch(() => false)
 			return updateData
+		} catch (error) {
+			return false
+		}
+	}
+
+	async deleteDoctor(doctorId: string): Promise<boolean> {
+		try {
+			const doctorRef = doc(db, 'doctors', doctorId)
+			const doctorDelete = await deleteDoc(doctorRef)
+				.then(() => true)
+				.catch(() => false)
+
+			return doctorDelete
 		} catch (error) {
 			return false
 		}

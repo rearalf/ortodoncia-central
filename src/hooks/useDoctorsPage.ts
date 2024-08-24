@@ -139,6 +139,48 @@ function useDoctorsPage() {
 		}
 	}
 
+	const handleDeleteDoctor = async (e: FormEvent<HTMLFormElement>) => {
+		try {
+			e.preventDefault()
+			if (inputValue.length > 0) {
+				const doctorsModel = new Doctors()
+				const newDoctor = await doctorsModel.deleteDoctor(doctorSelect.id)
+				if (newDoctor) {
+					setHandleState({
+						severity: 'success',
+						show: true,
+						text: 'Doctor eliminado.',
+						variant: 'filled',
+					})
+					getDoctors()
+					setShowModal(false)
+					setError({
+						error: false,
+						helperText: '',
+					})
+				} else {
+					setError({
+						error: true,
+						helperText: 'Error al actualizar el doctor.',
+					})
+					throw new Error('Error al actualizar doctor.')
+				}
+			} else {
+				setError({
+					error: true,
+					helperText: 'Debe de actualizar un nombre.',
+				})
+			}
+		} catch (error) {
+			setHandleState({
+				severity: 'error',
+				show: true,
+				text: 'Error al actualizar el doctor.',
+				variant: 'filled',
+			})
+		}
+	}
+
 	useEffect(() => {
 		getDoctors()
 	}, [getDoctors])
@@ -147,6 +189,7 @@ function useDoctorsPage() {
 		links,
 		loading,
 		allDoctors,
+		handleDeleteDoctor,
 		handleUpdateDoctor,
 		handleCreateDoctor,
 		handleOpenCreateForm,
