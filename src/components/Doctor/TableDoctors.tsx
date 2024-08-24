@@ -13,12 +13,22 @@ import {
 	TableRow,
 	Tooltip,
 } from '@mui/material'
-import { FiUser } from 'react-icons/fi'
+import { FiEdit } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import TablePaginationActions from '../TablePaginationActions'
 
 const TableDoctors = () => {
-	const { rowsPerPage, allDoctors, page, setPage, setRowsPerPage } = useDoctorsState()
+	const {
+		page,
+		allDoctors,
+		rowsPerPage,
+		setPage,
+		setAction,
+		setShowModal,
+		setInputValue,
+		setRowsPerPage,
+		setDoctorSelect,
+	} = useDoctorsState()
 
 	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - allDoctors.length) : 0
 
@@ -64,11 +74,19 @@ const TableDoctors = () => {
 
 							<TableCell style={{ width: 160 }} align="center">
 								<Tooltip title="Ir al perfil">
-									<Link to={`/patient-profile/${doctor.id}`}>
-										<IconButton>
-											<FiUser size={20} />
-										</IconButton>
-									</Link>
+									<IconButton
+										onClick={() => {
+											setShowModal(true)
+											setAction('edit')
+											setDoctorSelect({
+												id: doctor.id || '',
+												fullName: doctor.fullName,
+											})
+											setInputValue(doctor.fullName)
+										}}
+									>
+										<FiEdit size={20} />
+									</IconButton>
 								</Tooltip>
 							</TableCell>
 						</TableRow>

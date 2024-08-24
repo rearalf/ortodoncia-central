@@ -6,10 +6,11 @@ import { FormEvent } from 'react'
 
 interface Props {
 	handleCreateDoctor: (e: FormEvent<HTMLFormElement>) => void
+	handleUpdateDoctor: (e: FormEvent<HTMLFormElement>) => void
 }
 
 const ModalDoctor = (props: Props) => {
-	const { inputValue, error, setInputValue, showModal, setShowModal } = useDoctorsState()
+	const { inputValue, action, error, setInputValue, showModal, setShowModal } = useDoctorsState()
 	return (
 		<Modal
 			open={showModal}
@@ -17,7 +18,12 @@ const ModalDoctor = (props: Props) => {
 			aria-describedby="Puede crear o modificar los doctores"
 		>
 			<div className="modal_doctor">
-				<form className="doctot_form" onSubmit={props.handleCreateDoctor}>
+				<form
+					className="doctot_form"
+					onSubmit={
+						action === 'create' ? props.handleCreateDoctor : props.handleUpdateDoctor
+					}
+				>
 					<IconButton
 						color="error"
 						className="close_button"
@@ -25,7 +31,9 @@ const ModalDoctor = (props: Props) => {
 					>
 						<FiX />
 					</IconButton>
-					<h2 className="form_title">Agregar nuevo doctor</h2>
+					<h2 className="form_title">
+						{action === 'create' ? 'Agregar nuevo doctor' : 'Editar doctor'}
+					</h2>
 
 					<InputBasic
 						required
@@ -45,7 +53,7 @@ const ModalDoctor = (props: Props) => {
 							variant="contained"
 							startIcon={<FiSave />}
 						>
-							Guardar
+							{action === 'create' ? 'Guardar' : 'Editar'}
 						</Button>
 						<Button
 							color="error"

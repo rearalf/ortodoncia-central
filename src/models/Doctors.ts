@@ -1,5 +1,5 @@
 import { db } from '@/database/firebase'
-import { addDoc, collection, getDocs } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs, serverTimestamp, updateDoc } from 'firebase/firestore'
 
 class Doctors {
 	async getDoctors(): Promise<DoctorsInterface[] | undefined> {
@@ -34,6 +34,21 @@ class Doctors {
 			return doctor.id
 		} catch (error) {
 			return undefined
+		}
+	}
+
+	async updateDoctor(doctor: { fullName: string; id: string }): Promise<boolean> {
+		try {
+			const doctorRef = doc(db, 'doctors', doctor.id)
+			const updateData = await updateDoc(doctorRef, {
+				...doctor,
+				updated_at: serverTimestamp(),
+			})
+				.then(() => true)
+				.catch(() => false)
+			return updateData
+		} catch (error) {
+			return false
 		}
 	}
 }

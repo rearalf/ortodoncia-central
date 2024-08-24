@@ -7,6 +7,7 @@ interface doctorsStateInterface {
 	loading: boolean
 	rowsPerPage: number
 	allDoctors: DoctorsInterface[]
+	doctorSelect: { fullName: string; id: string }
 	action: 'edit' | 'create'
 	inputValue: string
 	showModal: boolean
@@ -14,6 +15,7 @@ interface doctorsStateInterface {
 		error: boolean
 		helperText: string
 	}
+	setDoctorSelect: (value: { fullName: string; id: string }) => void
 	setError: (error: { error: boolean; helperText: string }) => void
 	setPage: (value: number) => void
 	setLoading: (value: boolean) => void
@@ -42,6 +44,18 @@ const useDoctorsState = create<doctorsStateInterface>()(set => ({
 		error: false,
 		helperText: '',
 	},
+	doctorSelect: {
+		fullName: '',
+		id: '',
+	},
+	setDoctorSelect: value =>
+		set(state => ({
+			...state,
+			doctorSelect: {
+				fullName: value.fullName,
+				id: value.id,
+			},
+		})),
 	setError: value =>
 		set(state => ({
 			...state,
@@ -57,8 +71,7 @@ const useDoctorsState = create<doctorsStateInterface>()(set => ({
 			showModal: value,
 		})),
 	setInputValue: value => {
-		const letters = /^[A-Za-z]+$/
-		if (!value.match(letters) && value.length > 0) {
+		if (!value.trim().match('^[a-zA-Z ]+$') && value.length > 0) {
 			set(state => ({
 				...state,
 				error: {

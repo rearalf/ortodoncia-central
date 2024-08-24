@@ -5,8 +5,15 @@ import { FormEvent, useCallback, useEffect, useState } from 'react'
 
 function useDoctorsPage() {
 	const [loading, setLoading] = useState(false)
-	const { allDoctors, setAllDoctors, setShowModal, setAction, inputValue, setError } =
-		useDoctorsState()
+	const {
+		allDoctors,
+		doctorSelect,
+		setAllDoctors,
+		setShowModal,
+		setAction,
+		inputValue,
+		setError,
+	} = useDoctorsState()
 	const { setHandleState } = useAlertState()
 
 	const links = [
@@ -87,6 +94,51 @@ function useDoctorsPage() {
 		}
 	}, [setAllDoctors, setHandleState])
 
+	const handleUpdateDoctor = async (e: FormEvent<HTMLFormElement>) => {
+		try {
+			e.preventDefault()
+			if (inputValue.length > 0) {
+				const doctorsModel = new Doctors()
+				const newDoctor = await doctorsModel.updateDoctor({
+					fullName: inputValue.trim(),
+					id: doctorSelect.id,
+				})
+				if (newDoctor) {
+					setHandleState({
+						severity: 'success',
+						show: true,
+						text: 'Doctor actualizado.',
+						variant: 'filled',
+					})
+					getDoctors()
+					setShowModal(false)
+					setError({
+						error: false,
+						helperText: '',
+					})
+				} else {
+					setError({
+						error: true,
+						helperText: 'Error al actualizar el doctor.',
+					})
+					throw new Error('Error al actualizar doctor.')
+				}
+			} else {
+				setError({
+					error: true,
+					helperText: 'Debe de actualizar un nombre.',
+				})
+			}
+		} catch (error) {
+			setHandleState({
+				severity: 'error',
+				show: true,
+				text: 'Error al actualizar el doctor.',
+				variant: 'filled',
+			})
+		}
+	}
+
 	useEffect(() => {
 		getDoctors()
 	}, [getDoctors])
@@ -95,6 +147,7 @@ function useDoctorsPage() {
 		links,
 		loading,
 		allDoctors,
+		handleUpdateDoctor,
 		handleCreateDoctor,
 		handleOpenCreateForm,
 	}
