@@ -1,17 +1,20 @@
 import { Outlet } from 'react-router-dom'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import "@/styles/DoctorsLayout.css"
+import '@/styles/DoctorsLayout.css'
+import { Container } from '@mui/material'
 
 const LayoutDoctors = () => {
 	return (
-		<>
+		<div className="layoutDoctors">
 			<Navbar />
-			<main className='doctosr_main'>
-				<Outlet />
-			</main>
+			<Container maxWidth="lg">
+				<main>
+					<Outlet />
+				</main>
+			</Container>
 			<Footer />
-		</>
+		</div>
 	)
 }
 

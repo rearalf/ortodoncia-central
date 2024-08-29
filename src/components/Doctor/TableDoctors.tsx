@@ -45,7 +45,7 @@ const TableDoctors = () => {
 
 	return (
 		<TableContainer component={Paper}>
-			<Table sx={{ minWidth: 500 }} aria-label="Tabla de pacientes">
+			<Table sx={{ minWidth: 500 }} aria-label="Tabla de doctores">
 				<TableHead>
 					<TableRow>
 						<TableCell>Nombre</TableCell>

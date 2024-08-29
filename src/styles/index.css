@@ -130,8 +130,8 @@ ul {
 	min-width: 150px;
 }
 
-main {
-	min-height: 88vh;
+.MuiContainer-root.MuiContainer-maxWidthLg {
+	flex: 1;
 }
 
 /*

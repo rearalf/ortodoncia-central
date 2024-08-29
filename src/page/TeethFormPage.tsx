@@ -143,8 +143,8 @@ const TeethFormPage = () => {
 						</div>
 					</form>
 				)}
-				<Footer />
 			</main>
+			<Footer />
 		</>
 	)
 }
