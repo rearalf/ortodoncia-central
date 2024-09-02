@@ -1,9 +1,3 @@
-.appointment-page_main {
-	margin: 1rem auto;
-	max-width: 1280px;
-	padding: 32px 16px;
-}
-
 .appointment-page_main .main_content {
 	display: flex;
 	flex-direction: column;

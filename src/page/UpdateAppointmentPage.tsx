@@ -9,10 +9,8 @@ import InputSelect from '@/components/InputSelect'
 import { FiSave, FiXCircle } from 'react-icons/fi'
 import InputBasic from '@/components/InputBasic'
 import InputDate from '@/components/InputDate'
-import Navbar from '@/components/Navbar'
 import { Button } from '@mui/material'
 import '@/styles/UpdateAppointmentPage.css'
-import Footer from '@/components/Footer'
 
 function UpdateAppointmentPage() {
 	const {
@@ -39,8 +37,8 @@ function UpdateAppointmentPage() {
 		<>
 			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Cita de`} />
-			<Navbar />
-			<main className="update-appointment-page_main">
+
+			<div className="update-appointment-page_main">
 				<BreadCrumbs links={breadCrumbsLinks} />
 				<header className="main_header">
 					<h1>Modificar cita {patientData.name}</h1>
@@ -165,8 +163,7 @@ function UpdateAppointmentPage() {
 						)}
 					</form>
 				)}
-				<Footer />
-			</main>
+			</div>
 		</>
 	)
 }

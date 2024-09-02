@@ -62,7 +62,7 @@ const AppointmentsTable = () => {
 								{i === 0 && (
 									<Tooltip title="Modificar cita">
 										<Link
-											to={`/patient-profile/${data.id_patient}/appointment/${
+											to={`/appointments/${data.id_patient}/appointment/${
 												data.id
 											}/update-appointment/${true}`}
 										>
@@ -74,15 +74,9 @@ const AppointmentsTable = () => {
 								)}
 								<Tooltip title="Ver cita">
 									<Link
-										to={
-											i === 0
-												? `/patient-profile/${
-														data.id_patient
-												  }/appointment/${data.id}/${true}`
-												: `/patient-profile/${
-														data.id_patient
-												  }/appointment/${data.id}/${false}`
-										}
+										to={`/appointments/${data.id_patient}/appointment/${
+											data.id
+										}/${i === 0 ? true : false}`}
 									>
 										<IconButton>
 											<FiBookmark size={20} />

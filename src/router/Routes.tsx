@@ -10,8 +10,8 @@ import TeethFormPage from '@/page/TeethFormPage'
 import DoctorsPage from '@/page/DoctorsPage'
 import PhotosPage from '@/page/PhotosPage'
 import HomePage from '@/page/HomePage'
+import Layout from '@/Layout/Layout'
 import App from '@/App'
-import LayoutDoctors from '@/Layout/LayoutDoctors'
 
 const router = createBrowserRouter(
 	[
@@ -20,52 +20,69 @@ const router = createBrowserRouter(
 			element: <App />,
 			children: [
 				{
-					path: '/',
-					element: <HomePage />,
-				},
-				{
-					path: '/create-patient',
-					element: <CreatePatientPage />,
-				},
-				{
-					path: '/patient-profile/:id',
-					element: <PatientProfilePage />,
-				},
-
-				{
-					path: '/teeth-form/:id_patient',
-					element: <TeethFormPage />,
-				},
-				{
-					path: '/update-patient/:id',
-					element: <UpdatePatientPage />,
-				},
-				{
-					path: '/patient-profile/:id_patient/appointment/:id_appointment/:last_appointment',
-					element: <AppointmentPage />,
-				},
-				{
-					path: '/patient-profile/:id_patient/appointment/:id_appointment/update-appointment/:last_appointment',
-					element: <UpdateAppointmentPage />,
-				},
-				{
-					path: '/patient-profile/:id_patient/photos',
-					element: <PhotosPage />,
-				},
-				{
-					path: '/patient-profile/:id_patient/photos/add-photos',
-					element: <AddPhotosPage />,
-				},
-				{
-					path: '/patient-profile/:id_patient/photos/update-photos/:id_photo',
-					element: <UpdatePhotosPage />,
-				},
-				{
-					path: '/doctors',
-					element: <LayoutDoctors />,
+					path: '',
+					element: <Layout />,
 					children: [
 						{
-							path: '/doctors',
+							path: '',
+							element: <HomePage />,
+						},
+						{
+							path: 'create-patient',
+							element: <CreatePatientPage />,
+						},
+						{
+							path: 'patient-profile/:id',
+							element: <PatientProfilePage />,
+						},
+						{
+							path: 'update-patient/:id',
+							element: <UpdatePatientPage />,
+						},
+					],
+				},
+				{
+					path: 'appointments',
+					element: <Layout />,
+					children: [
+						{
+							path: ':id_patient/appointment/:id_appointment/:last_appointment',
+							element: <AppointmentPage />,
+						},
+						{
+							path: 'create/:id_patient',
+							element: <TeethFormPage />,
+						},
+						{
+							path: ':id_patient/appointment/:id_appointment/update-appointment/:last_appointment',
+							element: <UpdateAppointmentPage />,
+						},
+					],
+				},
+				{
+					path: 'photos',
+					element: <Layout />,
+					children: [
+						{
+							path: ':id_patient/photos',
+							element: <PhotosPage />,
+						},
+						{
+							path: ':id_patient/photos/add-photos',
+							element: <AddPhotosPage />,
+						},
+						{
+							path: ':id_patient/photos/update-photos/:id_photo',
+							element: <UpdatePhotosPage />,
+						},
+					],
+				},
+				{
+					path: 'doctors',
+					element: <Layout />,
+					children: [
+						{
+							path: '',
 							element: <DoctorsPage />,
 						},
 					],

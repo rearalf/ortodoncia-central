@@ -9,9 +9,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 import HeadComponent from '@/components/HeadComponent'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
-import Navbar from '@/components/Navbar'
 import '@/styles/PatientProfilePage.css'
-import Footer from '@/components/Footer'
 
 const PatientProfilePage = () => {
 	const {
@@ -30,8 +28,7 @@ const PatientProfilePage = () => {
 		<>
 			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
-			<Navbar />
-			<main className="patient_profile-main">
+			<div className="patient_profile-main">
 				<BreadCrumbs links={links} />
 				<header className="main_header">
 					<h1 className="header_title">Paciente {titleName}</h1>
@@ -232,8 +229,7 @@ const PatientProfilePage = () => {
 					<h2 className="appointments_title">Citas anteriores</h2>
 					<AppointmentsTable />
 				</section>
-			</main>
-			<Footer />
+			</div>
 		</>
 	)
 }

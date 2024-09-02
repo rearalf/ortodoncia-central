@@ -9,7 +9,6 @@ import InputCheckbox from '@/components/Checkbox'
 import InputBasic from '@/components/InputBasic'
 import InputDate from '@/components/InputDate'
 import { SlArrowDown } from 'react-icons/sl'
-import Navbar from '@/components/Navbar'
 import {
 	Accordion,
 	AccordionDetails,
@@ -17,7 +16,6 @@ import {
 	Button,
 	CircularProgress,
 } from '@mui/material'
-import Footer from '@/components/Footer'
 
 function UpdatePatientPage() {
 	const {
@@ -40,8 +38,7 @@ function UpdatePatientPage() {
 		<>
 			<BackdropLoading loading={loadingPatient} />
 			<HeadComponent title={`Actualizar paciente | `} />
-			<Navbar />
-			<main className="createPatient_main">
+			<div className="createPatient_main">
 				<BreadCrumbs
 					links={[
 						{
@@ -315,8 +312,7 @@ function UpdatePatientPage() {
 						</Button>
 					</div>
 				</form>
-			</main>
-			<Footer />
+			</div>
 		</>
 	)
 }

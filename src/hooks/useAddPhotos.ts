@@ -247,7 +247,7 @@ function useAddPhotos() {
 	}
 
 	const handleCancelButton = () => {
-		navigate(`/patient-profile/${patientData.id}/photos`)
+		navigate(`/photos/${patientData.id}/photos`)
 		setHandleState({
 			severity: 'info',
 			variant: 'filled',

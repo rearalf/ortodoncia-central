@@ -51,13 +51,13 @@ function useUpdateAppointmentPage() {
 					? patientData.name.split(' ')[2]
 					: patientData.name.split(' ')[1]
 			}`,
-			link_to: last_appointment
-				? `/patient-profile/${patientData.id}/appointment/${appointment.id}/true`
-				: `/patient-profile/${patientData.id}/appointment/${appointment.id}/false`,
+			link_to: `/appointments/${patientData.id}/appointment/${appointment.id}/${
+				last_appointment === 'true' ? 'true' : 'false'
+			}`,
 		},
 		{
 			link_name: 'Modificar cita',
-			link_to: `/patient-profile/${patientData.id}/appointment/${appointment.id}/update-appointment`,
+			link_to: `/appointments/${patientData.id}/appointment/${appointment.id}/update-appointment`,
 		},
 	]
 
@@ -199,7 +199,7 @@ function useUpdateAppointmentPage() {
 						throw 'Error updating in update appointment.'
 					}
 					navigate(
-						`/patient-profile/${patientData.id}/appointment/${appointment.id}/${true}`,
+						`/appointments/${patientData.id}/appointment/${appointment.id}/${true}`,
 					)
 				} else {
 					const updateAppoinment = await appointmentClass.updateAppoinment(
@@ -216,7 +216,7 @@ function useUpdateAppointmentPage() {
 							show: true,
 							text: 'La actualización de la cita fue exitosa.',
 						})
-						const address = `/patient-profile/${patientData.id}/appointment/${appointment.id}`
+						const address = `/appointments/${patientData.id}/appointment/${appointment.id}`
 						last_appointment === 'true'
 							? navigate(address + '/true')
 							: navigate(address + '/false')

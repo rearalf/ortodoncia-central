@@ -1,4 +1,6 @@
+import TablePaginationActions from '../TablePaginationActions'
 import useDoctorsState from '@/states/doctosState'
+import { FiEdit, FiTrash } from 'react-icons/fi'
 import {
 	Button,
 	IconButton,
@@ -13,9 +15,6 @@ import {
 	TableRow,
 	Tooltip,
 } from '@mui/material'
-import { FiEdit, FiTrash } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
-import TablePaginationActions from '../TablePaginationActions'
 
 const TableDoctors = () => {
 	const {
@@ -62,13 +61,21 @@ const TableDoctors = () => {
 							sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 						>
 							<TableCell scope="patient">
-								<Tooltip title="Ir al perfil">
-									<Link
-										to={`/patient-profile/${doctor.id}`}
-										className="patient-name-link"
+								<Tooltip title="Modificar nombre">
+									<Button
+										variant="text"
+										onClick={() => {
+											setShowModal(true)
+											setAction('edit')
+											setDoctorSelect({
+												id: doctor.id || '',
+												fullName: doctor.fullName,
+											})
+											setInputValue(doctor.fullName)
+										}}
 									>
-										<Button variant="text">{doctor.fullName}</Button>
-									</Link>
+										{doctor.fullName}
+									</Button>
 								</Tooltip>
 							</TableCell>
 
@@ -88,7 +95,7 @@ const TableDoctors = () => {
 										<FiEdit size={20} />
 									</IconButton>
 								</Tooltip>
-								<Tooltip title="Modificar nombre">
+								<Tooltip title="Eliminar nombre">
 									<IconButton
 										onClick={() => {
 											setShowModal(true)

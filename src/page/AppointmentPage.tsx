@@ -3,11 +3,9 @@ import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
 import useAppointment from '@/hooks/useAppointment'
 import BreadCrumbs from '@/components/BreadCrumbs'
-import Navbar from '@/components/Navbar'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
 import '@/styles/AppointmentPage.css'
-import Footer from '@/components/Footer'
 
 function AppointmentPage() {
 	const { loading, appointment, patientData, last_appointment } = useAppointment()
@@ -22,7 +20,6 @@ function AppointmentPage() {
 						: patientData.name.split(' ')[1]
 				}`}
 			/>
-			<Navbar />
 			<main className="appointment-page_main">
 				<BreadCrumbs
 					links={[
@@ -44,7 +41,7 @@ function AppointmentPage() {
 									? patientData.name.split(' ')[2]
 									: patientData.name.split(' ')[1]
 							}`,
-							link_to: `/patient-profile/${patientData.id}/appointment/${appointment.id}/update-appointment`,
+							link_to: `/appointments/${patientData.id}/appointment/${appointment.id}/update-appointment`,
 						},
 					]}
 				/>
@@ -58,11 +55,9 @@ function AppointmentPage() {
 						}`}
 					</h1>
 					<Link
-						to={
-							last_appointment === 'true'
-								? `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment/true`
-								: `/patient-profile/${patientData.id}/appointment/${appointment?.id}/update-appointment/false`
-						}
+						to={`/appointments/${patientData.id}/appointment/${
+							appointment?.id
+						}/update-appointment/${last_appointment === 'true' ? 'true' : 'false'}`}
 					>
 						<Button variant="contained">Modificar cita</Button>
 					</Link>
@@ -167,7 +162,6 @@ function AppointmentPage() {
 					<TeethTable />
 				</section>
 			</main>
-			<Footer />
 		</>
 	)
 }

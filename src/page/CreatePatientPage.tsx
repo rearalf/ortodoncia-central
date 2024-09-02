@@ -1,15 +1,15 @@
-import Navbar from '@/components/Navbar'
-import { SlArrowDown } from 'react-icons/sl'
-import InputDate from '@/components/InputDate'
-import InputBasic from '@/components/InputBasic'
-import InputCheckbox from '@/components/Checkbox'
 import { FiSave, FiUpload, FiXCircle } from 'react-icons/fi'
-import BreadCrumbs from '@/components/BreadCrumbs'
-import HeadComponent from '@/components/HeadComponent'
-import useCreatePatient from '@/hooks/useCreatePatient'
-import AvatarComponent from '@/components/AvatarComponent'
 import PhoneNumberInput from '@/components/PhoneNumberInput'
 import BackdropLoading from '@/components/BackdropLoading'
+import AvatarComponent from '@/components/AvatarComponent'
+import useCreatePatient from '@/hooks/useCreatePatient'
+import HeadComponent from '@/components/HeadComponent'
+import BreadCrumbs from '@/components/BreadCrumbs'
+import InputCheckbox from '@/components/Checkbox'
+import InputBasic from '@/components/InputBasic'
+import InputDate from '@/components/InputDate'
+import { SlArrowDown } from 'react-icons/sl'
+import '@/styles/CreatePatientPage.css'
 import {
 	Button,
 	Accordion,
@@ -17,8 +17,6 @@ import {
 	AccordionSummary,
 	CircularProgress,
 } from '@mui/material'
-import '@/styles/CreatePatientPage.css'
-import Footer from '@/components/Footer'
 
 const CreatePatientPage = () => {
 	const {
@@ -41,8 +39,7 @@ const CreatePatientPage = () => {
 		<>
 			<BackdropLoading loading={loadingPatient} />
 			<HeadComponent title="Crear paciente" />
-			<Navbar />
-			<main className="createPatient_main">
+			<div className="createPatient_main">
 				<BreadCrumbs
 					links={[
 						{
@@ -307,8 +304,7 @@ const CreatePatientPage = () => {
 						</Button>
 					</div>
 				</form>
-			</main>
-			<Footer />
+			</div>
 		</>
 	)
 }

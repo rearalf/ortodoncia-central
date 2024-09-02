@@ -1,9 +1,3 @@
-.patient_profile-main {
-	margin: 0 auto;
-	max-width: 1280px;
-	padding: 32px 16px;
-}
-
 .patient_profile-main .main_header {
 	display: flex;
 	flex-direction: column;

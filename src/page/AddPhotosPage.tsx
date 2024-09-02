@@ -6,9 +6,7 @@ import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
 import useAddPhotos from '@/hooks/useAddPhotos'
-import Navbar from '@/components/Navbar'
 import '@/styles/AddPhotosPage.css'
-import Footer from '@/components/Footer'
 
 const AddPhotosPage = () => {
 	const {
@@ -37,8 +35,8 @@ const AddPhotosPage = () => {
 		<>
 			<BackdropLoading loading={loading} />
 			<HeadComponent title="Agregar imagenes al expediente" />
-			<Navbar />
-			<main className="add_x_rays_page-main">
+
+			<div className="add_x_rays_page-main">
 				<BreadCrumbs
 					links={[
 						{
@@ -51,11 +49,11 @@ const AddPhotosPage = () => {
 						},
 						{
 							link_name: 'Fotos e imagenes',
-							link_to: `/patient-profile/${patientData.id}/photos`,
+							link_to: `/photos/${patientData.id}/photos`,
 						},
 						{
 							link_name: 'Agregar fotos e imagenes',
-							link_to: `/patient-profile/${patientData.id}/photos/add-photos`,
+							link_to: `/photos/${patientData.id}/photos/add-photos`,
 						},
 					]}
 				/>
@@ -144,7 +142,7 @@ const AddPhotosPage = () => {
 						</div>
 					))}
 				</div>
-			</main>
+			</div>
 			{isViewerOpen && (
 				<ImageViewer
 					src={images}
@@ -157,7 +155,6 @@ const AddPhotosPage = () => {
 					}}
 				/>
 			)}
-			<Footer />
 		</>
 	)
 }

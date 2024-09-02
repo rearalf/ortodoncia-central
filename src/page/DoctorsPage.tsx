@@ -6,6 +6,7 @@ import useDoctorsPage from '@/hooks/useDoctorsPage'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import { FiUserPlus } from 'react-icons/fi'
 import { Button } from '@mui/material'
+import '@/styles/DoctorsLayout.css'
 
 const DoctorsPage = () => {
 	const {

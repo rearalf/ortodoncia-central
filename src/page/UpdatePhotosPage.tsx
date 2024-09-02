@@ -6,9 +6,7 @@ import BackdropLoading from '@/components/BackdropLoading'
 import HeadComponent from '@/components/HeadComponent'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import InputBasic from '@/components/InputBasic'
-import Navbar from '@/components/Navbar'
 import '@/styles/AddPhotosPage.css'
-import Footer from '@/components/Footer'
 
 function UpdatePhotosPage() {
 	const {
@@ -37,8 +35,8 @@ function UpdatePhotosPage() {
 		<>
 			<BackdropLoading loading={loading} />
 			<HeadComponent title="Agregar imagenes al expediente" />
-			<Navbar />
-			<main className="add_x_rays_page-main">
+
+			<div className="add_x_rays_page-main">
 				<BreadCrumbs
 					links={[
 						{
@@ -51,11 +49,11 @@ function UpdatePhotosPage() {
 						},
 						{
 							link_name: 'Fotos e imagenes',
-							link_to: `/patient-profile/${patientData.id}/photos`,
+							link_to: `/photos/${patientData.id}/photos`,
 						},
 						{
 							link_name: 'Modificar fotos e imagenes',
-							link_to: `/patient-profile/${patientData.id}/photos/add-photos`,
+							link_to: `/photos/${patientData.id}/photos/add-photos`,
 						},
 					]}
 				/>
@@ -145,7 +143,7 @@ function UpdatePhotosPage() {
 						</div>
 					))}
 				</div>
-			</main>
+			</div>
 			{isViewerOpen && (
 				<ReactSimpleImageViewer
 					src={images}
@@ -158,7 +156,6 @@ function UpdatePhotosPage() {
 					}}
 				/>
 			)}
-			<Footer />
 		</>
 	)
 }

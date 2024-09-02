@@ -8,10 +8,8 @@ import BreadCrumbs from '@/components/BreadCrumbs'
 import InputSelect from '@/components/InputSelect'
 import InputBasic from '@/components/InputBasic'
 import InputDate from '@/components/InputDate'
-import Navbar from '@/components/Navbar'
 import { Button } from '@mui/material'
 import '@/styles/TeethFormPage.css'
-import Footer from '@/components/Footer'
 
 const TeethFormPage = () => {
 	const {
@@ -33,8 +31,7 @@ const TeethFormPage = () => {
 		<>
 			<BackdropLoading loading={loading} />
 			<HeadComponent title="Odontograma de " />
-			<Navbar />
-			<main className="teethform_main">
+			<div className="teethform_main">
 				<BreadCrumbs
 					links={[
 						{
@@ -143,8 +140,7 @@ const TeethFormPage = () => {
 						</div>
 					</form>
 				)}
-			</main>
-			<Footer />
+			</div>
 		</>
 	)
 }

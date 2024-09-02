@@ -1,14 +1,13 @@
-import { Outlet } from 'react-router-dom'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import '@/styles/DoctorsLayout.css'
 import { Container } from '@mui/material'
+import { Outlet } from 'react-router-dom'
 
-const LayoutDoctors = () => {
+const Layout = () => {
 	return (
-		<div className="layoutDoctors">
+		<div className="layout">
 			<Navbar />
-			<Container maxWidth="lg">
+			<Container maxWidth="xl">
 				<main>
 					<Outlet />
 				</main>
@@ -18,4 +17,4 @@ const LayoutDoctors = () => {
 	)
 }
 
-export default LayoutDoctors
+export default Layout

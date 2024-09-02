@@ -126,11 +126,19 @@ ul {
 	margin: 0;
 }
 
+.layout {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	min-height: 100vh;
+	gap: 24px;
+}
+
 .MuiFormControl-root.input-select {
 	min-width: 150px;
 }
 
-.MuiContainer-root.MuiContainer-maxWidthLg {
+.MuiContainer-root.MuiContainer-maxWidthXl {
 	flex: 1;
 }
 

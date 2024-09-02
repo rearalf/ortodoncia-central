@@ -7,9 +7,7 @@ import ImageViewer from 'react-simple-image-viewer'
 import BreadCrumbs from '@/components/BreadCrumbs'
 import usePhotosPage from '@/hooks/usePhotosPage'
 import { Button, Tooltip } from '@mui/material'
-import Navbar from '@/components/Navbar'
 import '@/styles/PhtosPage.css'
-import Footer from '@/components/Footer'
 
 const PhtosPage = () => {
 	const {
@@ -38,14 +36,14 @@ const PhtosPage = () => {
 		<>
 			<BackdropLoading loading={loading} />
 			<HeadComponent title={`Perfil de ${patientData.name}`} />
-			<Navbar />
+
 			<DialogDeletePhotos
 				openModal={openModal}
 				handleDeleteDialog={handleDeleteDialog}
 				handleCancelDialog={handleCancelDialog}
 				data={idSelect}
 			/>
-			<main className="photos-page_main">
+			<div className="photos-page_main">
 				<BreadCrumbs
 					links={[
 						{
@@ -107,7 +105,7 @@ const PhtosPage = () => {
 						</Tooltip>
 					)}
 				</div>
-			</main>
+			</div>
 			{isViewerOpen && (
 				<ImageViewer
 					src={images}
@@ -120,7 +118,6 @@ const PhtosPage = () => {
 					}}
 				/>
 			)}
-			<Footer />
 		</>
 	)
 }
