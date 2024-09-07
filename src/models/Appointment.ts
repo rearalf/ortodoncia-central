@@ -21,7 +21,7 @@ class Appointment {
 		try {
 			const patientTeethRef = collection(db, `patients/${id}/appointment`)
 			const addData = await addDoc(patientTeethRef, {
-				date: appointment.date,
+				date: serverTimestamp(),
 				treatment: appointment.treatment,
 				cost: appointment.cost,
 				doctor: appointment.doctor,
