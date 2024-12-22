@@ -12,6 +12,7 @@ import PhotosPage from '@/page/PhotosPage'
 import HomePage from '@/page/HomePage'
 import Layout from '@/Layout/Layout'
 import App from '@/App'
+import LoginPage from '@/page/LoginPage'
 
 const router = createBrowserRouter(
 	[
@@ -21,6 +22,10 @@ const router = createBrowserRouter(
 			children: [
 				{
 					path: '',
+					element: <LoginPage />,
+				},
+				{
+					path: '/home',
 					element: <Layout />,
 					children: [
 						{
