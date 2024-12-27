@@ -1,6 +1,7 @@
 import { getApps, initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
+import { getAuth } from 'firebase/auth'
 
 if (
 	!import.meta.env.VITE_APIKEY ||
@@ -27,3 +28,5 @@ export const firebase_app = getApps().length === 0 ? initializeApp(firebaseConfi
 export const db = getFirestore(firebase_app)
 
 export const storage = getStorage(firebase_app)
+
+export const auth = getAuth(firebase_app)

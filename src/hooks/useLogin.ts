@@ -1,6 +1,11 @@
+import useAlertState from "@/states/useAlertState"
 import React, { useState } from "react"
+import User from "@/models/User"
+import { useNavigate } from "react-router-dom"
 
 function useLogin() {
+    const navigate = useNavigate()
+    const { setHandleState } = useAlertState()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
@@ -12,10 +17,75 @@ function useLogin() {
         if (e.target.id === 'email') setEmail(e.target.value)
     }
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (email.trim().toLowerCase() === "") {
+            setHandleState({
+                severity: 'warning',
+                variant: 'filled',
+                show: true,
+                text: 'Debe de agregar un email.',
+            })
+        }
+        if (password.trim() === "") {
+            setHandleState({
+                severity: 'warning',
+                variant: 'filled',
+                show: true,
+                text: 'Debe de agregar un email.',
+            })
+        }
+        const user = new User()
+        const { success, signIn, errorCode } = await user.authUser(email.trim().toLowerCase(), password.trim())
+
+
+        if (!success) {
+            if (errorCode !== "") {
+                setHandleState({
+                    severity: 'error',
+                    variant: 'filled',
+                    show: true,
+                    text: 'Credenciales inválidas. Por favor, inténtalo de nuevo.',
+                })
+                return
+            }
+            setHandleState({
+                severity: 'error',
+                variant: 'filled',
+                show: true,
+                text: 'Error en el servidor.',
+            })
+            return
+        }
+        if (signIn) {
+            const token = await signIn?.user.getIdToken()
+            localStorage.setItem("token", token)
+            setHandleState({
+                severity: 'success',
+                variant: 'filled',
+                show: true,
+                text: 'Bienvenid@',
+            })
+            navigate("/home")
+            return
+        }
+        setHandleState({
+            severity: 'error',
+            variant: 'filled',
+            show: true,
+            text: 'Error en el servidor.',
+        })
+        return
+    }
+
+
+
+
     return {
         email,
         password,
         showPassword,
+        handleSubmit,
         handleChangeInputs,
         handleShowPassword
     }

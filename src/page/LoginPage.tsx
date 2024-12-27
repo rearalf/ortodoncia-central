@@ -5,13 +5,13 @@ import useLogin from '@/hooks/useLogin'
 import '@/styles/LoginPage.css'
 
 function LoginPage() {
-	const { email, password, showPassword, handleChangeInputs, handleShowPassword } = useLogin()
+	const { email, password, showPassword, handleSubmit, handleChangeInputs, handleShowPassword } = useLogin()
 
 
 	return (
 		<Container maxWidth="xl">
 			<main className="login-page">
-				<form action="" className="form-login">
+				<form onSubmit={handleSubmit} className="form-login">
 					<h1>Inicia sesión</h1>
 					<InputBasic
 						required
