@@ -1,7 +1,7 @@
 import useAlertState from "@/states/useAlertState"
-import React, { useState } from "react"
-import User from "@/models/User"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import User from "@/models/User"
 
 function useLogin() {
     const navigate = useNavigate()
@@ -78,7 +78,10 @@ function useLogin() {
         return
     }
 
-
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        if (token) navigate("/home")
+    }, [])
 
 
     return {

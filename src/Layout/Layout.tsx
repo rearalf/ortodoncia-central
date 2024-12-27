@@ -1,9 +1,16 @@
+import { Outlet, useNavigate } from 'react-router-dom'
+import { Container } from '@mui/material'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import { Container } from '@mui/material'
-import { Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Layout = () => {
+	const navigate = useNavigate()
+	useEffect(() => {
+		const token = localStorage.getItem("token")
+		if (!token) navigate("/")
+	}, [])
+
 	return (
 		<div className="layout">
 			<Navbar />
