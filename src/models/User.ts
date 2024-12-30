@@ -22,7 +22,27 @@ class User {
                 errorCode: "",
                 success: false,
             };
+        }
+    }
 
+    async signOut() {
+        try {
+            const out = await auth.signOut()
+            return {
+                out,
+                success: true,
+            }
+        } catch (error) {
+            if (error instanceof FirebaseError)
+                return {
+                    error: error,
+                    success: false,
+                    errorCode: error.code
+                };
+            return {
+                errorCode: "",
+                success: false,
+            };
         }
     }
 }
