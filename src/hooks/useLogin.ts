@@ -2,9 +2,11 @@ import useAlertState from "@/states/useAlertState"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import User from "@/models/User"
+import useUserState from "@/states/useUserState"
 
 function useLogin() {
     const navigate = useNavigate()
+    const { setUserState } = useUserState()
     const { setHandleState } = useAlertState()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -38,7 +40,6 @@ function useLogin() {
         const user = new User()
         const { success, signIn, errorCode } = await user.authUser(email.trim().toLowerCase(), password.trim())
 
-
         if (!success) {
             if (errorCode !== "") {
                 setHandleState({
@@ -60,6 +61,7 @@ function useLogin() {
         if (signIn) {
             const token = await signIn?.user.getIdToken()
             localStorage.setItem("token", token)
+            setUserState(signIn.user.providerData[0])
             setHandleState({
                 severity: 'success',
                 variant: 'filled',

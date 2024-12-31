@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { UserCredential } from "firebase/auth";
+import { UserCredential, UserInfo } from "firebase/auth";
 
 interface IAuthUserReturn {
     signIn?: UserCredential;
@@ -7,3 +7,5 @@ interface IAuthUserReturn {
     error?: FirebaseError;
     errorCode?: string;
 }
+
+interface IUserState extends UserInfo {}
