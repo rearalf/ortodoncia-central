@@ -1,0 +1,89 @@
+.user-profile .form-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.user-profile .form-profile .form_patient-first_section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.user-profile .form-profile .form-first-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.user-profile .form-profile .form-first-section .form-avatar-component,
+.user-profile .form-profile .form-first-section .form-required-inputs {
+  background-color: var(--background-color-3);
+  padding: 24px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.user-profile .form-profile .form-first-section .form-avatar-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-profile .form-profile .form-first-section .form-required-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.user-profile
+  .form-profile
+  .form-first-section
+  .form-avatar-component
+  .MuiAvatar-root.MuiAvatar-circular {
+  width: 250px;
+  height: 250px;
+  font-size: 130px;
+}
+
+.user-profile
+  .form-profile
+  .form-first-section
+  .form-avatar-component
+  .btn-group {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+.user-profile
+  .form-profile
+  .form-first-section
+  .form-required-inputs
+  .btn-group {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  justify-content: center;
+}
+
+.user-profile
+  .form-profile
+  .form-first-section
+  .form-avatar-component
+  .avatar_component-loading {
+  position: absolute;
+  z-index: 2;
+}
+
+@media (min-width: 1024px) {
+  .user-profile .form-profile .form-first-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

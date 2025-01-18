@@ -2,14 +2,6 @@ import { Breadcrumbs, Skeleton } from '@mui/material'
 import { FiChevronRight } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
-interface BreadCrumbsProps {
-	loading?: boolean
-	links?: {
-		link_name: string
-		link_to: string
-	}[]
-}
-
 const BreadCrumbs = ({
 	loading = false,
 	links = [
@@ -18,7 +10,7 @@ const BreadCrumbs = ({
 			link_to: '/',
 		},
 	],
-}: BreadCrumbsProps) =>
+}: IBreadCrumbsProps) =>
 	!loading ? (
 		<Breadcrumbs
 			aria-label="breadcrumb"

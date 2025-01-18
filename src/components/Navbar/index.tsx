@@ -64,7 +64,11 @@ const Navbar = () => {
 						'aria-labelledby': 'basic-button',
 					}}
 				>
-					{/* <MenuItem onClick={handleClose}>Perfil</MenuItem> */}
+					{/* <Link to="/users/profile">
+						<MenuItem className='menu-item'>
+							<i><FiUser /></i> Perfil
+						</MenuItem>
+					</Link> */}
 					<MenuItem onClick={handleSignOut} className='menu-item'><i><FiLogOut /></i> Cerrar sesion</MenuItem>
 				</Menu>
 

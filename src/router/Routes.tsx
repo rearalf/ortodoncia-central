@@ -13,6 +13,7 @@ import HomePage from '@/page/HomePage'
 import Layout from '@/Layout/Layout'
 import App from '@/App'
 import LoginPage from '@/page/LoginPage'
+import UserProfilePage from '@/page/UserProfilePage'
 
 const router = createBrowserRouter(
 	[
@@ -92,6 +93,16 @@ const router = createBrowserRouter(
 						},
 					],
 				},
+				{
+					path: "users",
+					element: <Layout />,
+					children: [
+						{
+							path: "profile",
+							element: <UserProfilePage />
+						}
+					]
+				}
 			],
 		},
 	],

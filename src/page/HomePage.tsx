@@ -17,7 +17,7 @@ const HomePage = () => {
 			<BreadCrumbs />
 			<div className="main_header">
 				<h1>Pacientes</h1>
-				<Link to="/create-patient">
+				<Link to="/home/create-patient">
 					<Button variant="contained" startIcon={<FiUserPlus />}>
 						Paciente nuevo
 					</Button>
