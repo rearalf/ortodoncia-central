@@ -1,11 +1,11 @@
 import { FormEvent, useState } from "react";
 
-import useAlertState from "@/states/useAlertState";
+// import useAlertState from "@/states/useAlertState";
 import useUserState from "@/states/useUserState";
 import User from "@/models/User";
 
 function useUserProfile() {
-  const { setHandleState } = useAlertState();
+  // const { setHandleState } = useAlertState();
   const { user } = useUserState();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,6 +26,7 @@ function useUserProfile() {
       const auth = new User();
       const getUser = await auth.authGetUser();
       console.log(getUser);
+      setLoading(false);
     } catch (error) {}
   };
 
