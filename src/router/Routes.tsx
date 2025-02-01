@@ -12,6 +12,8 @@ import PhotosPage from '@/page/PhotosPage'
 import HomePage from '@/page/HomePage'
 import Layout from '@/Layout/Layout'
 import App from '@/App'
+import LoginPage from '@/page/LoginPage'
+import UserProfilePage from '@/page/UserProfilePage'
 
 const router = createBrowserRouter(
 	[
@@ -21,6 +23,10 @@ const router = createBrowserRouter(
 			children: [
 				{
 					path: '',
+					element: <LoginPage />,
+				},
+				{
+					path: '/home',
 					element: <Layout />,
 					children: [
 						{
@@ -87,6 +93,16 @@ const router = createBrowserRouter(
 						},
 					],
 				},
+				{
+					path: "users",
+					element: <Layout />,
+					children: [
+						{
+							path: "profile",
+							element: <UserProfilePage />
+						}
+					]
+				}
 			],
 		},
 	],

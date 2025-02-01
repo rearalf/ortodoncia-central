@@ -257,6 +257,13 @@ function useTheme() {
 					},
 				},
 			},
+			MuiListItemIcon:{
+				styleOverrides:{
+					root:{
+						color: "#FFF"
+					}
+				}
+			}
 		},
 	})
 

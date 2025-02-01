@@ -1,3 +1,4 @@
+import { IUserState } from '@/interface/User'
 import { sub } from 'date-fns'
 
 export const constantTeethList: Odontogram = {
@@ -698,3 +699,12 @@ export const maxDate = sub(new Date(), {
 export const minDate = sub(new Date(), {
 	years: 95,
 })
+
+export const USERBASIC: IUserState = {
+	displayName: null,
+	email: null,
+	phoneNumber: null,
+	photoURL: null,
+	providerId: 'password',
+	uid: ""
+}

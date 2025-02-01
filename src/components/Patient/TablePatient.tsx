@@ -59,7 +59,7 @@ const TablePatient = () => {
 							<TableCell scope="patient">
 								<Tooltip title="Ir al perfil">
 									<Link
-										to={`/patient-profile/${patient.id}`}
+										to={`/home/patient-profile/${patient.id}`}
 										className="patient-name-link"
 									>
 										<Button variant="text">{patient.name}</Button>
@@ -84,7 +84,7 @@ const TablePatient = () => {
 							</TableCell>
 							<TableCell style={{ width: 160 }} align="center">
 								<Tooltip title="Ir al perfil">
-									<Link to={`/patient-profile/${patient.id}`}>
+									<Link to={`/home/patient-profile/${patient.id}`}>
 										<IconButton>
 											<FiUser size={20} />
 										</IconButton>
