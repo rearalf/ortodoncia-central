@@ -41,7 +41,7 @@ function usePatientProfilePage() {
 	]
 
 	const handleGoToTeethForm = () => navigate('/appointments/create/' + id)
-	const handleGoToUpdatePatient = () => navigate('/update-patient/' + id)
+	const handleGoToUpdatePatient = () => navigate('/home/update-patient/' + id)
 	const handleGoToPhotos = () => navigate(`/photos/${id}/photos`)
 
 	// eslint-disable-next-line

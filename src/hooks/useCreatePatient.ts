@@ -145,7 +145,7 @@ function useCreatePatient() {
 					id: patient,
 				})
 
-				navigate(`/patient-profile/${patient}`)
+				navigate(`/home/patient-profile/${patient}`)
 
 				setHandleState({
 					severity: 'success',
