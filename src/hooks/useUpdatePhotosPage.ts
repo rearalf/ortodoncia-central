@@ -236,7 +236,7 @@ function useUpdatePhotosPage() {
 									show: true,
 									text: 'Actualización exitosa.',
 								})
-								navigate('/patient-profile/' + patientData.id + '/photos')
+								navigate('/home/patient-profile/' + patientData.id + '/photos')
 								setLoading(false)
 							} else {
 								setHandleState({
@@ -254,7 +254,7 @@ function useUpdatePhotosPage() {
 								show: true,
 								text: 'Actualización exitosa.',
 							})
-							navigate('/patient-profile/' + patientData.id + '/photos')
+							navigate('/home/patient-profile/' + patientData.id + '/photos')
 							setLoading(false)
 						}
 					} else {
@@ -287,7 +287,7 @@ function useUpdatePhotosPage() {
 								show: true,
 								text: 'Actualización exitosa.',
 							})
-							navigate('/patient-profile/' + patientData.id + '/photos')
+							navigate('/home/patient-profile/' + patientData.id + '/photos')
 							setLoading(false)
 						} else {
 							setHandleState({
@@ -394,7 +394,7 @@ function useUpdatePhotosPage() {
 						show: true,
 						text: 'Actualización exitosa.',
 					})
-					navigate('/patient-profile/' + patientData.id + '/photos')
+					navigate('/home/patient-profile/' + patientData.id + '/photos')
 					setLoading(false)
 				} else {
 					setHandleState({
@@ -421,7 +421,7 @@ function useUpdatePhotosPage() {
 	}
 
 	const handleCancelButton = () => {
-		navigate(`/patient-profile/${patientData.id}/photos`)
+		navigate(`/home/patient-profile/${patientData.id}/photos`)
 		setHandleState({
 			severity: 'info',
 			variant: 'filled',

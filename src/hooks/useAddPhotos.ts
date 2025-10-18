@@ -220,7 +220,7 @@ function useAddPhotos() {
 						show: true,
 						text: 'Datos e imagenes guardados exitosamente.',
 					})
-					navigate('/patient-profile/' + patientData.id + '/photos')
+					navigate('/home/patient-profile/' + patientData.id + '/photos')
 				} else {
 					setLoading(false)
 					setHandleState({
