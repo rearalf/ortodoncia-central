@@ -1,7 +1,8 @@
 import { IUserState } from '@/interface/User'
+import { ITeethList } from '@/modules/odontogram/types/type'
 import { sub } from 'date-fns'
 
-export const constantTeethList: Odontogram = {
+export const constantTeethList: ITeethList = {
 	permanent: {
 		'1': [
 			{
