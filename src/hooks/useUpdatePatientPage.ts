@@ -151,7 +151,7 @@ function useUpdatePatientPage() {
 						...patientData,
 					})
 
-					navigate(`/patient-profile/${id}`)
+					navigate(`/home/patient-profile/${id}`)
 
 					setHandleState({
 						severity: 'success',

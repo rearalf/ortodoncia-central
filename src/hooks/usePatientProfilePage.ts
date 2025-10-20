@@ -36,7 +36,7 @@ function usePatientProfilePage() {
 		},
 		{
 			link_name: `Paciente ${titleName}`,
-			link_to: `/patient-profile/${patientData.id}`,
+			link_to: `/home/patient-profile/${patientData.id}`,
 		},
 	]
 

@@ -52,11 +52,11 @@ const PhtosPage = () => {
 						},
 						{
 							link_name: `Paciente ${titleName}`,
-							link_to: `/patient-profile/${patientData.id}`,
+							link_to: `/home/patient-profile/${patientData.id}`,
 						},
 						{
 							link_name: `Fotos e imagenes`,
-							link_to: `/patient-profile/${patientData.id}/photos`,
+							link_to: `/home/patient-profile/${patientData.id}/photos`,
 						},
 					]}
 				/>

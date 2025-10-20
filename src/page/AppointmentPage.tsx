@@ -33,7 +33,7 @@ function AppointmentPage() {
 									? patientData.name.split(' ')[2]
 									: patientData.name.split(' ')[1]
 							}`,
-							link_to: `/patient-profile/${patientData.id}`,
+							link_to: `/home/patient-profile/${patientData.id}`,
 						},
 						{
 							link_name: `Cita de ${patientData.name.split(' ')[0]} ${

@@ -75,7 +75,7 @@ function useTeethFormPage() {
 
 	const handleCancelButton = () => {
 		if (steps === 1) {
-			if (patientData.id) navigate(`/patient-profile/${patientData.id}`)
+			if (patientData.id) navigate(`/home/patient-profile/${patientData.id}`)
 			else navigate('/')
 			handleCleanStates()
 			setHandleState({
