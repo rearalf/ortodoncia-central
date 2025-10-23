@@ -26,6 +26,7 @@ const TeethForm = () => {
   };
 
   const handleToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
     setToothState(e.target.value as toothStateType);
     if (e.target.value !== "") {
       setAbutmentTooth("");
@@ -77,18 +78,7 @@ const TeethForm = () => {
             { label: "Deshacer", value: "disable" },
           ]}
         />
-        <RadioGroupComponent
-          row
-          id="toothState"
-          label="Estado de extracción"
-          value={toothState}
-          onChange={handleToothState}
-          options={[
-            { label: "A extracción", value: "extraction" },
-            { label: "Extraida", value: "extracted" },
-            { label: "Deshacer", value: "disable" },
-          ]}
-        />
+
         <RadioGroupComponent
           row
           id="abutmentToothState"
@@ -118,6 +108,23 @@ const TeethForm = () => {
             { label: "Sellante hecho", value: 1 },
             { label: "Sellante por hacer", value: 2 },
             { label: "Deshacer", value: 0 },
+          ]}
+        />
+        <RadioGroupComponent
+          row
+          id="toothState"
+          label="Afectaciones generales"
+          value={toothState}
+          onChange={handleToothState}
+          options={[
+            { label: "Deshacer", value: "disable" },
+            { label: "A extracción", value: "extraction" },
+            { label: "Extraida", value: "extracted" },
+            { label: "Endodoncia mal estado", value: "endodonticBadCondition" },
+            {
+              label: "Endodoncia buen estado",
+              value: "endodonticsGoodCondition",
+            },
           ]}
         />
       </div>

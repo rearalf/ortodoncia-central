@@ -18,15 +18,17 @@ const Tooth = (props: Props) => (
           ? ""
           : props.tooth.toothState === "extraction"
           ? "activeExtraction"
-          : "activeExtracted"
+          : props.tooth.toothState === "extracted"
+          ? "activeExtracted"
+          : props.tooth.toothState === "endodonticBadCondition"
+          ? "endodonticBadCondition"
+          : "endodonticsGoodCondition"
       }`}
       type="button"
       onClick={() =>
         props.hanldeModifyStateTooth(props.quadrant, props.tooth.tooth)
       }
-    >
-      X
-    </button>
+    ></button>
 
     <button
       className={`abutment_tooth_state ${

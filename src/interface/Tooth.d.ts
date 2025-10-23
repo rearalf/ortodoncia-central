@@ -1,6 +1,6 @@
 type toothPositionStateType = '' | 'decay' | 'filling' | 'disable'
 
-type toothStateType = '' | 'extraction' | 'extracted' | 'disable'
+type toothStateType = '' | 'extraction' | 'extracted' | 'disable' | 'endodonticsGoodCondition' | 'endodonticBadCondition'
 
 type toothPosition = 'palatina' | 'mesial' | 'distal' | 'vestibular' | 'oclusal'
 
