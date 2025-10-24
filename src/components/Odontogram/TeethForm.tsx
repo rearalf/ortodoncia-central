@@ -1,9 +1,12 @@
+import { Box, Grid, Typography } from "@mui/material";
+
 import useTeethState from "@/states/toothFormState";
-import RadioGroupComponent from "../RadioGroup";
+
 import TeethTable from "./TeethTable";
-import React from "react";
-import "./styles.css";
 import ModalDetailTooth from "./ModalDetailTooth";
+import RadioButtonComponent from "../RadioButtonComponent";
+
+import "./styles.css";
 
 const TeethForm = () => {
   const {
@@ -17,46 +20,45 @@ const TeethForm = () => {
     setPitFissureSealant,
   } = useTeethState();
 
-  const handlePositionState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPositionState(e.target.value as toothPositionStateType);
-    if (e.target.value !== "") {
+  const handlePositionState = (e: string | number) => {
+    setPositionState(e as toothPositionStateType);
+    if (e !== "") {
       setToothState("");
       setAbutmentTooth("");
       setPitFissureSealant("");
     }
   };
 
-  const handleToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setToothState(e.target.value as toothStateType);
-    if (e.target.value !== "") {
+  const handleToothState = (e: string | number) => {
+    setToothState(e as toothStateType);
+    if (e !== "") {
       setAbutmentTooth("");
       setPositionState("");
       setPitFissureSealant("");
     }
   };
 
-  const handleAbutmentToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAbutmentToothState = (e: string | number | boolean) => {
     setAbutmentTooth(
-      e.target.value === "true"
+      e === "true"
         ? true
-        : e.target.value === "disable"
+        : e === "disable"
         ? "disable"
-        : e.target.value === "falseTooth"
+        : e === "falseTooth"
         ? "falseTooth"
         : ""
     );
-    if (e.target.value !== "") {
+    if (e !== "") {
       setToothState("");
       setPositionState("");
       setPitFissureSealant("");
     }
   };
 
-  const handlePitFissureSealant = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const handlePitFissureSealant = (e: string | number) => {
+    const value = Number(e);
     if (value === 0 || value === 1 || value === 2) setPitFissureSealant(value);
-
-    if (e.target.value !== "") {
+    if (e !== "") {
       setToothState("");
       setPositionState("");
       setAbutmentTooth("");
@@ -66,70 +68,113 @@ const TeethForm = () => {
   return (
     <div className="teethForm">
       <ModalDetailTooth />
-      <div className="optionsTeethForm">
-        <RadioGroupComponent
-          row
-          id="positionState"
-          label="Estado del diente"
-          value={positionState}
-          onChange={handlePositionState}
-          options={[
-            { label: "Caries", value: "decay" },
-            { label: "Obturación", value: "filling" },
-            { label: "Deshacer", value: "disable" },
-          ]}
-        />
+      <Box
+        className="optionsTeethForm"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexWrap: {
+            sm: "wrap",
+            md: "nowrap",
+          },
+          justifyContent: {
+            xs: "center",
+            sm: "space-between",
+          },
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
+          gap: {
+            xs: "8px",
+            sm: "20px",
+          },
+        }}
+      >
+        <Grid>
+          <Typography variant="h6" gutterBottom>
+            Estado del diente:
+          </Typography>
+          <RadioButtonComponent
+            id="positionState"
+            onChange={handlePositionState}
+            value={positionState}
+            options={[
+              { label: "Caries", value: "decay" },
+              { label: "Obturación", value: "filling" },
+              { label: "Deshacer", value: "disable" },
+            ]}
+            sx={{}}
+          />
+        </Grid>
 
-        <RadioGroupComponent
-          row
-          id="abutmentToothState"
-          label="Puente parcial fijo"
-          value={abutmentToothState}
-          onChange={handleAbutmentToothState}
-          options={
-            abutmentToothState === "falseTooth" || abutmentToothState
-              ? [
-                  { label: "Pilar", value: "true" },
-                  { label: "Puente", value: "falseTooth" },
-                  { label: "Deshacer", value: "disable" },
-                ]
-              : [
-                  { label: "Pilar", value: "true" },
-                  { label: "Deshacer", value: "disable" },
-                ]
-          }
-        />
-        <RadioGroupComponent
-          row
-          id="pitFissureSealant"
-          label="Sellante de fosas y fisuras"
-          value={pitFissureSealant}
-          onChange={handlePitFissureSealant}
-          options={[
-            { label: "Sellante hecho", value: 1 },
-            { label: "Sellante por hacer", value: 2 },
-            { label: "Deshacer", value: 0 },
-          ]}
-        />
-        <RadioGroupComponent
-          row
-          id="toothState"
-          label="Afectaciones generales"
-          value={toothState}
-          onChange={handleToothState}
-          options={[
-            { label: "Deshacer", value: "disable" },
-            { label: "A extracción", value: "extraction" },
-            { label: "Extraida", value: "extracted" },
-            { label: "Ausente", value: "absent" },
-            { label: "Endodoncia mal estado", value: "endodonticBadCondition" },
-            {
-              label: "Endodoncia buen estado",
-              value: "endodonticsGoodCondition",
-            },
-          ]}
-        />
-      </div>
+        <Grid>
+          <Typography variant="h6" gutterBottom>
+            Puente parcial fijo:
+          </Typography>
+          <RadioButtonComponent
+            id="abutmentToothState"
+            onChange={handleAbutmentToothState}
+            value={abutmentToothState}
+            options={
+              abutmentToothState === "falseTooth" || abutmentToothState
+                ? [
+                    { label: "Pilar", value: "true" },
+                    { label: "Puente", value: "falseTooth" },
+                    { label: "Deshacer", value: "disable" },
+                  ]
+                : [
+                    { label: "Pilar", value: "true" },
+                    { label: "Deshacer", value: "disable" },
+                  ]
+            }
+            sx={{}}
+          />
+        </Grid>
+
+        <Grid>
+          <Typography variant="h6" gutterBottom>
+            Sellante de fosas y fisuras:
+          </Typography>
+          <RadioButtonComponent
+            id="pitFissureSealant"
+            onChange={handlePitFissureSealant}
+            value={pitFissureSealant}
+            options={[
+              { label: "Sellante hecho", value: 1 },
+              { label: "Sellante por hacer", value: 2 },
+              { label: "Deshacer", value: 0 },
+            ]}
+            sx={{}}
+          />
+        </Grid>
+
+        <Grid>
+          <Typography variant="h6" gutterBottom>
+            Selecciona una afectación:
+          </Typography>
+          <RadioButtonComponent
+            id="toothState"
+            onChange={handleToothState}
+            value={toothState || ""}
+            options={[
+              { label: "Deshacer", value: "disable" },
+              { label: "A extracción", value: "extraction" },
+              { label: "Extraida", value: "extracted" },
+              { label: "Ausente", value: "absent" },
+              {
+                label: "Endodoncia mal estado",
+                value: "endodonticBadCondition",
+              },
+              {
+                label: "Endodoncia buen estado",
+                value: "endodonticsGoodCondition",
+              },
+            ]}
+            sx={{}}
+          />
+        </Grid>
+      </Box>
 
       <TeethTable />
     </div>
