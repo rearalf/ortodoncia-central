@@ -27,7 +27,6 @@ const TeethForm = () => {
   };
 
   const handleToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setToothState(e.target.value as toothStateType);
     if (e.target.value !== "") {
       setAbutmentTooth("");
@@ -122,6 +121,7 @@ const TeethForm = () => {
             { label: "Deshacer", value: "disable" },
             { label: "A extracción", value: "extraction" },
             { label: "Extraida", value: "extracted" },
+            { label: "Ausente", value: "absent" },
             { label: "Endodoncia mal estado", value: "endodonticBadCondition" },
             {
               label: "Endodoncia buen estado",

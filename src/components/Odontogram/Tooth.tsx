@@ -22,7 +22,9 @@ const Tooth = (props: Props) => (
           ? "activeExtracted"
           : props.tooth.toothState === "endodonticBadCondition"
           ? "endodonticBadCondition"
-          : "endodonticsGoodCondition"
+          : props.tooth.toothState === "endodonticsGoodCondition"
+          ? "endodonticsGoodCondition"
+          : props.tooth.toothState === "absent" && "absent"
       }`}
       type="button"
       onClick={() =>
@@ -52,10 +54,15 @@ const Tooth = (props: Props) => (
       }
     ></button>
 
-    <button
+    <Button
       className={`${"toothButtonNumber"} ${
         props.tooth.oclusal !== "" ? "toothButtonNumberOver" : ""
       }`}
+      sx={{
+        color: "#fff",
+        opacity: props.tooth.toothState === "absent" ? ".5" : "1",
+        transition: "all 0.3s ease",
+      }}
       type="button"
       onClick={() =>
         props.hanldeModifyStateTooth(
@@ -66,10 +73,14 @@ const Tooth = (props: Props) => (
       }
     >
       {(props.quadrant, props.tooth.tooth)}
-    </button>
+    </Button>
     <Button
       variant={props.tooth.palatina === "" ? "outlined" : "contained"}
       className="palatina"
+      sx={{
+        opacity: props.tooth.toothState === "absent" ? ".5" : "1",
+        transition: "all 0.3s ease",
+      }}
       color={props.tooth.palatina === "decay" ? "error" : "info"}
       onClick={() =>
         props.hanldeModifyStateTooth(
@@ -82,6 +93,10 @@ const Tooth = (props: Props) => (
     <Button
       variant={props.tooth.mesial === "" ? "outlined" : "contained"}
       className="mesial"
+      sx={{
+        opacity: props.tooth.toothState === "absent" ? ".5" : "1",
+        transition: "all 0.3s ease",
+      }}
       color={props.tooth.mesial === "decay" ? "error" : "info"}
       onClick={() =>
         props.hanldeModifyStateTooth(
@@ -94,6 +109,10 @@ const Tooth = (props: Props) => (
     <Button
       variant={props.tooth.distal === "" ? "outlined" : "contained"}
       className="distal"
+      sx={{
+        opacity: props.tooth.toothState === "absent" ? ".5" : "1",
+        transition: "all 0.3s ease",
+      }}
       color={props.tooth.distal === "decay" ? "error" : "info"}
       onClick={() =>
         props.hanldeModifyStateTooth(
@@ -106,6 +125,10 @@ const Tooth = (props: Props) => (
     <Button
       variant={props.tooth.vestibular === "" ? "outlined" : "contained"}
       className="vestibular"
+      sx={{
+        opacity: props.tooth.toothState === "absent" ? ".5" : "1",
+        transition: "all 0.3s ease",
+      }}
       color={props.tooth.vestibular === "decay" ? "error" : "info"}
       onClick={() =>
         props.hanldeModifyStateTooth(
@@ -118,6 +141,10 @@ const Tooth = (props: Props) => (
     <Button
       variant={props.tooth.oclusal === "" ? "outlined" : "contained"}
       className="oclusal"
+      sx={{
+        opacity: props.tooth.toothState === "absent" ? ".5" : "1",
+        transition: "all 0.3s ease",
+      }}
       color={props.tooth.oclusal === "decay" ? "error" : "info"}
       onClick={() =>
         props.hanldeModifyStateTooth(

@@ -114,16 +114,15 @@
 	display: block;
 }
 
-/* --- ENDODONCIA (CONDICIÓN MALA Y BUENA) --- */
-/* Triángulo solo con borde (mala condición - rojo) */
 .toothState.endodonticBadCondition::after {
 	content: "";
 	display: block;
 	width: 0;
 	height: 0;
 	margin: 0 auto;
-	border-left: 15px solid transparent;
-	border-right: 15px solid transparent;
+	--border-left-right: 20px;
+	border-left: var(--border-left-right) solid transparent;
+	border-right: var(--border-left-right) solid transparent;
 	border-bottom: 25px solid transparent;
 	position: relative;
 }
@@ -136,27 +135,26 @@
 	transform: translate(-50%, -50%);
 	width: 0;
 	height: 0;
-	border-left: 13px solid transparent;
-	border-right: 13px solid transparent;
-	border-bottom: 23px solid #fff; /* color de fondo para simular hueco */
+	--border-left-right: 20px;
+	border-left: var(--border-left-right) solid transparent;
+	border-right: var(--border-left-right) solid transparent;
+	border-bottom: 25px solid transparent;
 }
 
-/* Dibujar borde rojo encima */
 .toothState.endodonticBadCondition::after {
 	border-bottom-color: #e22f32;
 }
 
-/* Triángulo solo con borde (buena condición - azul) */
 .toothState.endodonticsGoodCondition::after {
 	content: "";
 	display: block;
 	width: 0;
 	height: 0;
 	margin: 0 auto;
-	--border-left-right: 25px;
+	--border-left-right: 20px;
 	border-left: var(--border-left-right) solid transparent;
 	border-right: var(--border-left-right) solid transparent;
-	border-bottom: 30px solid transparent;
+	border-bottom: 25px solid transparent;
 	position: relative;
 }
 
@@ -168,9 +166,10 @@
 	transform: translate(-50%, -50%);
 	width: 0;
 	height: 0;
-	border-left: 13px solid transparent;
-	border-right: 13px solid transparent;
-	border-bottom: 23px solid #fff; /* color del fondo */
+	--border-left-right: 20px;
+	border-left: var(--border-left-right) solid transparent;
+	border-right: var(--border-left-right) solid transparent;
+	border-bottom: 25px solid transparent;
 }
 
 /* Dibujar borde azul encima */
