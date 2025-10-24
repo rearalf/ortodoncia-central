@@ -3,6 +3,7 @@ import RadioGroupComponent from "../RadioGroup";
 import TeethTable from "./TeethTable";
 import React from "react";
 import "./styles.css";
+import ModalDetailTooth from "./ModalDetailTooth";
 
 const TeethForm = () => {
   const {
@@ -65,6 +66,7 @@ const TeethForm = () => {
 
   return (
     <div className="teethForm">
+      <ModalDetailTooth />
       <div className="optionsTeethForm">
         <RadioGroupComponent
           row
