@@ -8,12 +8,15 @@ import useTeethState from '@/states/toothFormState'
 import useAlertState from '@/states/useAlertState'
 import Tooth from './Tooth'
 import './styles.css'
+import InputCheckbox from '../Checkbox'
+import { useDetailToothState } from '@/stores'
 
 interface Props {
 	enableButton?: boolean
 }
 
 const TeethTable = ({ enableButton = true }: Props) => {
+	const {selectTooth, setSelectTooth, setOpenModalWithData }=useDetailToothState()
 	const {
 		completeOdontogram,
 		teethList,
@@ -96,6 +99,8 @@ const TeethTable = ({ enableButton = true }: Props) => {
 
 	return (
 		<div className="teeth_table">
+			<InputCheckbox checked={selectTooth} id='selectTooth' onChange={(e)=> setSelectTooth(e.target.checked)} label='Seleccionar diente' />
+
 			<div id="teeth_permanent_maxillary" className="quadrants">
 				<div id="maxillary_right" className="quadrant">
 					{teethList.permanent['1'].map(tooth => (
@@ -104,6 +109,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 							tooth={tooth}
 							key={tooth.tooth}
 							hanldeModifyStateTooth={hanldeModifyStateTooth}
+							handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 						/>
 					))}
 				</div>
@@ -115,6 +121,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 							tooth={tooth}
 							key={tooth.tooth}
 							hanldeModifyStateTooth={hanldeModifyStateTooth}
+							handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 						/>
 					))}
 				</div>
@@ -129,6 +136,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 									tooth={tooth}
 									key={tooth.tooth}
 									hanldeModifyStateTooth={hanldeModifyStateTooth}
+									handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 								/>
 							))}
 						</div>
@@ -140,6 +148,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 									tooth={tooth}
 									key={tooth.tooth}
 									hanldeModifyStateTooth={hanldeModifyStateTooth}
+									handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 								/>
 							))}
 						</div>
@@ -153,6 +162,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 									tooth={tooth}
 									key={tooth.tooth}
 									hanldeModifyStateTooth={hanldeModifyStateTooth}
+									handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 								/>
 							))}
 						</div>
@@ -164,6 +174,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 									tooth={tooth}
 									key={tooth.tooth}
 									hanldeModifyStateTooth={hanldeModifyStateTooth}
+									handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 								/>
 							))}
 						</div>
@@ -178,6 +189,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 							tooth={tooth}
 							key={tooth.tooth}
 							hanldeModifyStateTooth={hanldeModifyStateTooth}
+							handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 						/>
 					))}
 				</div>
@@ -189,6 +201,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
 							tooth={tooth}
 							key={tooth.tooth}
 							hanldeModifyStateTooth={hanldeModifyStateTooth}
+							handleSetOpenModalWithData={selectTooth ? setOpenModalWithData : undefined}
 						/>
 					))}
 				</div>

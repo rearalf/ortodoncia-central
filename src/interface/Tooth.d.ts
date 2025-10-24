@@ -26,6 +26,7 @@ const toothPositionState = {
 
 interface toothObject {
   tooth: number;
+  toothNotes?: string;
   toothState: toothStateType;
   palatina: toothPositionStateType;
   distal: toothPositionStateType;

@@ -1,36 +1,33 @@
 import { Box, Button, Dialog, IconButton } from "@mui/material";
 import { FiSave, FiX, FiXCircle } from "react-icons/fi";
+
 import Tooth from "./Tooth";
 import InputBasic from "../InputBasic";
+import { useDetailToothState } from "@/stores";
 
 const ModalDetailTooth = () => {
+  const {
+    tooth,
+    toothNotes,
+    openModal,
+    setToothNotes,
+    setClearDetailToothState,
+  } = useDetailToothState();
   return (
-    <Dialog open={false} maxWidth="sm" fullWidth>
+    <Dialog open={openModal} maxWidth="sm" fullWidth>
       <IconButton
         sx={{
           position: "absolute",
           top: "15px",
           right: "15px",
         }}
+        onClick={setClearDetailToothState}
       >
         <FiX size={20} />
       </IconButton>
-      <Tooth
-        hanldeModifyStateTooth={() => {}}
-        quadrant={1}
-        tooth={{
-          tooth: 1,
-          toothState: "",
-          palatina: "",
-          distal: "",
-          mesial: "",
-          vestibular: "",
-          oclusal: "",
-          abutmentTooth: false,
-          falseTooth: false,
-          pitFissureSealant: "",
-        }}
-      />
+      {tooth && (
+        <Tooth hanldeModifyStateTooth={() => {}} quadrant={1} tooth={tooth} />
+      )}
 
       <Box
         sx={{
@@ -41,11 +38,11 @@ const ModalDetailTooth = () => {
           required
           multiline
           type="text"
-          id="tooth_notes"
-          key="tooth_notes"
+          id="toothNotes"
+          key="toothNotes"
           label="Observaciones del diente"
-          value={""}
-          onChange={() => {}}
+          value={toothNotes || ""}
+          onChange={(e) => setToothNotes(e.target.value)}
           sx={{
             width: "100%",
           }}
@@ -61,7 +58,7 @@ const ModalDetailTooth = () => {
           variant="outlined"
           color="error"
           type="button"
-          onClick={() => {}}
+          onClick={setClearDetailToothState}
           startIcon={<FiXCircle />}
         >
           Cancelar

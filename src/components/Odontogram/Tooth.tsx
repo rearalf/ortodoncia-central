@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 interface Props {
   tooth: toothObject;
   quadrant: number;
+  handleSetOpenModalWithData?: (toothNumber: toothObject) => void;
   hanldeModifyStateTooth: (
     quadrant: number,
     tooth: number,
@@ -65,11 +66,13 @@ const Tooth = (props: Props) => (
       }}
       type="button"
       onClick={() =>
-        props.hanldeModifyStateTooth(
-          props.quadrant,
-          props.tooth.tooth,
-          "oclusal"
-        )
+        props.handleSetOpenModalWithData !== undefined
+          ? props.handleSetOpenModalWithData(props.tooth)
+          : props.hanldeModifyStateTooth(
+              props.quadrant,
+              props.tooth.tooth,
+              "oclusal"
+            )
       }
     >
       {(props.quadrant, props.tooth.tooth)}
@@ -83,11 +86,13 @@ const Tooth = (props: Props) => (
       }}
       color={props.tooth.palatina === "decay" ? "error" : "info"}
       onClick={() =>
-        props.hanldeModifyStateTooth(
-          props.quadrant,
-          props.tooth.tooth,
-          "palatina"
-        )
+        props.handleSetOpenModalWithData !== undefined
+          ? props.handleSetOpenModalWithData(props.tooth)
+          : props.hanldeModifyStateTooth(
+              props.quadrant,
+              props.tooth.tooth,
+              "palatina"
+            )
       }
     ></Button>
     <Button
