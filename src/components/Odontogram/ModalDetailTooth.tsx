@@ -25,6 +25,7 @@ const ModalDetailTooth = () => {
       >
         <FiX size={20} />
       </IconButton>
+
       {tooth && (
         <Tooth hanldeModifyStateTooth={() => {}} quadrant={1} tooth={tooth} />
       )}
@@ -66,7 +67,7 @@ const ModalDetailTooth = () => {
         <Button
           variant="contained"
           color="success"
-          type="submit"
+          type="button"
           startIcon={<FiSave />}
         >
           Guardar

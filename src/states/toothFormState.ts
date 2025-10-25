@@ -33,7 +33,7 @@ const useTeethState = create<TeethStateInterface>()(set => ({
 	setPositionState: value => set(state => ({ ...state, positionState: value })),
 	completeOdontogram: false,
 	setCompleteOdontogram: value => set(state => ({ ...state, completeOdontogram: value })),
-	abutmentToothState: false,
+	abutmentToothState: '',
 	setAbutmentTooth: value => set(state => ({ ...state, abutmentToothState: value })),
 	pitFissureSealant: '',
 	setPitFissureSealant: value => set(state => ({ ...state, pitFissureSealant: value })),
