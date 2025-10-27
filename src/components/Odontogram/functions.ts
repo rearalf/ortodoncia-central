@@ -40,7 +40,7 @@ export function modifyPositionStatus(
 export function modifyExtractionStatus(
   tooth: number,
   quadrant: QuadrantKey | TemporaryQuadrantKey,
-  toothState: toothStateType,
+  toothState: TOOTH_STATE_TYPE | TOOTH_FACE_AFFECTION_TYPE,
   teethList: Odontogram,
   setHandleState: setAlertType
 ) {
@@ -59,14 +59,14 @@ export function modifyExtractionStatus(
       }
 
       if (toothObj.tooth === tooth) {
-        toothObj.toothState = toothState === "disable" ? "" : toothState;
+        toothObj.toothState = toothState === "" ? "" : toothState;
       }
     });
   } else {
     const q = quadrant as TemporaryQuadrantKey;
     updatedTeethList.temporary[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
-        toothObj.toothState = toothState === "disable" ? "" : toothState;
+        toothObj.toothState = toothState === "" ? "" : toothState;
       }
     });
   }

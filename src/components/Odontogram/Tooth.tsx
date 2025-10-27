@@ -1,9 +1,8 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 interface Props {
   tooth: toothObject;
   quadrant: QuadrantKey | TemporaryQuadrantKey;
-  handleSetOpenModalWithData?: (toothNumber: toothObject) => void;
   hanldeModifyStateTooth: (
     quadrant: QuadrantKey | TemporaryQuadrantKey,
     tooth: number,
@@ -27,11 +26,25 @@ const Tooth = (props: Props) => (
           ? "endodonticsGoodCondition"
           : props.tooth.toothState === "absent" && "absent"
       }`}
+      style={{ zIndex: 2 }}
       type="button"
       onClick={() =>
         props.hanldeModifyStateTooth(props.quadrant, props.tooth.tooth)
       }
-    ></button>
+    >
+      <Box
+        sx={{
+          color: "#fff",
+          fontSize: "0.875rem",
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        {props.tooth.tooth}
+      </Box>
+    </button>
 
     <button
       className={`abutment_tooth_state ${
@@ -56,26 +69,43 @@ const Tooth = (props: Props) => (
     ></button>
 
     <Button
-      className={`${"toothButtonNumber"} ${
-        props.tooth.oclusal !== "" ? "toothButtonNumberOver" : ""
-      }`}
       sx={{
         color: "#fff",
         opacity: props.tooth.toothState === "absent" ? ".5" : "1",
         transition: "all 0.3s ease",
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: 0,
+        minWidth: 0,
+        zIndex: 1,
+        width: {
+          xs: "15px",
+          sm: "20px",
+          md: "25px",
+          lg: "27px",
+        },
+        height: {
+          xs: "15px",
+          sm: "20px",
+          md: "25px",
+          lg: "27px",
+        },
+        "&:hover": {
+          filter: "brightness(0.9)",
+        },
       }}
       type="button"
       onClick={() =>
-        props.handleSetOpenModalWithData !== undefined
-          ? props.handleSetOpenModalWithData(props.tooth)
-          : props.hanldeModifyStateTooth(
-              props.quadrant,
-              props.tooth.tooth,
-              "oclusal"
-            )
+        props.hanldeModifyStateTooth(
+          props.quadrant,
+          props.tooth.tooth,
+          "oclusal"
+        )
       }
     >
-      {(props.quadrant, props.tooth.tooth)}
+      {props.tooth.tooth}
     </Button>
     <Button
       variant={props.tooth.palatina === "" ? "outlined" : "contained"}
@@ -86,13 +116,11 @@ const Tooth = (props: Props) => (
       }}
       color={props.tooth.palatina === "decay" ? "error" : "info"}
       onClick={() =>
-        props.handleSetOpenModalWithData !== undefined
-          ? props.handleSetOpenModalWithData(props.tooth)
-          : props.hanldeModifyStateTooth(
-              props.quadrant,
-              props.tooth.tooth,
-              "palatina"
-            )
+        props.hanldeModifyStateTooth(
+          props.quadrant,
+          props.tooth.tooth,
+          "palatina"
+        )
       }
     ></Button>
     <Button

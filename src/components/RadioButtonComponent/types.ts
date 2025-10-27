@@ -9,7 +9,7 @@ export interface IRadioButtonComponentOption {
 }
 
 export interface IRadioButtonComponentProps {
-  value: string | number | boolean;
+  value: string | number | boolean | null;
   onChange: (newValue: string | number) => void;
   options: IRadioButtonComponentOption[];
   sx?: SxProps<Theme>;

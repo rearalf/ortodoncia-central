@@ -1,6 +1,7 @@
 type toothPositionStateType = "" | "decay" | "filling" | "disable";
 
 type toothStateType =
+  | null
   | ""
   | "extraction"
   | "extracted"
@@ -25,15 +26,33 @@ const toothPositionState = {
   filling: "filling",
 };
 
+type TOOTH_STATE_TYPE =
+  | null
+  | ""
+  | "selectTooth"
+  | "extraction"
+  | "extracted"
+  | "absent"
+  | "endodonticsGoodCondition"
+  | "endodonticBadCondition"
+  | "bridgeAbutment"
+  | "bridgePontic"
+  | "sealantDone"
+  | "sealantPending";
+
+type TOOTH_FACE_AFFECTION_TYPE = null | "" | "decay" | "filling";
+
+type TOOTH_AFFECTION = TOOTH_STATE_TYPE | TOOTH_FACE_AFFECTION_TYPE;
+
 interface toothObject {
   tooth: number;
   toothNotes?: string;
-  toothState: toothStateType;
-  palatina: toothPositionStateType;
-  distal: toothPositionStateType;
-  mesial: toothPositionStateType;
-  vestibular: toothPositionStateType;
-  oclusal: toothPositionStateType;
+  toothState: TOOTH_STATE_TYPE;
+  palatina: TOOTH_FACE_AFFECTION_TYPE;
+  distal: TOOTH_FACE_AFFECTION_TYPE;
+  mesial: TOOTH_FACE_AFFECTION_TYPE;
+  vestibular: TOOTH_FACE_AFFECTION_TYPE;
+  oclusal: TOOTH_FACE_AFFECTION_TYPE;
   abutmentTooth: boolean;
   falseTooth: boolean;
   pitFissureSealant: pitFissureSealantType;

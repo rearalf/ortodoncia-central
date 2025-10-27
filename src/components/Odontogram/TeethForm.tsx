@@ -7,11 +7,12 @@ import ModalDetailTooth from "./ModalDetailTooth";
 import RadioButtonComponent from "../RadioButtonComponent";
 
 import "./styles.css";
+import { TOOTH_FACE_AFFECTION_ENUM, TOOTH_STATE_ENUM } from "./constants";
 
 const TeethForm = () => {
   const {
     toothState,
-    positionState,
+    // positionState,
     pitFissureSealant,
     abutmentToothState,
     setToothState,
@@ -20,18 +21,18 @@ const TeethForm = () => {
     setPitFissureSealant,
   } = useTeethState();
 
-  const handlePositionState = (e: string | number) => {
+  /*  const handlePositionState = (e: string | number) => {
     setPositionState(e as toothPositionStateType);
     if (e !== "") {
       setToothState("");
       setAbutmentTooth("");
       setPitFissureSealant("");
     }
-  };
+  }; */
 
-  const handleToothState = (e: string | number) => {
-    setToothState(e as toothStateType);
-    if (e !== "") {
+  const handleToothState = (e: string | number | boolean | null) => {
+    setToothState(e === 0 ? "" : (e as TOOTH_AFFECTION));
+    if (e !== null || e !== 0) {
       setAbutmentTooth("");
       setPositionState("");
       setPitFissureSealant("");
@@ -49,7 +50,7 @@ const TeethForm = () => {
         : ""
     );
     if (e !== "") {
-      setToothState("");
+      setToothState(null);
       setPositionState("");
       setPitFissureSealant("");
     }
@@ -59,7 +60,7 @@ const TeethForm = () => {
     const value = Number(e);
     if (value === 0 || value === 1 || value === 2) setPitFissureSealant(value);
     if (e !== "") {
-      setToothState("");
+      setToothState(null);
       setPositionState("");
       setAbutmentTooth("");
     }
@@ -93,16 +94,31 @@ const TeethForm = () => {
       >
         <Grid>
           <Typography variant="h6" gutterBottom>
-            Estado del diente:
+            Selecciona una afectación:
           </Typography>
           <RadioButtonComponent
-            id="positionState"
-            onChange={handlePositionState}
-            value={positionState}
+            id="toothState"
+            onChange={handleToothState}
+            value={toothState}
             options={[
-              { label: "Caries", value: "decay" },
-              { label: "Obturación", value: "filling" },
-              { label: "Deshacer", value: "disable" },
+              {
+                label: "Seleccionar diente",
+                value: TOOTH_STATE_ENUM.SelectTooth,
+              },
+              { label: "Deshacer", value: "" },
+              { label: "Caries", value: TOOTH_FACE_AFFECTION_ENUM.Decay },
+              { label: "Obturación", value: TOOTH_FACE_AFFECTION_ENUM.Filling },
+              { label: "A extracción", value: TOOTH_STATE_ENUM.Extraction },
+              { label: "Extraida", value: TOOTH_STATE_ENUM.Extracted },
+              { label: "Ausente", value: TOOTH_STATE_ENUM.Absent },
+              {
+                label: "Endodoncia mal estado",
+                value: TOOTH_STATE_ENUM.EndodonticBadCondition,
+              },
+              {
+                label: "Endodoncia buen estado",
+                value: TOOTH_STATE_ENUM.EndodonticsGoodCondition,
+              },
             ]}
             sx={{}}
           />
@@ -144,36 +160,6 @@ const TeethForm = () => {
               { label: "Sellante hecho", value: 1 },
               { label: "Sellante por hacer", value: 2 },
               { label: "Deshacer", value: 0 },
-            ]}
-            sx={{}}
-          />
-        </Grid>
-
-        <Grid>
-          <Typography variant="h6" gutterBottom>
-            Selecciona una afectación:
-          </Typography>
-          <RadioButtonComponent
-            id="toothState"
-            onChange={handleToothState}
-            value={toothState || ""}
-            options={[
-              {
-                label: "Seleccionar diente",
-                value: "selectTooth",
-              },
-              { label: "Deshacer", value: "disable" },
-              { label: "A extracción", value: "extraction" },
-              { label: "Extraida", value: "extracted" },
-              { label: "Ausente", value: "absent" },
-              {
-                label: "Endodoncia mal estado",
-                value: "endodonticBadCondition",
-              },
-              {
-                label: "Endodoncia buen estado",
-                value: "endodonticsGoodCondition",
-              },
             ]}
             sx={{}}
           />
