@@ -1,5 +1,5 @@
 export function modifyPositionStatus(
-  quadrant: number,
+  quadrant: QuadrantKey | TemporaryQuadrantKey,
   tooth: number,
   teethList: Odontogram,
   positionState: toothPositionStateType,
@@ -7,8 +7,9 @@ export function modifyPositionStatus(
   setHandleState: setAlertType
 ) {
   const updatedTeethList = { ...teethList };
-  if (quadrant < 5) {
-    updatedTeethList.permanent[quadrant].map((toothObj) => {
+  if (["1", "2", "3", "4"].includes(quadrant)) {
+    const q = quadrant as QuadrantKey;
+    updatedTeethList.permanent[q].map((toothObj) => {
       if (toothObj.falseTooth || toothObj.abutmentTooth) {
         setHandleState({
           severity: "warning",
@@ -25,7 +26,8 @@ export function modifyPositionStatus(
       }
     });
   } else {
-    updatedTeethList.temporary[quadrant].map((toothObj) => {
+    const q = quadrant as TemporaryQuadrantKey;
+    updatedTeethList.temporary[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
         toothObj[position] = positionState === "disable" ? "" : positionState;
         toothObj.toothState = "";
@@ -37,14 +39,15 @@ export function modifyPositionStatus(
 
 export function modifyExtractionStatus(
   tooth: number,
-  quadrant: number,
+  quadrant: QuadrantKey | TemporaryQuadrantKey,
   toothState: toothStateType,
   teethList: Odontogram,
   setHandleState: setAlertType
 ) {
   const updatedTeethList = { ...teethList };
-  if (quadrant < 5) {
-    updatedTeethList.permanent[quadrant].map((toothObj) => {
+  if (["1", "2", "3", "4"].includes(quadrant)) {
+    const q = quadrant as QuadrantKey;
+    updatedTeethList.permanent[q].map((toothObj) => {
       if (toothObj.falseTooth || toothObj.abutmentTooth) {
         setHandleState({
           severity: "warning",
@@ -60,7 +63,8 @@ export function modifyExtractionStatus(
       }
     });
   } else {
-    updatedTeethList.temporary[quadrant].map((toothObj) => {
+    const q = quadrant as TemporaryQuadrantKey;
+    updatedTeethList.temporary[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
         toothObj.toothState = toothState === "disable" ? "" : toothState;
       }
@@ -70,7 +74,7 @@ export function modifyExtractionStatus(
 }
 
 export function modifyFixedPartialBridge(
-  quadrant: number,
+  quadrant: QuadrantKey | TemporaryQuadrantKey,
   tooth: number,
   teethList: Odontogram,
   abutmentToothState: abutmentToothStateType,
@@ -78,7 +82,7 @@ export function modifyFixedPartialBridge(
 ) {
   const updatedTeethList = { ...teethList };
 
-  if (quadrant >= 5) {
+  if (["5", "6", "7", "8"].includes(quadrant)) {
     setHandleState({
       severity: "error",
       variant: "filled",
@@ -87,8 +91,8 @@ export function modifyFixedPartialBridge(
     });
     return;
   }
-
-  const abutments = updatedTeethList.permanent[quadrant].filter(
+  const q = quadrant as QuadrantKey;
+  const abutments = updatedTeethList.permanent[q].filter(
     (t) => t.tooth === tooth
   )[0];
 
@@ -103,20 +107,20 @@ export function modifyFixedPartialBridge(
   }
 
   if (abutmentToothState === "disable") {
-    updatedTeethList.permanent[quadrant].map((toothObj) => {
+    updatedTeethList.permanent[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
         toothObj.falseTooth = false;
         toothObj.abutmentTooth = false;
       }
     });
   } else if (abutmentToothState === "falseTooth") {
-    updatedTeethList.permanent[quadrant].map((toothObj) => {
+    updatedTeethList.permanent[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
         toothObj.falseTooth = true;
       }
     });
   } else {
-    updatedTeethList.permanent[quadrant].map((toothObj) => {
+    updatedTeethList.permanent[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
         toothObj.abutmentTooth = true;
       }
@@ -128,14 +132,15 @@ export function modifyFixedPartialBridge(
 
 export function modifyPitFissuereSealant(
   tooth: number,
-  quadrant: number,
+  quadrant: QuadrantKey | TemporaryQuadrantKey,
   teethList: Odontogram,
   pitFissureSealant: pitFissureSealantType,
   setHandleState: setAlertType
 ) {
   const updatedTeethList = { ...teethList };
-  if (quadrant < 5) {
-    updatedTeethList.permanent[quadrant].map((toothObj) => {
+  if (["1", "2", "3", "4"].includes(quadrant)) {
+    const q = quadrant as QuadrantKey;
+    updatedTeethList.permanent[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
         if (
           toothObj.abutmentTooth ||
@@ -155,7 +160,8 @@ export function modifyPitFissuereSealant(
       }
     });
   } else {
-    updatedTeethList.temporary[quadrant].map((toothObj) => {
+    const q = quadrant as TemporaryQuadrantKey;
+    updatedTeethList.temporary[q].map((toothObj) => {
       if (toothObj.tooth === tooth) {
         if (
           toothObj.abutmentTooth ||

@@ -158,6 +158,10 @@ const TeethForm = () => {
             onChange={handleToothState}
             value={toothState || ""}
             options={[
+              {
+                label: "Seleccionar diente",
+                value: "selectTooth",
+              },
               { label: "Deshacer", value: "disable" },
               { label: "A extracción", value: "extraction" },
               { label: "Extraida", value: "extracted" },

@@ -2,10 +2,10 @@ import { Button } from "@mui/material";
 
 interface Props {
   tooth: toothObject;
-  quadrant: number;
+  quadrant: QuadrantKey | TemporaryQuadrantKey;
   handleSetOpenModalWithData?: (toothNumber: toothObject) => void;
   hanldeModifyStateTooth: (
-    quadrant: number,
+    quadrant: QuadrantKey | TemporaryQuadrantKey,
     tooth: number,
     position?: toothPosition
   ) => void;

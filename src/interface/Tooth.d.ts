@@ -7,7 +7,8 @@ type toothStateType =
   | "disable"
   | "endodonticsGoodCondition"
   | "endodonticBadCondition"
-  | "absent";
+  | "absent"
+  | "selectTooth";
 
 type toothPosition =
   | "palatina"
@@ -40,9 +41,12 @@ interface toothObject {
 
 type Quadrant = toothObject[];
 
+type QuadrantKey = "1" | "2" | "3" | "4";
+type TemporaryQuadrantKey = "5" | "6" | "7" | "8";
+
 interface Odontogram {
-  permanent: Record<string, Quadrant>;
-  temporary: Record<string, Quadrant>;
+  permanent: Record<QuadrantKey, Quadrant>;
+  temporary: Record<TemporaryQuadrantKey, Quadrant>;
 }
 
 type pitFissureSealantType = 0 | 1 | 2 | "";
