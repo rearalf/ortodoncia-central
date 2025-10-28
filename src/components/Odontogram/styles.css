@@ -36,32 +36,6 @@
 	gap: 3px;
 }
 
-.tooth_button {
-	--sizeBox: 35px;
-	position: relative;
-	width: var(--sizeBox);
-	height: var(--sizeBox);
-}
-
-.toothButtonNumber {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	z-index: 0;
-	font-size: 9px;
-	transform: translate(-50%, -50%);
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	transition: font-size 0.5s ease-in-out;
-	color: var(--paragrap);
-}
-
-.toothButtonNumberOver {
-	z-index: 1;
-	color: #fff;
-}
-
 .tooth_button .palatina {
 	position: absolute;
 	top: 0;
@@ -121,16 +95,6 @@
 		gap: 4px;
 	}
 
-	.tooth_button {
-		--sizeBox: 45px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 11px;
-	}
-
 	.tooth_button .vestibular,
 	.tooth_button .palatina {
 		height: 12px;
@@ -165,16 +129,6 @@
 		gap: 12px;
 	}
 
-	.tooth_button {
-		--sizeBox: 50px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 12px;
-	}
-
 	.tooth_button .vestibular,
 	.tooth_button .palatina {
 		height: 15px;
@@ -186,29 +140,7 @@
 	}
 }
 
-@media (width >= 1200px) {
-	.tooth_button {
-		--sizeBox: 55px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 15px;
-	}
-}
-
 @media (width >= 1440px) {
-	.tooth_button {
-		--sizeBox: 65px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 18px;
-	}
-
 	.tooth_button .vestibular,
 	.tooth_button .palatina {
 		height: 18px;
@@ -275,6 +207,9 @@
 	padding: 24px;
 	background: #00000080;
 	border-radius: 50%;
+	width: 38px;
+	height: 38px;
+	padding: 0;
 }
 
 .tooth_button .abutment_tooth_state.false_tooth {
@@ -284,6 +219,20 @@
 	background: #00000080;
 	border-top: 2px solid #8ae0ff;
 	border-bottom: 2px solid #8ae0ff;
+}
+
+@media (width >= 768px) {
+	.tooth_button .abutment_tooth_state.abutment_tooth {
+		width: 48px;
+		height: 48px;
+	}
+}
+
+@media (width >= 1024px) {
+	.tooth_button .abutment_tooth_state.abutment_tooth {
+		width: 48px;
+		height: 48px;
+	}
 }
 
 .tooth_button .pit_fissure_sealant {

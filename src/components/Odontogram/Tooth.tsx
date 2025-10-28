@@ -12,7 +12,11 @@ interface Props {
 }
 
 const Tooth = (props: Props) => (
-  <div className="tooth_button" key={props.tooth.tooth}>
+  <Box
+    className="tooth_button"
+    sx={buttonStateTooth.toothButton}
+    key={props.tooth.tooth}
+  >
     <Button
       sx={buttonStateTooth.buttonState(props.tooth.toothState)}
       onClick={() =>
@@ -123,7 +127,7 @@ const Tooth = (props: Props) => (
     >
       {props.tooth.tooth}
     </Button>
-  </div>
+  </Box>
 );
 
 export default Tooth;

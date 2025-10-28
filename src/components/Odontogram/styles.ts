@@ -1,6 +1,23 @@
 import { IToothStyles } from "./type";
 
 export const buttonStateTooth: IToothStyles = {
+  toothButton: {
+    position: "relative",
+    width: {
+      xs: "35px",
+      sm: "45px",
+      md: "50px",
+      lg: "55px",
+      xl: "65px",
+    },
+    height: {
+      xs: "35px",
+      sm: "45px",
+      md: "50px",
+      lg: "55px",
+      xl: "65px",
+    },
+  },
   buttonState: (toothState) => ({
     position: "absolute",
     left: "50%",
@@ -28,7 +45,6 @@ export const buttonStateTooth: IToothStyles = {
     backgroundColor: "transparent",
     border: "none",
     cursor: "pointer",
-    transition: "font-size 0.5s ease-in-out",
     "&:hover": {
       fontSize: {
         md: "75px",
@@ -99,35 +115,52 @@ export const buttonStateTooth: IToothStyles = {
       transition: "font-size 0.5s ease-in-out",
       fontSize: "9px",
       width: "100%",
+      minWidth: "100%",
       height: "4px",
+      padding: "0",
+      borderRadius: "1px",
       border: "none",
     }),
     // --- SELLANTES POR HACER ---
     ...(toothState === "sealantPending" && {
       backgroundColor: "#e22f32",
       display: "block",
+      "&:hover": {
+        backgroundColor: "#e22f32",
+      },
     }),
     // --- SELLANTES HECHOS ---
     ...(toothState === "sealantDone" && {
       backgroundColor: "#00A6E2",
       display: "block",
+      "&:hover": {
+        backgroundColor: "#00A6E2",
+      },
     }),
     ...((toothState === "bridgeAbutment" || toothState === "bridgePontic") && {
       fontSize: "9px",
       transition: "font-size 0.5s ease-in-out",
+      padding: 0,
+      minWidth: {
+        xs: "38px",
+        sm: "48px",
+        md: "52px",
+        lg: "58px",
+        xl: "68px",
+      },
       width: {
-        xs: "35px",
-        sm: "45px",
-        md: "50px",
-        lg: "55px",
-        xl: "65px",
+        xs: "38px",
+        sm: "48px",
+        md: "52px",
+        lg: "58px",
+        xl: "68px",
       },
       height: {
-        xs: "35px",
-        sm: "45px",
-        md: "50px",
-        lg: "55px",
-        xl: "65px",
+        xs: "38px",
+        sm: "48px",
+        md: "52px",
+        lg: "58px",
+        xl: "68px",
       },
       "&:hover": {
         backgroundColor: "#00000080",
@@ -136,13 +169,14 @@ export const buttonStateTooth: IToothStyles = {
     ...(toothState === "bridgeAbutment" && {
       width: "85%",
       height: "85%",
+      padding: 0,
       background: "#00000080",
       borderTop: "2px solid #8ae0ff",
       borderBottom: "2px solid #8ae0ff",
     }),
     ...(toothState === "bridgePontic" && {
+      padding: 0,
       border: "3px solid #8ae0ff",
-      padding: "24px",
       background: "#00000080",
       borderRadius: "50%",
     }),
