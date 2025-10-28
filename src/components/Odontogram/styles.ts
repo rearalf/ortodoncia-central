@@ -94,6 +94,58 @@ export const buttonStateTooth: IToothStyles = {
         borderBottomColor: "#00A6E2",
       },
     }),
+    // --- ESTILOS BASE PARA SELLANTES ---
+    ...((toothState === "sealantPending" || toothState === "sealantDone") && {
+      transition: "font-size 0.5s ease-in-out",
+      fontSize: "9px",
+      width: "100%",
+      height: "4px",
+      border: "none",
+    }),
+    // --- SELLANTES POR HACER ---
+    ...(toothState === "sealantPending" && {
+      backgroundColor: "#e22f32",
+      display: "block",
+    }),
+    // --- SELLANTES HECHOS ---
+    ...(toothState === "sealantDone" && {
+      backgroundColor: "#00A6E2",
+      display: "block",
+    }),
+    ...((toothState === "bridgeAbutment" || toothState === "bridgePontic") && {
+      fontSize: "9px",
+      transition: "font-size 0.5s ease-in-out",
+      width: {
+        xs: "35px",
+        sm: "45px",
+        md: "50px",
+        lg: "55px",
+        xl: "65px",
+      },
+      height: {
+        xs: "35px",
+        sm: "45px",
+        md: "50px",
+        lg: "55px",
+        xl: "65px",
+      },
+      "&:hover": {
+        backgroundColor: "#00000080",
+      },
+    }),
+    ...(toothState === "bridgeAbutment" && {
+      width: "85%",
+      height: "85%",
+      background: "#00000080",
+      borderTop: "2px solid #8ae0ff",
+      borderBottom: "2px solid #8ae0ff",
+    }),
+    ...(toothState === "bridgePontic" && {
+      border: "3px solid #8ae0ff",
+      padding: "24px",
+      background: "#00000080",
+      borderRadius: "50%",
+    }),
   }),
   buttonNumberStyles: {
     color: "#fff",

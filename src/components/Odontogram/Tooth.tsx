@@ -13,7 +13,12 @@ interface Props {
 
 const Tooth = (props: Props) => (
   <div className="tooth_button" key={props.tooth.tooth}>
-    <Button sx={buttonStateTooth.buttonState(props.tooth.toothState)}>
+    <Button
+      sx={buttonStateTooth.buttonState(props.tooth.toothState)}
+      onClick={() =>
+        props.hanldeModifyStateTooth(props.quadrant, props.tooth.tooth)
+      }
+    >
       <Box sx={buttonStateTooth.buttonNumberStyles}>{props.tooth.tooth}</Box>
     </Button>
 
