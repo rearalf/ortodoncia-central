@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
+import { constantAppointment, constantTeethList } from '@/utils/constants'
 import { useNavigate, useParams } from 'react-router-dom'
-import { constantAppointment } from '@/utils/constants'
 import usePatientState from '@/states/patientState'
 import useTeethState from '@/states/toothFormState'
 import useAlertState from '@/states/useAlertState'
@@ -11,8 +11,6 @@ import formatDate from '@/utils/formatDate'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
 import Doctors from '@/models/Doctors'
-
-import useMigrateTeethData from '@/components/Odontogram/useMigrateTeethData'
 
 function useTeethFormPage() {
 	const navigate = useNavigate()
@@ -27,11 +25,11 @@ function useTeethFormPage() {
 		setTeethList,
 		setToothState,
 		setAppointment,
+		setPositionState,
+		setAbutmentTooth,
+		setPitFissureSealant,
 		setCompleteOdontogram,
 	} = useTeethState()
-
-	/* MIGRATION */
-	const { hasObsoleteFields, migrateTeethData } = useMigrateTeethData()
 
 	const [loading, setLoading] = useState<boolean>(false)
 	const [steps, setSteps] = useState<number>(1)
@@ -91,7 +89,12 @@ function useTeethFormPage() {
 		}
 	}
 
-	const handleCleanStates = () => setToothState(null)
+	const handleCleanStates = () => {
+		setToothState('')
+		setPositionState('')
+		setAbutmentTooth('')
+		setPitFissureSealant('')
+	}
 
 	const handleChangeInputDate = (value: Date | null) => {
 		try {
@@ -147,6 +150,7 @@ function useTeethFormPage() {
 				const patient = new Patient()
 				const data = await patient.getPatient(id_patient)
 				if (data !== undefined) {
+					setLoading(false)
 					setPatientData({
 						...data,
 						age: getAge(data.birthdate.toISOString()),
@@ -162,23 +166,12 @@ function useTeethFormPage() {
 						}`,
 					)
 					setCompleteOdontogram(data.completeOdontogram)
-
 					if (data.teeth !== undefined) {
-						const parsed: Odontogram = JSON.parse(JSON.parse(JSON.stringify(data.teeth)));
-						if (hasObsoleteFields(parsed)) {
-							const migrated = migrateTeethData(parsed);
-							if (JSON.stringify(parsed) !== JSON.stringify(migrated)) {
-								const updateTeeth = await patient.updateOnlyTeeth(id_patient, migrated)
-								if(updateTeeth)
-									console.log("🛠 Migrando odontograma del paciente...");
-								else
-									console.log("🛠 Migrando odontograma del paciente tuvo error...");
-							}
-							setTeethList(migrated)
-							return;
-						}
-						setTeethList(parsed)
-					} 
+						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
+						setTeethList(teeth)
+					} else {
+						setTeethList(constantTeethList)
+					}
 				}
 				setLoading(false)
 			}
@@ -193,7 +186,7 @@ function useTeethFormPage() {
 				text: 'Datos del paciente no obtenidos.',
 			})
 		}
-	}, [id_patient, setPatientData, setCompleteOdontogram, hasObsoleteFields, setTeethList, migrateTeethData, navigate, setHandleState])
+	}, [id_patient, navigate, setHandleState, setTeethList, setPatientData, setCompleteOdontogram])
 
 	const handleNextStep = () => setSteps(prevStep => prevStep + 1)
 

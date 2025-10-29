@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
-import { IconButton, InputAdornment, SxProps, Theme } from '@mui/material'
+import { IconButton, InputAdornment } from '@mui/material'
 
 interface InputBasicProps {
 	id: string
@@ -17,13 +17,11 @@ interface InputBasicProps {
 	onChange: React.ChangeEventHandler<HTMLInputElement>
 	showPassword?: boolean
 	handleShowPassword?: () => void
-	sx?: SxProps<Theme>
 }
 
 const InputBasic = React.memo((props: InputBasicProps) => {
 	return (
 		<TextField
-		sx={props.sx}
 			minRows={4}
 			id={props.id}
 			name={props.id}

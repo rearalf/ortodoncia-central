@@ -40,7 +40,7 @@ const TeethFormPage = () => {
 						},
 						{
 							link_name: `Paciente ${titleName}`,
-							link_to: `/home/patient-profile/${patientData.id}`,
+							link_to: `/patient-profile/${patientData.id}`,
 						},
 						{
 							link_name: 'Nueva cita',
