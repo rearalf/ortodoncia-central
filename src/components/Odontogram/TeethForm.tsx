@@ -1,130 +1,104 @@
-import useTeethState from '@/states/toothFormState'
-import RadioGroupComponent from '../RadioGroup'
-import TeethTable from './TeethTable'
-import React from 'react'
-import './styles.css'
+import { Box, Grid, Typography } from "@mui/material";
+
+import RadioButtonComponent from "../RadioButtonComponent";
+
+import useTeethState from "@/states/toothFormState";
+import ModalDetailTooth from "./ModalDetailTooth";
+import TeethTable from "./TeethTable";
+
+import { TOOTH_FACE_AFFECTION_ENUM, TOOTH_STATE_ENUM } from "./constants";
+import "./styles.css";
 
 const TeethForm = () => {
-	const {
-		toothState,
-		positionState,
-		pitFissureSealant,
-		abutmentToothState,
-		setToothState,
-		setPositionState,
-		setAbutmentTooth,
-		setPitFissureSealant,
-	} = useTeethState()
+  const { toothState, setToothState } = useTeethState();
 
-	const handlePositionState = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPositionState(e.target.value as toothPositionStateType)
-		if (e.target.value !== '') {
-			setToothState('')
-			setAbutmentTooth('')
-			setPitFissureSealant('')
-		}
-	}
+  const handleToothState = (e: string | number | boolean | null) =>
+    setToothState(e === 0 ? "" : (e as TOOTH_AFFECTION));
 
-	const handleToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setToothState(e.target.value as toothStateType)
-		if (e.target.value !== '') {
-			setAbutmentTooth('')
-			setPositionState('')
-			setPitFissureSealant('')
-		}
-	}
+  return (
+    <div className="teethForm">
+      <ModalDetailTooth />
+      <Box
+        className="optionsTeethForm"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexWrap: {
+            sm: "wrap",
+            md: "nowrap",
+          },
+          justifyContent: {
+            xs: "center",
+            sm: "space-between",
+          },
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
+          gap: {
+            xs: "8px",
+            sm: "20px",
+          },
+        }}
+      >
+        <Grid>
+          <Typography variant="h6" gutterBottom>
+            Selecciona una afectación:
+          </Typography>
+          <RadioButtonComponent
+            id="toothState"
+            onChange={handleToothState}
+            value={toothState}
+            options={[
+              {
+                label: "Seleccionar diente",
+                value: TOOTH_STATE_ENUM.SelectTooth,
+              },
+              { label: "Deshacer", value: "" },
+              { label: "Caries", value: TOOTH_FACE_AFFECTION_ENUM.Decay },
+              {
+                label: "Obturación",
+                value: TOOTH_FACE_AFFECTION_ENUM.Filling,
+              },
+              {
+                label: "Extracción por hacer",
+                value: TOOTH_STATE_ENUM.Extraction,
+              },
+              { label: "Diente extraído", value: TOOTH_STATE_ENUM.Extracted },
+              { label: "Ausente", value: TOOTH_STATE_ENUM.Absent },
+              {
+                label: "Endodoncia en mal estado",
+                value: TOOTH_STATE_ENUM.EndodonticBadCondition,
+              },
+              {
+                label: "Endodoncia en buen estado",
+                value: TOOTH_STATE_ENUM.EndodonticsGoodCondition,
+              },
+              {
+                label: "Sellante por hacer",
+                value: TOOTH_STATE_ENUM.SealantPending,
+              },
+              {
+                label: "Sellante hecho",
+                value: TOOTH_STATE_ENUM.SealantDone,
+              },
+              {
+                label: "Pilar del puente",
+                value: TOOTH_STATE_ENUM.BridgePontic,
+              },
+              {
+                label: "Póntico (pieza del puente)",
+                value: TOOTH_STATE_ENUM.BridgeAbutment,
+              },
+            ]}
+            sx={{}}
+          />
+        </Grid>
+      </Box>
 
-	const handleAbutmentToothState = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setAbutmentTooth(
-			e.target.value === 'true'
-				? true
-				: e.target.value === 'disable'
-				? 'disable'
-				: e.target.value === 'falseTooth'
-				? 'falseTooth'
-				: '',
-		)
-		if (e.target.value !== '') {
-			setToothState('')
-			setPositionState('')
-			setPitFissureSealant('')
-		}
-	}
+      <TeethTable />
+    </div>
+  );
+};
 
-	const handlePitFissureSealant = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = Number(e.target.value)
-		if (value === 0 || value === 1 || value === 2) setPitFissureSealant(value)
-
-		if (e.target.value !== '') {
-			setToothState('')
-			setPositionState('')
-			setAbutmentTooth('')
-		}
-	}
-
-	return (
-		<div className="teethForm">
-			<div className="optionsTeethForm">
-				<RadioGroupComponent
-					row
-					id="positionState"
-					label="Estado del diente"
-					value={positionState}
-					onChange={handlePositionState}
-					options={[
-						{ label: 'Caries', value: 'decay' },
-						{ label: 'Obturación', value: 'filling' },
-						{ label: 'Deshacer', value: 'disable' },
-					]}
-				/>
-				<RadioGroupComponent
-					row
-					id="toothState"
-					label="Estado de extracción"
-					value={toothState}
-					onChange={handleToothState}
-					options={[
-						{ label: 'A extracción', value: 'extraction' },
-						{ label: 'Extraida', value: 'extracted' },
-						{ label: 'Deshacer', value: 'disable' },
-					]}
-				/>
-				<RadioGroupComponent
-					row
-					id="abutmentToothState"
-					label="Puente parcial fijo"
-					value={abutmentToothState}
-					onChange={handleAbutmentToothState}
-					options={
-						abutmentToothState === 'falseTooth' || abutmentToothState 
-							? [
-									{ label: 'Pilar', value: 'true' },
-									{ label: 'Puente', value: 'falseTooth' },
-									{ label: 'Deshacer', value: 'disable' },
-							  ]
-							: [
-									{ label: 'Pilar', value: 'true' },
-									{ label: 'Deshacer', value: 'disable' },
-							  ]
-					}
-				/>
-				<RadioGroupComponent
-					row
-					id="pitFissureSealant"
-					label="Sellante de fosas y fisuras"
-					value={pitFissureSealant}
-					onChange={handlePitFissureSealant}
-					options={[
-						{ label: 'Sellante hecho', value: 1 },
-						{ label: 'Sellante por hacer', value: 2 },
-						{ label: 'Deshacer', value: 0 },
-					]}
-				/>
-			</div>
-
-			<TeethTable />
-		</div>
-	)
-}
-
-export default TeethForm
+export default TeethForm;
