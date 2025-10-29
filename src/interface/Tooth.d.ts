@@ -53,9 +53,9 @@ interface toothObject {
   mesial: TOOTH_FACE_AFFECTION_TYPE;
   vestibular: TOOTH_FACE_AFFECTION_TYPE;
   oclusal: TOOTH_FACE_AFFECTION_TYPE;
-  abutmentTooth: boolean;
-  falseTooth: boolean;
-  pitFissureSealant: pitFissureSealantType;
+  abutmentTooth?: boolean;
+  falseTooth?: boolean;
+  pitFissureSealant?: pitFissureSealantType;
 }
 
 type Quadrant = toothObject[];

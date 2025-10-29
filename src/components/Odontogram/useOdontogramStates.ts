@@ -1,27 +1,23 @@
 import useTeethState from "@/states/toothFormState";
 import useAlertState from "@/states/useAlertState";
-
 import { useDetailToothState } from "@/stores";
 
 import {
   PERMANENT_TEETH,
-  TOOTH_FACE_AFFECTION_VALUES,
   TOOTH_STATE_VALUES,
+  TOOTH_FACE_AFFECTION_VALUES,
 } from "./constants";
 
 function useOdontogramStates(enableButton: boolean) {
   const { setOpenModalWithData } = useDetailToothState();
+  const { setHandleState } = useAlertState();
   const {
-    completeOdontogram,
     teethList,
     toothState,
-    // positionState,
-    // pitFissureSealant,
-    // abutmentToothState,
+    completeOdontogram,
     setTeethList,
     setToothState,
   } = useTeethState();
-  const { setHandleState } = useAlertState();
 
   const findToothByNumber = (toothNumber: number) => {
     for (const quadrantKey of Object.keys(
@@ -111,59 +107,6 @@ function useOdontogramStates(enableButton: boolean) {
     }
 
     setTeethList(updatedTeethList);
-    /* if (toothState === "" && positionState !== "" && position !== undefined) {
-      const updatedTeethList = modifyPositionStatus(
-        quadrant,
-        tooth,
-        teethList,
-        positionState,
-        position,
-        setHandleState
-      );
-      if (updatedTeethList) setTeethList(updatedTeethList);
-    }
-
-    if (toothState !== "" && positionState === "") {
-      const updatedTeethList = modifyExtractionStatus(
-        tooth,
-        quadrant,
-        toothState,
-        teethList,
-        setHandleState
-      );
-      if (updatedTeethList) setTeethList(updatedTeethList);
-    }
-
-    if (
-      toothState === "" &&
-      positionState === "" &&
-      abutmentToothState !== ""
-    ) {
-      const updatedTeethList = modifyFixedPartialBridge(
-        quadrant,
-        tooth,
-        teethList,
-        abutmentToothState,
-        setHandleState
-      );
-      if (updatedTeethList) setTeethList(updatedTeethList);
-    }
-
-    if (
-      toothState === "" &&
-      positionState === "" &&
-      abutmentToothState === "" &&
-      pitFissureSealant !== ""
-    ) {
-      const updatedTeethList = modifyPitFissuereSealant(
-        tooth,
-        quadrant,
-        teethList,
-        pitFissureSealant,
-        setHandleState
-      );
-      if (updatedTeethList) setTeethList(updatedTeethList);
-    } */
   };
 
   return {

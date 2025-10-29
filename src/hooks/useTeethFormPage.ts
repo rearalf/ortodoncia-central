@@ -12,6 +12,8 @@ import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
 import Doctors from '@/models/Doctors'
 
+import useMigrateTeethData from '@/components/Odontogram/useMigrateTeethData'
+
 function useTeethFormPage() {
 	const navigate = useNavigate()
 	const { id_patient } = useParams()
@@ -30,6 +32,9 @@ function useTeethFormPage() {
 		setPitFissureSealant,
 		setCompleteOdontogram,
 	} = useTeethState()
+
+	/* MIGRATION */
+	const migratedData = useMigrateTeethData()
 
 	const [loading, setLoading] = useState<boolean>(false)
 	const [steps, setSteps] = useState<number>(1)
@@ -150,7 +155,6 @@ function useTeethFormPage() {
 				const patient = new Patient()
 				const data = await patient.getPatient(id_patient)
 				if (data !== undefined) {
-					setLoading(false)
 					setPatientData({
 						...data,
 						age: getAge(data.birthdate.toISOString()),
@@ -166,12 +170,33 @@ function useTeethFormPage() {
 						}`,
 					)
 					setCompleteOdontogram(data.completeOdontogram)
+
+					let teeth: Odontogram;
+
 					if (data.teeth !== undefined) {
+						const parsed: Odontogram = JSON.parse(JSON.parse(JSON.stringify(data.teeth)));
+
+						// 🧩 Migrar los datos si tienen los campos viejos
+						const migrated = migratedData(parsed);
+
+						// ✅ Si hubo cambios, actualiza Firestore automáticamente
+						if (JSON.stringify(parsed) !== JSON.stringify(migrated)) {
+							console.log("🛠 Migrando odontograma del paciente...");
+							// const ref = doc(db, "patients", id_patient);
+							// await updateDoc(ref, { teeth: JSON.stringify(migrated) });
+						}
+
+						teeth = migrated;
+					} else {
+						teeth = constantTeethList;
+					}
+					
+					setTeethList(teeth)
+					/* if (data.teeth !== undefined) {
 						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
-						setTeethList(teeth)
 					} else {
 						setTeethList(constantTeethList)
-					}
+					} */
 				}
 				setLoading(false)
 			}
