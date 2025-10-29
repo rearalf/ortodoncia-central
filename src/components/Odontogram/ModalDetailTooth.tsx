@@ -27,7 +27,7 @@ const ModalDetailTooth = () => {
       </IconButton>
 
       {tooth && (
-        <Tooth hanldeModifyStateTooth={() => {}} quadrant={"1"} tooth={tooth} />
+        <Tooth handleToothStateChange={() => {}} quadrant={"1"} tooth={tooth} />
       )}
 
       <Box

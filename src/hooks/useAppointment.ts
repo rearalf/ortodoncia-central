@@ -17,7 +17,6 @@ function useAppointment() {
 		setTeethList,
 		setAppointment,
 		setToothState,
-		setPositionState,
 		setCompleteOdontogram,
 	} = useTeethState()
 	const { setHandleState } = useAlertState()
@@ -153,9 +152,8 @@ function useAppointment() {
 	}, [id_patient, getPatientData])
 
 	useEffect(() => {
-		setToothState('')
-		setPositionState('')
-	}, [setToothState, setPositionState])
+		setToothState(null)
+	}, [setToothState])
 
 	return {
 		loading,

@@ -13,7 +13,7 @@ const TeethForm = () => {
   const { toothState, setToothState } = useTeethState();
 
   const handleToothState = (e: string | number | boolean | null) =>
-    setToothState(e === 0 ? "" : (e as TOOTH_AFFECTION));
+    setToothState(e === 0 ? null : (e as TOOTH_AFFECTION));
 
   return (
     <div className="teethForm">

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const TeethTable = ({ enableButton = true }: Props) => {
-  const { completeOdontogram, hanldeModifyStateTooth, teethList } =
+  const { completeOdontogram, handleToothStateChange, teethList } =
     useOdontogramStates(enableButton);
   return (
     <div className="teeth_table">
@@ -18,7 +18,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
               quadrant={"1"}
               tooth={tooth}
               key={tooth.tooth}
-              hanldeModifyStateTooth={hanldeModifyStateTooth}
+              handleToothStateChange={handleToothStateChange}
             />
           ))}
         </div>
@@ -29,7 +29,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
               quadrant={"2"}
               tooth={tooth}
               key={tooth.tooth}
-              hanldeModifyStateTooth={hanldeModifyStateTooth}
+              handleToothStateChange={handleToothStateChange}
             />
           ))}
         </div>
@@ -43,7 +43,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
                   quadrant={"5"}
                   tooth={tooth}
                   key={tooth.tooth}
-                  hanldeModifyStateTooth={hanldeModifyStateTooth}
+                  handleToothStateChange={handleToothStateChange}
                 />
               ))}
             </div>
@@ -54,7 +54,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
                   quadrant={"6"}
                   tooth={tooth}
                   key={tooth.tooth}
-                  hanldeModifyStateTooth={hanldeModifyStateTooth}
+                  handleToothStateChange={handleToothStateChange}
                 />
               ))}
             </div>
@@ -67,7 +67,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
                   quadrant={"8"}
                   tooth={tooth}
                   key={tooth.tooth}
-                  hanldeModifyStateTooth={hanldeModifyStateTooth}
+                  handleToothStateChange={handleToothStateChange}
                 />
               ))}
             </div>
@@ -78,7 +78,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
                   quadrant={"7"}
                   tooth={tooth}
                   key={tooth.tooth}
-                  hanldeModifyStateTooth={hanldeModifyStateTooth}
+                  handleToothStateChange={handleToothStateChange}
                 />
               ))}
             </div>
@@ -92,7 +92,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
               quadrant={"3"}
               tooth={tooth}
               key={tooth.tooth}
-              hanldeModifyStateTooth={hanldeModifyStateTooth}
+              handleToothStateChange={handleToothStateChange}
             />
           ))}
         </div>
@@ -103,7 +103,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
               quadrant={"4"}
               tooth={tooth}
               key={tooth.tooth}
-              hanldeModifyStateTooth={hanldeModifyStateTooth}
+              handleToothStateChange={handleToothStateChange}
             />
           ))}
         </div>
