@@ -5,19 +5,6 @@
 	margin: 38px 0;
 }
 
-.optionsTeethForm {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-@media (width >= 768px) {
-	.optionsTeethForm {
-		flex-direction: row;
-		gap: 32px;
-	}
-}
-
 .teethFirstRow {
 	display: flex;
 	flex-wrap: wrap;
@@ -47,57 +34,6 @@
 .teethFirstRow_row:last-child .row,
 .teethFirstRow_row:first-child .row {
 	gap: 3px;
-}
-
-.tooth_button {
-	--sizeBox: 35px;
-	position: relative;
-	width: var(--sizeBox);
-	height: var(--sizeBox);
-}
-
-.toothButtonNumber {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	z-index: 0;
-	font-size: 9px;
-	transform: translate(-50%, -50%);
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	transition: font-size 0.5s ease-in-out;
-	color: var(--paragrap);
-}
-
-.toothButtonNumberOver {
-	z-index: 1;
-	color: #fff;
-}
-
-.toothState {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 1;
-	font-size: 45px;
-	user-select: none;
-	display: none;
-	line-height: 32px;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	transition: font-size 0.5s ease-in-out;
-}
-
-.toothState.activeExtraction {
-	color: #e22f32;
-	display: block;
-}
-.toothState.activeExtracted {
-	color: #00A6E2;
-	display: block;
 }
 
 .tooth_button .palatina {
@@ -148,18 +84,6 @@
 	border-top-right-radius: 60%;
 }
 
-.tooth_button .oclusal {
-	--sizeBox: 15px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	width: var(--sizeBox);
-	height: var(--sizeBox);
-	padding: 0;
-	min-width: 0;
-}
-
 @media (width >= 768px) {
 	.teethFirstRow_row {
 		gap: 10px;
@@ -171,16 +95,6 @@
 		gap: 4px;
 	}
 
-	.tooth_button {
-		--sizeBox: 45px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 11px;
-	}
-
 	.tooth_button .vestibular,
 	.tooth_button .palatina {
 		height: 12px;
@@ -189,21 +103,6 @@
 	.tooth_button .distal,
 	.tooth_button .mesial {
 		min-width: 12px;
-	}
-
-	.tooth_button .oclusal {
-		--sizeBox: 20px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothState {
-		font-size: 65px;
-		line-height: 45px;
-	}
-
-	.toothState:hover {
-		font-size: 75px;
 	}
 }
 
@@ -230,16 +129,6 @@
 		gap: 12px;
 	}
 
-	.tooth_button {
-		--sizeBox: 50px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 12px;
-	}
-
 	.tooth_button .vestibular,
 	.tooth_button .palatina {
 		height: 15px;
@@ -249,67 +138,9 @@
 	.tooth_button .mesial {
 		min-width: 15px;
 	}
-
-	.tooth_button .oclusal {
-		--sizeBox: 20px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothState {
-		font-size: 65px;
-		line-height: 45px;
-	}
-
-	.toothState:hover {
-		font-size: 75px;
-	}
-}
-
-@media (width >= 1200px) {
-	.tooth_button {
-		--sizeBox: 55px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 15px;
-	}
-
-	.tooth_button .oclusal {
-		--sizeBox: 25px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothState {
-		font-size: 72px;
-		line-height: 52px;
-	}
-
-	.toothState:hover {
-		font-size: 78px;
-	}
 }
 
 @media (width >= 1440px) {
-	.tooth_button {
-		--sizeBox: 65px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
-	.toothButtonNumber {
-		font-size: 18px;
-	}
-
-	.tooth_button .oclusal {
-		--sizeBox: 28px;
-		width: var(--sizeBox);
-		height: var(--sizeBox);
-	}
-
 	.tooth_button .vestibular,
 	.tooth_button .palatina {
 		height: 18px;
@@ -318,15 +149,6 @@
 	.tooth_button .distal,
 	.tooth_button .mesial {
 		min-width: 18px;
-	}
-
-	.toothState {
-		font-size: 80px;
-		line-height: 60px;
-	}
-
-	.toothState:hover {
-		font-size: 82px;
 	}
 }
 
@@ -366,6 +188,7 @@
 
 .tooth_button .abutment_tooth_state {
 	position: absolute;
+	display: none;
 	left: 50%;
 	top: 50%;
 	z-index: 0;
@@ -379,18 +202,37 @@
 }
 
 .tooth_button .abutment_tooth_state.abutment_tooth {
+	display: block;
 	border: 3px solid #8ae0ff;
 	padding: 24px;
 	background: #00000080;
 	border-radius: 50%;
+	width: 38px;
+	height: 38px;
+	padding: 0;
 }
 
 .tooth_button .abutment_tooth_state.false_tooth {
+	display: block;
 	width: 85%;
 	height: 85%;
 	background: #00000080;
 	border-top: 2px solid #8ae0ff;
 	border-bottom: 2px solid #8ae0ff;
+}
+
+@media (width >= 768px) {
+	.tooth_button .abutment_tooth_state.abutment_tooth {
+		width: 48px;
+		height: 48px;
+	}
+}
+
+@media (width >= 1024px) {
+	.tooth_button .abutment_tooth_state.abutment_tooth {
+		width: 48px;
+		height: 48px;
+	}
 }
 
 .tooth_button .pit_fissure_sealant {
