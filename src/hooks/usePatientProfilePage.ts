@@ -10,8 +10,6 @@ import formatDate from '@/utils/formatDate'
 import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
 
-import useMigrateTeethData from '@/components/Odontogram/useMigrateTeethData'
-
 function usePatientProfilePage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
@@ -26,8 +24,6 @@ function usePatientProfilePage() {
 	const { setPatientData, patientData } = usePatientState()
 	const { setAppoinments } = useAppointmentState()
 	const { setHandleState } = useAlertState()
-	/* MIGRATION */
-	const { migrateTeethData, hasObsoleteFields } = useMigrateTeethData();
 
 	const [loading, setLoading] = useState<boolean>(false)
 	const [tabValue, setTabValue] = useState<string>('1')
@@ -75,24 +71,15 @@ function usePatientProfilePage() {
 					)
 					setCompleteOdontogram(data.completeOdontogram)
 					if (data.teeth !== undefined) {
-						const parsed: Odontogram = JSON.parse(JSON.parse(JSON.stringify(data.teeth)));
-						if (hasObsoleteFields(parsed)) {
-							const migrated = migrateTeethData(parsed);
-							if (JSON.stringify(parsed) !== JSON.stringify(migrated)) {
-								const updateTeeth = await patient.updateOnlyTeeth(id, migrated)
-								if(updateTeeth)
-									console.log("🛠 Migrando odontograma del paciente...");
-								else
-									console.log("🛠 Migrando odontograma del paciente tuvo error...");
-							}
-							setTeethList(migrated)
-							return;
-						}
-						setTeethList(parsed)
+						const teeth = JSON.parse(JSON.parse(JSON.stringify(data.teeth)))
+						setTeethList(teeth)
+					} else {
+						setTeethList(constantTeethList)
 					}
 				}
 			}
 		} catch (error) {
+			setLoading(false)
 			console.log('Error getting patient data usePatient: ' + error)
 			setHandleState({
 				severity: 'error',
@@ -101,10 +88,8 @@ function usePatientProfilePage() {
 				text: 'Error al obtener los datos del paciente.',
 			})
 			navigate('/')
-		} finally {
-			setLoading(false);
 		}
-	}, [id, setPatientData, setCompleteOdontogram, hasObsoleteFields, setTeethList, migrateTeethData, setHandleState, navigate])
+	}, [id, setPatientData, setTeethList, setHandleState, navigate, setCompleteOdontogram])
 
 	const getAppointments = useCallback(async () => {
 		try {
@@ -174,7 +159,10 @@ function usePatientProfilePage() {
 	}, [id, getAppointments])
 
 	useEffect(() => {
-		setToothState(null)
+		setToothState('')
+		setPositionState('')
+		setAbutmentTooth('')
+		setPitFissureSealant('')
 	}, [setToothState, setPositionState, setAbutmentTooth, setPitFissureSealant])
 
 	return {
