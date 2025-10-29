@@ -84,11 +84,11 @@ const TeethForm = () => {
               },
               {
                 label: "Pilar del puente",
-                value: TOOTH_STATE_ENUM.BridgeAbutment,
+                value: TOOTH_STATE_ENUM.BridgePontic,
               },
               {
                 label: "Póntico (pieza del puente)",
-                value: TOOTH_STATE_ENUM.BridgePontic,
+                value: TOOTH_STATE_ENUM.BridgeAbutment,
               },
             ]}
             sx={{}}
