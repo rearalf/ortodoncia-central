@@ -1,7 +1,11 @@
 import { SxProps, Theme } from "@mui/material";
 
-export type PermanentQuadrantType = "1" | "2" | "3" | "4";
-export type TemporaryQuadrantType = "5" | "6" | "7" | "8";
+export type FACE_TYPE =
+  | "palatina"
+  | "distal"
+  | "mesial"
+  | "vestibular"
+  | "oclusal";
 
 export type TOOTH_STATE_TYPE =
   | null
@@ -44,3 +48,16 @@ export type IToothStyles = {
     oclusal?: TOOTH_FACE_AFFECTION_TYPE
   ) => SxProps<Theme>;
 };
+
+type pitFissureSealantType = 0 | 1 | 2 | "";
+
+export type IQuadrant = IToothObject[];
+
+export type PermanentQuadrantType = "1" | "2" | "3" | "4";
+export type TemporaryQuadrantType = "5" | "6" | "7" | "8";
+export type FullQuadrantType = PermanentQuadrantType | TemporaryQuadrantType;
+
+export interface OdontogramType {
+  permanent: Record<PermanentQuadrantType, IQuadrant>;
+  temporary: Record<TemporaryQuadrantType, IQuadrant>;
+}

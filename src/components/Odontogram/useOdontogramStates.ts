@@ -7,6 +7,13 @@ import {
   TOOTH_STATE_VALUES,
   TOOTH_FACE_AFFECTION_VALUES,
 } from "./constants";
+import {
+  FACE_TYPE,
+  TOOTH_STATE_TYPE,
+  PermanentQuadrantType,
+  TemporaryQuadrantType,
+  TOOTH_FACE_AFFECTION_TYPE,
+} from "./type";
 
 function useOdontogramStates(enableButton: boolean) {
   const { setOpenModalWithData } = useDetailToothState();
@@ -22,7 +29,7 @@ function useOdontogramStates(enableButton: boolean) {
   const findToothByNumber = (toothNumber: number) => {
     for (const quadrantKey of Object.keys(
       teethList.permanent
-    ) as QuadrantKey[]) {
+    ) as PermanentQuadrantType[]) {
       const foundTooth = teethList.permanent[quadrantKey].find(
         (tooth) => tooth.tooth === toothNumber
       );
@@ -33,7 +40,7 @@ function useOdontogramStates(enableButton: boolean) {
 
     for (const quadrantKey of Object.keys(
       teethList.temporary
-    ) as TemporaryQuadrantKey[]) {
+    ) as TemporaryQuadrantType[]) {
       const foundTooth = teethList.temporary[quadrantKey].find(
         (tooth) => tooth.tooth === toothNumber
       );
@@ -43,7 +50,7 @@ function useOdontogramStates(enableButton: boolean) {
     }
   };
 
-  const handleToothStateChange = (tooth: number, face?: toothPosition) => {
+  const handleToothStateChange = (tooth: number, face?: FACE_TYPE) => {
     if (!enableButton) return;
 
     if (toothState === null) {
@@ -68,7 +75,7 @@ function useOdontogramStates(enableButton: boolean) {
       const updatedTeethList = { ...teethList };
 
       if (PERMANENT_TEETH.includes(toothObj.quadrant)) {
-        const q = toothObj.quadrant as QuadrantKey;
+        const q = toothObj.quadrant as PermanentQuadrantType;
         if (face && TOOTH_FACE_AFFECTION_VALUES.includes(toothState)) {
           updatedTeethList.permanent[q].forEach((t) => {
             if (t.tooth === tooth) {
@@ -85,7 +92,7 @@ function useOdontogramStates(enableButton: boolean) {
           });
         }
       } else {
-        const q = toothObj.quadrant as TemporaryQuadrantKey;
+        const q = toothObj.quadrant as TemporaryQuadrantType;
         if (face && TOOTH_FACE_AFFECTION_VALUES.includes(toothState)) {
           updatedTeethList.temporary[q].forEach((t) => {
             if (t.tooth === tooth) {

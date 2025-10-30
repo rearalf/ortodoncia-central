@@ -11,6 +11,7 @@ import Patient from '@/models/Patient'
 import getAge from '@/utils/getAge'
 
 import useMigrateTeethData from '@/components/Odontogram/useMigrateTeethData'
+import { OdontogramType } from '@/components/Odontogram/type'
 
 function usePatientProfilePage() {
 	const { id } = useParams()
@@ -18,9 +19,6 @@ function usePatientProfilePage() {
 	const {
 		setTeethList,
 		setToothState,
-		setPositionState,
-		setAbutmentTooth,
-		setPitFissureSealant,
 		setCompleteOdontogram,
 	} = useTeethState()
 	const { setPatientData, patientData } = usePatientState()
@@ -75,7 +73,7 @@ function usePatientProfilePage() {
 					)
 					setCompleteOdontogram(data.completeOdontogram)
 					if (data.teeth !== undefined) {
-						const parsed: Odontogram = JSON.parse(JSON.parse(JSON.stringify(data.teeth)));
+						const parsed: OdontogramType = JSON.parse(JSON.parse(JSON.stringify(data.teeth)));
 						if (hasObsoleteFields(parsed)) {
 							const migrated = migrateTeethData(parsed);
 							if (JSON.stringify(parsed) !== JSON.stringify(migrated)) {
@@ -175,7 +173,7 @@ function usePatientProfilePage() {
 
 	useEffect(() => {
 		setToothState(null)
-	}, [setToothState, setPositionState, setAbutmentTooth, setPitFissureSealant])
+	}, [setToothState])
 
 	return {
 		links,

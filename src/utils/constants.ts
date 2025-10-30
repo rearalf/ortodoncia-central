@@ -1,7 +1,10 @@
-import { IUserState } from "@/interface/User";
 import { sub } from "date-fns";
 
-export const constantTeethList: Odontogram = {
+import { OdontogramType } from "@/components/Odontogram/type";
+import { PatientDataInterface } from "@/interface/Patient";
+import { IUserState } from "@/interface/User";
+
+export const constantTeethList: OdontogramType = {
   permanent: {
     "1": [
       {

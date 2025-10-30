@@ -1,10 +1,12 @@
 import { Box, Button } from "@mui/material";
+
 import { buttonStateTooth } from "./styles";
+import { FACE_TYPE, FullQuadrantType, IToothObject } from "./type";
 
 interface Props {
-  tooth: toothObject;
-  quadrant: QuadrantKey | TemporaryQuadrantKey;
-  handleToothStateChange: (tooth: number, position?: toothPosition) => void;
+  tooth: IToothObject;
+  quadrant: FullQuadrantType;
+  handleToothStateChange: (tooth: number, position?: FACE_TYPE) => void;
 }
 
 const Tooth = (props: Props) => (
