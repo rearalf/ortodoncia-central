@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import {
 	DatePicker,
 	DateValidationError,
@@ -38,4 +39,4 @@ const InputDate = (props: InputDateProps) => {
 	)
 }
 
-export default InputDate
+export default memo(InputDate)

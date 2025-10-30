@@ -1,4 +1,5 @@
 import { Backdrop, CircularProgress } from '@mui/material'
+import { memo } from 'react'
 
 interface BackdropLoadingProps {
 	loading: boolean
@@ -10,4 +11,4 @@ const BackdropLoading = (props: BackdropLoadingProps) => (
 	</Backdrop>
 )
 
-export default BackdropLoading
+export default memo(BackdropLoading)

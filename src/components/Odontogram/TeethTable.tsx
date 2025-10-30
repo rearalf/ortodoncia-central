@@ -2,12 +2,13 @@ import useOdontogramStates from "./useOdontogramStates";
 import ModalDetailTooth from "./ModalDetailTooth";
 import Tooth from "./Tooth";
 import "./styles.css";
+import { memo } from "react";
 
 interface Props {
   enableButton?: boolean;
 }
 
-const TeethTable = ({ enableButton = true }: Props) => {
+const TeethTableComponent = ({ enableButton = true }: Props) => {
   const {
     teethList,
     completeOdontogram,
@@ -121,5 +122,7 @@ const TeethTable = ({ enableButton = true }: Props) => {
     </>
   );
 };
+
+const TeethTable = memo(TeethTableComponent);
 
 export default TeethTable;

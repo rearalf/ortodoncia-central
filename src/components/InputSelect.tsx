@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import { memo } from 'react'
 
 interface InputSelectProps {
 	id: string
@@ -48,4 +49,4 @@ const InputSelect = (props: InputSelectProps) => (
 	</FormControl>
 )
 
-export default InputSelect
+export default memo(InputSelect)

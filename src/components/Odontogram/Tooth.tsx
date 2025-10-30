@@ -2,6 +2,7 @@ import { Box, Button } from "@mui/material";
 
 import { buttonStateTooth } from "./styles";
 import { FACE_TYPE, FullQuadrantType, IToothObject } from "./type";
+import { memo } from "react";
 
 interface Props {
   tooth: IToothObject;
@@ -9,7 +10,7 @@ interface Props {
   handleToothStateChange: (tooth: number, position?: FACE_TYPE) => void;
 }
 
-const Tooth = (props: Props) => (
+const Tooth = memo((props: Props) => (
   <Box
     className="tooth_button"
     sx={buttonStateTooth.toothButton}
@@ -94,6 +95,6 @@ const Tooth = (props: Props) => (
       {props.tooth.tooth}
     </Button>
   </Box>
-);
+));
 
 export default Tooth;
