@@ -14,17 +14,14 @@ import {
   TemporaryQuadrantType,
   TOOTH_FACE_AFFECTION_TYPE,
 } from "./type";
+import { useEffect } from "react";
 
 function useOdontogramStates(enableButton: boolean) {
-  const { setOpenModalWithData } = useDetailToothState();
+  const { setOpenModalWithData, setEnableEditing, enableEditing } =
+    useDetailToothState();
   const { setHandleState } = useAlertState();
-  const {
-    teethList,
-    toothState,
-    completeOdontogram,
-    setTeethList,
-    setToothState,
-  } = useTeethState();
+  const { teethList, toothState, completeOdontogram, setTeethList } =
+    useTeethState();
 
   const findToothByNumber = (toothNumber: number) => {
     for (const quadrantKey of Object.keys(
@@ -51,7 +48,7 @@ function useOdontogramStates(enableButton: boolean) {
   };
 
   const handleToothStateChange = (tooth: number, face?: FACE_TYPE) => {
-    if (!enableButton) return;
+    if (!enableButton && toothState !== "selectTooth") return;
 
     if (toothState === null) {
       setHandleState({
@@ -68,7 +65,13 @@ function useOdontogramStates(enableButton: boolean) {
     if (toothObj) {
       if (toothState === "selectTooth") {
         setOpenModalWithData(toothObj.tooth);
-        setToothState(null);
+        setEnableEditing(true);
+        return;
+      }
+
+      if (toothState === "selectToothEnableEditing") {
+        setOpenModalWithData(toothObj.tooth);
+        setEnableEditing(false);
         return;
       }
 
@@ -132,6 +135,10 @@ function useOdontogramStates(enableButton: boolean) {
       }
     }
   };
+
+  useEffect(() => {
+    console.log({ enableEditing });
+  }, [enableEditing]);
 
   return {
     teethList,

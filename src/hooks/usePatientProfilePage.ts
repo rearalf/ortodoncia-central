@@ -42,7 +42,10 @@ function usePatientProfilePage() {
 		},
 	]
 
-	const handleGoToTeethForm = () => navigate('/appointments/create/' + id)
+	const handleGoToTeethForm = () => {
+		setToothState(null)
+		navigate('/appointments/create/' + id)
+	}
 	const handleGoToUpdatePatient = () => navigate('/home/update-patient/' + id)
 	const handleGoToPhotos = () => navigate(`/photos/${id}/photos`)
 
@@ -172,7 +175,7 @@ function usePatientProfilePage() {
 	}, [id, getAppointments])
 
 	useEffect(() => {
-		setToothState(null)
+		setToothState('selectToothEnableEditing')
 	}, [setToothState])
 
 	return {

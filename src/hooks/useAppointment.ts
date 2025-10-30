@@ -152,7 +152,7 @@ function useAppointment() {
 	}, [id_patient, getPatientData])
 
 	useEffect(() => {
-		setToothState(null)
+		setToothState('selectToothEnableEditing')
 	}, [setToothState])
 
 	return {

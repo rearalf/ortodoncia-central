@@ -11,7 +11,8 @@ const ModalDetailTooth = ({
 }: {
   updateToothNoteInOdontogram: (tooth: number, description: string) => void;
 }) => {
-  const { tooth, openModal, setClearDetailToothState } = useDetailToothState();
+  const { tooth, openModal, enableEditing, setClearDetailToothState } =
+    useDetailToothState();
 
   const [localNotes, setLocalNotes] = useState(tooth?.toothNotes || "");
 
@@ -64,33 +65,36 @@ const ModalDetailTooth = ({
           sx={{
             width: "100%",
           }}
+          disabled={!enableEditing}
         />
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "8px",
-        }}
-      >
-        <Button
-          variant="outlined"
-          color="error"
-          type="button"
-          onClick={handleClose}
-          startIcon={<FiXCircle />}
+      {enableEditing && (
+        <Box
+          sx={{
+            display: "flex",
+            gap: "8px",
+          }}
         >
-          Cancelar
-        </Button>
-        <Button
-          variant="contained"
-          color="success"
-          type="button"
-          startIcon={<FiSave />}
-          onClick={handleSave}
-        >
-          Guardar
-        </Button>
-      </Box>
+          <Button
+            variant="outlined"
+            color="error"
+            type="button"
+            onClick={handleClose}
+            startIcon={<FiXCircle />}
+          >
+            Cancelar
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            type="button"
+            startIcon={<FiSave />}
+            onClick={handleSave}
+          >
+            Guardar
+          </Button>
+        </Box>
+      )}
     </Dialog>
   );
 };

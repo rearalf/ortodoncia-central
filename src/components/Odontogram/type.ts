@@ -11,6 +11,7 @@ export type TOOTH_STATE_TYPE =
   | null
   | ""
   | "selectTooth"
+  | "selectToothEnableEditing"
   | "extraction"
   | "extracted"
   | "absent"
