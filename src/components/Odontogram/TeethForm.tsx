@@ -3,8 +3,8 @@ import { Box, Grid, Typography } from "@mui/material";
 import RadioButtonComponent from "../RadioButtonComponent";
 
 import useTeethState from "@/states/toothFormState";
-import ModalDetailTooth from "./ModalDetailTooth";
 import TeethTable from "./TeethTable";
+import { TOOTH_AFFECTION } from "./type";
 
 import { TOOTH_FACE_AFFECTION_ENUM, TOOTH_STATE_ENUM } from "./constants";
 import "./styles.css";
@@ -17,7 +17,6 @@ const TeethForm = () => {
 
   return (
     <div className="teethForm">
-      <ModalDetailTooth />
       <Box
         className="optionsTeethForm"
         sx={{

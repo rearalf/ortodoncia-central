@@ -1,3 +1,4 @@
+import { OdontogramType } from '@/components/Odontogram/type'
 import { db } from '@/database/firebase'
 import {
 	doc,
@@ -15,7 +16,7 @@ class Appointment {
 	async saveNewAppointment(
 		id: string,
 		appointment: appointmentInterface,
-		teeth: Odontogram,
+		teeth: OdontogramType,
 		// eslint-disable-next-line
 	): Promise<any | undefined> {
 		try {

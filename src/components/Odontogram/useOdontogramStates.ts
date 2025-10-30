@@ -114,10 +114,30 @@ function useOdontogramStates(enableButton: boolean) {
     }
   };
 
+  const updateToothNoteInOdontogram = (tooth: number, description: string) => {
+    const toothObj = findToothByNumber(tooth);
+
+    if (toothObj) {
+      const updatedTeethList = { ...teethList };
+      if (PERMANENT_TEETH.includes(toothObj.quadrant)) {
+        const q = toothObj.quadrant as PermanentQuadrantType;
+        updatedTeethList.permanent[q].forEach((t) => {
+          if (t.tooth === tooth) t.toothNotes = description;
+        });
+      } else {
+        const q = toothObj.quadrant as TemporaryQuadrantType;
+        updatedTeethList.temporary[q].forEach((t) => {
+          if (t.tooth === tooth) t.toothNotes = description;
+        });
+      }
+    }
+  };
+
   return {
     teethList,
     completeOdontogram,
     handleToothStateChange,
+    updateToothNoteInOdontogram,
   };
 }
 

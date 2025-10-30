@@ -14,9 +14,11 @@ import {
 	serverTimestamp,
 	OrderByDirection,
 } from 'firebase/firestore'
+import { OdontogramType } from '@/components/Odontogram/type'
+import { PatientDataInterface } from '@/interface/Patient'
 
 class Patient {
-	async save(patientData: PatientDataInterface, teeth: Odontogram): Promise<string | undefined> {
+	async save(patientData: PatientDataInterface, teeth: OdontogramType): Promise<string | undefined> {
 		try {
 			const patient = await addDoc(collection(db, 'patients'), {
 				...patientData,
@@ -168,7 +170,7 @@ class Patient {
 		}
 	}
 
-	async updateOnlyTeeth(id: string, teeth: Odontogram) {
+	async updateOnlyTeeth(id: string, teeth: OdontogramType) {
 		try {
 			const patientRef = doc(db, 'patients', id)
 			const updateData = await updateDoc(patientRef, {
