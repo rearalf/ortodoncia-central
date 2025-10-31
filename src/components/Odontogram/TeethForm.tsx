@@ -13,15 +13,17 @@ import { memo } from "react";
 const TeethForm = () => {
   const { toothState, setToothState } = useTeethState();
 
-  const handleToothState = (e: string | number | boolean | null) =>
-    setToothState(e === 0 ? null : (e as TOOTH_AFFECTION));
+  const handleToothState = (e: string | number | boolean | null) => {
+    console.log(e);
+    setToothState(e as TOOTH_AFFECTION);
+  };
 
   const options = [
     {
       label: "Seleccionar diente",
       value: TOOTH_STATE_ENUM.SelectTooth,
     },
-    { label: "Deshacer", value: "" },
+    { label: "Deshacer", value: TOOTH_STATE_ENUM.Disable },
     { label: "Caries", value: TOOTH_FACE_AFFECTION_ENUM.Decay },
     {
       label: "Obturación",
