@@ -14,11 +14,9 @@ import {
   TemporaryQuadrantType,
   TOOTH_FACE_AFFECTION_TYPE,
 } from "./type";
-import { useEffect } from "react";
 
 function useOdontogramStates(enableButton: boolean) {
-  const { setOpenModalWithData, setEnableEditing, enableEditing } =
-    useDetailToothState();
+  const { setOpenModalWithData, setEnableEditing } = useDetailToothState();
   const { setHandleState } = useAlertState();
   const { teethList, toothState, completeOdontogram, setTeethList } =
     useTeethState();
@@ -135,10 +133,6 @@ function useOdontogramStates(enableButton: boolean) {
       }
     }
   };
-
-  useEffect(() => {
-    console.log({ enableEditing });
-  }, [enableEditing]);
 
   return {
     teethList,

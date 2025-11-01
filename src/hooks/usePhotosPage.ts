@@ -80,29 +80,87 @@ function usePhotosPage() {
 				}
 			}
 		} catch (error) {
-			console.log('Error getting patient data usePatient: ' + error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
 				show: true,
 				text: 'Error al obtener los datos del paciente.',
 			})
-			navigate('/')
+			navigate('/home')
 		}
 	}, [id_patient, setPatientData, setHandleState, navigate])
 
 	const getPhotos = useCallback(async () => {
 		try {
-			if (id_patient) {
-				setLoading(true)
-				const patientPhotos = new PatientPhotos()
-				const data = await patientPhotos.getPhotosByPatient(id_patient, limit)
+			if (id_patient === undefined) return;
+			setLoading(true)
+			const patientPhotos = new PatientPhotos()
+			const data = await patientPhotos.getPhotosByPatient(id_patient, limit)
 
-				const photoArray: PhotosByPatientInterface[] = []
-				const imagesStrings: string[] = []
+			const photoArray: PhotosByPatientInterface[] = []
+			const imagesStrings: string[] = []
 
-				if (data) {
-					data.dataPhotos.map((photo: getPhotosByPatientInterface) => {
+			if (data) {
+				data.dataPhotos.map((photo: getPhotosByPatientInterface) => {
+					photoArray.push({
+						...photo,
+						formatDate: formatDate({
+							date: photo.date,
+						}),
+						formatCreated_at: formatDate({
+							date: photo.created_at,
+						}),
+						formatUpdated_at: formatDate({
+							date: photo.updated_at,
+						}),
+						imagesLinks:
+							typeof photo.imagesLinks !== 'string' ? photo.imagesLinks : [],
+						imagesNames:
+							typeof photo.imagesNames !== 'string' ? photo.imagesNames : [],
+					})
+
+					if (typeof photo.imagesLinks === 'object') {
+						photo.imagesLinks.map(link => imagesStrings.push(link))
+					}
+				})
+				setCount(data.count)
+				if (data.count <= limit) {
+					setTotalPage(1)
+				} else {
+					setTotalPage(data.count / limit)
+				}
+			}
+			setImages(imagesStrings)
+			setData(photoArray)
+		} catch (error) {
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del las fotos.',
+			})
+		} finally {
+			setLoading(false)
+		}
+	}, [id_patient, setHandleState])
+
+	const getNextPhotos = async () => {
+		try {
+			if (id_patient === undefined) return;
+			setLoading(true)
+			const patientPhotos = new PatientPhotos()
+			const dataPhotos = await patientPhotos.getNextPhotosByPatient(
+				id_patient,
+				limit,
+				data[data.length - 1],
+			)
+
+			const photoArray: PhotosByPatientInterface[] = []
+			const imagesStrings: string[] = []
+
+			if (dataPhotos) {
+				if (dataPhotos.length > 0) {
+					dataPhotos.map((photo: getPhotosByPatientInterface) => {
 						photoArray.push({
 							...photo,
 							formatDate: formatDate({
@@ -124,145 +182,80 @@ function usePhotosPage() {
 							photo.imagesLinks.map(link => imagesStrings.push(link))
 						}
 					})
-					setCount(data.count)
-					if (data.count <= limit) {
-						setTotalPage(1)
-					} else {
-						setTotalPage(data.count / limit)
-					}
 				}
+			}
+
+			if (dataPhotos !== undefined && dataPhotos.length > 0) {
 				setImages(imagesStrings)
 				setData(photoArray)
-				setLoading(false)
+				setPage(page + 1)
 			}
 		} catch (error) {
-			setLoading(false)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
 				show: true,
 				text: 'Error al obtener los datos del las fotos.',
 			})
-			console.log(error)
-		}
-	}, [id_patient, setHandleState])
-
-	const getNextPhotos = async () => {
-		try {
-			if (id_patient) {
-				setLoading(true)
-				const patientPhotos = new PatientPhotos()
-				const dataPhotos = await patientPhotos.getNextPhotosByPatient(
-					id_patient,
-					limit,
-					data[data.length - 1],
-				)
-
-				const photoArray: PhotosByPatientInterface[] = []
-				const imagesStrings: string[] = []
-
-				if (dataPhotos) {
-					if (dataPhotos.length > 0) {
-						dataPhotos.map((photo: getPhotosByPatientInterface) => {
-							photoArray.push({
-								...photo,
-								formatDate: formatDate({
-									date: photo.date,
-								}),
-								formatCreated_at: formatDate({
-									date: photo.created_at,
-								}),
-								formatUpdated_at: formatDate({
-									date: photo.updated_at,
-								}),
-								imagesLinks:
-									typeof photo.imagesLinks !== 'string' ? photo.imagesLinks : [],
-								imagesNames:
-									typeof photo.imagesNames !== 'string' ? photo.imagesNames : [],
-							})
-
-							if (typeof photo.imagesLinks === 'object') {
-								photo.imagesLinks.map(link => imagesStrings.push(link))
-							}
-						})
-					}
-				}
-
-				if (dataPhotos !== undefined && dataPhotos.length > 0) {
-					setImages(imagesStrings)
-					setData(photoArray)
-					setPage(page + 1)
-				}
-				setLoading(false)
-			}
-		} catch (error) {
+		} finally {
 			setLoading(false)
-			setHandleState({
-				severity: 'error',
-				variant: 'filled',
-				show: true,
-				text: 'Error al obtener los datos del las fotos.',
-			})
-			console.log('Error gettign next photos: ' + error)
 		}
 	}
 
 	const getBeforePhotos = async () => {
 		try {
-			if (id_patient) {
-				setLoading(true)
-				const patientPhotos = new PatientPhotos()
-				const dataPhotos = await patientPhotos.getEndBeforePhotosByPatient(
-					id_patient,
-					limit,
-					data[0],
-				)
+			if (id_patient === undefined) return;
+			setLoading(true)
+			const patientPhotos = new PatientPhotos()
+			const dataPhotos = await patientPhotos.getEndBeforePhotosByPatient(
+				id_patient,
+				limit,
+				data[0],
+			)
 
-				const photoArray: PhotosByPatientInterface[] = []
-				const imagesStrings: string[] = []
-				if (dataPhotos) {
-					if (dataPhotos.length > 0) {
-						dataPhotos.map((photo: getPhotosByPatientInterface) => {
-							photoArray.push({
-								...photo,
-								formatDate: formatDate({
-									date: photo.date,
-								}),
-								formatCreated_at: formatDate({
-									date: photo.created_at,
-								}),
-								formatUpdated_at: formatDate({
-									date: photo.updated_at,
-								}),
-								imagesLinks:
-									typeof photo.imagesLinks !== 'string' ? photo.imagesLinks : [],
-								imagesNames:
-									typeof photo.imagesNames !== 'string' ? photo.imagesNames : [],
-							})
-
-							if (typeof photo.imagesLinks === 'object') {
-								photo.imagesLinks.map(link => imagesStrings.push(link))
-							}
+			const photoArray: PhotosByPatientInterface[] = []
+			const imagesStrings: string[] = []
+			if (dataPhotos) {
+				if (dataPhotos.length > 0) {
+					dataPhotos.map((photo: getPhotosByPatientInterface) => {
+						photoArray.push({
+							...photo,
+							formatDate: formatDate({
+								date: photo.date,
+							}),
+							formatCreated_at: formatDate({
+								date: photo.created_at,
+							}),
+							formatUpdated_at: formatDate({
+								date: photo.updated_at,
+							}),
+							imagesLinks:
+								typeof photo.imagesLinks !== 'string' ? photo.imagesLinks : [],
+							imagesNames:
+								typeof photo.imagesNames !== 'string' ? photo.imagesNames : [],
 						})
-					}
-				}
 
-				if (dataPhotos !== undefined && dataPhotos.length > 0) {
-					setImages(imagesStrings)
-					setData(photoArray)
-					setPage(page - 1)
+						if (typeof photo.imagesLinks === 'object') {
+							photo.imagesLinks.map(link => imagesStrings.push(link))
+						}
+					})
 				}
-				setLoading(false)
+			}
+
+			if (dataPhotos !== undefined && dataPhotos.length > 0) {
+				setImages(imagesStrings)
+				setData(photoArray)
+				setPage(page - 1)
 			}
 		} catch (error) {
-			setLoading(false)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
 				show: true,
 				text: 'Error al obtener los datos del las fotos.',
 			})
-			console.log('Error getting before photos: ' + error)
+		} finally {
+			setLoading(false)
 		}
 	}
 
@@ -282,65 +275,56 @@ function usePhotosPage() {
 
 	const handleDeleteDialog = async () => {
 		try {
-			if (id_patient) {
-				setLoading(true)
-				setOpenModal(false)
-				let totalImageDeleted = idSelect.imagesNames.length
-				idSelect.imagesNames.map(async name => {
-					const photoRef = ref(storage, `/${id_patient}/${name}`)
-					const deletePhoto = await deleteObject(photoRef)
-						.then(() => {
-							return true
-						})
-						.catch(() => false)
-					if (deletePhoto) {
-						setIdSelect({
-							...idSelect,
-							totalImageDeleted: idSelect.totalImageDeleted - 1,
-						})
-						totalImageDeleted = totalImageDeleted - 1
-					}
-				})
-				const patientPhotos = new PatientPhotos()
-				const photosDelete = await patientPhotos.deletePhotosByPhoto(
-					id_patient,
-					idSelect.id,
-				)
-				if (photosDelete) {
-					setHandleState({
-						severity: 'success',
-						variant: 'filled',
-						show: true,
-						text: 'Se elimino todos los datos.',
+			if (id_patient === undefined) return;
+			setLoading(true)
+			setOpenModal(false)
+			let totalImageDeleted = idSelect.imagesNames.length
+			idSelect.imagesNames.map(async name => {
+				const photoRef = ref(storage, `/${id_patient}/${name}`)
+				const deletePhoto = await deleteObject(photoRef)
+					.then(() => {
+						return true
 					})
-				} else {
-					setHandleState({
-						severity: 'error',
-						variant: 'filled',
-						show: true,
-						text: 'Error al eliminar este expediente.',
+					.catch(() => false)
+				if (deletePhoto) {
+					setIdSelect({
+						...idSelect,
+						totalImageDeleted: idSelect.totalImageDeleted - 1,
 					})
-					setLoading(false)
+					totalImageDeleted = totalImageDeleted - 1
 				}
-				setOpenModal(false)
-				getPhotos()
-				setIdSelect({
-					id: '',
-					imagesNames: [],
-					totalImageDeleted: 0,
+			})
+			const patientPhotos = new PatientPhotos()
+			const photosDelete = await patientPhotos.deletePhotosByPhoto(
+				id_patient,
+				idSelect.id,
+			)
+			if (photosDelete) {
+				setHandleState({
+					severity: 'success',
+					variant: 'filled',
+					show: true,
+					text: 'Se elimino todos los datos.',
 				})
 			} else {
-				throw new Error('No tiene id')
+				throw 'Error al eliminar este expediente.'
 			}
 		} catch (error) {
-			setLoading(false)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
 				show: true,
-				text: 'Error al obtener los datos del las fotos.',
+				text: typeof error === 'string' ? error : 'Error al obtener los datos del las fotos.',
 			})
-			console.log('Error getting before photos: ' + error)
+		} finally {
+			setOpenModal(false)
+			setLoading(false)
+			getPhotos()
+			setIdSelect({
+				id: '',
+				imagesNames: [],
+				totalImageDeleted: 0,
+			})
 		}
 	}
 

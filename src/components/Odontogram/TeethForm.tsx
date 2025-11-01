@@ -13,10 +13,8 @@ import { memo } from "react";
 const TeethForm = () => {
   const { toothState, setToothState } = useTeethState();
 
-  const handleToothState = (e: string | number | boolean | null) => {
-    console.log(e);
+  const handleToothState = (e: string | number | boolean | null) =>
     setToothState(e as TOOTH_AFFECTION);
-  };
 
   const options = [
     {

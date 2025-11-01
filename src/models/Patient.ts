@@ -87,7 +87,6 @@ class Patient {
 
 			return patientData
 		} catch (error) {
-			console.log('Error getting patient data: ' + error)
 			return undefined
 		}
 	}
@@ -103,7 +102,6 @@ class Patient {
 				.catch(() => false)
 			return updateData
 		} catch (error) {
-			console.log('Error updating data patient: ' + error)
 			return false
 		}
 	}
@@ -134,7 +132,6 @@ class Patient {
 
 			return patientsData
 		} catch (error) {
-			console.log('Error searching patients: ' + error)
 			return []
 		}
 	}

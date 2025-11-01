@@ -28,7 +28,6 @@ class Doctors {
 
 			return doctors
 		} catch (error) {
-			console.log('Error saving teeth form: ' + error)
 			return undefined
 		}
 	}

@@ -4,6 +4,7 @@ import Patient from '@/models/Patient'
 import formatDate from '@/utils/formatDate'
 import useAlertState from '@/states/useAlertState'
 import usePatientsState from '@/states/patientsState'
+import { PatientDataInterface } from '@/interface/Patient'
 
 function useHome() {
 	const { setAllPatients, setLoading, loading } = usePatientsState()
@@ -60,7 +61,6 @@ function useHome() {
 				})
 			}
 		} catch (error) {
-			console.log('' + error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
@@ -71,43 +71,36 @@ function useHome() {
 	}
 
 	const handleClearSearchPatient = async () => {
+		if (search === '') return;
+		setLoading(true);
 		try {
-			try {
-				if (search !== '') {
-					setLoading(true)
-					const patientInstance = new Patient()
-					const patientsData = await patientInstance.getAllPatients('name', 'asc')
+			const patientInstance = new Patient();
+			const patientsData = await patientInstance.getAllPatients('name', 'asc');
 
-					const patients: PatientDataInterface[] = []
-					patientsData.map(data => {
-						patients.push({
-							...data,
-							age: getAge(data.birthdate.toISOString()),
-							formatBirthdate: formatDate({ date: data.birthdate }),
-						})
-					})
+			const patients: PatientDataInterface[] = patientsData.map(data => ({
+				...data,
+				age: getAge(data.birthdate.toISOString()),
+				formatBirthdate: formatDate({ date: data.birthdate }),
+			}));
 
-					setSearch('')
-					setLoading(false)
-					setAllPatients(patients)
-					setHandleState({
-						severity: 'success',
-						variant: 'filled',
-						show: true,
-						text: 'Busqueda limpiada.',
-					})
-				}
-			} catch (error) {
-				console.log(error)
-				setHandleState({
-					severity: 'error',
-					variant: 'filled',
-					show: true,
-					text: 'Error al obtener datos de los pacientes.',
-				})
-			}
+			setSearch('');
+			setAllPatients(patients);
+			setHandleState({
+				severity: 'success',
+				variant: 'filled',
+				show: true,
+				text: 'Búsqueda limpiada.',
+			});
+
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener datos de los pacientes.',
+			});
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -127,16 +120,16 @@ function useHome() {
 					})
 				})
 
-				setLoading(false)
 				setAllPatients(patients)
 			} catch (error) {
-				console.log(error)
 				setHandleState({
 					severity: 'error',
 					variant: 'filled',
 					show: true,
 					text: 'Error al obtener datos de los pacientes.',
 				})
+			} finally {
+				setLoading(false)
 			}
 		}
 		getAllPatient()

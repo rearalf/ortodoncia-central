@@ -36,13 +36,18 @@ function useAppointment() {
 					})
 					setCompleteOdontogram(data.completeOdontogram)
 				}
-				setLoading(false)
 			}
 		} catch (error) {
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Ocurrio un error al cargar los datos del paciente.',
+			})
+		} finally {
 			setLoading(false)
-			console.log('Error getting patient data usePatient: ' + error)
 		}
-	}, [id_patient, patientData.id, setPatientData, setCompleteOdontogram])
+	}, [patientData.id, id_patient, setPatientData, setCompleteOdontogram, setHandleState])
 
 	const getAppointment = useCallback(async () => {
 		try {
@@ -54,7 +59,6 @@ function useAppointment() {
 				let addInfoAppointment
 
 				if (appointmentById.dateChange) {
-					setLoading(false)
 					addInfoAppointment = {
 						...appointmentById,
 						date: new Date(
@@ -86,7 +90,6 @@ function useAppointment() {
 						reasonChange: appointmentById.reasonChange,
 					}
 				} else {
-					setLoading(false)
 					addInfoAppointment = {
 						...appointmentById,
 						date: new Date(
@@ -113,7 +116,6 @@ function useAppointment() {
 
 				if (appointmentById) {
 					setAppointment(addInfoAppointment)
-					setLoading(false)
 					const teeth = JSON.parse(appointmentById.teeth)
 					if (typeof teeth !== 'string') {
 						setTeethList(teeth)
@@ -128,14 +130,14 @@ function useAppointment() {
 				throw new Error('Error getting appointment data')
 			}
 		} catch (error) {
-			console.log(error)
-			setLoading(false)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
 				show: true,
 				text: 'Ocurrio un error al cargar los datos de la cita.',
 			})
+		} finally {
+			setLoading(false)
 		}
 	}, [id_appointment, id_patient, setAppointment, setTeethList, setHandleState])
 

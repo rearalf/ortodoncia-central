@@ -94,7 +94,6 @@ function usePatientProfilePage() {
 				}
 			}
 		} catch (error) {
-			console.log('Error getting patient data usePatient: ' + error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
@@ -126,7 +125,6 @@ function usePatientProfilePage() {
 				setAppoinments(appointmentsList)
 			}
 		} catch (error) {
-			console.log('Error getting all apointment: ' + error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',

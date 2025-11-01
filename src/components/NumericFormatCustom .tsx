@@ -45,7 +45,6 @@ const InputNumericFormat = (props: InputNumericFormatProps) => {
 			label={props.label}
 			value={props.value}
 			onChange={value => {
-				// console.log(value)
 				props.onChange(value)
 			}}
 			name={props.id}

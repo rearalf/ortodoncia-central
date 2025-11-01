@@ -82,34 +82,27 @@ function useCreatePatient() {
 					birthdate: value,
 				})
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Fecha invalidad.',
+			})
 		}
 	}
 
 	const handleSaveData = async (e: React.FormEvent<HTMLFormElement>) => {
 		try {
 			e.preventDefault()
-			if (patientData.name === '') {
-				setHandleState({
-					severity: 'warning',
-					variant: 'filled',
-					show: true,
-					text: 'Debe agregar el nombre completo.',
-				})
-				throw 'Fiel name is empty.'
-			}
-			if (patientData.phone === '') {
-				setHandleState({
-					severity: 'warning',
-					variant: 'filled',
-					show: true,
-					text: 'Debe agregar el número de teléfono.',
-				})
-				throw 'Fiel phone is empty.'
-			}
+			if (patientData.name === '') 
+				throw 'Debe agregar el nombre completo.'
+			if (patientData.phone === '') 
+				throw 'Debe agregar el número de teléfono.'
+
 			setLoadingPatient(true)
 
 			const newPatient = new Patient()
+
 			let uploadURL: string = ''
 			const avatarName: number = new Date().getTime()
 			if (avatar) {
@@ -139,32 +132,28 @@ function useCreatePatient() {
 			)
 
 			if (patient !== undefined) {
-				setLoadingPatient(false)
 				setPatientData({
 					...patientData,
 					id: patient,
 				})
-
 				navigate(`/home/patient-profile/${patient}`)
-
 				setHandleState({
 					severity: 'success',
 					variant: 'filled',
 					show: true,
 					text: 'Datos guardados con éxito.',
 				})
-			} else {
-				setLoadingPatient(false)
-				setHandleState({
-					severity: 'error',
-					variant: 'filled',
-					show: true,
-					text: 'Error al guardar los datos.',
-				})
-				throw 'Error creating patient.'
-			}
+			} else 
+				throw 'Error al guardar los datos.'
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: typeof error === 'string' ? error : 'Ocurrió un error al crear el paciente.',
+			})
+		} finally {
+			setLoadingPatient(false)
 		}
 	}
 
@@ -187,16 +176,16 @@ function useCreatePatient() {
 					setAvatarURL(imgUrl)
 					setAvatar(file)
 				} else {
-					setHandleState({
-						severity: 'error',
-						variant: 'filled',
-						show: true,
-						text: 'El archivo seleccionado no es una imagen.',
-					})
+					throw 'El archivo seleccionado no es una imagen.'
 				}
 			}
 		} catch (error) {
-			console.log('Handle change file error: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: typeof error === 'string' ? error : 'El archivo seleccionado no es una imagen.',
+			})
 		}
 	}
 

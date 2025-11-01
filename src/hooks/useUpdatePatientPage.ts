@@ -76,7 +76,12 @@ function useUpdatePatientPage() {
 					birthdate: value,
 				})
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en el valor de la fecha.',
+			})
 		}
 	}
 
@@ -165,7 +170,6 @@ function useUpdatePatientPage() {
 			}
 		} catch (error) {
 			setLoadingPatient(false)
-			console.log(error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
@@ -231,7 +235,6 @@ function useUpdatePatientPage() {
 			}
 		} catch (error) {
 			setLoadingPatient(false)
-			console.log(error)
 		}
 	}, [id, setPatientData, setHandleState, patientData.id, setLoadingPatient, patientData.name])
 
@@ -244,16 +247,16 @@ function useUpdatePatientPage() {
 					setAvatarURL(imgUrl)
 					setAvatar(file)
 				} else {
-					setHandleState({
-						severity: 'error',
-						variant: 'filled',
-						show: true,
-						text: 'El archivo seleccionado no es una imagen.',
-					})
+					throw 'El archivo seleccionado no es una imagen'
 				}
 			}
 		} catch (error) {
-			console.log('Handle change file error: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: typeof error === 'string' ? error : 'El archivo seleccionado no es una imagen.',
+			})
 		}
 	}
 

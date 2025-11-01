@@ -67,7 +67,6 @@ function useAddPhotos() {
 			}
 		} catch (error) {
 			setLoading(false)
-			console.log('Error getting patient data usePatient: ' + error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
@@ -91,7 +90,12 @@ function useAddPhotos() {
 				validateAndAddFiles(addFiles)
 			}
 		} catch (error) {
-			console.log('Handle change file error: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al subir imagenes.',
+			})
 		}
 	}
 
@@ -163,13 +167,6 @@ function useAddPhotos() {
 								}
 							},
 							error => {
-								setLoading(false)
-								setHandleState({
-									severity: 'error',
-									variant: 'filled',
-									show: true,
-									text: 'Error al subir la imagen.',
-								})
 								throw error
 							},
 							() => {
@@ -188,16 +185,17 @@ function useAddPhotos() {
 					}
 				}
 			} else {
-				setHandleState({
-					severity: 'error',
-					variant: 'filled',
-					show: true,
-					text: 'Ocurrio un error al guardar.',
-				})
 				throw 'Debe de agregar una descripción a la imagen.'
 			}
 		} catch (error) {
-			console.log('Error saving expedient photos: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al subir la imagen.',
+			})
+		} finally {
+			setLoading(false)
 		}
 	}
 
@@ -213,7 +211,6 @@ function useAddPhotos() {
 				})
 
 				if (saveDate?.id) {
-					setLoading(false)
 					setHandleState({
 						severity: 'success',
 						variant: 'filled',
@@ -222,27 +219,21 @@ function useAddPhotos() {
 					})
 					navigate('/home/patient-profile/' + patientData.id + '/photos')
 				} else {
-					setLoading(false)
-					setHandleState({
-						severity: 'error',
-						variant: 'filled',
-						show: true,
-						text: 'Error al guardar los datos.',
-					})
 					throw saveDate
 				}
 			} else {
-				setLoading(false)
-				setHandleState({
-					severity: 'error',
-					variant: 'filled',
-					show: true,
-					text: 'Error al guardar los datos.',
-				})
 				throw patientData
 			}
 		} catch (error) {
-			console.log('Saving data error: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al guardar los datos.',
+			})
+			
+		} finally {
+			setLoading(false)
 		}
 	}
 
