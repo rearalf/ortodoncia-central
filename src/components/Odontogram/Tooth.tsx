@@ -1,17 +1,16 @@
 import { Box, Button } from "@mui/material";
+
 import { buttonStateTooth } from "./styles";
+import { FACE_TYPE, FullQuadrantType, IToothObject } from "./type";
+import { memo } from "react";
 
 interface Props {
-  tooth: toothObject;
-  quadrant: QuadrantKey | TemporaryQuadrantKey;
-  hanldeModifyStateTooth: (
-    quadrant: QuadrantKey | TemporaryQuadrantKey,
-    tooth: number,
-    position?: toothPosition
-  ) => void;
+  tooth: IToothObject;
+  quadrant: FullQuadrantType;
+  handleToothStateChange: (tooth: number, position?: FACE_TYPE) => void;
 }
 
-const Tooth = (props: Props) => (
+const Tooth = memo((props: Props) => (
   <Box
     className="tooth_button"
     sx={buttonStateTooth.toothButton}
@@ -19,9 +18,7 @@ const Tooth = (props: Props) => (
   >
     <Button
       sx={buttonStateTooth.buttonState(props.tooth.toothState)}
-      onClick={() =>
-        props.hanldeModifyStateTooth(props.quadrant, props.tooth.tooth)
-      }
+      onClick={() => props.handleToothStateChange(props.tooth.tooth)}
     >
       <Box sx={buttonStateTooth.buttonNumberStyles}>{props.tooth.tooth}</Box>
     </Button>
@@ -30,9 +27,7 @@ const Tooth = (props: Props) => (
       className={`abutment_tooth_state ${
         props.tooth.abutmentTooth ? "abutment_tooth" : ""
       } ${props.tooth.falseTooth ? "false_tooth" : ""}`}
-      onClick={() =>
-        props.hanldeModifyStateTooth(props.quadrant, props.tooth.tooth)
-      }
+      onClick={() => props.handleToothStateChange(props.tooth.tooth)}
     ></button>
 
     <button
@@ -43,9 +38,7 @@ const Tooth = (props: Props) => (
           ? "sealant_tooth_red"
           : ""
       }`}
-      onClick={() =>
-        props.hanldeModifyStateTooth(props.quadrant, props.tooth.tooth)
-      }
+      onClick={() => props.handleToothStateChange(props.tooth.tooth)}
     ></button>
 
     <Button
@@ -57,11 +50,7 @@ const Tooth = (props: Props) => (
       }}
       color={props.tooth.palatina === "decay" ? "error" : "info"}
       onClick={() =>
-        props.hanldeModifyStateTooth(
-          props.quadrant,
-          props.tooth.tooth,
-          "palatina"
-        )
+        props.handleToothStateChange(props.tooth.tooth, "palatina")
       }
     ></Button>
     <Button
@@ -72,13 +61,7 @@ const Tooth = (props: Props) => (
         transition: "all 0.3s ease",
       }}
       color={props.tooth.mesial === "decay" ? "error" : "info"}
-      onClick={() =>
-        props.hanldeModifyStateTooth(
-          props.quadrant,
-          props.tooth.tooth,
-          "mesial"
-        )
-      }
+      onClick={() => props.handleToothStateChange(props.tooth.tooth, "mesial")}
     ></Button>
     <Button
       variant={props.tooth.distal === "" ? "outlined" : "contained"}
@@ -88,13 +71,7 @@ const Tooth = (props: Props) => (
         transition: "all 0.3s ease",
       }}
       color={props.tooth.distal === "decay" ? "error" : "info"}
-      onClick={() =>
-        props.hanldeModifyStateTooth(
-          props.quadrant,
-          props.tooth.tooth,
-          "distal"
-        )
-      }
+      onClick={() => props.handleToothStateChange(props.tooth.tooth, "distal")}
     ></Button>
     <Button
       variant={props.tooth.vestibular === "" ? "outlined" : "contained"}
@@ -105,11 +82,7 @@ const Tooth = (props: Props) => (
       }}
       color={props.tooth.vestibular === "decay" ? "error" : "info"}
       onClick={() =>
-        props.hanldeModifyStateTooth(
-          props.quadrant,
-          props.tooth.tooth,
-          "vestibular"
-        )
+        props.handleToothStateChange(props.tooth.tooth, "vestibular")
       }
     ></Button>
     <Button
@@ -117,17 +90,11 @@ const Tooth = (props: Props) => (
       className="oclusal"
       sx={buttonStateTooth.oclusalStyles(props.tooth.toothState)}
       color={props.tooth.oclusal === "decay" ? "error" : "info"}
-      onClick={() =>
-        props.hanldeModifyStateTooth(
-          props.quadrant,
-          props.tooth.tooth,
-          "oclusal"
-        )
-      }
+      onClick={() => props.handleToothStateChange(props.tooth.tooth, "oclusal")}
     >
       {props.tooth.tooth}
     </Button>
   </Box>
-);
+));
 
 export default Tooth;

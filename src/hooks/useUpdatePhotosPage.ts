@@ -88,7 +88,6 @@ function useUpdatePhotosPage() {
 			}
 		} catch (error) {
 			setLoading(false)
-			console.log('Error getting patient data usePatient: ' + error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
@@ -126,7 +125,6 @@ function useUpdatePhotosPage() {
 			setLoading(false)
 		} catch (error) {
 			setLoading(false)
-			console.log('Error getting patient data usePatient: ' + error)
 			navigate('/')
 		}
 	}, [id_photo, id_patient, navigate, setHandleState])
@@ -144,7 +142,12 @@ function useUpdatePhotosPage() {
 				validateAndAddFiles(addFiles)
 			}
 		} catch (error) {
-			console.log('Handle change file error: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en la carga de la imagen.',
+			})
 		}
 	}
 
@@ -353,16 +356,15 @@ function useUpdatePhotosPage() {
 				}
 			} else {
 				setLoading(false)
-				setHandleState({
-					severity: 'error',
-					variant: 'filled',
-					show: true,
-					text: 'Ocurrio un error al actualizar los datos.',
-				})
 				throw 'Error al actualizar los datos.'
 			}
 		} catch (error) {
-			console.log('Error saving expedient photos: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al actualizar los datos.',
+			})
 		}
 	}
 
@@ -416,7 +418,12 @@ function useUpdatePhotosPage() {
 				throw patientData
 			}
 		} catch (error) {
-			console.log('Updating data error: ' + error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al actualizar los datos.',
+			})
 		}
 	}
 

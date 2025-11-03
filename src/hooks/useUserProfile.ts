@@ -24,8 +24,7 @@ function useUserProfile() {
     try {
       e.preventDefault();
       const auth = new User();
-      const getUser = await auth.authGetUser();
-      console.log(getUser);
+      await auth.authGetUser();
       setLoading(false);
     } catch (error) {}
   };

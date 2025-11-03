@@ -65,7 +65,6 @@ function useDoctorsPage() {
 				})
 			}
 		} catch (error) {
-			console.log(error)
 			setHandleState({
 				severity: 'error',
 				show: true,

@@ -1,4 +1,6 @@
-interface PatientDataInterface {
+import { OdontogramType } from "@/components/Odontogram/type"
+
+export interface PatientDataInterface {
 	id?: string
 	avatar?: File
 	avatarName?: number
@@ -25,5 +27,5 @@ interface PatientDataInterface {
 	SGU: boolean
 	SGI: boolean
 	comments2: string
-	teeth?: Odontogram | string
+	teeth?: OdontogramType | string
 }

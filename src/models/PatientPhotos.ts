@@ -39,7 +39,6 @@ class PatientPhotos {
 
 			return saveData
 		} catch (error) {
-			console.log('Error al ' + error)
 		}
 	}
 
@@ -70,7 +69,6 @@ class PatientPhotos {
 			})
 			return photoData
 		} catch (error) {
-			console.log('Error getting one patients data photos' + error)
 			return undefined
 		}
 	}
@@ -114,7 +112,6 @@ class PatientPhotos {
 
 			return { dataPhotos, count: count.data().count }
 		} catch (error) {
-			console.log('Error getting photos by patients')
 			return undefined
 		}
 	}
@@ -158,7 +155,6 @@ class PatientPhotos {
 
 			return dataPhotos
 		} catch (error) {
-			console.log('Error getting next photos by patients')
 			return undefined
 		}
 	}
@@ -201,7 +197,6 @@ class PatientPhotos {
 
 			return dataPhotos
 		} catch (error) {
-			console.log('Error getting before photos by patients')
 			return undefined
 		}
 	}
@@ -214,7 +209,6 @@ class PatientPhotos {
 				.catch(() => false)
 			return photosDetele
 		} catch (error) {
-			console.log('Error deleting photos by photo: ' + error)
 			return undefined
 		}
 	}
@@ -242,7 +236,6 @@ class PatientPhotos {
 				})
 			return updateData
 		} catch (error) {
-			console.log('Error updating photos by photo: ' + error)
 			return false
 		}
 	}

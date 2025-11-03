@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import TextField from '@mui/material/TextField'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import { IconButton, InputAdornment, SxProps, Theme } from '@mui/material'
@@ -43,4 +43,4 @@ const InputBasic = React.memo((props: InputBasicProps) => {
 	)
 })
 
-export default InputBasic
+export default memo(InputBasic)

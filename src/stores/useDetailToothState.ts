@@ -1,36 +1,37 @@
+import { IToothObject } from "@/components/Odontogram/type";
 import { create } from "zustand";
 
 interface IUseDetailToothState {
   openModal: boolean;
-  tooth: toothObject | null;
-  toothNotes: string | null;
-  setToothNumber: (value: toothObject) => void;
-  setToothNotes: (value: string) => void;
+  tooth: IToothObject | null;
+  enableEditing: boolean;
+  setEnableEditing: (value: boolean) => void;
   setClearDetailToothState: () => void;
-  setOpenModalWithData: (tooth: toothObject) => void;
+  setToothNumber: (value: IToothObject) => void;
+  setOpenModalWithData: (tooth: IToothObject) => void;
 }
 
 const useDetailToothState = create<IUseDetailToothState>((set) => ({
   openModal: false,
-  toothNotes: null,
   tooth: null,
+  enableEditing: true,
+  setEnableEditing: (value) =>
+    set((state) => ({
+      ...state,
+      enableEditing: value,
+    })),
   setToothNumber: (tooth) => set((state) => ({ ...state, tooth })),
-  setToothNotes: (toothNotes) => set((state) => ({ ...state, toothNotes })),
   setClearDetailToothState: () =>
     set((state) => ({
       ...state,
-      toothNotes: null,
       tooth: null,
       openModal: false,
-      selectTooth: false,
     })),
   setOpenModalWithData: (tooth) =>
     set((state) => ({
       ...state,
       openModal: true,
-      selectTooth: false,
       tooth,
-      toothNotes: tooth.toothNotes,
     })),
 }));
 

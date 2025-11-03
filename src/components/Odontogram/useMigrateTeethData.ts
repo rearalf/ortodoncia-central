@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { IToothObject } from "./type";
+import { IToothObject, OdontogramType } from "./type";
 
 function useMigrateTeethData() {
-  const hasObsoleteFields = useCallback((teethData: Odontogram): boolean => {
+  const hasObsoleteFields = useCallback((teethData: OdontogramType): boolean => {
     const checkQuadrant = (quadrant: IToothObject[]) =>
       quadrant.some(
         (tooth) =>
@@ -22,7 +22,7 @@ function useMigrateTeethData() {
   }, []);
 
   const migrateTeethData = useCallback(
-    (teethData: Odontogram): Odontogram => {
+    (teethData: OdontogramType): OdontogramType => {
       if (!hasObsoleteFields(teethData)) {
         console.log("✅ No hay campos antiguos, no es necesaria la migración.");
         return teethData;

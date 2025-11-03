@@ -6,7 +6,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import UpdatePhotosPage from '@/page/UpdatePhotosPage'
 import AppointmentPage from '@/page/AppointmentPage'
 import AddPhotosPage from '@/page/AddPhotosPage'
-import TeethFormPage from '@/page/TeethFormPage'
 import DoctorsPage from '@/page/DoctorsPage'
 import PhotosPage from '@/page/PhotosPage'
 import HomePage from '@/page/HomePage'
@@ -14,6 +13,8 @@ import Layout from '@/Layout/Layout'
 import App from '@/App'
 import LoginPage from '@/page/LoginPage'
 import UserProfilePage from '@/page/UserProfilePage'
+
+import { CreateAppointment } from '@/page/appointments'
 
 const router = createBrowserRouter(
 	[
@@ -57,7 +58,7 @@ const router = createBrowserRouter(
 						},
 						{
 							path: 'create/:id_patient',
-							element: <TeethFormPage />,
+							element: <CreateAppointment />,
 						},
 						{
 							path: ':id_patient/appointment/:id_appointment/update-appointment/:last_appointment',

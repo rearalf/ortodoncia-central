@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import { constantTeethList, patientBasicData } from '@/utils/constants'
+import { OdontogramType } from '@/components/Odontogram/type'
+import { PatientDataInterface } from '@/interface/Patient'
 
 interface PatientStateInterface {
 	patientData: PatientDataInterface
 	setPatientData: (value: PatientDataInterface) => void
-	teeth: Odontogram
+	teeth: OdontogramType
 	setTeeth: (value: PatientStateInterface['teeth']) => void
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { TextField } from '@mui/material'
 import { NumericFormat, NumericFormatProps } from 'react-number-format'
 
@@ -45,7 +45,6 @@ const InputNumericFormat = (props: InputNumericFormatProps) => {
 			label={props.label}
 			value={props.value}
 			onChange={value => {
-				// console.log(value)
 				props.onChange(value)
 			}}
 			name={props.id}
@@ -59,4 +58,4 @@ const InputNumericFormat = (props: InputNumericFormatProps) => {
 	)
 }
 
-export default InputNumericFormat
+export default memo(InputNumericFormat)

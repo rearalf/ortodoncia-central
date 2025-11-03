@@ -24,9 +24,9 @@ const RadioButtonComponent: FC<IRadioButtonComponentProps> = ({
       row
       value={value}
       onChange={(e) => {
-        const newValue = isNaN(Number(e.target.value))
-          ? e.target.value
-          : Number(e.target.value);
+        const raw = e.target.value;
+        const parsed = raw !== "" ? Number(raw) : NaN;
+        const newValue = Number.isNaN(parsed) ? raw : parsed;
         onChange(newValue);
       }}
       sx={{ ...sx }}

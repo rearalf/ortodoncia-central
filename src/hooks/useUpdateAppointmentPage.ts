@@ -71,7 +71,12 @@ function useUpdateAppointmentPage() {
 					date: value,
 				})
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en la fecha.',
+			})
 		}
 	}
 
@@ -82,7 +87,12 @@ function useUpdateAppointmentPage() {
 				doctor: e.target.value,
 			})
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en el doctor seleccionado.',
+			})
 		}
 	}
 
@@ -95,7 +105,12 @@ function useUpdateAppointmentPage() {
 				[e.target.id]: e.target.value,
 			})
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en el valor agregado.',
+			})
 		}
 	}
 
@@ -109,7 +124,12 @@ function useUpdateAppointmentPage() {
 				})
 			}
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en la fecha.',
+			})
 		}
 	}
 
@@ -122,7 +142,12 @@ function useUpdateAppointmentPage() {
 				reasonChange: e.target.value,
 			})
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en la razón del cambio.',
+			})
 		}
 	}
 
@@ -133,7 +158,12 @@ function useUpdateAppointmentPage() {
 				[e.target.name]: e.target.value,
 			})
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error en el costo agregado.',
+			})
 		}
 	}
 
@@ -177,9 +207,7 @@ function useUpdateAppointmentPage() {
 							show: true,
 							text: 'La actualización de la cita fue exitosa.',
 						})
-						setLoading(false)
 					} else if (updateAppoinment) {
-						setLoading(false)
 						setHandleState({
 							severity: 'info',
 							variant: 'filled',
@@ -187,7 +215,6 @@ function useUpdateAppointmentPage() {
 							text: 'El odontograma se actualizó, pero no la cita.',
 						})
 					} else if (updateTeeth) {
-						setLoading(false)
 						setHandleState({
 							severity: 'info',
 							variant: 'filled',
@@ -195,7 +222,6 @@ function useUpdateAppointmentPage() {
 							text: 'La actualización de la cita fue exitosa, no se actualizó el odontograma.',
 						})
 					} else {
-						setLoading(false)
 						throw 'Error updating in update appointment.'
 					}
 					navigate(
@@ -209,7 +235,6 @@ function useUpdateAppointmentPage() {
 					)
 
 					if (updateAppoinment) {
-						setLoading(false)
 						setHandleState({
 							severity: 'success',
 							variant: 'filled',
@@ -221,20 +246,19 @@ function useUpdateAppointmentPage() {
 							? navigate(address + '/true')
 							: navigate(address + '/false')
 					} else {
-						setLoading(false)
 						throw 'Error updating in update appointment.'
 					}
 				}
 			}
 		} catch (error) {
-			setLoading(false)
-			console.log(error)
 			setHandleState({
 				severity: 'error',
 				variant: 'filled',
 				show: true,
 				text: typeof error === 'string' ? error : 'Ocurrio un error al actualizar.',
 			})
+		} finally {
+			setLoading(false)
 		}
 	}
 
@@ -299,10 +323,16 @@ function useUpdateAppointmentPage() {
 				}
 			}
 		} catch (error) {
+			setHandleState({
+				severity: 'warning',
+				variant: 'filled',
+				show: true,
+				text: 'Actualización de la cita cancelada.',
+			})
+		} finally {
 			setLoading(false)
-			console.log(error)
 		}
-	}, [id_appointment, setAppointment, setTeethList, id_patient])
+	}, [id_appointment, id_patient, setAppointment, setTeethList, setHandleState])
 
 	const getPatientData = useCallback(async () => {
 		try {
@@ -322,10 +352,16 @@ function useUpdateAppointmentPage() {
 				setLoading(false)
 			}
 		} catch (error) {
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del paciente.',
+			})
+		} finally {
 			setLoading(false)
-			console.log(error)
 		}
-	}, [id_patient, setPatientData, patientData.id, setCompleteOdontogram])
+	}, [patientData.id, id_patient, setPatientData, setCompleteOdontogram, setHandleState])
 
 	const getDoctors = useCallback(async () => {
 		try {
@@ -333,9 +369,14 @@ function useUpdateAppointmentPage() {
 			const doctorsData = await doctorsModel.getDoctors()
 			if (Array.isArray(doctorsData)) setDoctors(doctorsData)
 		} catch (error) {
-			console.log(error)
+			setHandleState({
+				severity: 'error',
+				variant: 'filled',
+				show: true,
+				text: 'Error al obtener los datos del doctor.',
+			})
 		}
-	}, [setDoctors])
+	}, [setDoctors, setHandleState])
 
 	useEffect(() => {
 		getAppointmentData()

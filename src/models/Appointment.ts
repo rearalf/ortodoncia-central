@@ -1,3 +1,4 @@
+import { OdontogramType } from '@/components/Odontogram/type'
 import { db } from '@/database/firebase'
 import {
 	doc,
@@ -15,7 +16,7 @@ class Appointment {
 	async saveNewAppointment(
 		id: string,
 		appointment: appointmentInterface,
-		teeth: Odontogram,
+		teeth: OdontogramType,
 		// eslint-disable-next-line
 	): Promise<any | undefined> {
 		try {
@@ -42,7 +43,6 @@ class Appointment {
 
 			return addData
 		} catch (error) {
-			console.log('Error saving teeth form: ' + error)
 			return undefined
 		}
 	}
@@ -72,7 +72,6 @@ class Appointment {
 
 			return appointments
 		} catch (error) {
-			console.log('Error getting appointments: ' + error)
 			return []
 		}
 	}
@@ -90,13 +89,11 @@ class Appointment {
 						resolve(querySnapshot.data())
 					},
 					error => {
-						console.log('Error getting the appointment: ' + error)
 						reject()
 					},
 				)
 			})
 		} catch (error) {
-			console.log('Error getting the appointmnet: ' + error)
 			return {}
 		}
 	}
@@ -142,7 +139,6 @@ class Appointment {
 				.catch(() => false)
 			return updateData
 		} catch (error) {
-			console.log('Error updating the appointmnet: ' + error)
 			return false
 		}
 	}

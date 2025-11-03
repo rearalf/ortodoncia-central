@@ -4,15 +4,33 @@ import { FiSave, FiX, FiXCircle } from "react-icons/fi";
 import Tooth from "./Tooth";
 import InputBasic from "../InputBasic";
 import { useDetailToothState } from "@/stores";
+import { useEffect, useState } from "react";
 
-const ModalDetailTooth = () => {
-  const {
-    tooth,
-    toothNotes,
-    openModal,
-    setToothNotes,
-    setClearDetailToothState,
-  } = useDetailToothState();
+const ModalDetailTooth = ({
+  updateToothNoteInOdontogram,
+}: {
+  updateToothNoteInOdontogram: (tooth: number, description: string) => void;
+}) => {
+  const { tooth, openModal, enableEditing, setClearDetailToothState } =
+    useDetailToothState();
+
+  const [localNotes, setLocalNotes] = useState(tooth?.toothNotes || "");
+
+  const handleClose = () => {
+    if (document.activeElement instanceof HTMLElement)
+      document.activeElement.blur();
+    setClearDetailToothState();
+  };
+
+  const handleSave = () => {
+    if (tooth) updateToothNoteInOdontogram(tooth.tooth, localNotes);
+    handleClose();
+  };
+
+  useEffect(() => {
+    setLocalNotes(tooth?.toothNotes || "");
+  }, [tooth]);
+
   return (
     <Dialog open={openModal} maxWidth="sm" fullWidth>
       <IconButton
@@ -21,13 +39,13 @@ const ModalDetailTooth = () => {
           top: "15px",
           right: "15px",
         }}
-        onClick={setClearDetailToothState}
+        onClick={handleClose}
       >
         <FiX size={20} />
       </IconButton>
 
       {tooth && (
-        <Tooth hanldeModifyStateTooth={() => {}} quadrant={"1"} tooth={tooth} />
+        <Tooth handleToothStateChange={() => {}} quadrant={"1"} tooth={tooth} />
       )}
 
       <Box
@@ -42,37 +60,41 @@ const ModalDetailTooth = () => {
           id="toothNotes"
           key="toothNotes"
           label="Observaciones del diente"
-          value={toothNotes || ""}
-          onChange={(e) => setToothNotes(e.target.value)}
+          value={localNotes}
+          onChange={(e) => setLocalNotes(e.target.value)}
           sx={{
             width: "100%",
           }}
+          disabled={!enableEditing}
         />
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "8px",
-        }}
-      >
-        <Button
-          variant="outlined"
-          color="error"
-          type="button"
-          onClick={setClearDetailToothState}
-          startIcon={<FiXCircle />}
+      {enableEditing && (
+        <Box
+          sx={{
+            display: "flex",
+            gap: "8px",
+          }}
         >
-          Cancelar
-        </Button>
-        <Button
-          variant="contained"
-          color="success"
-          type="button"
-          startIcon={<FiSave />}
-        >
-          Guardar
-        </Button>
-      </Box>
+          <Button
+            variant="outlined"
+            color="error"
+            type="button"
+            onClick={handleClose}
+            startIcon={<FiXCircle />}
+          >
+            Cancelar
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            type="button"
+            startIcon={<FiSave />}
+            onClick={handleSave}
+          >
+            Guardar
+          </Button>
+        </Box>
+      )}
     </Dialog>
   );
 };

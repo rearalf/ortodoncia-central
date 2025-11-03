@@ -14,9 +14,11 @@ import {
 	serverTimestamp,
 	OrderByDirection,
 } from 'firebase/firestore'
+import { OdontogramType } from '@/components/Odontogram/type'
+import { PatientDataInterface } from '@/interface/Patient'
 
 class Patient {
-	async save(patientData: PatientDataInterface, teeth: Odontogram): Promise<string | undefined> {
+	async save(patientData: PatientDataInterface, teeth: OdontogramType): Promise<string | undefined> {
 		try {
 			const patient = await addDoc(collection(db, 'patients'), {
 				...patientData,
@@ -85,7 +87,6 @@ class Patient {
 
 			return patientData
 		} catch (error) {
-			console.log('Error getting patient data: ' + error)
 			return undefined
 		}
 	}
@@ -101,7 +102,6 @@ class Patient {
 				.catch(() => false)
 			return updateData
 		} catch (error) {
-			console.log('Error updating data patient: ' + error)
 			return false
 		}
 	}
@@ -132,7 +132,6 @@ class Patient {
 
 			return patientsData
 		} catch (error) {
-			console.log('Error searching patients: ' + error)
 			return []
 		}
 	}
@@ -168,7 +167,7 @@ class Patient {
 		}
 	}
 
-	async updateOnlyTeeth(id: string, teeth: Odontogram) {
+	async updateOnlyTeeth(id: string, teeth: OdontogramType) {
 		try {
 			const patientRef = doc(db, 'patients', id)
 			const updateData = await updateDoc(patientRef, {

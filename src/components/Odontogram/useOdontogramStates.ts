@@ -7,22 +7,24 @@ import {
   TOOTH_STATE_VALUES,
   TOOTH_FACE_AFFECTION_VALUES,
 } from "./constants";
+import {
+  FACE_TYPE,
+  TOOTH_STATE_TYPE,
+  PermanentQuadrantType,
+  TemporaryQuadrantType,
+  TOOTH_FACE_AFFECTION_TYPE,
+} from "./type";
 
 function useOdontogramStates(enableButton: boolean) {
-  const { setOpenModalWithData } = useDetailToothState();
+  const { setOpenModalWithData, setEnableEditing } = useDetailToothState();
   const { setHandleState } = useAlertState();
-  const {
-    teethList,
-    toothState,
-    completeOdontogram,
-    setTeethList,
-    setToothState,
-  } = useTeethState();
+  const { teethList, toothState, completeOdontogram, setTeethList } =
+    useTeethState();
 
   const findToothByNumber = (toothNumber: number) => {
     for (const quadrantKey of Object.keys(
       teethList.permanent
-    ) as QuadrantKey[]) {
+    ) as PermanentQuadrantType[]) {
       const foundTooth = teethList.permanent[quadrantKey].find(
         (tooth) => tooth.tooth === toothNumber
       );
@@ -33,7 +35,7 @@ function useOdontogramStates(enableButton: boolean) {
 
     for (const quadrantKey of Object.keys(
       teethList.temporary
-    ) as TemporaryQuadrantKey[]) {
+    ) as TemporaryQuadrantType[]) {
       const foundTooth = teethList.temporary[quadrantKey].find(
         (tooth) => tooth.tooth === toothNumber
       );
@@ -43,12 +45,8 @@ function useOdontogramStates(enableButton: boolean) {
     }
   };
 
-  const hanldeModifyStateTooth = (
-    quadrant: QuadrantKey | TemporaryQuadrantKey,
-    tooth: number,
-    face?: toothPosition
-  ) => {
-    if (!enableButton) return;
+  const handleToothStateChange = (tooth: number, face?: FACE_TYPE) => {
+    if (!enableButton && toothState !== "selectTooth") return;
 
     if (toothState === null) {
       setHandleState({
@@ -62,57 +60,85 @@ function useOdontogramStates(enableButton: boolean) {
 
     const toothObj = findToothByNumber(tooth);
 
-    if (toothState === "selectTooth") {
-      if (toothObj && toothObj.tooth) setOpenModalWithData(toothObj.tooth);
-      setToothState(null);
-      return;
+    if (toothObj) {
+      if (toothState === "selectTooth") {
+        setOpenModalWithData(toothObj.tooth);
+        setEnableEditing(true);
+        return;
+      }
+
+      if (toothState === "selectToothEnableEditing") {
+        setOpenModalWithData(toothObj.tooth);
+        setEnableEditing(false);
+        return;
+      }
+
+      const updatedTeethList = { ...teethList };
+
+      if (PERMANENT_TEETH.includes(toothObj.quadrant)) {
+        const q = toothObj.quadrant as PermanentQuadrantType;
+        if (face && TOOTH_FACE_AFFECTION_VALUES.includes(toothState)) {
+          updatedTeethList.permanent[q].forEach((t) => {
+            if (t.tooth === tooth) {
+              const state = toothState as TOOTH_FACE_AFFECTION_TYPE;
+              t[face] = toothState === "" ? "" : state;
+            }
+          });
+        } else if (TOOTH_STATE_VALUES.includes(toothState)) {
+          updatedTeethList.permanent[q].forEach((t) => {
+            if (t.tooth === tooth) {
+              const state = toothState as TOOTH_STATE_TYPE;
+              t.toothState = toothState === "" ? "" : state;
+            }
+          });
+        }
+      } else {
+        const q = toothObj.quadrant as TemporaryQuadrantType;
+        if (face && TOOTH_FACE_AFFECTION_VALUES.includes(toothState)) {
+          updatedTeethList.temporary[q].forEach((t) => {
+            if (t.tooth === tooth) {
+              const state = toothState as TOOTH_FACE_AFFECTION_TYPE;
+              t[face] = toothState === "" ? "" : state;
+            }
+          });
+        } else if (TOOTH_STATE_VALUES.includes(toothState)) {
+          updatedTeethList.temporary[q].forEach((t) => {
+            if (t.tooth === tooth) {
+              const state = toothState as TOOTH_STATE_TYPE;
+              t.toothState = toothState === "" ? "" : state;
+            }
+          });
+        }
+      }
+
+      setTeethList(updatedTeethList);
     }
+  };
 
-    const updatedTeethList = { ...teethList };
+  const updateToothNoteInOdontogram = (tooth: number, description: string) => {
+    const toothObj = findToothByNumber(tooth);
 
-    if (PERMANENT_TEETH.includes(quadrant)) {
-      const q = quadrant as QuadrantKey;
-      if (face && TOOTH_FACE_AFFECTION_VALUES.includes(toothState)) {
+    if (toothObj) {
+      const updatedTeethList = { ...teethList };
+      if (PERMANENT_TEETH.includes(toothObj.quadrant)) {
+        const q = toothObj.quadrant as PermanentQuadrantType;
         updatedTeethList.permanent[q].forEach((t) => {
-          if (t.tooth === tooth) {
-            const state = toothState as TOOTH_FACE_AFFECTION_TYPE;
-            t[face] = toothState === "" ? "" : state;
-          }
+          if (t.tooth === tooth) t.toothNotes = description;
         });
-      } else if (TOOTH_STATE_VALUES.includes(toothState)) {
-        updatedTeethList.permanent[q].forEach((t) => {
-          if (t.tooth === tooth) {
-            const state = toothState as TOOTH_STATE_TYPE;
-            t.toothState = toothState === "" ? "" : state;
-          }
+      } else {
+        const q = toothObj.quadrant as TemporaryQuadrantType;
+        updatedTeethList.temporary[q].forEach((t) => {
+          if (t.tooth === tooth) t.toothNotes = description;
         });
       }
-    } else {
-      const q = quadrant as TemporaryQuadrantKey;
-      if (face && TOOTH_FACE_AFFECTION_VALUES.includes(toothState)) {
-        updatedTeethList.temporary[q].forEach((t) => {
-          if (t.tooth === tooth) {
-            const state = toothState as TOOTH_FACE_AFFECTION_TYPE;
-            t[face] = toothState === "" ? "" : state;
-          }
-        });
-      } else if (TOOTH_STATE_VALUES.includes(toothState)) {
-        updatedTeethList.temporary[q].forEach((t) => {
-          if (t.tooth === tooth) {
-            const state = toothState as TOOTH_STATE_TYPE;
-            t.toothState = toothState === "" ? "" : state;
-          }
-        });
-      }
     }
-
-    setTeethList(updatedTeethList);
   };
 
   return {
     teethList,
     completeOdontogram,
-    hanldeModifyStateTooth,
+    handleToothStateChange,
+    updateToothNoteInOdontogram,
   };
 }
 
