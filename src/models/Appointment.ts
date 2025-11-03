@@ -88,7 +88,7 @@ class Appointment {
 						unsubscribe() // Detenemos la escucha del snapshot
 						resolve(querySnapshot.data())
 					},
-					error => {
+() => {
 						reject()
 					},
 				)
